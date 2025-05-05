@@ -65,8 +65,8 @@ export default function CarFilter() {
     const params = new URLSearchParams();
     
     if (filter.zipCode) params.set("zipCode", filter.zipCode);
-    if (filter.make) params.set("make", filter.make);
-    if (filter.model) params.set("model", filter.model);
+    if (filter.make && filter.make !== "any") params.set("make", filter.make);
+    if (filter.model && filter.model !== "any") params.set("model", filter.model);
     
     params.set("minPrice", filter.priceRange[0].toString());
     params.set("maxPrice", filter.priceRange[1].toString());
@@ -89,8 +89,8 @@ export default function CarFilter() {
   const resetFilters = () => {
     setFilter({
       zipCode: "",
-      make: "",
-      model: "",
+      make: "any",
+      model: "any",
       priceRange: [15000, 150000],
       mileageRange: [0, 100000],
       yearRange: [2003, 2023],
@@ -121,7 +121,7 @@ export default function CarFilter() {
             <SelectValue placeholder="Select make" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Any Make</SelectItem>
+            <SelectItem value="any">Any Make</SelectItem>
             {carMakes.map((make) => (
               <SelectItem key={make.id} value={make.id}>
                 {make.name}
@@ -142,7 +142,7 @@ export default function CarFilter() {
             <SelectValue placeholder={filter.make ? "Select model" : "Select make first"} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Any Model</SelectItem>
+            <SelectItem value="any">Any Model</SelectItem>
             {availableModels.map((model) => (
               <SelectItem key={model.id} value={model.id}>
                 {model.name}

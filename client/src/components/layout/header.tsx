@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
+import SheenCarLogo from "../../assets/SheenCar-Logo.png";
 import {
   Sheet,
   SheetContent,
@@ -66,9 +67,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <Link href="/" className="flex items-center">
-            <span className="text-primary font-montserrat font-bold text-xl">
-              Sheen<span className="text-secondary">Car</span>
-            </span>
+            <img src={SheenCarLogo} alt="SheenCar Logo" className="h-10" />
           </Link>
           <nav className="hidden md:flex ml-8">
             {menuItems.map((item) => (

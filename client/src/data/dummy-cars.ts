@@ -1,6 +1,47 @@
-import { Car } from "@shared/schema";
+// Using a more flexible car type for our dummy data that includes additional fields for comparison
+export interface DummyCar {
+  id: number;
+  sellerId: number;
+  title: string;
+  description?: string;
+  make: string;
+  model: string;
+  year: number;
+  trim?: string;
+  mileage: number;
+  price: number;
+  bodyType?: string;
+  condition: string;
+  exteriorColor?: string;
+  interiorColor?: string;
+  fuelType?: string;
+  transmission?: string;
+  drivetrain?: string;
+  engine?: string;
+  mpgCity?: number;
+  mpgHighway?: number;
+  features: string[];
+  images: string[];
+  location?: string;
+  sellerType?: string;
+  vin?: string;
+  status: string;
+  boosted?: boolean;
+  featured?: boolean;
+  // Additional fields for comparison
+  specifications?: {
+    mpg?: string;
+    horsepower?: string;
+    torque?: string;
+    acceleration?: string;
+    engineType?: string;
+    weight?: string;
+    dimensions?: string;
+    range?: string; // For electric vehicles
+  }
+}
 
-export const dummyCars: Car[] = [
+export const dummyCars: DummyCar[] = [
   {
     id: 101,
     sellerId: 1,
@@ -17,19 +58,19 @@ export const dummyCars: Car[] = [
     fuelType: "Gasoline",
     transmission: "Automatic",
     bodyType: "Sedan",
-    driveType: "FWD",
-    engineSize: "1.8L",
+    drivetrain: "FWD",
+    engine: "1.8L",
     features: ["Bluetooth", "Backup Camera", "Keyless Entry", "Lane Departure Warning", "Adaptive Cruise Control"],
-    images: ["/car-images/toyota-corolla-black.jpg"],
+    images: ["/car-images/toyota-corolla-black.svg"],
     location: "New York, NY",
     sellerType: "dealer",
     vin: "1HGBH41JXMN109186",
     status: "active",
-    views: 245,
-    createdAt: "2023-05-15",
-    expiresAt: "2023-08-15",
-    isPremium: false,
-    isFeatured: true,
+    mpgCity: 31,
+    mpgHighway: 40,
+    boosted: false,
+    featured: true,
+    trim: "Altis",
     specifications: {
       mpg: "31 city / 40 hwy",
       horsepower: "169 hp",
@@ -56,19 +97,19 @@ export const dummyCars: Car[] = [
     fuelType: "Gasoline",
     transmission: "CVT",
     bodyType: "Sedan",
-    driveType: "FWD",
-    engineSize: "2.0L",
+    drivetrain: "FWD",
+    engine: "2.0L",
     features: ["Apple CarPlay", "Android Auto", "Honda Sensing", "Adaptive Cruise Control", "Lane Keeping Assist"],
-    images: ["/car-images/honda-civic-blue.jpg"],
+    images: ["/car-images/honda-civic-blue.svg"],
     location: "Los Angeles, CA",
     sellerType: "dealer",
     vin: "2HGFC2F54MH123456",
     status: "active",
-    views: 312,
-    createdAt: new Date("2023-06-10").toISOString(),
-    expiresAt: new Date("2023-09-10").toISOString(),
-    isPremium: true,
-    isFeatured: false,
+    mpgCity: 33,
+    mpgHighway: 42,
+    boosted: true,
+    featured: false,
+    trim: "LX",
     specifications: {
       mpg: "33 city / 42 hwy",
       horsepower: "158 hp",
@@ -213,7 +254,7 @@ export const dummyCars: Car[] = [
     fuelType: "Gasoline",
     transmission: "Automatic",
     bodyType: "Sedan",
-    driveType: "FWD",
+    drivetrain: "FWD",
     engineSize: "2.5L 4-cylinder",
     features: ["Toyota Safety Sense", "JBL Premium Audio", "Panoramic Sunroof", "Wireless Charging", "Head-Up Display"],
     images: ["/car-images/toyota-camry-silver.jpg"],
@@ -238,15 +279,15 @@ export const dummyCars: Car[] = [
   }
 ];
 
-export function getCarById(id: number): Car | undefined {
+export function getCarById(id: number): DummyCar | undefined {
   return dummyCars.find(car => car.id === id);
 }
 
-export function getCarsByIds(ids: number[]): Car[] {
+export function getCarsByIds(ids: number[]): DummyCar[] {
   return dummyCars.filter(car => ids.includes(car.id));
 }
 
-export function searchCars(query: string): Car[] {
+export function searchCars(query: string): DummyCar[] {
   const lowercaseQuery = query.toLowerCase();
   return dummyCars.filter(car => 
     car.make.toLowerCase().includes(lowercaseQuery) ||

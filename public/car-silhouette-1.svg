@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="150" viewBox="0 0 300 150" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#CCCCCC" stroke-width="2" fill="none">
+    <!-- Car body -->
+    <path d="M50,90 L70,60 L230,60 L260,90 L260,110 L50,110 Z" />
+    
+    <!-- Windows -->
+    <path d="M90,60 L110,40 L190,40 L210,60" />
+    <path d="M90,60 L90,40 L110,40" />
+    <path d="M190,40 L210,60 L210,40 L190,40" />
+    
+    <!-- Front and rear wheels -->
+    <circle cx="90" cy="110" r="20" />
+    <circle cx="220" cy="110" r="20" />
+    
+    <!-- Details -->
+    <path d="M50,90 L50,110" />
+    <path d="M260,90 L260,110" />
+    <path d="M150,60 L150,40" />
+  </g>
+</svg>

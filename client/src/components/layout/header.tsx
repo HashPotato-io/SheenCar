@@ -97,7 +97,7 @@ export default function Header() {
           <Link href="/post-ad">
             <Button
               variant="outline"
-              className="hidden md:flex border-primary text-primary hover:bg-primary hover:text-white"
+              className="hidden md:flex border-[#AF8C32] text-[#AF8C32] hover:bg-[#AF8C32] hover:text-white"
             >
               Post Ad
             </Button>
@@ -158,7 +158,12 @@ export default function Header() {
                   </div>
                 ))}
                 <Link href="/post-ad" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full mt-4">Post Ad</Button>
+                  <Button 
+                    variant="outline"
+                    className="w-full mt-4 border-[#AF8C32] text-[#AF8C32] hover:bg-[#AF8C32] hover:text-white"
+                  >
+                    Post Ad
+                  </Button>
                 </Link>
               </div>
             </SheetContent>

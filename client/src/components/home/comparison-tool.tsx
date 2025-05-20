@@ -85,9 +85,9 @@ export default function ComparisonTool() {
                 {/* Car illustration */}
                 <div className="border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center h-64 w-full mb-6">
                   <img 
-                    src={`/car-placeholder.svg`} 
+                    src={`/car-silhouette.svg`} 
                     alt="Car silhouette" 
-                    className="w-40 h-auto max-h-36 opacity-60"
+                    className="w-48 h-auto max-h-44 opacity-70"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 150' fill='none' stroke='%23cccccc' stroke-width='1'><path d='M50,90 L70,60 L230,60 L260,90 L260,110 L50,110 Z M90,60 L110,40 L190,40 L210,60 M90,60 L90,40 L110,40 M190,40 L210,60 L210,40 L190,40 M50,90 L50,110 M260,90 L260,110 M150,60 L150,40' /><circle cx='90' cy='110' r='20' /><circle cx='220' cy='110' r='20' /></svg>";

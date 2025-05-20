@@ -1,68 +1,46 @@
 import { useState, useEffect } from "react";
-import { useLocation, useSearch } from "wouter";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
-import { getCarById, dummyCars, DummyCar } from "../data/dummy-cars";
+import { dummyCars } from "../data/dummy-cars";
 import { Check, ChevronRight, ChevronLeft } from "lucide-react";
+
+// Sample car data for demonstration
+const sampleCars = [
+  dummyCars[0], // Toyota Corolla
+  dummyCars[1]  // Honda Civic
+];
 
 export default function ComparePage() {
   const [, setLocation] = useLocation();
-  const searchParams = useSearchParams();
-  const [selectedCars, setSelectedCars] = useState<DummyCar[]>([]);
+  const [selectedCars, setSelectedCars] = useState(sampleCars);
   const [activeTab, setActiveTab] = useState<string>("features");
-  const [similarCars, setSimilarCars] = useState<DummyCar[]>([]);
+  const [similarCars, setSimilarCars] = useState(dummyCars.slice(2, 6));
 
   useEffect(() => {
-    // Parse URL parameters to get car IDs
-    const carIds: number[] = [];
-    const paramEntries = Object.entries(searchParams);
+    // For simplicity in this demo, we're using sample data
+    // In a real implementation, we would parse the URL parameters
+    // to get the car IDs and fetch them from the server
     
-    for (const [key, value] of paramEntries) {
-      if (key.startsWith('car') && value) {
-        // If we're using the make_model format from the comparison tool
-        if (value.includes('_')) {
-          const [make, model] = value.split('_');
-          const matchingCar = dummyCars.find(car => 
-            car.make === make && car.model === model
-          );
-          if (matchingCar) carIds.push(matchingCar.id);
-        } 
-        // If we're using numeric IDs
-        else if (!isNaN(Number(value))) {
-          carIds.push(Number(value));
-        }
-      }
-    }
-    
-    // Fetch car data based on IDs
-    const cars = carIds.map(id => getCarById(id)).filter(Boolean) as DummyCar[];
-    setSelectedCars(cars);
-    
-    // Get similar cars based on first selected car's make and body type
-    if (cars.length > 0) {
-      const firstCar = cars[0];
+    // Update similar cars when selected cars change
+    if (selectedCars.length > 0) {
+      const firstCar = selectedCars[0];
       const similar = dummyCars.filter(car => 
-        car.id !== firstCar.id && 
+        !selectedCars.some(selected => selected.id === car.id) &&
         (car.make === firstCar.make || car.bodyType === firstCar.bodyType)
       ).slice(0, 4);
+      
       setSimilarCars(similar);
     }
-  }, [searchParams]);
+  }, [selectedCars]);
 
-  const handleAddCar = (car: DummyCar) => {
+  const handleAddCar = (car) => {
     if (selectedCars.length < 3) {
       setSelectedCars([...selectedCars, car]);
       
-      // Update URL parameters
-      const newParams = { ...searchParams };
-      newParams[`car${selectedCars.length + 1}`] = car.id.toString();
-      
-      const queryString = Object.entries(newParams)
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-        
-      setLocation(`/compare?${queryString}`);
+      // In a real implementation, we would update the URL parameters 
+      // to reflect the current selection
     }
   };
 

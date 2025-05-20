@@ -85,20 +85,20 @@ export default function ComparisonTool() {
                 {/* Car illustration */}
                 <div className="border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center h-64 w-full mb-6">
                   <img 
-                    src={`/car-silhouette-${index + 1}.svg`} 
+                    src={`/car-placeholder.svg`} 
                     alt="Car silhouette" 
-                    className="w-40 h-40 opacity-40"
+                    className="w-40 h-auto max-h-36 opacity-60"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23cccccc' stroke-width='1'><path d='M7,19H17V21H7V19ZM17,5H15V3H9V5H7V3.88C7,3.38 7.4,3 7.88,3H16.12C16.6,3 17,3.38 17,3.88V5ZM15,7V15H16L13,18L10,15H11V7H15Z'/></svg>";
+                      target.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 150' fill='none' stroke='%23cccccc' stroke-width='1'><path d='M50,90 L70,60 L230,60 L260,90 L260,110 L50,110 Z M90,60 L110,40 L190,40 L210,60 M90,60 L90,40 L110,40 M190,40 L210,60 L210,40 L190,40 M50,90 L50,110 M260,90 L260,110 M150,60 L150,40' /><circle cx='90' cy='110' r='20' /><circle cx='220' cy='110' r='20' /></svg>";
                     }}
                   />
                 </div>
                 
                 {/* VS circle between cars */}
                 {index < carSelections.length - 1 && (
-                  <div className="hidden md:flex absolute -right-4 top-[30%] z-10">
-                    <div className="rounded-full bg-green-800 text-white font-medium flex items-center justify-center w-8 h-8 text-xs">
+                  <div className="hidden md:flex absolute -right-6 top-1/3 -translate-y-1/2 z-10">
+                    <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-10 h-10 text-xs shadow-md">
                       VS
                     </div>
                   </div>
@@ -158,7 +158,7 @@ export default function ComparisonTool() {
           <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4">
             <Button 
               variant="default" 
-              className={`bg-green-800 hover:bg-green-700 text-white px-8 py-2 h-12 rounded-sm ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
+              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-12 rounded-sm ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
               disabled={!canCompare}
               asChild={canCompare ? true : false}
             >

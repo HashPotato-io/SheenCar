@@ -44,6 +44,7 @@ export default function ComparePage() {
     }
   };
 
+  // Common features for comparison
   const featuresList = [
     "Bluetooth",
     "Backup Camera",
@@ -55,6 +56,7 @@ export default function ComparePage() {
     "Android Auto"
   ];
 
+  // Specifications to compare
   const specificationsList = [
     { name: "Engine Type", key: "engineType" },
     { name: "Horsepower", key: "horsepower" },
@@ -64,18 +66,6 @@ export default function ComparePage() {
     { name: "Weight", key: "weight" },
     { name: "Dimensions", key: "dimensions" }
   ];
-
-  if (selectedCars.length === 0) {
-    return (
-      <div className="container mx-auto py-16 text-center">
-        <h1 className="text-2xl font-bold mb-4">Car Comparison</h1>
-        <p className="mb-8">No cars selected for comparison. Please select at least two cars to compare.</p>
-        <Button onClick={() => setLocation("/")}>
-          Back to Home
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-gray-100 min-h-screen py-10">

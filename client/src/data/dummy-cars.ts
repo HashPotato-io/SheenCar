@@ -18,6 +18,7 @@ export interface DummyCar {
   transmission?: string;
   drivetrain?: string;
   engine?: string;
+  engineSize?: string;
   mpgCity?: number;
   mpgHighway?: number;
   features: string[];

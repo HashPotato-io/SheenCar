@@ -232,21 +232,35 @@ export default function ComparisonTool() {
   const handleRemoveCarSelection = (id: number) => {
     // Only allow removal if we have more than 2 car selections
     if (carSelections.length > 2) {
-      // First filter out the car to be removed
-      const filteredSelections = carSelections.filter((car) => car.id !== id);
+      // Get the car that's being removed
+      const carToRemove = carSelections.find(car => car.id === id);
       
-      // Then reassign sequential IDs to maintain proper order
-      const reindexedSelections = filteredSelections.map((car, index) => ({
-        ...car,
-        id: index + 1
-      }));
+      // Check if this car has a make and model (i.e., it's a valid selection)
+      const isPopulatedCar = carToRemove && carToRemove.make && carToRemove.model;
       
-      setCarSelections(reindexedSelections);
+      // Count how many populated cars we currently have
+      const populatedCarsCount = carSelections.filter(car => car.make && car.model).length;
       
-      // Reset comparison if it was showing
-      if (showComparison) {
-        setShowComparison(false);
-        setSelectedCars([]);
+      // Only allow removal if:
+      // 1. It's an empty car (no make/model), OR
+      // 2. Removing this car still leaves at least 2 populated cars
+      if (!isPopulatedCar || populatedCarsCount > 2) {
+        // First filter out the car to be removed
+        const filteredSelections = carSelections.filter((car) => car.id !== id);
+        
+        // Then reassign sequential IDs to maintain proper order
+        const reindexedSelections = filteredSelections.map((car, index) => ({
+          ...car,
+          id: index + 1
+        }));
+        
+        setCarSelections(reindexedSelections);
+        
+        // Reset comparison if it was showing
+        if (showComparison) {
+          setShowComparison(false);
+          setSelectedCars([]);
+        }
       }
     }
   };

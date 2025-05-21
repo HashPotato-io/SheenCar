@@ -12,13 +12,17 @@ export default function AboutPage() {
 
       {/* Hero Banner */}
       <div 
-        className="bg-gray-900 text-white py-20 bg-cover bg-center"
+        className="bg-gray-900 text-white py-24 bg-cover bg-center"
         style={{ 
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/images/about-hero.jpg")' 
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("https://images.unsplash.com/photo-1560361586-8242b1fcb35a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80")' 
         }}
       >
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Driving Dreams Forward: The Story <br/>Behind SheenCar</h1>
+          <h1 className="text-5xl font-bold mb-4">
+            Driving Dreams Forward: The Story 
+            <br/>
+            Behind <span className="text-amber-500">SheenCar</span>
+          </h1>
         </div>
       </div>
 

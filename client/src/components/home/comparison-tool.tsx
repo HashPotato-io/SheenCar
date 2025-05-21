@@ -484,10 +484,10 @@ export default function ComparisonTool() {
         </p>
         
         <div className="max-w-6xl mx-auto">
-          {/* Two card grid with VS badge */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto relative">
+          {/* Flexible card grid with VS badges */}
+          <div className="flex flex-col md:flex-row justify-center items-start max-w-6xl mx-auto relative gap-10">
             {carSelections.map((carSelection, index) => (
-              <div key={carSelection.id} className="relative flex flex-col items-center">
+              <div key={carSelection.id} className="relative flex flex-col items-center flex-1">
                 {/* Car card */}
                 <div className={`rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'} relative`}>
                   {/* Remove button (show only if there are more than 2 cars) */}
@@ -598,16 +598,18 @@ export default function ComparisonTool() {
               </div>
             ))}
             
-            {/* VS Badge - positioned absolutely in center */}
-            {carSelections.length >= 2 && (
-              <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex-col items-center">
-                <div className="border-l-2 border-dashed border-gray-300 h-20"></div>
-                <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-4">
-                  VS
+            {/* VS badges between car cards */}
+            {carSelections.map((carSelection, index) => (
+              index < carSelections.length - 1 && (
+                <div key={`vs-badge-${index}`} className="hidden md:flex flex-col items-center justify-center z-10">
+                  <div className="border-l-2 border-dashed border-gray-300 h-20"></div>
+                  <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-4">
+                    VS
+                  </div>
+                  <div className="border-l-2 border-dashed border-gray-300 h-20"></div>
                 </div>
-                <div className="border-l-2 border-dashed border-gray-300 h-20"></div>
-              </div>
-            )}
+              )
+            ))}
           </div>
           
           <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">

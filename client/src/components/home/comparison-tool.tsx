@@ -184,10 +184,13 @@ export default function ComparisonTool() {
     
     if (validSelections.length >= 2) {
       const carDetailsArray = validSelections.map(car => {
-        const carKey = `${car.make}_${car.model}`;
-        return carDetailsData[carKey] || getSelectedCarDetails(car);
+        // Get the car details either from existing data or via the helper function
+        const details = getSelectedCarDetails(car);
+        console.log("Selected car details:", details);
+        return details;
       }).filter(car => car !== null) as CarDetails[];
       
+      console.log("Selected cars for comparison:", carDetailsArray);
       setSelectedCars(carDetailsArray);
       setShowComparison(true);
     }
@@ -203,6 +206,11 @@ export default function ComparisonTool() {
       )
     );
     setShowComparison(false);
+  };
+  
+  // Check if a make is already selected by another car
+  const isMakeSelected = (make: string, currentId: number) => {
+    return carSelections.some(car => car.id !== currentId && car.make === make);
   };
 
   // Handle model selection
@@ -363,11 +371,19 @@ export default function ComparisonTool() {
                         <SelectValue placeholder="Make" />
                       </SelectTrigger>
                       <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
-                        {carMakes.map((make) => (
-                          <SelectItem key={make.id} value={make.id} className="py-2 border-b border-gray-200 last:border-0">
-                            {make.name}
-                          </SelectItem>
-                        ))}
+                        {carMakes.map((make) => {
+                          const isDisabled = isMakeSelected(make.id, carSelection.id);
+                          return (
+                            <SelectItem 
+                              key={make.id} 
+                              value={make.id} 
+                              disabled={isDisabled}
+                              className={`py-2 border-b border-gray-200 last:border-0 ${isDisabled ? 'opacity-50' : ''}`}
+                            >
+                              {make.name}
+                            </SelectItem>
+                          );
+                        })}
                       </SelectContent>
                     </Select>
                   </div>

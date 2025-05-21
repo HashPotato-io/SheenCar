@@ -190,6 +190,14 @@ export default function ComparisonTool() {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
+  // Handle remove car selection
+  const handleRemoveCarSelection = (id: number) => {
+    // Only allow removal if we have more than 2 car selections
+    if (carSelections.length > 2) {
+      setCarSelections(prevSelections => prevSelections.filter(car => car.id !== id));
+    }
+  };
+
   // Handle compare button click
   const handleCompareClick = () => {
     // Get selected car details
@@ -480,7 +488,18 @@ export default function ComparisonTool() {
             {carSelections.map((carSelection, index) => (
               <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
                 {/* Car card */}
-                <div className={`rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
+                <div className={`rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'} relative`}>
+                  {/* Remove button (show only if there are more than 2 cars) */}
+                  {carSelections.length > 2 && (
+                    <button 
+                      onClick={() => handleRemoveCarSelection(carSelection.id)}
+                      className="absolute right-2 top-2 z-10 bg-white/90 text-gray-700 hover:text-red-500 rounded-full p-1 shadow-sm transition-colors"
+                      aria-label="Remove car"
+                    >
+                      <X size={16} />
+                    </button>
+                  )}
+                  
                   {/* Car image container */}
                   <div className="h-64 flex items-center justify-center overflow-hidden bg-gray-50">
                     {carSelection.make && carSelection.model ? (

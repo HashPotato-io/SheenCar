@@ -28,7 +28,8 @@ interface Dealer {
   location: string;
   phoneNumber: string;
   websiteUrl: string;
-  logoUrl: string;
+  isOpen: boolean;
+  hoursToday: string;
 }
 
 const dealers: Dealer[] = [
@@ -44,7 +45,8 @@ const dealers: Dealer[] = [
     location: "Chicago, IL",
     phoneNumber: "(312) 555-7890",
     websiteUrl: "https://prestigeautogallery.com",
-    logoUrl: "https://example.com/logo1.png"
+    isOpen: true,
+    hoursToday: "9:00 AM - 7:00 PM"
   },
   {
     id: 2,
@@ -58,7 +60,8 @@ const dealers: Dealer[] = [
     location: "Chicago, IL",
     phoneNumber: "(312) 555-7890",
     websiteUrl: "https://prestigeautogallery.com",
-    logoUrl: "https://example.com/logo1.png"
+    isOpen: true,
+    hoursToday: "9:00 AM - 7:00 PM"
   },
   {
     id: 3,
@@ -72,7 +75,8 @@ const dealers: Dealer[] = [
     location: "Chicago, IL",
     phoneNumber: "(312) 555-7890",
     websiteUrl: "https://prestigeautogallery.com",
-    logoUrl: "https://example.com/logo1.png"
+    isOpen: true,
+    hoursToday: "9:00 AM - 7:00 PM"
   },
   {
     id: 4,
@@ -86,7 +90,8 @@ const dealers: Dealer[] = [
     location: "Chicago, IL",
     phoneNumber: "(312) 555-7890",
     websiteUrl: "https://prestigeautogallery.com",
-    logoUrl: "https://example.com/logo1.png"
+    isOpen: true,
+    hoursToday: "9:00 AM - 7:00 PM"
   }
 ];
 
@@ -319,61 +324,60 @@ export default function FindDealersPage() {
             <div className="flex-1 bg-gray-100 rounded-lg p-4">
               <div className="space-y-4">
                 {dealers.map((dealer) => (
-                  <div key={dealer.id} className="bg-white rounded-lg p-4 flex gap-4 shadow-sm">
-                    <div className="w-36 h-24 bg-neutral-100 rounded flex items-center justify-center overflow-hidden relative">
-                      <div className="bg-green-800 text-white text-xs absolute top-0 left-0 px-2 py-1">CAR DEALER</div>
-                      <div className="text-center text-xs mt-4">LOGO AREA</div>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start">
-                        <h3 className="font-bold text-lg">{dealer.name}</h3>
-                        <div className="flex items-center text-sm">
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <Star 
-                                key={i} 
-                                className={`w-4 h-4 ${i < Math.floor(dealer.rating) ? "fill-amber-500 text-amber-500" : "text-amber-500"}`} 
-                              />
-                            ))}
+                  <div key={dealer.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <div className="flex p-4">
+                      <div className="w-24 h-24 bg-neutral-800 rounded flex items-center justify-center overflow-hidden relative mr-4">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17a2 2 0 100-4 2 2 0 000 4zM19 17a2 2 0 100-4 2 2 0 000 4zM5 9h14M5 4h2M5 14h2M17 4h2M17 14h2M9 4v10M15 4v10" />
+                          </svg>
+                        </div>
+                        <div className="bg-green-800 text-white text-[10px] absolute top-0 left-0 px-2 py-1">CAR DEALER</div>
+                      </div>
+                      
+                      <div className="flex-1">
+                        <div className="flex justify-between items-start">
+                          <h3 className="font-bold text-lg">{dealer.name}</h3>
+                          <div className="flex flex-col items-end">
+                            <div className="flex items-center text-sm">
+                              <div className="flex">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star 
+                                    key={i} 
+                                    className={`w-4 h-4 ${i < Math.floor(dealer.rating) ? "fill-amber-500 text-amber-500" : "text-amber-500"}`} 
+                                  />
+                                ))}
+                              </div>
+                              <span className="ml-1 text-gray-500 text-xs">({dealer.reviewCount} ratings)</span>
+                            </div>
+                            <div className="flex items-center text-xs mt-1">
+                              <span className={`${dealer.isOpen ? 'text-green-600' : 'text-red-600'} font-medium`}>
+                                {dealer.isOpen ? 'Open Now' : 'Closed Now'}
+                              </span>
+                              <span className="mx-1 text-gray-400">•</span>
+                              <span className="text-gray-500">{dealer.hoursToday}</span>
+                            </div>
                           </div>
-                          <span className="ml-1 text-gray-500">({dealer.reviewCount} ratings)</span>
                         </div>
-                      </div>
-                      
-                      <div className="flex gap-3 text-xs text-gray-500 mt-1">
-                        {dealer.verified && (
-                          <span className="flex items-center">
-                            <span className="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                            Verified Dealer
-                          </span>
-                        )}
-                        {dealer.premium && (
-                          <span className="flex items-center">
-                            <span className="w-2 h-2 bg-amber-500 rounded-full mr-1"></span>
-                            Premium Partner
-                          </span>
-                        )}
-                        {dealer.certified && (
-                          <span className="flex items-center">
-                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-1"></span>
-                            Certified
-                          </span>
-                        )}
-                      </div>
-                      
-                      <p className="text-sm text-gray-600 mt-2 line-clamp-3">
-                        {dealer.description}
-                      </p>
-                      
-                      <div className="flex justify-between items-center mt-3">
-                        <div className="text-sm">
-                          <div className="text-gray-500">{dealer.location}</div>
-                          <div className="text-gray-500">{dealer.phoneNumber}</div>
+                        
+                        <div className="flex gap-3 text-xs text-gray-500 mt-1">
+                          {dealer.verified && (
+                            <span className="flex items-center">
+                              <span className="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                              Verified Dealer
+                            </span>
+                          )}
+                          {dealer.premium && (
+                            <span className="flex items-center">
+                              <span className="w-2 h-2 bg-amber-500 rounded-full mr-1"></span>
+                              Premium Partner
+                            </span>
+                          )}
                         </div>
-                        <Button variant="outline" className="text-sm border-green-700 text-green-700 hover:bg-green-700 hover:text-white">
-                          View Dealer
-                        </Button>
+                        
+                        <p className="text-xs text-gray-600 mt-2 line-clamp-3">
+                          {dealer.description}
+                        </p>
                       </div>
                     </div>
                   </div>

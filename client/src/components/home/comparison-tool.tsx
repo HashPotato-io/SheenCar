@@ -597,12 +597,13 @@ export default function ComparisonTool() {
                 
                 {/* VS circle between cars */}
                 {index < carSelections.length - 1 && (
-                  <div className="hidden md:block absolute left-[100%] top-1/4 -translate-x-1/2 z-10">
-                    <div className="flex flex-col items-center">
-                      <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md mb-2">
+                  <div className="hidden md:block absolute left-[100%] top-0 -translate-x-1/2 z-10 h-full">
+                    <div className="flex flex-col items-center justify-center h-full">
+                      <div className="border-l-2 border-dashed border-gray-300 h-[40%]"></div>
+                      <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-4">
                         VS
                       </div>
-                      <div className="h-32 border-r-2 border-dashed border-gray-400"></div>
+                      <div className="border-l-2 border-dashed border-gray-300 h-[40%]"></div>
                     </div>
                   </div>
                 )}

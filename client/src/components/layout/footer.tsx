@@ -36,9 +36,9 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-4">Our Company</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-neutral-400 hover:text-white transition-colors">
+                <Link href="/about" className="text-neutral-400 hover:text-white transition-colors">
                   About SheenCar
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-neutral-400 hover:text-white transition-colors">

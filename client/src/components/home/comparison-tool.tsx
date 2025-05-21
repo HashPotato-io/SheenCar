@@ -689,9 +689,26 @@ export default function ComparisonTool() {
             
             {/* Specifications Comparison */}
             <div className="mb-10">
-              <h2 className="text-xl font-semibold mb-6 flex items-center">
+              <h2 className="text-xl font-semibold mb-4 flex items-center">
                 <span className="text-green-900 mr-2">Compare</span> Specifications
               </h2>
+              
+              {/* Specifications Category Select */}
+              <div className="w-40 mb-4">
+                <Select defaultValue="engine">
+                  <SelectTrigger className="border-gray-300">
+                    <SelectValue placeholder="Specifications" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="engine">Engine/Motor</SelectItem>
+                    <SelectItem value="transmission">Transmission</SelectItem>
+                    <SelectItem value="steering">Steering</SelectItem>
+                    <SelectItem value="wheels">Wheels and Tires</SelectItem>
+                    <SelectItem value="fuel">Fuel Economy</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
               <div className="overflow-hidden rounded-none border border-gray-200">
                 <Table className="border-collapse w-full">
                   <TableHeader>

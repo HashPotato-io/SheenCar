@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@/components/ui/button";
 import { 
@@ -484,9 +484,10 @@ export default function ComparisonTool() {
         </p>
         
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-16">
+          {/* Two card grid with VS badge */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto relative">
             {carSelections.map((carSelection, index) => (
-              <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
+              <div key={carSelection.id} className="relative flex flex-col items-center">
                 {/* Car card */}
                 <div className={`rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'} relative`}>
                   {/* Remove button (show only if there are more than 2 cars) */}
@@ -594,21 +595,19 @@ export default function ComparisonTool() {
                     </Select>
                   </div>
                 </div>
-                
-                {/* VS circle between cars */}
-                {index < carSelections.length - 1 && (
-                  <div className="hidden md:block absolute top-0 z-10 h-full" style={{ left: "100%", transform: "translateX(-50%)" }}>
-                    <div className="flex flex-col items-center justify-center h-full">
-                      <div className="border-l-2 border-dashed border-gray-300 h-[40%]"></div>
-                      <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-4">
-                        VS
-                      </div>
-                      <div className="border-l-2 border-dashed border-gray-300 h-[40%]"></div>
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
+            
+            {/* VS Badge - positioned absolutely in center */}
+            {carSelections.length >= 2 && (
+              <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex-col items-center">
+                <div className="border-l-2 border-dashed border-gray-300 h-20"></div>
+                <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-4">
+                  VS
+                </div>
+                <div className="border-l-2 border-dashed border-gray-300 h-20"></div>
+              </div>
+            )}
           </div>
           
           <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">

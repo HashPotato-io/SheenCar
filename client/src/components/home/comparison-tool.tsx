@@ -184,38 +184,25 @@ export default function ComparisonTool() {
     
     if (validSelections.length >= 2) {
       const carDetailsArray = validSelections.map(car => {
-        // Get the car details using our helper function which handles all cases
-        const details = getSelectedCarDetails(car);
-        return details;
+        const carKey = `${car.make}_${car.model}`;
+        return carDetailsData[carKey] || getSelectedCarDetails(car);
       }).filter(car => car !== null) as CarDetails[];
       
       setSelectedCars(carDetailsArray);
       setShowComparison(true);
-      console.log("Selected cars for comparison:", carDetailsArray);
     }
   };
 
   // Handle make selection and reset model when make changes
   const handleMakeChange = (value: string, selectionId: number) => {
-    // Check if this make is already selected in another car
-    const isAlreadySelected = carSelections.some(
-      selection => selection.id !== selectionId && selection.make === value
+    setCarSelections(
+      carSelections.map(selection => 
+        selection.id === selectionId 
+          ? { ...selection, make: value, model: "" } 
+          : selection
+      )
     );
-    
-    // Only change if not already selected
-    if (!isAlreadySelected) {
-      setCarSelections(
-        carSelections.map(selection => 
-          selection.id === selectionId 
-            ? { ...selection, make: value, model: "" } 
-            : selection
-        )
-      );
-      setShowComparison(false);
-    } else {
-      // Could add a toast notification here to inform user
-      console.log("This make is already selected");
-    }
+    setShowComparison(false);
   };
 
   // Handle model selection
@@ -362,6 +349,54 @@ export default function ComparisonTool() {
           <div className="flex flex-wrap justify-center gap-8">
             {carSelections.map((carSelection, index) => (
               <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
+                {/* Make & Model selectors - moved outside car image container */}
+                <div className="w-full flex gap-2 mb-4">
+                  <div className="relative flex-1">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <Search className="h-4 w-4 text-gray-500" />
+                    </div>
+                    <Select
+                      value={carSelection.make}
+                      onValueChange={(value) => handleMakeChange(value, carSelection.id)}
+                    >
+                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
+                        <SelectValue placeholder="Make" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
+                        {carMakes.map((make) => (
+                          <SelectItem key={make.id} value={make.id} className="py-2 border-b border-gray-200 last:border-0">
+                            {make.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="relative flex-1">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <Search className="h-4 w-4 text-gray-500" />
+                    </div>
+                    <Select
+                      value={carSelection.model}
+                      onValueChange={(value) => handleModelChange(value, carSelection.id)}
+                      disabled={!carSelection.make}
+                    >
+                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
+                        <SelectValue placeholder="Model" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
+                        {carModels
+                          .filter(model => model.makeId === carSelection.make)
+                          .map((model) => (
+                            <SelectItem key={model.id} value={model.id} className="py-2 border-b border-gray-200 last:border-0">
+                              {model.name}
+                            </SelectItem>
+                          ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
                 {/* Car card */}
                 <div className={`rounded-lg shadow-sm overflow-hidden bg-white w-full mb-6 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
                   {/* Car image container */}
@@ -398,66 +433,6 @@ export default function ComparisonTool() {
                       </p>
                     </div>
                   )}
-                </div>
-                
-                {/* Make & Model selectors - moved below car image container */}
-                <div className="w-full flex gap-2 mb-4">
-                  <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-500" />
-                    </div>
-                    <Select
-                      value={carSelection.make}
-                      onValueChange={(value) => handleMakeChange(value, carSelection.id)}
-                    >
-                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
-                        <SelectValue placeholder="Make" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
-                        {carMakes.map((make) => {
-                          // Check if this make is already selected in another car
-                          const isDisabled = carSelections.some(
-                            selection => selection.id !== carSelection.id && selection.make === make.id
-                          );
-                          
-                          return (
-                            <SelectItem 
-                              key={make.id} 
-                              value={make.id} 
-                              disabled={isDisabled}
-                              className={`py-2 border-b border-gray-200 last:border-0 ${isDisabled ? 'opacity-50' : ''}`}
-                            >
-                              {make.name}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-500" />
-                    </div>
-                    <Select
-                      value={carSelection.model}
-                      onValueChange={(value) => handleModelChange(value, carSelection.id)}
-                      disabled={!carSelection.make}
-                    >
-                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
-                        <SelectValue placeholder="Model" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
-                        {carModels
-                          .filter(model => model.makeId === carSelection.make)
-                          .map((model) => (
-                            <SelectItem key={model.id} value={model.id} className="py-2 border-b border-gray-200 last:border-0">
-                              {model.name}
-                            </SelectItem>
-                          ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
                 </div>
                 
                 {/* VS circle between cars */}
@@ -500,30 +475,14 @@ export default function ComparisonTool() {
           <div className="mt-16 text-left">
             {/* Features Comparison */}
             <div className="mb-10">
-              <h2 className="text-xl font-semibold mb-6">Compare <span className="text-amber-500">Features</span></h2>
-              
-              {/* Features Category Selector */}
-              <div className="mb-4">
-                <Select defaultValue="safety">
-                  <SelectTrigger className="w-[180px] border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
-                    <SelectValue placeholder="Safety" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="safety">Safety</SelectItem>
-                    <SelectItem value="comfort">Comfort & Convenience</SelectItem>
-                    <SelectItem value="infotainment">Infotainment</SelectItem>
-                    <SelectItem value="exterior">Exterior Feature</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="overflow-hidden rounded-none border-0">
+              <h2 className="text-xl font-semibold mb-6">Compare Features</h2>
+              <div className="overflow-hidden rounded-md border border-gray-200">
                 <Table className="border-collapse w-full">
                   <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-1/3 bg-green-900 text-white border border-green-800 px-4 py-3 font-medium text-left">Feature</TableHead>
+                    <TableRow className="bg-green-900 text-white">
+                      <TableHead className="w-1/3 border-r border-gray-600 px-4 py-3">Feature</TableHead>
                       {selectedCars.map((car) => (
-                        <TableHead key={car.id} className="bg-green-900 text-white border border-green-800 px-4 py-3 font-medium">
+                        <TableHead key={car.id} className="border-r last:border-r-0 border-gray-600 px-4 py-3">
                           {car.make === 'Toyota' && car.model === 'Corolla Altis' 
                             ? 'Toyota Corolla Altis' 
                             : `${car.make} ${car.model}`}
@@ -532,72 +491,50 @@ export default function ComparisonTool() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">No. of Airbags</TableCell>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">AC (Climate)</TableCell>
                       {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
-                          {car.model === 'Corolla Altis' ? '2' : 
-                           car.model === 'Civic' ? '6' : 
-                           car.model === 'A4' ? '8' : '4'}
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3 text-center">
+                          <Check className="h-5 w-5 mx-auto text-green-600" />
                         </TableCell>
                       ))}
                     </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">No. of Seatbelts</TableCell>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">Power Windows</TableCell>
                       {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
-                          {car.doors >= 4 ? '5' : '4'}
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3 text-center">
+                          <Check className="h-5 w-5 mx-auto text-green-600" />
                         </TableCell>
                       ))}
                     </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">Immobilizer</TableCell>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">Sunroof</TableCell>
                       {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
-                          {car.year >= 2018 ? (
-                            <div className="w-5 h-5 bg-black rounded-full mx-auto"></div>
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3 text-center">
+                          {car.model === 'Civic' || car.model === 'A4' ? (
+                            <Check className="h-5 w-5 mx-auto text-green-600" />
                           ) : (
-                            car.model === 'Mustang' || car.model === 'A4' ? (
-                              <div className="w-5 h-5 bg-black rounded-full mx-auto"></div>
-                            ) : (
-                              <span className="text-gray-500">N/A</span>
-                            )
+                            <X className="h-5 w-5 mx-auto text-red-500" />
                           )}
                         </TableCell>
                       ))}
                     </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">ABS (Anti-lock Braking)</TableCell>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">Backup Camera</TableCell>
                       {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
-                          {car.year >= 2010 ? (
-                            <div className="w-5 h-5 bg-black rounded-full mx-auto"></div>
-                          ) : (
-                            <span className="text-gray-500">N/A</span>
-                          )}
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3 text-center">
+                          <Check className="h-5 w-5 mx-auto text-green-600" />
                         </TableCell>
                       ))}
                     </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">Child Lock</TableCell>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-gray-200 px-4 py-3">Lane Assist</TableCell>
                       {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
-                          {car.doors >= 4 ? (
-                            <div className="w-5 h-5 bg-black rounded-full mx-auto"></div>
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-gray-200 px-4 py-3 text-center">
+                          {car.model === 'Mustang' || car.model === 'F-150' ? (
+                            <X className="h-5 w-5 mx-auto text-red-500" />
                           ) : (
-                            <span className="text-gray-500">N/A</span>
-                          )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">ISOFIX Child Seat Anchors</TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
-                          {car.year >= 2011 && car.doors >= 4 ? (
-                            <div className="w-5 h-5 bg-black rounded-full mx-auto"></div>
-                          ) : (
-                            <span className="text-gray-500">N/A</span>
+                            <Check className="h-5 w-5 mx-auto text-green-600" />
                           )}
                         </TableCell>
                       ))}
@@ -609,31 +546,14 @@ export default function ComparisonTool() {
             
             {/* Specifications Comparison */}
             <div className="mb-10">
-              <h2 className="text-xl font-semibold mb-6">Compare <span className="text-amber-500">Specifications</span></h2>
-              
-              {/* Specifications Category Selector */}
-              <div className="mb-4">
-                <Select defaultValue="engine">
-                  <SelectTrigger className="w-[180px] border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
-                    <SelectValue placeholder="Engine/Motor" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="engine">Engine/Motor</SelectItem>
-                    <SelectItem value="transmission">Transmission</SelectItem>
-                    <SelectItem value="steering">Steering</SelectItem>
-                    <SelectItem value="wheels">Wheels and Tires</SelectItem>
-                    <SelectItem value="fuel">Fuel Economy</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="overflow-hidden rounded-none border-0">
+              <h2 className="text-xl font-semibold mb-6">Compare Specifications</h2>
+              <div className="overflow-hidden rounded-md border border-gray-200">
                 <Table className="border-collapse w-full">
                   <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-1/3 bg-green-900 text-white border border-green-800 px-4 py-3 font-medium text-left">Specification</TableHead>
+                    <TableRow className="bg-green-900 text-white">
+                      <TableHead className="w-1/3 border-r border-gray-600 px-4 py-3">Engine/Mech</TableHead>
                       {selectedCars.map((car) => (
-                        <TableHead key={car.id} className="bg-green-900 text-white border border-green-800 px-4 py-3 font-medium">
+                        <TableHead key={car.id} className="border-r last:border-r-0 border-gray-600 px-4 py-3">
                           {car.make === 'Toyota' && car.model === 'Corolla Altis' 
                             ? 'Toyota Corolla Altis' 
                             : `${car.make} ${car.model}`}
@@ -642,56 +562,43 @@ export default function ComparisonTool() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">Engine Type</TableCell>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">Engine Type</TableCell>
                       {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3">
                           {car.engine}
                         </TableCell>
                       ))}
                     </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">Drive Type</TableCell>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">Fuel Type</TableCell>
                       {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
-                          {car.model === 'A4' ? 'AWD' : 
-                           car.model === 'F-150' ? '4WD' : 'FWD'}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">Fuel Type</TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3">
                           {car.fuelType}
                         </TableCell>
                       ))}
                     </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">Horsepower</TableCell>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">Year</TableCell>
                       {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
-                          {car.model === 'Corolla Altis' ? '132 hp' : 
-                           car.model === 'Civic' ? '158 hp' : 
-                           car.model === 'A4' ? '201 hp' : 
-                           car.model === 'Mustang' ? '310 hp' : 
-                           car.model === 'F-150' ? '290 hp' : '180 hp'}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">Transmission</TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
-                          {car.transmission}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-normal border border-gray-200 px-4 py-3 text-left">Model Year</TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3">
                           {car.year}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">Mileage</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3">
+                          {car.mileage.toLocaleString()} miles
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border-r border-gray-200 px-4 py-3">Transmission</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border-r last:border-r-0 border-gray-200 px-4 py-3">
+                          {car.transmission}
                         </TableCell>
                       ))}
                     </TableRow>

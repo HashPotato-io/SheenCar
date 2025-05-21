@@ -33,6 +33,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Car1 from "../../assets/car1.png";
 
 // Define car selection interface
 interface CarSelection {
@@ -231,9 +232,22 @@ export default function ComparisonTool() {
   const handleRemoveCarSelection = (id: number) => {
     // Only allow removal if we have more than 2 car selections
     if (carSelections.length > 2) {
-      setCarSelections((prevSelections) =>
-        prevSelections.filter((car) => car.id !== id),
-      );
+      // First filter out the car to be removed
+      const filteredSelections = carSelections.filter((car) => car.id !== id);
+      
+      // Then reassign sequential IDs to maintain proper order
+      const reindexedSelections = filteredSelections.map((car, index) => ({
+        ...car,
+        id: index + 1
+      }));
+      
+      setCarSelections(reindexedSelections);
+      
+      // Reset comparison if it was showing
+      if (showComparison) {
+        setShowComparison(false);
+        setSelectedCars([]);
+      }
     }
   };
 
@@ -585,13 +599,13 @@ export default function ComparisonTool() {
               >
                 {/* Car card */}
                 <div
-                  className={`rounded-xl border shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? "border border-gray-200" : "border-2 border-dashed border-gray-300"} relative`}
+                  className={`rounded-xl border shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? "border border-gray-200" : "border-2 border-dashed border-gray-300"} relative group`}
                 >
-                  {/* Remove button (show only if there are more than 2 cars) */}
-                  {carSelections.length > 2 && (
+                  {/* Remove button (show only if there are more than 2 cars and a car is selected) */}
+                  {carSelections.length > 2 && carSelection.make && carSelection.model && (
                     <button
                       onClick={() => handleRemoveCarSelection(carSelection.id)}
-                      className="absolute right-2 top-2 z-10 bg-white/90 text-gray-700 hover:text-red-500 rounded-full p-1 shadow-sm transition-colors"
+                      className="absolute right-2 top-2 z-10 bg-white/90 text-gray-700 hover:text-red-500 rounded-full p-1 shadow-sm transition-colors opacity-0 group-hover:opacity-100"
                       aria-label="Remove car"
                     >
                       <X size={16} />
@@ -608,7 +622,7 @@ export default function ComparisonTool() {
                       />
                     ) : (
                       <img
-                        src="/car-outline.svg"
+                        src={Car1}
                         alt="Car silhouette"
                         className="w-40 h-auto max-h-36 opacity-60"
                         onError={(e) => {

@@ -7,7 +7,8 @@ import {
   Check, 
   X, 
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  ChevronLeft
 } from "lucide-react";
 import { carMakes, carModels } from "@/lib/car-types";
 import {

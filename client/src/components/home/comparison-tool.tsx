@@ -183,16 +183,27 @@ export default function ComparisonTool() {
     const validSelections = carSelections.filter(car => car.make && car.model);
     
     if (validSelections.length >= 2) {
-      const carDetailsArray = validSelections.map(car => {
-        // Get the car details either from existing data or via the helper function
-        const details = getSelectedCarDetails(car);
-        console.log("Selected car details:", details);
-        return details;
-      }).filter(car => car !== null) as CarDetails[];
+      const carDetailsArray: CarDetails[] = [];
       
-      console.log("Selected cars for comparison:", carDetailsArray);
-      setSelectedCars(carDetailsArray);
-      setShowComparison(true);
+      validSelections.forEach(car => {
+        const details = getSelectedCarDetails(car);
+        if (details) {
+          carDetailsArray.push(details);
+        }
+      });
+      
+      if (carDetailsArray.length >= 2) {
+        setSelectedCars(carDetailsArray);
+        setShowComparison(true);
+        
+        // Scroll to comparison section
+        setTimeout(() => {
+          const comparisonSection = document.getElementById('comparison-results');
+          if (comparisonSection) {
+            comparisonSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
     }
   };
 
@@ -488,17 +499,19 @@ export default function ComparisonTool() {
         
         {/* Comparison Results Section */}
         {showComparison && selectedCars.length >= 2 && (
-          <div className="mt-16 text-left">
+          <div id="comparison-results" className="mt-16 text-left">
             {/* Features Comparison */}
             <div className="mb-10">
-              <h2 className="text-xl font-semibold mb-6">Compare Features</h2>
-              <div className="overflow-hidden rounded-md border border-gray-200">
+              <h2 className="text-xl font-semibold mb-6 flex items-center">
+                <span className="text-green-900 mr-2">Compare</span> Features
+              </h2>
+              <div className="overflow-hidden rounded-none border border-gray-200">
                 <Table className="border-collapse w-full">
                   <TableHeader>
                     <TableRow className="bg-green-900 text-white">
-                      <TableHead className="w-1/3 border-r border-gray-600 px-4 py-3">Feature</TableHead>
+                      <TableHead className="w-1/3 border-r border-gray-600 px-4 py-3 text-left font-medium">Feature</TableHead>
                       {selectedCars.map((car) => (
-                        <TableHead key={car.id} className="border-r last:border-r-0 border-gray-600 px-4 py-3">
+                        <TableHead key={car.id} className="border-r last:border-r-0 border-gray-600 px-4 py-3 text-left font-medium">
                           {car.make === 'Toyota' && car.model === 'Corolla Altis' 
                             ? 'Toyota Corolla Altis' 
                             : `${car.make} ${car.model}`}
@@ -562,14 +575,16 @@ export default function ComparisonTool() {
             
             {/* Specifications Comparison */}
             <div className="mb-10">
-              <h2 className="text-xl font-semibold mb-6">Compare Specifications</h2>
-              <div className="overflow-hidden rounded-md border border-gray-200">
+              <h2 className="text-xl font-semibold mb-6 flex items-center">
+                <span className="text-green-900 mr-2">Compare</span> Specifications
+              </h2>
+              <div className="overflow-hidden rounded-none border border-gray-200">
                 <Table className="border-collapse w-full">
                   <TableHeader>
                     <TableRow className="bg-green-900 text-white">
-                      <TableHead className="w-1/3 border-r border-gray-600 px-4 py-3">Engine/Mech</TableHead>
+                      <TableHead className="w-1/3 border-r border-gray-600 px-4 py-3 text-left font-medium">Engine/Mech</TableHead>
                       {selectedCars.map((car) => (
-                        <TableHead key={car.id} className="border-r last:border-r-0 border-gray-600 px-4 py-3">
+                        <TableHead key={car.id} className="border-r last:border-r-0 border-gray-600 px-4 py-3 text-left font-medium">
                           {car.make === 'Toyota' && car.model === 'Corolla Altis' 
                             ? 'Toyota Corolla Altis' 
                             : `${car.make} ${car.model}`}
@@ -625,7 +640,9 @@ export default function ComparisonTool() {
             
             {/* Similar Listings */}
             <div className="mb-8">
-              <h2 className="text-xl font-semibold mb-6">Similar Listings</h2>
+              <h2 className="text-xl font-semibold mb-6 flex items-center">
+                <span className="text-green-900 mr-2">Similar</span> Listings
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {selectedCars.map((car, index) => (
                   <div key={`${car.id}-${index}`} className="bg-white rounded-md overflow-hidden shadow-sm relative">

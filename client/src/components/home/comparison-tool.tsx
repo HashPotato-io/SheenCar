@@ -821,16 +821,20 @@ export default function ComparisonTool() {
                                 ? 'Toyota Corolla Altis' 
                                 : `${car.make} ${car.model}`}
                             </p>
-                            <p className="text-green-800 text-sm font-medium">
-                              Price: ${(idx % 2 === 0 ? car.price : car.price - 2000).toLocaleString()}
+                            <p className="text-xs text-gray-500 mb-1">
+                              {idx % 2 === 0 ? car.year : car.year - 1}
                             </p>
-                            <p className="text-xs text-gray-600 mt-1">
-                              {(idx % 2 === 0 ? car.mileage/1000 : car.mileage/1000 + 15).toFixed(0)}k miles • {idx % 2 === 0 ? car.year : car.year - 1} • {car.transmission}
-                            </p>
-                            
-                            {/* Green dot indicator */}
-                            <div className="flex justify-end mt-1">
-                              <div className="w-4 h-4 rounded-full bg-green-500"></div>
+                            <div className="flex justify-between items-center">
+                              <p className="text-green-800 text-sm font-medium">
+                                Price: ${(idx % 2 === 0 ? car.price : car.price - 2000).toLocaleString()}
+                              </p>
+                              
+                              {/* View details button */}
+                              <Link href={`/cars/${car.id}`}>
+                                <button className="rounded-full p-2 bg-green-500 text-white">
+                                  <ChevronRight className="h-4 w-4" />
+                                </button>
+                              </Link>
                             </div>
                           </div>
                         </div>

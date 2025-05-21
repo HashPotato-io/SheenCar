@@ -127,18 +127,22 @@ export default function FindDealersPage() {
             Find Your Perfect Car!
           </h2>
           
-          <form onSubmit={handleSearchSubmit} className="max-w-xl mx-auto flex overflow-hidden rounded-full bg-white">
-            <Input 
-              type="text" 
-              placeholder="What do you need help with?"
-              className="flex-grow border-none focus-visible:ring-0 focus-visible:ring-offset-0 py-6"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-            />
-            <Button type="submit" className="rounded-r-full bg-green-800 hover:bg-green-900">
-              <SearchIcon className="h-5 w-5" />
-              Search
-            </Button>
+          <form onSubmit={handleSearchSubmit} className="max-w-3xl mx-auto">
+            <div className="flex items-center bg-white rounded-full shadow-md overflow-hidden p-1">
+              <div className="flex items-center pl-4">
+                <SearchIcon className="h-5 w-5 text-gray-400 mr-2" />
+                <Input 
+                  type="text" 
+                  placeholder="What do you need help with?"
+                  className="flex-grow border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 py-2 px-0"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+              </div>
+              <Button type="submit" className="bg-green-800 hover:bg-green-900 rounded-full px-6 py-2 text-white">
+                Search
+              </Button>
+            </div>
           </form>
         </div>
       </div>

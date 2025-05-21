@@ -62,9 +62,9 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-4">Important</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-neutral-400 hover:text-white transition-colors">
+                <Link href="/security" className="text-neutral-400 hover:text-white transition-colors">
                   Security
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-neutral-400 hover:text-white transition-colors">

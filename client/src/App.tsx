@@ -12,6 +12,7 @@ import ComparePage from "@/pages/compare-page";
 import DashboardPage from "@/pages/dashboard-page";
 import PostAdPage from "@/pages/post-ad-page";
 import NewCarsPage from "@/pages/new-cars-page";
+import SecurityPage from "@/pages/security-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
 function Router() {
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/new-cars" component={NewCarsPage} />
       <Route path="/cars/:id" component={CarDetailsPage} />
       <Route path="/compare" component={ComparePage} />
+      <Route path="/security" component={SecurityPage} />
       <ProtectedRoute path="/dashboard" component={DashboardPage} />
       <ProtectedRoute path="/post-ad" component={PostAdPage} />
       <Route component={NotFound} />

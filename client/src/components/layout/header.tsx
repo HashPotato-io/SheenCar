@@ -37,7 +37,7 @@ export default function Header() {
       name: "Cars",
       children: [
         { name: "Browse All Cars", href: "/search" },
-        { name: "New Cars", href: "/search?condition=new" },
+        { name: "New Cars", href: "/new-cars" },
         { name: "Used Cars", href: "/search?condition=used" },
         { name: "Certified Pre-Owned", href: "/search?condition=certified" },
       ],

@@ -11,7 +11,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Search, Heart } from "lucide-react";
+import { Search, Heart, ArrowRight } from "lucide-react";
 import { carMakes, carModels } from "@/lib/car-types";
 import { Link } from 'wouter';
 import Header from "@/components/layout/header";
@@ -21,8 +21,11 @@ import Footer from "@/components/layout/footer";
 const carsListings = Array(16).fill(null).map((_, index) => ({
   id: index + 1,
   title: "Toyota Corolla Altis",
+  year: 2025,
   price: 42000,
-  imageUrl: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
+  imageUrl: index % 2 === 0 
+    ? "https://images.unsplash.com/photo-1583267746897-2cf4865e2cbb?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3" 
+    : "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3",
   isFavorite: false
 }));
 
@@ -233,9 +236,17 @@ export default function NewCarsPage() {
                       <Heart className="h-4 w-4" />
                     </button>
                   </div>
-                  <div className="p-3">
-                    <h3 className="font-medium text-sm">{car.title}</h3>
-                    <p className="text-green-800 text-sm font-medium mt-1">Price: ${car.price.toLocaleString()}</p>
+                  <div className="p-4">
+                    <h3 className="font-medium text-lg">{car.title}</h3>
+                    <p className="text-gray-500 text-sm mb-2">{car.year}</p>
+                    <div className="flex justify-between items-center">
+                      <p className="text-green-800 text-lg font-medium">Price: ${car.price.toLocaleString()}</p>
+                      <Link href={`/cars/${car.id}`}>
+                        <button className="rounded-full p-2 bg-green-900 text-white">
+                          <ArrowRight className="h-4 w-4" />
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}

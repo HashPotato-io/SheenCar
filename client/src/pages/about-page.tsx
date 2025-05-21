@@ -97,58 +97,88 @@ export default function AboutPage() {
       </div>
 
       {/* What We Do */}
-      <div className="py-16 bg-gray-900 text-white">
+      <div className="py-16 bg-green-900 text-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">What We Do</h2>
-          <p className="text-gray-300 text-center max-w-4xl mx-auto mb-16">
-            SheenCar meticulously curates a trustworthy collection of vehicles, making car buying a stress-free experience that will make you smile from ear to ear. We help buyers find their dream cars and assist sellers in connecting with genuine buyers who will appreciate their vehicles as much as they did.
+          <h2 className="text-3xl font-bold text-center mb-6"><span className="text-amber-500">What</span> We Do</h2>
+          <p className="text-gray-300 text-center max-w-4xl mx-auto mb-12">
+            SheenCar brings buyers, sellers, and dealers together. In one seamless marketplace, making car trading easier and more 
+            efficient. With verified listings, advanced search filters, and secure transactions, we ensure a smooth experience for all. 
+            Whether you're buying, selling, or expanding your dealership, SheenCar provides the tools to help you succeed.
           </p>
 
-          <div className="space-y-8">
+          <div className="space-y-12 max-w-4xl mx-auto">
             {/* Section 1 */}
-            <div className="flex flex-col md:flex-row items-center">
+            <div className="flex flex-col md:flex-row items-center gap-6">
               <div className="md:w-1/4 flex justify-center mb-6 md:mb-0">
-                <div className="rounded-full bg-green-900/20 p-6">
-                  <Handshake className="h-12 w-12 text-green-500" />
-                </div>
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 37H60" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M40 45C40 45 34 37 20 37" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M30 55C30 55 41 45 40 45" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M60 37C46 37 40 45 40 45" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M40 45C39 45 50 55 50 55" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="30" cy="55" r="5" stroke="#14B8A6" strokeWidth="2"/>
+                  <circle cx="50" cy="55" r="5" stroke="#14B8A6" strokeWidth="2"/>
+                  <path d="M10 25L25 22V32L10 35V25Z" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M25 22L65 15V25L25 32V22Z" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M65 15L70 25L25 32" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
               <div className="md:w-3/4">
-                <h3 className="text-2xl font-semibold mb-4">Helping Sellers Connect with Buyers</h3>
-                <p className="text-gray-300">
-                  We provide sellers with the tools and platform they need to showcase their vehicles effectively and connect with interested buyers who are ready to make a purchase.
+                <h3 className="text-xl font-semibold mb-2">Helping Sellers <span className="text-amber-500">Connect</span> with Buyers</h3>
+                <p className="text-gray-300 text-sm">
+                  Sellers can easily list their cars on SheenCar, showcasing detailed information 
+                  and images to reach a wide audience of potential buyers.
                 </p>
               </div>
             </div>
 
             {/* Section 2 */}
-            <div className="flex flex-col md:flex-row items-center">
+            <div className="flex flex-col md:flex-row items-center gap-6">
               <div className="md:w-1/4 flex justify-center mb-6 md:mb-0">
-                <div className="rounded-full bg-green-900/20 p-6">
-                  <Car className="h-12 w-12 text-green-500" />
-                </div>
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="60" cy="25" r="10" fill="none" stroke="#14B8A6" strokeWidth="2"/>
+                  <path d="M65 25H55" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M60 20V30" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M15 55L25 50V60L15 65V55Z" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M25 50L65 40V50L25 60V50Z" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M65 40L70 50L25 60" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
               <div className="md:w-3/4">
-                <h3 className="text-2xl font-semibold mb-4">Empowering Buyers with Options</h3>
-                <p className="text-gray-300">
-                  We give buyers access to extensive vehicle listings with detailed information and our innovative comparison tool, helping them make confident decisions based on their specific requirements and preferences.
+                <h3 className="text-xl font-semibold mb-2">Empowering <span className="text-amber-500">Buyers</span> with Options</h3>
+                <p className="text-gray-300 text-sm">
+                  Buyers can explore a variety of new and used cars, using advanced search 
+                  filters and the comparison tool to evaluate and select the best vehicle for their needs.
                 </p>
               </div>
             </div>
 
             {/* Section 3 */}
-            <div className="flex flex-col md:flex-row items-center">
+            <div className="flex flex-col md:flex-row items-center gap-6">
               <div className="md:w-1/4 flex justify-center mb-6 md:mb-0">
-                <div className="rounded-full bg-green-900/20 p-6">
-                  <Users className="h-12 w-12 text-green-500" />
-                </div>
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 65V55H35V65H15Z" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M25 40V55" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="25" cy="30" r="10" stroke="#14B8A6" strokeWidth="2"/>
+                  <path d="M40 30H65V52.5L55 60H40V30Z" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M65 40H55V52.5" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
               <div className="md:w-3/4">
-                <h3 className="text-2xl font-semibold mb-4">Supporting Dealers in Growing Their Business</h3>
-                <p className="text-gray-300">
-                  We partner with dealerships to expand their reach and connect with potential customers, providing them with insights and tools to showcase their inventory and boost their sales.
+                <h3 className="text-xl font-semibold mb-2">Supporting <span className="text-amber-500">Dealers</span> in Growing Their Business</h3>
+                <p className="text-gray-300 text-sm">
+                  Dealers can list multiple vehicles, gaining visibility on the platform and 
+                  connecting with potential buyers quickly and efficiently.
                 </p>
               </div>
             </div>
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-sm text-gray-300 mb-4">Join SheenCar and experience a smarter, faster way to buy and sell cars.</p>
+            <a href="/signup" className="inline-block border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white px-4 py-2 text-sm transition-colors">
+              Join Now
+            </a>
           </div>
         </div>
       </div>

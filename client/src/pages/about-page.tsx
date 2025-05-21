@@ -183,14 +183,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Our Values */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-600 mb-6">
-            With SheenCar we've positioned a reliable, hassle-free way to buy and sell cars.
-          </p>
-        </div>
-      </div>
+
 
       <Footer />
     </div>

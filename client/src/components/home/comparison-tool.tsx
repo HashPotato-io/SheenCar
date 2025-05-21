@@ -181,18 +181,24 @@ export default function ComparisonTool() {
   const handleCompareClick = () => {
     // Get selected car details
     const validSelections = carSelections.filter(car => car.make && car.model);
+    console.log("Valid selections:", validSelections);
     
     if (validSelections.length >= 2) {
       const carDetailsArray: CarDetails[] = [];
       
       validSelections.forEach(car => {
         const details = getSelectedCarDetails(car);
+        console.log(`Details for ${car.make}_${car.model}:`, details);
         if (details) {
           carDetailsArray.push(details);
         }
       });
       
+      console.log("Car details array length:", carDetailsArray.length);
+      console.log("Car details array:", carDetailsArray);
+      
       if (carDetailsArray.length >= 2) {
+        console.log("Setting selected cars and showing comparison");
         setSelectedCars(carDetailsArray);
         setShowComparison(true);
         
@@ -297,11 +303,89 @@ export default function ComparisonTool() {
     if (carSelection.make && carSelection.model) {
       const makeKey = carSelection.make;
       const modelKey = carSelection.model;
-      const exactMatchKey = `${makeKey}_${modelKey}`;
       
-      // Try exact match first
-      if (carDetailsData[exactMatchKey]) {
-        return carDetailsData[exactMatchKey];
+      // For Toyota Corolla
+      if (makeKey === "toyota" && modelKey === "corolla") {
+        return {
+          id: "toyota_corolla",
+          make: "Toyota",
+          model: "Corolla Altis",
+          year: 2022,
+          price: 24500,
+          mileage: 12500,
+          fuelType: "Gasoline",
+          transmission: "CVT Automatic",
+          engine: "1.8L 4-Cylinder",
+          exteriorColor: "Black",
+          interiorColor: "Black",
+          doors: 4,
+          features: ["Bluetooth", "Backup Camera", "Lane Departure Warning", "Keyless Entry"],
+          imageUrl: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
+          rating: 4.5
+        };
+      }
+      
+      // For Toyota Camry
+      if (makeKey === "toyota" && modelKey === "camry") {
+        return {
+          id: "toyota_camry",
+          make: "Toyota",
+          model: "Camry",
+          year: 2022,
+          price: 26500,
+          mileage: 14200,
+          fuelType: "Gasoline",
+          transmission: "Automatic",
+          engine: "2.5L 4-Cylinder",
+          exteriorColor: "Silver",
+          interiorColor: "Black",
+          doors: 4,
+          features: ["Bluetooth", "Backup Camera", "Lane Departure Warning", "Keyless Entry"],
+          imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg/1200px-2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg",
+          rating: 4.5
+        };
+      }
+      
+      // For Honda Civic
+      if (makeKey === "honda" && modelKey === "civic") {
+        return {
+          id: "honda_civic",
+          make: "Honda",
+          model: "Civic",
+          year: 2022,
+          price: 23000,
+          mileage: 10200,
+          fuelType: "Gasoline",
+          transmission: "CVT",
+          engine: "1.5L Turbo 4-Cylinder",
+          exteriorColor: "Blue",
+          interiorColor: "Gray",
+          doors: 4,
+          features: ["Apple CarPlay", "Android Auto", "Adaptive Cruise Control", "Sunroof"],
+          imageUrl: "https://www.cnet.com/a/img/resize/75aefa7c3cd90d9d5fae785aad14e078f865ea59/hub/2021/11/16/1f7d8300-c033-4fa0-bcff-47170536cf69/2022-honda-civic-sedan-sport-touring-7.jpg?auto=webp&fit=crop&height=675&width=1200",
+          rating: 4.7
+        };
+      }
+      
+      // For Ford Mustang
+      if (makeKey === "ford" && modelKey === "mustang") {
+        return {
+          id: "ford_mustang",
+          make: "Ford",
+          model: "Mustang",
+          year: 2021,
+          price: 36800,
+          mileage: 15000,
+          fuelType: "Gasoline",
+          transmission: "Automatic",
+          engine: "5.0L V8",
+          exteriorColor: "Black",
+          interiorColor: "Black",
+          doors: 2,
+          features: ["Leather Seats", "Navigation System", "Premium Sound", "Performance Package"],
+          imageUrl: "https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          rating: 4.6
+        };
       }
       
       // Special cases for Porsche F-150
@@ -346,10 +430,24 @@ export default function ComparisonTool() {
         };
       }
       
-      // For Toyota Corolla
-      if (makeKey === "toyota" && modelKey === "corolla") {
-        return carDetailsData["toyota_corolla"];
-      }
+      // For any other car that doesn't have a specific case
+      return {
+        id: `${makeKey}_${modelKey}`,
+        make: carMakes.find(m => m.id === makeKey)?.name || makeKey.charAt(0).toUpperCase() + makeKey.slice(1),
+        model: carModels.find(m => m.id === modelKey)?.name || modelKey.charAt(0).toUpperCase() + modelKey.slice(1),
+        year: 2020,
+        price: 25000,
+        mileage: 20000,
+        fuelType: "Gasoline",
+        transmission: "Automatic",
+        engine: "2.0L 4-Cylinder",
+        exteriorColor: "Silver",
+        interiorColor: "Black",
+        doors: 4,
+        features: ["Bluetooth", "Backup Camera", "Power Windows", "AC (Climate)"],
+        imageUrl: getCarImage(carSelection),
+        rating: 4.0
+      };
     }
     return null;
   };

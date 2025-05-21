@@ -150,148 +150,165 @@ export default function FindDealersPage() {
       {/* Main Content Area */}
       <div className="bg-gray-50 py-8">
         <div className="container mx-auto px-4">
-          <div className="text-xl font-semibold text-neutral-800 mb-4">
-            <span className="text-amber-500">{totalDealers}</span> Car Dealers Found
-          </div>
-          
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Filters Sidebar */}
-            <div className="w-full md:w-64 bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="font-bold text-lg mb-4">Filters</h3>
+          <div className="flex">
+            <div className="w-full md:w-64 pr-0 md:pr-6">
+              <div className="text-xl font-semibold text-neutral-800 mb-4">
+                <span className="text-amber-500">{totalDealers}</span> Car Dealers Found
+              </div>
               
-              <div className="space-y-6">
-                <div>
-                  <Label htmlFor="zipcode" className="text-sm font-medium">ZIP Code</Label>
-                  <div className="relative mt-1">
-                    <Input
-                      id="zipcode"
-                      type="text"
-                      placeholder="Enter ZIP code"
-                      className="w-full"
-                      value={zipCode}
-                      onChange={(e) => setZipCode(e.target.value)}
-                    />
+              {/* Filters Sidebar */}
+              <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
+                <h3 className="font-bold text-lg mb-4">Filters</h3>
+                
+                <div className="space-y-6">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                      </svg>
+                      <Label htmlFor="zipcode" className="text-sm font-medium">ZIP Code</Label>
+                    </div>
+                    <div className="relative">
+                      <Input
+                        id="zipcode"
+                        type="text"
+                        placeholder="Enter ZIP code"
+                        className="w-full"
+                        value={zipCode}
+                        onChange={(e) => setZipCode(e.target.value)}
+                      />
+                    </div>
                   </div>
-                </div>
-                
-                <div>
-                  <Label className="text-sm font-medium">Make</Label>
-                  <Select value={make} onValueChange={setMake}>
-                    <SelectTrigger className="w-full mt-1">
-                      <SelectValue placeholder="Select make" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="toyota">Toyota</SelectItem>
-                        <SelectItem value="honda">Honda</SelectItem>
-                        <SelectItem value="ford">Ford</SelectItem>
-                        <SelectItem value="bmw">BMW</SelectItem>
-                        <SelectItem value="mercedes">Mercedes-Benz</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <Label className="text-sm font-medium">Model</Label>
-                  <Select value={model} onValueChange={setModel}>
-                    <SelectTrigger className="w-full mt-1">
-                      <SelectValue placeholder="Select model" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="camry">Camry</SelectItem>
-                        <SelectItem value="accord">Accord</SelectItem>
-                        <SelectItem value="f150">F-150</SelectItem>
-                        <SelectItem value="3series">3 Series</SelectItem>
-                        <SelectItem value="cclass">C-Class</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <Label className="text-sm font-medium">Body Type</Label>
-                  <Select value={bodyType} onValueChange={setBodyType}>
-                    <SelectTrigger className="w-full mt-1">
-                      <SelectValue placeholder="Select body type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="sedan">Sedan</SelectItem>
-                        <SelectItem value="suv">SUV</SelectItem>
-                        <SelectItem value="truck">Truck</SelectItem>
-                        <SelectItem value="coupe">Coupe</SelectItem>
-                        <SelectItem value="convertible">Convertible</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <Label className="text-sm font-medium">Condition</Label>
-                  <RadioGroup className="mt-2 space-y-1" defaultValue="used">
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="used" id="used" checked={condition === "used"} onClick={() => setCondition("used")} />
-                      <Label htmlFor="used" className="cursor-pointer">Used</Label>
+                  
+                  <div>
+                    <Label className="text-sm font-medium">Make</Label>
+                    <Select value={make} onValueChange={setMake}>
+                      <SelectTrigger className="w-full mt-1">
+                        <SelectValue placeholder="Select make" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="toyota">Toyota</SelectItem>
+                          <SelectItem value="honda">Honda</SelectItem>
+                          <SelectItem value="ford">Ford</SelectItem>
+                          <SelectItem value="bmw">BMW</SelectItem>
+                          <SelectItem value="mercedes">Mercedes-Benz</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <Label className="text-sm font-medium">Model</Label>
+                    <Select value={model} onValueChange={setModel}>
+                      <SelectTrigger className="w-full mt-1">
+                        <SelectValue placeholder="Select model" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="camry">Camry</SelectItem>
+                          <SelectItem value="accord">Accord</SelectItem>
+                          <SelectItem value="f150">F-150</SelectItem>
+                          <SelectItem value="3series">3 Series</SelectItem>
+                          <SelectItem value="cclass">C-Class</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <Label className="text-sm font-medium">Body Type</Label>
+                    <Select value={bodyType} onValueChange={setBodyType}>
+                      <SelectTrigger className="w-full mt-1">
+                        <SelectValue placeholder="Select body type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="sedan">Sedan</SelectItem>
+                          <SelectItem value="suv">SUV</SelectItem>
+                          <SelectItem value="truck">Truck</SelectItem>
+                          <SelectItem value="coupe">Coupe</SelectItem>
+                          <SelectItem value="convertible">Convertible</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <Label className="text-sm font-medium">Condition</Label>
+                    <div className="mt-2 space-y-1">
+                      <div className="flex items-center space-x-2">
+                        <div className="flex items-center">
+                          <input type="radio" id="used" name="condition" className="w-4 h-4 accent-green-800" 
+                            checked={condition === "used"} 
+                            onChange={() => setCondition("used")} 
+                          />
+                          <Label htmlFor="used" className="cursor-pointer ml-2">Used</Label>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <div className="flex items-center">
+                          <input type="radio" id="new" name="condition" className="w-4 h-4 accent-green-800" 
+                            checked={condition === "new"} 
+                            onChange={() => setCondition("new")} 
+                          />
+                          <Label htmlFor="new" className="cursor-pointer ml-2">New</Label>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="new" id="new" checked={condition === "new"} onClick={() => setCondition("new")} />
-                      <Label htmlFor="new" className="cursor-pointer">New</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-                
-                <div>
-                  <h4 className="text-sm font-medium mb-2">Customer Ratings</h4>
-                  <div className="space-y-2">
-                    <div className="flex items-center">
-                      <input type="radio" id="rating5" name="rating" className="mr-2" onClick={() => setRating("5")} />
-                      <label htmlFor="rating5" className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
-                        ))}
-                      </label>
-                    </div>
-                    <div className="flex items-center">
-                      <input type="radio" id="rating4" name="rating" className="mr-2" onClick={() => setRating("4")} />
-                      <label htmlFor="rating4" className="flex">
-                        {[...Array(4)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
-                        ))}
-                        <Star className="w-4 h-4 text-amber-500" />
-                      </label>
-                    </div>
-                    <div className="flex items-center">
-                      <input type="radio" id="rating3" name="rating" className="mr-2" onClick={() => setRating("3")} />
-                      <label htmlFor="rating3" className="flex">
-                        {[...Array(3)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
-                        ))}
-                        {[...Array(2)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-amber-500" />
-                        ))}
-                      </label>
-                    </div>
-                    <div className="flex items-center">
-                      <input type="radio" id="rating2" name="rating" className="mr-2" onClick={() => setRating("2")} />
-                      <label htmlFor="rating2" className="flex">
-                        {[...Array(2)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
-                        ))}
-                        {[...Array(3)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-amber-500" />
-                        ))}
-                      </label>
-                    </div>
-                    <div className="flex items-center">
-                      <input type="radio" id="rating1" name="rating" className="mr-2" onClick={() => setRating("1")} />
-                      <label htmlFor="rating1" className="flex">
-                        <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-                        {[...Array(4)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-amber-500" />
-                        ))}
-                      </label>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-sm font-medium mb-2">Customer Ratings</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center">
+                        <input type="radio" id="rating5" name="rating" className="mr-2" onClick={() => setRating("5")} />
+                        <label htmlFor="rating5" className="flex">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                          ))}
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        <input type="radio" id="rating4" name="rating" className="mr-2" onClick={() => setRating("4")} />
+                        <label htmlFor="rating4" className="flex">
+                          {[...Array(4)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                          ))}
+                          <Star className="w-4 h-4 text-amber-500" />
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        <input type="radio" id="rating3" name="rating" className="mr-2" onClick={() => setRating("3")} />
+                        <label htmlFor="rating3" className="flex">
+                          {[...Array(3)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                          ))}
+                          {[...Array(2)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 text-amber-500" />
+                          ))}
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        <input type="radio" id="rating2" name="rating" className="mr-2" onClick={() => setRating("2")} />
+                        <label htmlFor="rating2" className="flex">
+                          {[...Array(2)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                          ))}
+                          {[...Array(3)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 text-amber-500" />
+                          ))}
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        <input type="radio" id="rating1" name="rating" className="mr-2" onClick={() => setRating("1")} />
+                        <label htmlFor="rating1" className="flex">
+                          <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
+                          {[...Array(4)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 text-amber-500" />
+                          ))}
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -299,7 +316,7 @@ export default function FindDealersPage() {
             </div>
             
             {/* Dealers List */}
-            <div className="flex-1">
+            <div className="flex-1 bg-gray-100 rounded-lg p-4">
               <div className="space-y-4">
                 {dealers.map((dealer) => (
                   <div key={dealer.id} className="bg-white rounded-lg p-4 flex gap-4 shadow-sm">
@@ -367,9 +384,9 @@ export default function FindDealersPage() {
               <div className="flex justify-center mt-8">
                 <nav className="flex items-center">
                   <Button 
-                    variant="outline" 
+                    variant="default" 
                     size="icon"
-                    className={`rounded-l-md ${currentPage === 1 ? 'bg-green-800 text-white hover:bg-green-800 hover:text-white' : ''}`}
+                    className="rounded-none bg-green-800 text-white hover:bg-green-900"
                     onClick={() => setCurrentPage(1)}
                   >
                     1
@@ -377,7 +394,7 @@ export default function FindDealersPage() {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    className={currentPage === 2 ? 'bg-green-800 text-white hover:bg-green-800 hover:text-white' : ''}
+                    className="rounded-none border-gray-300"
                     onClick={() => setCurrentPage(2)}
                   >
                     2
@@ -385,7 +402,7 @@ export default function FindDealersPage() {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    className={currentPage === 3 ? 'bg-green-800 text-white hover:bg-green-800 hover:text-white' : ''}
+                    className="rounded-none border-gray-300"
                     onClick={() => setCurrentPage(3)}
                   >
                     3
@@ -393,10 +410,17 @@ export default function FindDealersPage() {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    className={currentPage === 4 ? 'bg-green-800 text-white hover:bg-green-800 hover:text-white' : ''}
+                    className="rounded-none border-gray-300"
                     onClick={() => setCurrentPage(4)}
                   >
                     4
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className="rounded-none border-gray-300"
+                  >
+                    <span className="text-lg leading-none">...</span>
                   </Button>
                 </nav>
               </div>

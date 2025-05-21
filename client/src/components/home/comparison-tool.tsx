@@ -484,7 +484,7 @@ export default function ComparisonTool() {
         </p>
         
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="flex flex-wrap justify-center gap-16">
             {carSelections.map((carSelection, index) => (
               <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
                 {/* Car card */}
@@ -597,7 +597,7 @@ export default function ComparisonTool() {
                 
                 {/* VS circle between cars */}
                 {index < carSelections.length - 1 && (
-                  <div className="hidden md:block absolute left-[100%] top-0 -translate-x-1/2 z-10 h-full">
+                  <div className="hidden md:block absolute top-0 z-10 h-full" style={{ left: "100%", transform: "translateX(-50%)" }}>
                     <div className="flex flex-col items-center justify-center h-full">
                       <div className="border-l-2 border-dashed border-gray-300 h-[40%]"></div>
                       <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-4">

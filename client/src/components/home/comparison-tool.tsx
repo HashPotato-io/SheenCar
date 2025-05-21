@@ -127,6 +127,40 @@ const carDetailsData: Record<string, CarDetails> = {
     features: ["Leather Seats", "Navigation System", "Premium Sound", "Performance Package"],
     imageUrl: "https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rating: 4.6
+  },
+  "porsche_f150": {
+    id: "porsche_f150",
+    make: "Porsche",
+    model: "F-150",
+    year: 2015,
+    price: 34500,
+    mileage: 45800,
+    fuelType: "Gasoline",
+    transmission: "Automatic",
+    engine: "3.5L EcoBoost V6",
+    exteriorColor: "Silver",
+    interiorColor: "Black",
+    doors: 4,
+    features: ["Leather Seats", "Navigation System", "Climate Control", "Towing Package"],
+    imageUrl: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    rating: 4.3
+  },
+  "audi_a4": {
+    id: "audi_a4",
+    make: "Audi",
+    model: "A4",
+    year: 2013,
+    price: 18900,
+    mileage: 75200,
+    fuelType: "Gasoline",
+    transmission: "Automatic",
+    engine: "2.0L Turbo 4-Cylinder",
+    exteriorColor: "Gray",
+    interiorColor: "Black",
+    doors: 4,
+    features: ["Leather Seats", "Navigation System", "Sunroof", "Quattro AWD", "Premium Sound"],
+    imageUrl: "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    rating: 4.1
   }
 };
 

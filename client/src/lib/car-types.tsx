@@ -170,4 +170,5 @@ export const carModels = [
   { id: "panamera", name: "Panamera", makeId: "porsche" },
   { id: "taycan", name: "Taycan", makeId: "porsche" },
   { id: "718", name: "718", makeId: "porsche" },
+  { id: "f150", name: "F-150", makeId: "porsche" },
 ];

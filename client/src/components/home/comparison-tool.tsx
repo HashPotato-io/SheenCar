@@ -354,18 +354,18 @@ export default function ComparisonTool() {
         <h2 className="text-3xl font-bold text-neutral-800 mb-2">
           Which one to choose? <span className="text-amber-500">Compare</span> them!
         </h2>
-        <p className="text-neutral-600 mb-10 max-w-3xl mx-auto">
+        <p className="text-neutral-600 mb-8 max-w-3xl mx-auto">
           Get a detailed comparison between the two cars of your liking to make a calculated buying decision.
         </p>
         
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="flex flex-wrap justify-center gap-2">
             {carSelections.map((carSelection, index) => (
               <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
                 {/* Car card */}
-                <div className={`rounded-lg shadow-sm overflow-hidden bg-white w-full mb-6 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
+                <div className={`rounded-lg shadow-sm overflow-hidden bg-white w-full mb-2 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
                   {/* Car image container */}
-                  <div className="h-64 flex items-center justify-center overflow-hidden bg-gray-50">
+                  <div className="h-48 md:h-56 flex items-center justify-center overflow-hidden bg-gray-50">
                     {carSelection.make && carSelection.model ? (
                       <img 
                         src={getCarImage(carSelection)} 
@@ -387,21 +387,21 @@ export default function ComparisonTool() {
 
                   {/* Car details - only show if a car is selected */}
                   {carSelection.make && carSelection.model && (
-                    <div className="bg-white p-4 text-left">
-                      <h3 className="font-medium">
+                    <div className="bg-white p-3 text-left">
+                      <h3 className="font-medium text-sm">
                         {carSelection.make === 'toyota' && carSelection.model === 'corolla'
                           ? 'Toyota Corolla Altis'
                           : `${carMakes.find(m => m.id === carSelection.make)?.name} ${carModels.find(m => m.id === carSelection.model)?.name}`}
                       </h3>
-                      <p className="text-sm text-green-800 mt-1">
+                      <p className="text-sm text-green-800">
                         Price: ${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}
                       </p>
                     </div>
                   )}
                 </div>
                 
-                {/* Make & Model selectors - moved below car image container */}
-                <div className="w-full flex gap-2 mb-4">
+                {/* Make & Model selectors - below car image container */}
+                <div className="w-full flex gap-1 mb-5">
                   <div className="relative flex-1">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <Search className="h-4 w-4 text-gray-500" />
@@ -462,8 +462,8 @@ export default function ComparisonTool() {
                 
                 {/* VS circle between cars */}
                 {index < carSelections.length - 1 && (
-                  <div className="hidden md:flex absolute -right-6 top-1/3 -translate-y-1/2 z-10">
-                    <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-10 h-10 text-xs shadow-md">
+                  <div className="hidden md:flex absolute -right-4 top-1/4 z-10">
+                    <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-8 h-8 text-xs shadow-md">
                       VS
                     </div>
                   </div>
@@ -472,10 +472,10 @@ export default function ComparisonTool() {
             ))}
           </div>
           
-          <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
+          <div className="flex justify-center gap-4 mb-3">
             <Button 
               variant="default" 
-              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-11 rounded-none ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
+              className={`bg-green-900 hover:bg-green-800 text-white text-sm px-6 py-1.5 h-9 rounded-sm ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
               disabled={!canCompare}
               onClick={handleCompareClick}
             >
@@ -486,9 +486,9 @@ export default function ComparisonTool() {
               <Button 
                 variant="outline" 
                 onClick={addNewCarSelection}
-                className="flex items-center gap-2 border-gray-300 hover:bg-gray-100 text-black rounded-none"
+                className="flex items-center gap-1 text-sm border-gray-300 hover:bg-gray-100 text-black rounded-sm"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-3.5 h-3.5" />
                 Add Another Car
               </Button>
             )}

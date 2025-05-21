@@ -466,8 +466,46 @@ export default function ComparisonTool() {
           <div className="flex flex-wrap justify-center gap-8">
             {carSelections.map((carSelection, index) => (
               <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
-                {/* Make & Model selectors - moved outside car image container */}
-                <div className="w-full flex gap-2 mb-4">
+                {/* Car card */}
+                <div className={`rounded-lg shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
+                  {/* Car image container */}
+                  <div className="h-64 flex items-center justify-center overflow-hidden bg-gray-50">
+                    {carSelection.make && carSelection.model ? (
+                      <img 
+                        src={getCarImage(carSelection)} 
+                        alt={`${carSelection.make} ${carSelection.model}`} 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <img 
+                        src="/car-placeholder.svg" 
+                        alt="Car silhouette" 
+                        className="w-40 h-auto max-h-36 opacity-60"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 150' fill='none' stroke='%23cccccc' stroke-width='1'><path d='M50,90 L70,60 L230,60 L260,90 L260,110 L50,110 Z M90,60 L110,40 L190,40 L210,60 M90,60 L90,40 L110,40 M190,40 L210,60 L210,40 L190,40 M50,90 L50,110 M260,90 L260,110 M150,60 L150,40' /><circle cx='90' cy='110' r='20' /><circle cx='220' cy='110' r='20' /></svg>";
+                        }}
+                      />
+                    )}
+                  </div>
+
+                  {/* Car details - only show if a car is selected */}
+                  {carSelection.make && carSelection.model && (
+                    <div className="bg-white p-4 text-left">
+                      <h3 className="font-medium text-lg">
+                        {carSelection.make === 'toyota' && carSelection.model === 'corolla'
+                          ? 'Toyota Corolla Altis'
+                          : `${carMakes.find(m => m.id === carSelection.make)?.name} ${carModels.find(m => m.id === carSelection.model)?.name}`}
+                      </h3>
+                      <p className="text-sm text-green-800 mt-1">
+                        Price: ${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Make & Model selectors - moved below car container */}
+                <div className="w-full flex gap-2 mb-6">
                   <div className="relative flex-1">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <Search className="h-4 w-4 text-gray-500" />
@@ -521,49 +559,11 @@ export default function ComparisonTool() {
                     </Select>
                   </div>
                 </div>
-
-                {/* Car card */}
-                <div className={`rounded-lg shadow-sm overflow-hidden bg-white w-full mb-6 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
-                  {/* Car image container */}
-                  <div className="h-64 flex items-center justify-center overflow-hidden bg-gray-50">
-                    {carSelection.make && carSelection.model ? (
-                      <img 
-                        src={getCarImage(carSelection)} 
-                        alt={`${carSelection.make} ${carSelection.model}`} 
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <img 
-                        src="/car-placeholder.svg" 
-                        alt="Car silhouette" 
-                        className="w-40 h-auto max-h-36 opacity-60"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 150' fill='none' stroke='%23cccccc' stroke-width='1'><path d='M50,90 L70,60 L230,60 L260,90 L260,110 L50,110 Z M90,60 L110,40 L190,40 L210,60 M90,60 L90,40 L110,40 M190,40 L210,60 L210,40 L190,40 M50,90 L50,110 M260,90 L260,110 M150,60 L150,40' /><circle cx='90' cy='110' r='20' /><circle cx='220' cy='110' r='20' /></svg>";
-                        }}
-                      />
-                    )}
-                  </div>
-
-                  {/* Car details - only show if a car is selected */}
-                  {carSelection.make && carSelection.model && (
-                    <div className="bg-white p-4 text-left">
-                      <h3 className="font-medium">
-                        {carSelection.make === 'toyota' && carSelection.model === 'corolla'
-                          ? 'Toyota Corolla Altis'
-                          : `${carMakes.find(m => m.id === carSelection.make)?.name} ${carModels.find(m => m.id === carSelection.model)?.name}`}
-                      </h3>
-                      <p className="text-sm text-green-800 mt-1">
-                        Price: ${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}
-                      </p>
-                    </div>
-                  )}
-                </div>
                 
                 {/* VS circle between cars */}
                 {index < carSelections.length - 1 && (
-                  <div className="hidden md:flex absolute -right-6 top-1/3 -translate-y-1/2 z-10">
-                    <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-10 h-10 text-xs shadow-md">
+                  <div className="hidden md:flex absolute -right-6 top-64 -translate-y-1/2 z-10">
+                    <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md">
                       VS
                     </div>
                   </div>
@@ -575,7 +575,7 @@ export default function ComparisonTool() {
           <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
             <Button 
               variant="default" 
-              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-11 rounded-none ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
+              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-11 ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
               disabled={!canCompare}
               onClick={handleCompareClick}
             >

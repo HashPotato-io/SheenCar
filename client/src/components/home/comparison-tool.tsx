@@ -480,7 +480,7 @@ export default function ComparisonTool() {
             {carSelections.map((carSelection, index) => (
               <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
                 {/* Car card */}
-                <div className={`rounded-lg shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
+                <div className={`rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
                   {/* Car image container */}
                   <div className="h-64 flex items-center justify-center overflow-hidden bg-gray-50">
                     {carSelection.make && carSelection.model ? (
@@ -510,8 +510,11 @@ export default function ComparisonTool() {
                           ? 'Toyota Corolla Altis'
                           : `${carMakes.find(m => m.id === carSelection.make)?.name} ${carModels.find(m => m.id === carSelection.model)?.name}`}
                       </h3>
-                      <p className="text-sm text-green-800 mt-1">
-                        Price: ${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}
+                      <p className="text-gray-500 text-sm mb-1">
+                        {getSelectedCarDetails(carSelection)?.year || "N/A"}
+                      </p>
+                      <p className="text-sm font-medium">
+                        Price: <span className="text-green-800">${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}</span>
                       </p>
                     </div>
                   )}
@@ -575,9 +578,12 @@ export default function ComparisonTool() {
                 
                 {/* VS circle between cars */}
                 {index < carSelections.length - 1 && (
-                  <div className="hidden md:flex absolute -right-6 top-64 -translate-y-1/2 z-10">
-                    <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md">
-                      VS
+                  <div className="hidden md:block absolute left-[100%] top-1/4 -translate-x-1/2 z-10">
+                    <div className="flex flex-col items-center">
+                      <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md mb-2">
+                        VS
+                      </div>
+                      <div className="h-32 border-r-2 border-dashed border-gray-400"></div>
                     </div>
                   </div>
                 )}

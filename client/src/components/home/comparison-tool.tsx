@@ -184,25 +184,38 @@ export default function ComparisonTool() {
     
     if (validSelections.length >= 2) {
       const carDetailsArray = validSelections.map(car => {
-        const carKey = `${car.make}_${car.model}`;
-        return carDetailsData[carKey] || getSelectedCarDetails(car);
+        // Get the car details using our helper function which handles all cases
+        const details = getSelectedCarDetails(car);
+        return details;
       }).filter(car => car !== null) as CarDetails[];
       
       setSelectedCars(carDetailsArray);
       setShowComparison(true);
+      console.log("Selected cars for comparison:", carDetailsArray);
     }
   };
 
   // Handle make selection and reset model when make changes
   const handleMakeChange = (value: string, selectionId: number) => {
-    setCarSelections(
-      carSelections.map(selection => 
-        selection.id === selectionId 
-          ? { ...selection, make: value, model: "" } 
-          : selection
-      )
+    // Check if this make is already selected in another car
+    const isAlreadySelected = carSelections.some(
+      selection => selection.id !== selectionId && selection.make === value
     );
-    setShowComparison(false);
+    
+    // Only change if not already selected
+    if (!isAlreadySelected) {
+      setCarSelections(
+        carSelections.map(selection => 
+          selection.id === selectionId 
+            ? { ...selection, make: value, model: "" } 
+            : selection
+        )
+      );
+      setShowComparison(false);
+    } else {
+      // Could add a toast notification here to inform user
+      console.log("This make is already selected");
+    }
   };
 
   // Handle model selection
@@ -349,54 +362,6 @@ export default function ComparisonTool() {
           <div className="flex flex-wrap justify-center gap-8">
             {carSelections.map((carSelection, index) => (
               <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
-                {/* Make & Model selectors - moved outside car image container */}
-                <div className="w-full flex gap-2 mb-4">
-                  <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-500" />
-                    </div>
-                    <Select
-                      value={carSelection.make}
-                      onValueChange={(value) => handleMakeChange(value, carSelection.id)}
-                    >
-                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
-                        <SelectValue placeholder="Make" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
-                        {carMakes.map((make) => (
-                          <SelectItem key={make.id} value={make.id} className="py-2 border-b border-gray-200 last:border-0">
-                            {make.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-500" />
-                    </div>
-                    <Select
-                      value={carSelection.model}
-                      onValueChange={(value) => handleModelChange(value, carSelection.id)}
-                      disabled={!carSelection.make}
-                    >
-                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
-                        <SelectValue placeholder="Model" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
-                        {carModels
-                          .filter(model => model.makeId === carSelection.make)
-                          .map((model) => (
-                            <SelectItem key={model.id} value={model.id} className="py-2 border-b border-gray-200 last:border-0">
-                              {model.name}
-                            </SelectItem>
-                          ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
                 {/* Car card */}
                 <div className={`rounded-lg shadow-sm overflow-hidden bg-white w-full mb-6 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
                   {/* Car image container */}
@@ -433,6 +398,66 @@ export default function ComparisonTool() {
                       </p>
                     </div>
                   )}
+                </div>
+                
+                {/* Make & Model selectors - moved below car image container */}
+                <div className="w-full flex gap-2 mb-4">
+                  <div className="relative flex-1">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <Search className="h-4 w-4 text-gray-500" />
+                    </div>
+                    <Select
+                      value={carSelection.make}
+                      onValueChange={(value) => handleMakeChange(value, carSelection.id)}
+                    >
+                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
+                        <SelectValue placeholder="Make" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
+                        {carMakes.map((make) => {
+                          // Check if this make is already selected in another car
+                          const isDisabled = carSelections.some(
+                            selection => selection.id !== carSelection.id && selection.make === make.id
+                          );
+                          
+                          return (
+                            <SelectItem 
+                              key={make.id} 
+                              value={make.id} 
+                              disabled={isDisabled}
+                              className={`py-2 border-b border-gray-200 last:border-0 ${isDisabled ? 'opacity-50' : ''}`}
+                            >
+                              {make.name}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="relative flex-1">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <Search className="h-4 w-4 text-gray-500" />
+                    </div>
+                    <Select
+                      value={carSelection.model}
+                      onValueChange={(value) => handleModelChange(value, carSelection.id)}
+                      disabled={!carSelection.make}
+                    >
+                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
+                        <SelectValue placeholder="Model" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
+                        {carModels
+                          .filter(model => model.makeId === carSelection.make)
+                          .map((model) => (
+                            <SelectItem key={model.id} value={model.id} className="py-2 border-b border-gray-200 last:border-0">
+                              {model.name}
+                            </SelectItem>
+                          ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
                 
                 {/* VS circle between cars */}

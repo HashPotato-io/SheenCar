@@ -29,51 +29,69 @@ export default function AboutPage() {
       {/* Why Choose SheenCar */}
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Choose SheenCar?</h2>
+          <h2 className="text-3xl font-bold text-center mb-2">Why <span className="text-amber-500">choose</span> SheenCar?</h2>
+          <p className="text-gray-600 text-center mb-12">Your Trusted Partner for a Smarter Car Buying & Selling Experience</p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1 */}
-            <div className="bg-gray-50 p-8 rounded-lg text-center">
+            <div className="bg-green-50 p-8 rounded-lg text-center">
               <div className="flex justify-center mb-4">
-                <div className="rounded-full bg-green-50 p-4">
-                  <FileText className="h-8 w-8 text-green-700" />
+                <div className="mb-2">
+                  <svg width="48" height="48" viewBox="0 0 24 24" className="mx-auto">
+                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="18" cy="18" r="5" fill="#d1fae5" stroke="#15803d" strokeWidth="1.5"/>
+                    <path d="M14 2V8H20" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M16 18H20" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Detailed Information</h3>
-              <p className="text-gray-600">Comprehensive details about every vehicle listing to help you make informed decisions</p>
+              <h3 className="text-amber-500 font-semibold mb-2">Verified Dealers</h3>
+              <p className="text-gray-600 text-sm">Our dealers are verified for authenticity, giving you complete peace of mind</p>
             </div>
             
             {/* Card 2 */}
-            <div className="bg-gray-50 p-8 rounded-lg text-center">
+            <div className="bg-green-50 p-8 rounded-lg text-center">
               <div className="flex justify-center mb-4">
-                <div className="rounded-full bg-green-50 p-4">
-                  <MessageSquare className="h-8 w-8 text-green-700" />
+                <div className="mb-2">
+                  <svg width="48" height="48" viewBox="0 0 24 24" className="mx-auto">
+                    <circle cx="9" cy="21" r="1" fill="#15803d"/>
+                    <circle cx="20" cy="21" r="1" fill="#15803d"/>
+                    <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="16" cy="8" r="6" fill="#d1fae5" stroke="#15803d" strokeWidth="1.5"/>
+                    <path d="M14 8L18 8" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M16 6L16 10" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Direct Contact</h3>
-              <p className="text-gray-600">Connect directly with sellers to ask questions, negotiate, and finalize deals effortlessly</p>
+              <h3 className="text-amber-500 font-semibold mb-2">Smart Buying</h3>
+              <p className="text-gray-600 text-sm">Browse a wide range of verified listings and drive home your perfect car</p>
             </div>
             
             {/* Card 3 */}
-            <div className="bg-gray-50 p-8 rounded-lg text-center">
+            <div className="bg-green-50 p-8 rounded-lg text-center">
               <div className="flex justify-center mb-4">
-                <div className="rounded-full bg-green-50 p-4">
-                  <ShieldCheck className="h-8 w-8 text-green-700" />
+                <div className="mb-2">
+                  <svg width="48" height="48" viewBox="0 0 24 24" className="mx-auto">
+                    <path d="M22 12H17L14 21L10 3L7 12H2" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="17" cy="7" r="5" fill="#d1fae5" stroke="#15803d" strokeWidth="1.5"/>
+                    <path d="M17 9V5" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M17 5L19 7" fill="none" stroke="#15803d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Verified Listings</h3>
-              <p className="text-gray-600">All listings undergo verification to ensure authenticity and prevent fraudulent activities</p>
+              <h3 className="text-amber-500 font-semibold mb-2">Quick Selling</h3>
+              <p className="text-gray-600 text-sm">Reach genuine buyers quickly with our simple listings process</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Who We Are */}
-      <div className="py-16 bg-gray-50">
+      <div className="py-16 bg-gray-100">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-6">Who We Are</h2>
+          <h2 className="text-3xl font-bold text-center mb-2"><span className="text-amber-500">Who</span> We Are</h2>
           <p className="text-gray-600 text-center max-w-4xl mx-auto mb-8">
-            At SheenCar, we are passionate about connecting you to larger-than-life car choices, backed by a tailored, trustworthy approach. Our experienced team of automotive professionals work around the clock to ensure the platform offers the right user experience with the search feature and comparing options to select perfect car for any lifestyle!
+            At SheenCar, we are passionate about connecting car buyers and sellers through a seamless, trustworthy platform. Our mission is to make car trading simple, secure, and efficient for everyone. With a commitment to innovation and customer satisfaction, SheenCar offers a safe, user-friendly environment supported by cutting-edge technology and dedicated service.
           </p>
         </div>
       </div>

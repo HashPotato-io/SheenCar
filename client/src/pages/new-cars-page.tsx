@@ -46,9 +46,9 @@ export default function NewCarsPage() {
       {/* Hero Banner */}
       <div className="relative h-64 bg-gray-800 flex items-center justify-center">
         <img 
-          src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+          src="/new-cars-banner.png" 
           alt="New Cars Banner" 
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
+          className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="relative text-center text-white z-10 px-4">
           <h1 className="text-4xl font-bold mb-2">Drive the Future: Explore the Latest</h1>
@@ -60,11 +60,11 @@ export default function NewCarsPage() {
               <Input 
                 type="text" 
                 placeholder="What do you need help with?" 
-                className="py-6 pl-10 pr-4 rounded-l-full rounded-r-none border-0 w-full"
+                className="py-6 pl-10 pr-4 rounded-l-full rounded-r-none border-0 w-full focus-visible:ring-0 focus-visible:ring-offset-0"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             </div>
-            <Button className="rounded-r-full rounded-l-none bg-green-900 hover:bg-green-800 px-6">
+            <Button className="rounded-r-full rounded-l-none bg-green-900 hover:bg-green-800 px-8 py-6 h-auto">
               Search
             </Button>
           </div>

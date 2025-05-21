@@ -1,5 +1,6 @@
 import { Link } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@/components/ui/button";
 import { 
   Plus, 
@@ -177,6 +178,17 @@ export default function ComparisonTool() {
   
   // Selected cars for comparison
   const [selectedCars, setSelectedCars] = useState<CarDetails[]>([]);
+  
+  // Embla carousel setup
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+  
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   // Handle compare button click
   const handleCompareClick = () => {
@@ -779,54 +791,59 @@ export default function ComparisonTool() {
                 {/* Left Arrow */}
                 <button 
                   className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-green-900 text-white rounded-full p-1 shadow-md hover:bg-green-800 transition-colors"
-                  onClick={() => console.log('Previous slide')}
+                  onClick={scrollPrev}
+                  aria-label="Previous"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 
-                {/* Slider Container */}
-                <div className="overflow-hidden px-10">
-                  <div className="flex space-x-4">
-                    {selectedCars.concat(selectedCars).map((car, index) => (
-                      <div 
-                        key={`${car.id}-${index}`} 
-                        className="min-w-[250px] bg-white rounded-lg overflow-hidden shadow-sm relative"
-                      >
-                        <div className="absolute left-2 top-2">
-                          <span className="bg-green-900 text-white text-xs py-0.5 px-2 rounded-sm">
-                            {index % 2 === 0 ? 'New' : 'Used'}
-                          </span>
-                        </div>
-                        <div className="h-32 overflow-hidden">
-                          <img src={car.imageUrl} alt={car.model} className="w-full h-full object-cover" />
-                        </div>
-                        <div className="p-3">
-                          <p className="font-medium text-sm mb-1">
-                            {car.make === 'Toyota' && car.model === 'Corolla Altis' 
-                              ? 'Toyota Corolla Altis' 
-                              : `${car.make} ${car.model}`}
-                          </p>
-                          <p className="text-green-800 text-sm font-medium">
-                            Price: ${(index % 2 === 0 ? car.price : car.price - 2000).toLocaleString()}
-                          </p>
-                          <p className="text-xs text-gray-600 mt-1">
-                            {(index % 2 === 0 ? car.mileage/1000 : car.mileage/1000 + 15).toFixed(0)}k miles • {index % 2 === 0 ? car.year : car.year - 1} • {car.transmission}
-                          </p>
-                          
-                          {/* Green dot indicator */}
-                          <div className="flex justify-end mt-1">
-                            <div className="w-4 h-4 rounded-full bg-green-500"></div>
+                {/* Embla Carousel */}
+                <div className="overflow-hidden px-10" ref={emblaRef}>
+                  <div className="flex">
+                    {/* Duplicate cars to have more slides */}
+                    {Array.from({ length: 3 }).flatMap(() => 
+                      selectedCars.map((car, idx) => (
+                        <div 
+                          key={`${car.id}-${idx}-${Math.random()}`} 
+                          className="flex-[0_0_250px] mx-2 bg-white rounded-lg overflow-hidden shadow-sm relative"
+                        >
+                          <div className="absolute left-2 top-2">
+                            <span className="bg-green-900 text-white text-xs py-0.5 px-2 rounded-sm">
+                              {idx % 2 === 0 ? 'New' : 'Used'}
+                            </span>
+                          </div>
+                          <div className="h-32 overflow-hidden">
+                            <img src={car.imageUrl} alt={car.model} className="w-full h-full object-cover" />
+                          </div>
+                          <div className="p-3">
+                            <p className="font-medium text-sm mb-1">
+                              {car.make === 'Toyota' && car.model === 'Corolla Altis' 
+                                ? 'Toyota Corolla Altis' 
+                                : `${car.make} ${car.model}`}
+                            </p>
+                            <p className="text-green-800 text-sm font-medium">
+                              Price: ${(idx % 2 === 0 ? car.price : car.price - 2000).toLocaleString()}
+                            </p>
+                            <p className="text-xs text-gray-600 mt-1">
+                              {(idx % 2 === 0 ? car.mileage/1000 : car.mileage/1000 + 15).toFixed(0)}k miles • {idx % 2 === 0 ? car.year : car.year - 1} • {car.transmission}
+                            </p>
+                            
+                            {/* Green dot indicator */}
+                            <div className="flex justify-end mt-1">
+                              <div className="w-4 h-4 rounded-full bg-green-500"></div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    )}
                   </div>
                 </div>
                 
                 {/* Right Arrow */}
                 <button 
                   className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-green-900 text-white rounded-full p-1 shadow-md hover:bg-green-800 transition-colors"
-                  onClick={() => console.log('Next slide')}
+                  onClick={scrollNext}
+                  aria-label="Next"
                 >
                   <ChevronRight size={24} />
                 </button>

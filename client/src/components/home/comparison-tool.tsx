@@ -471,18 +471,32 @@ export default function ComparisonTool() {
         <h2 className="text-3xl font-bold text-neutral-800 mb-2">
           Which one to choose? <span className="text-amber-500">Compare</span> them!
         </h2>
-        <p className="text-neutral-600 mb-10 max-w-3xl mx-auto">
+        <p className="text-neutral-600 mb-12 max-w-3xl mx-auto">
           Get a detailed comparison between the two cars of your liking to make a calculated buying decision.
         </p>
         
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-8">
+        <div className="max-w-5xl mx-auto relative">
+          {/* Main comparison container */}
+          <div className="flex flex-wrap justify-center md:justify-between relative">
+            {/* Center VS element */}
+            {carSelections.length > 1 && (
+              <div className="absolute left-1/2 top-1/3 -translate-x-1/2 z-10">
+                <div className="flex flex-col items-center">
+                  <div className="rounded-full bg-green-900 text-white font-bold flex items-center justify-center w-10 h-10 text-sm">
+                    VS
+                  </div>
+                  <div className="h-64 border-r border-dashed border-gray-400 mt-2"></div>
+                </div>
+              </div>
+            )}
+            
+            {/* Car selection items */}
             {carSelections.map((carSelection, index) => (
-              <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
+              <div key={carSelection.id} className="flex flex-col w-full md:w-[45%] mb-8">
                 {/* Car card */}
-                <div className={`rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
+                <div className={`rounded-2xl shadow-sm overflow-hidden bg-white border border-white ${carSelection.make && carSelection.model ? '' : 'border-2 border-dashed border-gray-300'}`}>
                   {/* Car image container */}
-                  <div className="h-64 flex items-center justify-center overflow-hidden bg-gray-50">
+                  <div className="h-48 sm:h-60 flex items-center justify-center overflow-hidden bg-gray-50">
                     {carSelection.make && carSelection.model ? (
                       <img 
                         src={getCarImage(carSelection)} 
@@ -510,18 +524,15 @@ export default function ComparisonTool() {
                           ? 'Toyota Corolla Altis'
                           : `${carMakes.find(m => m.id === carSelection.make)?.name} ${carModels.find(m => m.id === carSelection.model)?.name}`}
                       </h3>
-                      <p className="text-gray-500 text-sm mb-1">
-                        {getSelectedCarDetails(carSelection)?.year || "N/A"}
-                      </p>
-                      <p className="text-sm font-medium">
+                      <p className="text-sm font-medium mt-1">
                         Price: <span className="text-green-800">${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}</span>
                       </p>
                     </div>
                   )}
                 </div>
                 
-                {/* Make & Model selectors - moved below car container */}
-                <div className="w-full flex gap-2 mb-6">
+                {/* Make & Model selectors - styled like the figma design */}
+                <div className="w-full flex gap-2 mt-4">
                   <div className="relative flex-1">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <Search className="h-4 w-4 text-gray-500" />
@@ -575,26 +586,15 @@ export default function ComparisonTool() {
                     </Select>
                   </div>
                 </div>
-                
-                {/* VS circle between cars */}
-                {index < carSelections.length - 1 && (
-                  <div className="hidden md:block absolute left-[100%] top-1/4 -translate-x-1/2 z-10">
-                    <div className="flex flex-col items-center">
-                      <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md mb-2">
-                        VS
-                      </div>
-                      <div className="h-32 border-r-2 border-dashed border-gray-400"></div>
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
           </div>
           
-          <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
+          {/* Buttons section */}
+          <div className="mt-8 flex flex-row items-center justify-center gap-4">
             <Button 
               variant="default" 
-              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-11 ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
+              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-11 rounded-sm ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
               disabled={!canCompare}
               onClick={handleCompareClick}
             >
@@ -605,7 +605,7 @@ export default function ComparisonTool() {
               <Button 
                 variant="outline" 
                 onClick={addNewCarSelection}
-                className="flex items-center gap-2 border-gray-300 hover:bg-gray-100 text-black rounded-none"
+                className="flex items-center gap-2 border-gray-300 hover:bg-gray-100 text-black rounded-sm"
               >
                 <Plus className="w-4 h-4" />
                 Add Another Car

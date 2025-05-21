@@ -346,11 +346,14 @@ export default function ComparisonTool() {
         </p>
         
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-8">
-            {carSelections.map((carSelection, index) => (
-              <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
+          <div className="flex justify-center gap-14 relative">
+            {/* Dotted vertical line between cars */}
+            <div className="absolute left-1/2 h-full -translate-x-1/2 z-0 border-l border-gray-300 border-dashed"></div>
+            
+            {carSelections.slice(0, 2).map((carSelection, index) => (
+              <div key={carSelection.id} className="flex flex-col items-center w-1/2 max-w-xs relative">
                 {/* Car illustration */}
-                <div className="border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center h-64 w-full mb-6 overflow-hidden">
+                <div className="bg-white rounded-lg flex items-center justify-center h-64 w-full mb-6 overflow-hidden shadow-md">
                   {carSelection.make && carSelection.model ? (
                     <>
                       <img 
@@ -359,10 +362,14 @@ export default function ComparisonTool() {
                         className="w-full h-full object-cover"
                       />
                       {/* Car details overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 p-3 text-left">
-                        <h3 className="font-semibold">{carSelection.make === 'toyota' && carSelection.model === 'corolla' ? 'Toyota Corolla Altis' : `${carMakes.find(m => m.id === carSelection.make)?.name} ${carModels.find(m => m.id === carSelection.model)?.name}`}</h3>
-                        <p className="text-sm text-green-800 font-medium">
-                          Price: ${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}
+                      <div className="absolute bottom-0 left-0 right-0 bg-white p-4 text-left">
+                        <h3 className="font-semibold text-gray-900">
+                          {carSelection.make === 'toyota' && carSelection.model === 'corolla' 
+                            ? 'Toyota Corolla Altis' 
+                            : `${carMakes.find(m => m.id === carSelection.make)?.name} ${carModels.find(m => m.id === carSelection.model)?.name}`}
+                        </h3>
+                        <p className="text-sm font-medium">
+                          Price: <span>${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}</span>
                         </p>
                       </div>
                     </>
@@ -379,31 +386,20 @@ export default function ComparisonTool() {
                   )}
                 </div>
                 
-                {/* VS circle between cars */}
-                {index < carSelections.length - 1 && (
-                  <div className="hidden md:flex absolute -right-6 top-1/3 -translate-y-1/2 z-10">
-                    <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-10 h-10 text-xs shadow-md">
-                      VS
-                    </div>
-                  </div>
-                )}
-                
                 {/* Make & Model selectors */}
-                <div className="w-full flex gap-2">
-                  <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-500" />
-                    </div>
+                <div className="w-full space-y-2">
+                  <div className="relative flex items-center">
+                    <Search className="absolute left-0 h-4 w-4 text-gray-500" />
                     <Select
                       value={carSelection.make}
                       onValueChange={(value) => handleMakeChange(value, carSelection.id)}
                     >
-                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
+                      <SelectTrigger className="pl-7 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent w-full">
                         <SelectValue placeholder="Make" />
                       </SelectTrigger>
-                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
+                      <SelectContent>
                         {carMakes.map((make) => (
-                          <SelectItem key={make.id} value={make.id} className="py-2 border-b border-gray-200 last:border-0">
+                          <SelectItem key={make.id} value={make.id}>
                             {make.name}
                           </SelectItem>
                         ))}
@@ -411,23 +407,21 @@ export default function ComparisonTool() {
                     </Select>
                   </div>
                   
-                  <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-500" />
-                    </div>
+                  <div className="relative flex items-center">
+                    <Search className="absolute left-0 h-4 w-4 text-gray-500" />
                     <Select
                       value={carSelection.model}
                       onValueChange={(value) => handleModelChange(value, carSelection.id)}
                       disabled={!carSelection.make}
                     >
-                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
+                      <SelectTrigger className="pl-7 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent w-full">
                         <SelectValue placeholder="Model" />
                       </SelectTrigger>
-                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
+                      <SelectContent>
                         {carModels
                           .filter(model => model.makeId === carSelection.make)
                           .map((model) => (
-                            <SelectItem key={model.id} value={model.id} className="py-2 border-b border-gray-200 last:border-0">
+                            <SelectItem key={model.id} value={model.id}>
                               {model.name}
                             </SelectItem>
                           ))}
@@ -437,12 +431,19 @@ export default function ComparisonTool() {
                 </div>
               </div>
             ))}
+            
+            {/* VS circle between cars */}
+            <div className="absolute left-1/2 top-32 -translate-x-1/2 z-10">
+              <div className="rounded-full bg-green-700 text-white font-semibold flex items-center justify-center w-10 h-10 text-xs shadow-md">
+                VS
+              </div>
+            </div>
           </div>
           
-          <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
+          <div className="mt-10 flex flex-row items-center justify-center gap-4">
             <Button 
               variant="default" 
-              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-11 rounded-sm ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
+              className={`bg-green-800 hover:bg-green-900 text-white px-8 py-2 h-10 rounded-sm ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
               disabled={!canCompare}
               onClick={handleCompareClick}
             >
@@ -453,7 +454,7 @@ export default function ComparisonTool() {
               <Button 
                 variant="outline" 
                 onClick={addNewCarSelection}
-                className="flex items-center gap-2 border-gray-300 hover:bg-gray-100 text-black"
+                className="flex items-center gap-2 text-gray-700"
               >
                 <Plus className="w-4 h-4" />
                 Add Another Car

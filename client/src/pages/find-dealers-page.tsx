@@ -128,18 +128,18 @@ export default function FindDealersPage() {
           </h2>
           
           <form onSubmit={handleSearchSubmit} className="max-w-3xl mx-auto">
-            <div className="flex items-center bg-white rounded-full shadow-md overflow-hidden p-1">
-              <div className="flex items-center pl-4">
-                <SearchIcon className="h-5 w-5 text-gray-400 mr-2" />
+            <div className="flex items-center justify-between bg-white rounded-full shadow-md overflow-hidden pl-4 pr-2 py-1">
+              <div className="flex items-center flex-grow">
+                <SearchIcon className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
                 <Input 
                   type="text" 
                   placeholder="What do you need help with?"
-                  className="flex-grow border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 py-2 px-0"
+                  className="w-full border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 py-2 px-0"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
               </div>
-              <Button type="submit" className="bg-green-800 hover:bg-green-900 rounded-full px-6 py-2 text-white">
+              <Button type="submit" className="bg-green-800 hover:bg-green-900 rounded-full px-6 py-2 text-white ml-2">
                 Search
               </Button>
             </div>

@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button";
 import { Search, Heart } from "lucide-react";
 import { carMakes, carModels } from "@/lib/car-types";
 import { Link } from 'wouter';
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
 // Sample data for the new cars listings
 const carsListings = Array(16).fill(null).map((_, index) => ({
@@ -40,6 +42,7 @@ export default function NewCarsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Header />
       {/* Hero Banner */}
       <div className="relative h-64 bg-gray-800 flex items-center justify-center">
         <img 
@@ -254,6 +257,7 @@ export default function NewCarsPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

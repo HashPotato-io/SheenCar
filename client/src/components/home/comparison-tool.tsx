@@ -774,48 +774,61 @@ export default function ComparisonTool() {
               <h2 className="text-xl font-semibold mb-6 flex items-center">
                 <span className="text-green-900 mr-2">Similar</span> Listings
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                {selectedCars.map((car, index) => (
-                  <div key={`${car.id}-${index}`} className="bg-white rounded-md overflow-hidden shadow-sm relative">
-                    <div className="absolute left-2 top-2">
-                      <span className="bg-green-900 text-white text-xs py-0.5 px-2 rounded-sm">New</span>
-                    </div>
-                    <div className="h-32 overflow-hidden">
-                      <img src={car.imageUrl} alt={car.model} className="w-full h-full object-cover" />
-                    </div>
-                    <div className="p-3">
-                      <p className="font-medium text-sm mb-1">
-                        {car.make === 'Toyota' && car.model === 'Corolla Altis' 
-                          ? 'Toyota Corolla Altis' 
-                          : `${car.make} ${car.model}`}
-                      </p>
-                      <p className="text-green-800 text-sm font-medium">Price: ${car.price.toLocaleString()}</p>
-                      <p className="text-xs text-gray-600 mt-1">{(car.mileage/1000).toFixed(0)}k miles • {car.year} • {car.transmission}</p>
-                    </div>
-                  </div>
-                ))}
+              <div className="relative">
+                {/* Left Arrow */}
+                <button 
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-green-900 text-white rounded-full p-1 shadow-md hover:bg-green-800 transition-colors"
+                  onClick={() => console.log('Previous slide')}
+                >
+                  <ChevronLeft size={24} />
+                </button>
                 
-                {selectedCars.length > 0 && (
-                  <div className="bg-white rounded-md overflow-hidden shadow-sm relative">
-                    <div className="absolute left-2 top-2">
-                      <span className="bg-green-900 text-white text-xs py-0.5 px-2 rounded-sm">Used</span>
-                    </div>
-                    <div className="h-32 overflow-hidden">
-                      <img src={selectedCars[0].imageUrl} alt={selectedCars[0].model} className="w-full h-full object-cover" />
-                    </div>
-                    <div className="p-3">
-                      <p className="font-medium text-sm mb-1">
-                        {selectedCars[0].make === 'Toyota' && selectedCars[0].model === 'Corolla Altis' 
-                          ? 'Toyota Corolla Altis' 
-                          : `${selectedCars[0].make} ${selectedCars[0].model}`}
-                      </p>
-                      <p className="text-green-800 text-sm font-medium">Price: ${(selectedCars[0].price - 4000).toLocaleString()}</p>
-                      <p className="text-xs text-gray-600 mt-1">
-                        {(selectedCars[0].mileage/1000 + 15).toFixed(0)}k miles • {selectedCars[0].year - 1} • {selectedCars[0].transmission}
-                      </p>
-                    </div>
+                {/* Slider Container */}
+                <div className="overflow-hidden px-10">
+                  <div className="flex space-x-4">
+                    {selectedCars.concat(selectedCars).map((car, index) => (
+                      <div 
+                        key={`${car.id}-${index}`} 
+                        className="min-w-[250px] bg-white rounded-lg overflow-hidden shadow-sm relative"
+                      >
+                        <div className="absolute left-2 top-2">
+                          <span className="bg-green-900 text-white text-xs py-0.5 px-2 rounded-sm">
+                            {index % 2 === 0 ? 'New' : 'Used'}
+                          </span>
+                        </div>
+                        <div className="h-32 overflow-hidden">
+                          <img src={car.imageUrl} alt={car.model} className="w-full h-full object-cover" />
+                        </div>
+                        <div className="p-3">
+                          <p className="font-medium text-sm mb-1">
+                            {car.make === 'Toyota' && car.model === 'Corolla Altis' 
+                              ? 'Toyota Corolla Altis' 
+                              : `${car.make} ${car.model}`}
+                          </p>
+                          <p className="text-green-800 text-sm font-medium">
+                            Price: ${(index % 2 === 0 ? car.price : car.price - 2000).toLocaleString()}
+                          </p>
+                          <p className="text-xs text-gray-600 mt-1">
+                            {(index % 2 === 0 ? car.mileage/1000 : car.mileage/1000 + 15).toFixed(0)}k miles • {index % 2 === 0 ? car.year : car.year - 1} • {car.transmission}
+                          </p>
+                          
+                          {/* Green dot indicator */}
+                          <div className="flex justify-end mt-1">
+                            <div className="w-4 h-4 rounded-full bg-green-500"></div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                )}
+                </div>
+                
+                {/* Right Arrow */}
+                <button 
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-green-900 text-white rounded-full p-1 shadow-md hover:bg-green-800 transition-colors"
+                  onClick={() => console.log('Next slide')}
+                >
+                  <ChevronRight size={24} />
+                </button>
               </div>
             </div>
           </div>

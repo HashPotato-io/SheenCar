@@ -232,17 +232,105 @@ export default function ComparisonTool() {
   // Get car image based on make and model
   const getCarImage = (carSelection: CarSelection) => {
     if (carSelection.make && carSelection.model) {
-      const carKey = `${carSelection.make}_${carSelection.model}`;
-      return carDetailsData[carKey]?.imageUrl || "/car-placeholder.svg";
+      // Find the exact match or a fallback
+      const makeKey = carSelection.make;
+      const modelKey = carSelection.model;
+      const exactMatchKey = `${makeKey}_${modelKey}`;
+      
+      // Try exact match first
+      if (carDetailsData[exactMatchKey]) {
+        return carDetailsData[exactMatchKey].imageUrl;
+      }
+      
+      // Special cases
+      if (makeKey === "porsche" && modelKey === "f150") {
+        return "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
+      }
+      
+      if (makeKey === "audi" && modelKey === "a4") {
+        return "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
+      }
+      
+      // For Toyota Corolla, use a black Corolla image 
+      if (makeKey === "toyota" && modelKey === "corolla") {
+        return "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600";
+      }
+      
+      // Generic image for other models by make
+      if (makeKey === "toyota") {
+        return "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg/1200px-2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg";
+      }
+      
+      if (makeKey === "honda") {
+        return "https://www.cnet.com/a/img/resize/75aefa7c3cd90d9d5fae785aad14e078f865ea59/hub/2021/11/16/1f7d8300-c033-4fa0-bcff-47170536cf69/2022-honda-civic-sedan-sport-touring-7.jpg?auto=webp&fit=crop&height=675&width=1200";
+      }
+      
+      if (makeKey === "ford") {
+        return "https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+      }
     }
+    
     return "/car-placeholder.svg";
   };
 
   // Get selected car details
   const getSelectedCarDetails = (carSelection: CarSelection) => {
     if (carSelection.make && carSelection.model) {
-      const carKey = `${carSelection.make}_${carSelection.model}`;
-      return carDetailsData[carKey];
+      const makeKey = carSelection.make;
+      const modelKey = carSelection.model;
+      const exactMatchKey = `${makeKey}_${modelKey}`;
+      
+      // Try exact match first
+      if (carDetailsData[exactMatchKey]) {
+        return carDetailsData[exactMatchKey];
+      }
+      
+      // Special cases for Porsche F-150
+      if (makeKey === "porsche" && modelKey === "f150") {
+        return {
+          id: "porsche_f150",
+          make: "Porsche",
+          model: "F-150",
+          year: 2015,
+          price: 34500,
+          mileage: 45800,
+          fuelType: "Gasoline",
+          transmission: "Automatic",
+          engine: "3.5L EcoBoost V6",
+          exteriorColor: "Silver",
+          interiorColor: "Black",
+          doors: 4,
+          features: ["Leather Seats", "Navigation System", "Climate Control", "Towing Package"],
+          imageUrl: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+          rating: 4.3
+        };
+      }
+      
+      // Special cases for Audi A4
+      if (makeKey === "audi" && modelKey === "a4") {
+        return {
+          id: "audi_a4",
+          make: "Audi",
+          model: "A4",
+          year: 2013,
+          price: 18900,
+          mileage: 75200,
+          fuelType: "Gasoline",
+          transmission: "Automatic",
+          engine: "2.0L Turbo 4-Cylinder",
+          exteriorColor: "Gray",
+          interiorColor: "Black",
+          doors: 4,
+          features: ["Leather Seats", "Navigation System", "Sunroof", "Quattro AWD", "Premium Sound"],
+          imageUrl: "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+          rating: 4.1
+        };
+      }
+      
+      // For Toyota Corolla
+      if (makeKey === "toyota" && modelKey === "corolla") {
+        return carDetailsData["toyota_corolla"];
+      }
     }
     return null;
   };

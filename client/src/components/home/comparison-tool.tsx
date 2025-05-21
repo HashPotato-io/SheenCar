@@ -600,9 +600,25 @@ export default function ComparisonTool() {
           <div id="comparison-results" className="mt-16 text-left">
             {/* Features Comparison */}
             <div className="mb-10">
-              <h2 className="text-xl font-semibold mb-6 flex items-center">
+              <h2 className="text-xl font-semibold mb-4 flex items-center">
                 <span className="text-green-900 mr-2">Compare</span> Features
               </h2>
+              
+              {/* Feature Category Select */}
+              <div className="w-40 mb-4">
+                <Select defaultValue="safety">
+                  <SelectTrigger className="border-gray-300">
+                    <SelectValue placeholder="Features" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="safety">Safety</SelectItem>
+                    <SelectItem value="comfort">Comfort & Convenience</SelectItem>
+                    <SelectItem value="infotainment">Infotainment</SelectItem>
+                    <SelectItem value="exterior">Exterior Features</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
               <div className="overflow-hidden rounded-none border border-gray-200">
                 <Table className="border-collapse w-full">
                   <TableHeader>

@@ -48,7 +48,7 @@ export default function Header() {
         { name: "Create Listing", href: "/post-ad" },
         { name: "Pricing", href: "/pricing" },
         { name: "Sell it for Me Service", href: "/services/sell-for-me" },
-        { name: "Dealer Solutions", href: "/services/dealer" },
+        { name: "Find Dealers", href: "/services/dealer" },
       ],
     },
     {

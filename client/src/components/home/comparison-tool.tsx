@@ -601,8 +601,8 @@ export default function ComparisonTool() {
                 <div
                   className={`rounded-xl border shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? "border border-gray-200" : "border-2 border-dashed border-gray-300"} relative group`}
                 >
-                  {/* Remove button (show only if there are more than 2 cars and a car is selected) */}
-                  {carSelections.length > 2 && carSelection.make && carSelection.model && (
+                  {/* Remove button (show only if there are more than 2 cars) */}
+                  {carSelections.length > 2 && (
                     <button
                       onClick={() => handleRemoveCarSelection(carSelection.id)}
                       className="absolute right-2 top-2 z-10 bg-white/90 text-gray-700 hover:text-red-500 rounded-full p-1 shadow-sm transition-colors opacity-0 group-hover:opacity-100"

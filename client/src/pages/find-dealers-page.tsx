@@ -1,0 +1,407 @@
+import React, { useState } from 'react';
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { SearchIcon, Star } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+
+interface Dealer {
+  id: number;
+  name: string;
+  rating: number;
+  reviewCount: number;
+  verified: boolean;
+  premium: boolean;
+  certified: boolean;
+  description: string;
+  location: string;
+  phoneNumber: string;
+  websiteUrl: string;
+  logoUrl: string;
+}
+
+const dealers: Dealer[] = [
+  {
+    id: 1,
+    name: "Prestige Auto Gallery",
+    rating: 4.8,
+    reviewCount: 102,
+    verified: true,
+    premium: true,
+    certified: true,
+    description: "Prestige Auto Gallery is your premier destination for luxury vehicles. We offer a curated selection of high-end cars, from sleek sedans to powerful SUVs, all meticulously inspected to ensure the highest standards. Our knowledgeable staff is dedicated to providing an exceptional car buying experience, guiding you through every step with personalized service.",
+    location: "Chicago, IL",
+    phoneNumber: "(312) 555-7890",
+    websiteUrl: "https://prestigeautogallery.com",
+    logoUrl: "https://example.com/logo1.png"
+  },
+  {
+    id: 2,
+    name: "Prestige Auto Gallery",
+    rating: 4.8,
+    reviewCount: 102,
+    verified: true,
+    premium: true,
+    certified: true,
+    description: "Prestige Auto Gallery is your premier destination for luxury vehicles. We offer a curated selection of high-end cars, from sleek sedans to powerful SUVs, all meticulously inspected to ensure the highest standards. Our knowledgeable staff is dedicated to providing an exceptional car buying experience, guiding you through every step with personalized service.",
+    location: "Chicago, IL",
+    phoneNumber: "(312) 555-7890",
+    websiteUrl: "https://prestigeautogallery.com",
+    logoUrl: "https://example.com/logo1.png"
+  },
+  {
+    id: 3,
+    name: "Prestige Auto Gallery",
+    rating: 4.8,
+    reviewCount: 102,
+    verified: true,
+    premium: true,
+    certified: true,
+    description: "Prestige Auto Gallery is your premier destination for luxury vehicles. We offer a curated selection of high-end cars, from sleek sedans to powerful SUVs, all meticulously inspected to ensure the highest standards. Our knowledgeable staff is dedicated to providing an exceptional car buying experience, guiding you through every step with personalized service.",
+    location: "Chicago, IL",
+    phoneNumber: "(312) 555-7890",
+    websiteUrl: "https://prestigeautogallery.com",
+    logoUrl: "https://example.com/logo1.png"
+  },
+  {
+    id: 4,
+    name: "Prestige Auto Gallery",
+    rating: 4.8,
+    reviewCount: 102,
+    verified: true,
+    premium: true,
+    certified: true,
+    description: "Prestige Auto Gallery is your premier destination for luxury vehicles. We offer a curated selection of high-end cars, from sleek sedans to powerful SUVs, all meticulously inspected to ensure the highest standards. Our knowledgeable staff is dedicated to providing an exceptional car buying experience, guiding you through every step with personalized service.",
+    location: "Chicago, IL",
+    phoneNumber: "(312) 555-7890",
+    websiteUrl: "https://prestigeautogallery.com",
+    logoUrl: "https://example.com/logo1.png"
+  }
+];
+
+export default function FindDealersPage() {
+  const [condition, setCondition] = useState<"used" | "new">("used");
+  const [zipCode, setZipCode] = useState<string>("");
+  const [make, setMake] = useState<string>("");
+  const [model, setModel] = useState<string>("");
+  const [bodyType, setBodyType] = useState<string>("");
+  const [rating, setRating] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  
+  const totalDealers = 134;
+  const totalPages = Math.ceil(totalDealers / 10);
+  
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Search functionality would go here
+  }
+  
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      
+      {/* Hero Section with Dealer Search */}
+      <div className="relative w-full bg-gradient-to-r from-neutral-900 to-neutral-800 py-12">
+        <div className="absolute inset-0 opacity-30" style={{ 
+          backgroundImage: `url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80')`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        }}></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <h1 className="text-4xl font-bold text-white text-center mb-2">
+            Trusted <span className="text-amber-500">Dealerships</span>, Endless Choices:
+          </h1>
+          <h2 className="text-2xl font-bold text-white text-center mb-8">
+            Find Your Perfect Car!
+          </h2>
+          
+          <form onSubmit={handleSearchSubmit} className="max-w-xl mx-auto flex overflow-hidden rounded-full bg-white">
+            <Input 
+              type="text" 
+              placeholder="What do you need help with?"
+              className="flex-grow border-none focus-visible:ring-0 focus-visible:ring-offset-0 py-6"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            <Button type="submit" className="rounded-r-full bg-green-800 hover:bg-green-900">
+              <SearchIcon className="h-5 w-5" />
+              Search
+            </Button>
+          </form>
+        </div>
+      </div>
+      
+      {/* Main Content Area */}
+      <div className="bg-gray-50 py-8">
+        <div className="container mx-auto px-4">
+          <div className="text-xl font-semibold text-neutral-800 mb-4">
+            <span className="text-amber-500">{totalDealers}</span> Car Dealers Found
+          </div>
+          
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Filters Sidebar */}
+            <div className="w-full md:w-64 bg-white p-6 rounded-lg shadow-sm">
+              <h3 className="font-bold text-lg mb-4">Filters</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <Label htmlFor="zipcode" className="text-sm font-medium">ZIP Code</Label>
+                  <div className="relative mt-1">
+                    <Input
+                      id="zipcode"
+                      type="text"
+                      placeholder="Enter ZIP code"
+                      className="w-full"
+                      value={zipCode}
+                      onChange={(e) => setZipCode(e.target.value)}
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <Label className="text-sm font-medium">Make</Label>
+                  <Select value={make} onValueChange={setMake}>
+                    <SelectTrigger className="w-full mt-1">
+                      <SelectValue placeholder="Select make" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="toyota">Toyota</SelectItem>
+                        <SelectItem value="honda">Honda</SelectItem>
+                        <SelectItem value="ford">Ford</SelectItem>
+                        <SelectItem value="bmw">BMW</SelectItem>
+                        <SelectItem value="mercedes">Mercedes-Benz</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <Label className="text-sm font-medium">Model</Label>
+                  <Select value={model} onValueChange={setModel}>
+                    <SelectTrigger className="w-full mt-1">
+                      <SelectValue placeholder="Select model" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="camry">Camry</SelectItem>
+                        <SelectItem value="accord">Accord</SelectItem>
+                        <SelectItem value="f150">F-150</SelectItem>
+                        <SelectItem value="3series">3 Series</SelectItem>
+                        <SelectItem value="cclass">C-Class</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <Label className="text-sm font-medium">Body Type</Label>
+                  <Select value={bodyType} onValueChange={setBodyType}>
+                    <SelectTrigger className="w-full mt-1">
+                      <SelectValue placeholder="Select body type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="sedan">Sedan</SelectItem>
+                        <SelectItem value="suv">SUV</SelectItem>
+                        <SelectItem value="truck">Truck</SelectItem>
+                        <SelectItem value="coupe">Coupe</SelectItem>
+                        <SelectItem value="convertible">Convertible</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <Label className="text-sm font-medium">Condition</Label>
+                  <RadioGroup className="mt-2 space-y-1" defaultValue="used">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="used" id="used" checked={condition === "used"} onClick={() => setCondition("used")} />
+                      <Label htmlFor="used" className="cursor-pointer">Used</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="new" id="new" checked={condition === "new"} onClick={() => setCondition("new")} />
+                      <Label htmlFor="new" className="cursor-pointer">New</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+                
+                <div>
+                  <h4 className="text-sm font-medium mb-2">Customer Ratings</h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center">
+                      <input type="radio" id="rating5" name="rating" className="mr-2" onClick={() => setRating("5")} />
+                      <label htmlFor="rating5" className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                        ))}
+                      </label>
+                    </div>
+                    <div className="flex items-center">
+                      <input type="radio" id="rating4" name="rating" className="mr-2" onClick={() => setRating("4")} />
+                      <label htmlFor="rating4" className="flex">
+                        {[...Array(4)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                        ))}
+                        <Star className="w-4 h-4 text-amber-500" />
+                      </label>
+                    </div>
+                    <div className="flex items-center">
+                      <input type="radio" id="rating3" name="rating" className="mr-2" onClick={() => setRating("3")} />
+                      <label htmlFor="rating3" className="flex">
+                        {[...Array(3)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                        ))}
+                        {[...Array(2)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-amber-500" />
+                        ))}
+                      </label>
+                    </div>
+                    <div className="flex items-center">
+                      <input type="radio" id="rating2" name="rating" className="mr-2" onClick={() => setRating("2")} />
+                      <label htmlFor="rating2" className="flex">
+                        {[...Array(2)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                        ))}
+                        {[...Array(3)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-amber-500" />
+                        ))}
+                      </label>
+                    </div>
+                    <div className="flex items-center">
+                      <input type="radio" id="rating1" name="rating" className="mr-2" onClick={() => setRating("1")} />
+                      <label htmlFor="rating1" className="flex">
+                        <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
+                        {[...Array(4)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-amber-500" />
+                        ))}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Dealers List */}
+            <div className="flex-1">
+              <div className="space-y-4">
+                {dealers.map((dealer) => (
+                  <div key={dealer.id} className="bg-white rounded-lg p-4 flex gap-4 shadow-sm">
+                    <div className="w-36 h-24 bg-neutral-100 rounded flex items-center justify-center overflow-hidden relative">
+                      <div className="bg-green-800 text-white text-xs absolute top-0 left-0 px-2 py-1">CAR DEALER</div>
+                      <div className="text-center text-xs mt-4">LOGO AREA</div>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-bold text-lg">{dealer.name}</h3>
+                        <div className="flex items-center text-sm">
+                          <div className="flex">
+                            {[...Array(5)].map((_, i) => (
+                              <Star 
+                                key={i} 
+                                className={`w-4 h-4 ${i < Math.floor(dealer.rating) ? "fill-amber-500 text-amber-500" : "text-amber-500"}`} 
+                              />
+                            ))}
+                          </div>
+                          <span className="ml-1 text-gray-500">({dealer.reviewCount} ratings)</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-3 text-xs text-gray-500 mt-1">
+                        {dealer.verified && (
+                          <span className="flex items-center">
+                            <span className="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                            Verified Dealer
+                          </span>
+                        )}
+                        {dealer.premium && (
+                          <span className="flex items-center">
+                            <span className="w-2 h-2 bg-amber-500 rounded-full mr-1"></span>
+                            Premium Partner
+                          </span>
+                        )}
+                        {dealer.certified && (
+                          <span className="flex items-center">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-1"></span>
+                            Certified
+                          </span>
+                        )}
+                      </div>
+                      
+                      <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+                        {dealer.description}
+                      </p>
+                      
+                      <div className="flex justify-between items-center mt-3">
+                        <div className="text-sm">
+                          <div className="text-gray-500">{dealer.location}</div>
+                          <div className="text-gray-500">{dealer.phoneNumber}</div>
+                        </div>
+                        <Button variant="outline" className="text-sm border-green-700 text-green-700 hover:bg-green-700 hover:text-white">
+                          View Dealer
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Pagination */}
+              <div className="flex justify-center mt-8">
+                <nav className="flex items-center">
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className={`rounded-l-md ${currentPage === 1 ? 'bg-green-800 text-white hover:bg-green-800 hover:text-white' : ''}`}
+                    onClick={() => setCurrentPage(1)}
+                  >
+                    1
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className={currentPage === 2 ? 'bg-green-800 text-white hover:bg-green-800 hover:text-white' : ''}
+                    onClick={() => setCurrentPage(2)}
+                  >
+                    2
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className={currentPage === 3 ? 'bg-green-800 text-white hover:bg-green-800 hover:text-white' : ''}
+                    onClick={() => setCurrentPage(3)}
+                  >
+                    3
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className={currentPage === 4 ? 'bg-green-800 text-white hover:bg-green-800 hover:text-white' : ''}
+                    onClick={() => setCurrentPage(4)}
+                  >
+                    4
+                  </Button>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <Footer />
+    </div>
+  );
+}

@@ -60,13 +60,30 @@ interface CarDetails {
 
 // Dummy car data
 const carDetailsData: Record<string, CarDetails> = {
+  "toyota_corolla": {
+    id: "toyota_corolla",
+    make: "Toyota",
+    model: "Corolla Altis",
+    year: 2022,
+    price: 24500,
+    mileage: 12500,
+    fuelType: "Gasoline",
+    transmission: "CVT Automatic",
+    engine: "1.8L 4-Cylinder",
+    exteriorColor: "Black",
+    interiorColor: "Black",
+    doors: 4,
+    features: ["Bluetooth", "Backup Camera", "Lane Departure Warning", "Keyless Entry"],
+    imageUrl: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
+    rating: 4.5
+  },
   "toyota_camry": {
     id: "toyota_camry",
     make: "Toyota",
     model: "Camry",
     year: 2022,
     price: 26500,
-    mileage: 12500,
+    mileage: 14200,
     fuelType: "Gasoline",
     transmission: "Automatic",
     engine: "2.5L 4-Cylinder",
@@ -74,7 +91,7 @@ const carDetailsData: Record<string, CarDetails> = {
     interiorColor: "Black",
     doors: 4,
     features: ["Bluetooth", "Backup Camera", "Lane Departure Warning", "Keyless Entry"],
-    imageUrl: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg/1200px-2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg",
     rating: 4.5
   },
   "honda_civic": {
@@ -82,16 +99,16 @@ const carDetailsData: Record<string, CarDetails> = {
     make: "Honda",
     model: "Civic",
     year: 2022,
-    price: 24500,
+    price: 23000,
     mileage: 10200,
     fuelType: "Gasoline",
     transmission: "CVT",
-    engine: "2.0L 4-Cylinder",
+    engine: "1.5L Turbo 4-Cylinder",
     exteriorColor: "Blue",
     interiorColor: "Gray",
     doors: 4,
     features: ["Apple CarPlay", "Android Auto", "Adaptive Cruise Control", "Sunroof"],
-    imageUrl: "https://images.unsplash.com/photo-1590510732688-62a4a6e2f232",
+    imageUrl: "https://www.cnet.com/a/img/resize/75aefa7c3cd90d9d5fae785aad14e078f865ea59/hub/2021/11/16/1f7d8300-c033-4fa0-bcff-47170536cf69/2022-honda-civic-sedan-sport-touring-7.jpg?auto=webp&fit=crop&height=675&width=1200",
     rating: 4.7
   },
   "ford_mustang": {
@@ -104,11 +121,11 @@ const carDetailsData: Record<string, CarDetails> = {
     fuelType: "Gasoline",
     transmission: "Automatic",
     engine: "5.0L V8",
-    exteriorColor: "Red",
+    exteriorColor: "Black",
     interiorColor: "Black",
     doors: 2,
     features: ["Leather Seats", "Navigation System", "Premium Sound", "Performance Package"],
-    imageUrl: "https://images.unsplash.com/photo-1584345604476-8ec5f82d718c",
+    imageUrl: "https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rating: 4.6
   }
 };
@@ -187,6 +204,15 @@ export default function ComparisonTool() {
     return "/car-placeholder.svg";
   };
 
+  // Get selected car details
+  const getSelectedCarDetails = (carSelection: CarSelection) => {
+    if (carSelection.make && carSelection.model) {
+      const carKey = `${carSelection.make}_${carSelection.model}`;
+      return carDetailsData[carKey];
+    }
+    return null;
+  };
+
   return (
     <section className="py-16 bg-gray-100">
       <div className="container mx-auto px-4 text-center">
@@ -202,13 +228,22 @@ export default function ComparisonTool() {
             {carSelections.map((carSelection, index) => (
               <div key={carSelection.id} className="flex flex-col items-center w-full md:w-auto md:flex-1 relative">
                 {/* Car illustration */}
-                <div className="border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center h-64 w-full mb-6">
+                <div className="border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center h-64 w-full mb-6 overflow-hidden">
                   {carSelection.make && carSelection.model ? (
-                    <img 
-                      src={getCarImage(carSelection)} 
-                      alt={`${carSelection.make} ${carSelection.model}`} 
-                      className="w-full h-full object-cover rounded-lg"
-                    />
+                    <>
+                      <img 
+                        src={getCarImage(carSelection)} 
+                        alt={`${carSelection.make} ${carSelection.model}`} 
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Car details overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 p-3 text-left">
+                        <h3 className="font-semibold">{carSelection.make === 'toyota' && carSelection.model === 'corolla' ? 'Toyota Corolla Altis' : `${carMakes.find(m => m.id === carSelection.make)?.name} ${carModels.find(m => m.id === carSelection.model)?.name}`}</h3>
+                        <p className="text-sm text-green-800 font-medium">
+                          Price: ${getSelectedCarDetails(carSelection)?.price.toLocaleString() || "N/A"}
+                        </p>
+                      </div>
+                    </>
                   ) : (
                     <img 
                       src="/car-placeholder.svg" 
@@ -282,10 +317,10 @@ export default function ComparisonTool() {
             ))}
           </div>
           
-          <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4">
+          <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
             <Button 
               variant="default" 
-              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-12 rounded-sm ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
+              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-11 rounded-sm ${!canCompare && 'opacity-70 cursor-not-allowed'}`}
               disabled={!canCompare}
               onClick={handleCompareClick}
             >
@@ -308,179 +343,157 @@ export default function ComparisonTool() {
         {/* Comparison Results Section */}
         {showComparison && selectedCars.length >= 2 && (
           <div className="mt-16 text-left">
-            {/* Car Overview */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-semibold">Compare Features</h2>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                {selectedCars.map((car) => (
-                  <div key={car.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div className="h-48 overflow-hidden">
-                      <img 
-                        src={car.imageUrl} 
-                        alt={`${car.make} ${car.model}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-lg">{car.year} {car.make} {car.model}</h3>
-                      <div className="flex justify-between mt-2">
-                        <span className="text-green-800 font-semibold">${car.price.toLocaleString()}</span>
-                        <span className="text-gray-600">{car.mileage.toLocaleString()} miles</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
             {/* Features Comparison */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-              <div className="bg-green-900 text-white p-4">
-                <h3 className="font-semibold text-lg">Compare Features</h3>
+            <div className="mb-10">
+              <h2 className="text-xl font-bold mb-6 border-b pb-2">Compare Features</h2>
+              <div className="overflow-hidden rounded-sm">
+                <Table className="border-collapse">
+                  <TableHeader>
+                    <TableRow className="bg-green-900 text-white">
+                      <TableHead className="w-1/3 border px-4 py-3">Feature</TableHead>
+                      {selectedCars.map((car) => (
+                        <TableHead key={car.id} className="border px-4 py-3">{car.make} {car.model}</TableHead>
+                      ))}
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">AC (Climate)</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
+                          <Check className="h-5 w-5 mx-auto text-green-600" />
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Power Windows</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
+                          <Check className="h-5 w-5 mx-auto text-green-600" />
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Sunroof</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
+                          {car.model === 'civic' ? (
+                            <Check className="h-5 w-5 mx-auto text-green-600" />
+                          ) : (
+                            <X className="h-5 w-5 mx-auto text-red-500" />
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Backup Camera</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
+                          <Check className="h-5 w-5 mx-auto text-green-600" />
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Lane Assist</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3 text-center">
+                          {car.model === 'mustang' ? (
+                            <X className="h-5 w-5 mx-auto text-red-500" />
+                          ) : (
+                            <Check className="h-5 w-5 mx-auto text-green-600" />
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableBody>
+                </Table>
               </div>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-1/3">Features</TableHead>
-                    {selectedCars.map((car) => (
-                      <TableHead key={car.id}>{car.year} {car.make} {car.model}</TableHead>
-                    ))}
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">Fuel Type</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.fuelType}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Transmission</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.transmission}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Engine</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.engine}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Doors</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.doors}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Exterior Color</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.exteriorColor}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Key Features</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id} className="align-top">
-                        <ul className="list-disc pl-5">
-                          {car.features.map((feature, index) => (
-                            <li key={index}>{feature}</li>
-                          ))}
-                        </ul>
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableBody>
-              </Table>
             </div>
             
             {/* Specifications Comparison */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-              <div className="bg-green-900 text-white p-4">
-                <h3 className="font-semibold text-lg">Compare Specifications</h3>
+            <div className="mb-10">
+              <h2 className="text-xl font-bold mb-6 border-b pb-2">Compare Specifications</h2>
+              <div className="overflow-hidden rounded-sm">
+                <Table className="border-collapse">
+                  <TableHeader>
+                    <TableRow className="bg-green-900 text-white">
+                      <TableHead className="w-1/3 border px-4 py-3">Engine/Mech</TableHead>
+                      {selectedCars.map((car) => (
+                        <TableHead key={car.id} className="border px-4 py-3">{car.make} {car.model}</TableHead>
+                      ))}
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Engine Type</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
+                          {car.engine}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Fuel Type</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
+                          {car.fuelType}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Year</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
+                          {car.year}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Mileage</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
+                          {car.mileage.toLocaleString()} miles
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    <TableRow className="bg-white">
+                      <TableCell className="font-medium border border-gray-200 px-4 py-3">Transmission</TableCell>
+                      {selectedCars.map((car) => (
+                        <TableCell key={car.id} className="border border-gray-200 px-4 py-3">
+                          {car.transmission}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableBody>
+                </Table>
               </div>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-1/3">Specifications</TableHead>
-                    {selectedCars.map((car) => (
-                      <TableHead key={car.id}>{car.year} {car.make} {car.model}</TableHead>
-                    ))}
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">Year</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.year}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Price</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>${car.price.toLocaleString()}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Mileage</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.mileage.toLocaleString()} miles</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Interior Color</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.interiorColor}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Rating</TableCell>
-                    {selectedCars.map((car) => (
-                      <TableCell key={car.id}>{car.rating}/5</TableCell>
-                    ))}
-                  </TableRow>
-                </TableBody>
-              </Table>
             </div>
             
             {/* Similar Listings */}
             <div className="mb-8">
-              <Accordion type="single" collapsible className="bg-white rounded-lg shadow-md overflow-hidden">
-                <AccordionItem value="similar-listings">
-                  <AccordionTrigger className="bg-green-900 text-white px-4 py-3">
-                    <h3 className="font-semibold text-lg">Similar Listings</h3>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
-                      {selectedCars.map((car) => (
-                        <>
-                          <div key={`${car.id}-1`} className="bg-white border rounded-lg overflow-hidden">
-                            <div className="h-32 overflow-hidden">
-                              <img src={car.imageUrl} alt={car.model} className="w-full h-full object-cover" />
-                            </div>
-                            <div className="p-2">
-                              <p className="font-semibold text-sm">{car.year} {car.make} {car.model}</p>
-                              <p className="text-green-800 text-sm font-semibold">${(car.price - 1500).toLocaleString()}</p>
-                            </div>
-                          </div>
-                          <div key={`${car.id}-2`} className="bg-white border rounded-lg overflow-hidden">
-                            <div className="h-32 overflow-hidden">
-                              <img src={car.imageUrl} alt={car.model} className="w-full h-full object-cover" />
-                            </div>
-                            <div className="p-2">
-                              <p className="font-semibold text-sm">{car.year - 1} {car.make} {car.model}</p>
-                              <p className="text-green-800 text-sm font-semibold">${(car.price - 4500).toLocaleString()}</p>
-                            </div>
-                          </div>
-                        </>
-                      ))}
+              <h2 className="text-xl font-bold mb-6 border-b pb-2">Similar Listings</h2>
+              <div className="flex overflow-x-auto gap-4 pb-4">
+                {selectedCars.flatMap((car) => [
+                  <div key={`${car.id}-1`} className="flex-shrink-0 w-64 bg-white border rounded-lg overflow-hidden">
+                    <div className="h-40 overflow-hidden">
+                      <img src={car.imageUrl} alt={car.model} className="w-full h-full object-cover" />
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                    <div className="p-3">
+                      <p className="font-semibold text-sm">{car.year} {car.make} {car.model}</p>
+                      <p className="text-green-800 text-sm font-semibold">${(car.price - 1500).toLocaleString()}</p>
+                    </div>
+                  </div>,
+                  <div key={`${car.id}-2`} className="flex-shrink-0 w-64 bg-white border rounded-lg overflow-hidden">
+                    <div className="h-40 overflow-hidden">
+                      <img src={car.imageUrl} alt={car.model} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-3">
+                      <p className="font-semibold text-sm">{car.year - 1} {car.make} {car.model}</p>
+                      <p className="text-green-800 text-sm font-semibold">${(car.price - 4500).toLocaleString()}</p>
+                    </div>
+                  </div>
+                ])}
+              </div>
             </div>
           </div>
         )}

@@ -103,14 +103,14 @@ export default function DealerProfilePage() {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       
-      <main className="flex-1">
+      <main className="flex-1 bg-gray-50">
         {/* Dealer Profile Header */}
-        <div className="bg-white border-b">
-          <div className="container mx-auto px-4 py-6">
+        <div className="bg-gray-50 pt-8 pb-4">
+          <div className="container mx-auto px-4">
             <div className="flex items-start gap-6">
               {/* Dealer Logo */}
-              <div className="w-20 h-20 md:w-28 md:h-28 bg-neutral-800 rounded overflow-hidden relative flex-shrink-0">
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div className="w-[128px] h-[96px] bg-neutral-800 rounded overflow-hidden relative flex-shrink-0 flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center">
                   <svg width="70" height="45" viewBox="0 0 229 101" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto">
                     <path d="M186.897 30.4313C184.578 30.4313 182.465 30.7358 180.536 31.262C177.405 25.1649 170.997 20.9624 163.676 20.9624C161.009 20.9624 158.342 21.4886 155.955 22.4582C152.129 15.1803 144.329 10.1211 135.358 10.1211C132.86 10.1211 130.447 10.5646 128.128 11.3679C125.382 6.37598 120.12 3.24561 114.084 3.24561C107.932 3.24561 102.6 6.5071 99.9322 11.6724C97.6131 10.9518 95.1151 10.5646 92.6172 10.5646C83.5616 10.5646 75.8456 15.6238 72.0192 22.9845C69.632 22.0148 67.0525 21.4886 64.3823 21.4886C57.0613 21.4886 50.6534 25.6911 47.5224 31.788C45.5942 31.2618 43.4808 30.9572 41.1617 30.9572C32.4457 30.9572 25.4285 37.3846 25.4285 45.3358C25.4285 53.2869 32.4457 59.7143 41.1617 59.7143H186.897C200.29 59.7143 211.19 49.6639 211.19 37.2018C211.19 24.8224 200.29 30.4313 186.897 30.4313Z" fill="white" fillOpacity="0.12"/>
                     <path d="M12.7495 87.5711L12.7495 39.9992M12.7495 39.9992L7.3999 48.3989M12.7495 39.9992L18.4741 48.3989" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -127,46 +127,77 @@ export default function DealerProfilePage() {
                     <path d="M36 52.4845L44.4997 38.7346H67.9997L59.5 52.4845H36Z" fill="white" fillOpacity="0.12"/>
                     <path d="M67.9998 38.7346H156.5V29.7844H76.4995L67.9998 38.7346Z" fill="white" fillOpacity="0.12"/>
                     <path d="M169.324 21.5H76.4993L67.9996 29.7845H169.324V21.5Z" fill="white" fillOpacity="0.12"/>
-                    <div className="text-white text-xs absolute bottom-0 w-full text-center py-1 bg-green-800 font-bold">
-                      SALES • PARTS
-                    </div>
+                    <text className="text-white text-xs text-center absolute bottom-2 w-full font-bold">CAR DEALER</text>
+                    <text className="text-white text-xs text-center absolute bottom-10 w-full font-bold">SALES • PARTS</text>
                   </svg>
                 </div>
               </div>
               
-              {/* Dealer Info */}
+              {/* Dealer Header Info */}
               <div className="flex-1">
-                <h1 className="text-2xl font-bold text-gray-900">{dealerData.name}</h1>
-                
-                <div className="mt-4 grid md:grid-cols-3 gap-6">
-                  <div className="md:col-span-2">
-                    <h2 className="text-sm font-semibold text-gray-700 mb-2">Description</h2>
-                    <p className="text-sm text-gray-600 line-clamp-6">
-                      {dealerData.description}
-                    </p>
+                <div className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-md mb-2">
+                  <span className="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                    ZIP Code: {dealerData.zipCode}
+                  </span>
+                </div>
+                <h1 className="text-3xl font-bold text-gray-900">{dealerData.name}</h1>
+                <div className="flex items-center mt-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`w-5 h-5 ${i < Math.floor(dealerData.rating) ? "fill-amber-500 text-amber-500" : "text-gray-300"}`} 
+                    />
+                  ))}
+                  <span className="ml-2 text-gray-600 text-sm">{dealerData.reviewCount} Ratings</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Content Section */}
+        <div className="container mx-auto px-4 py-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Description Column */}
+            <div className="col-span-2">
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <h2 className="text-xl font-medium mb-4">Description</h2>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {dealerData.description}
+                </p>
+              </div>
+            </div>
+            
+            {/* Contact Information Column */}
+            <div className="col-span-1">
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <h2 className="text-xl font-medium mb-4">Contact Information</h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-gray-500 text-sm mb-1">Email Address</h3>
+                    <p className="text-blue-500 hover:underline">johndoe@email.com</p>
                   </div>
                   
                   <div>
-                    <h2 className="text-sm font-semibold text-gray-700 mb-2">Contact Information</h2>
-                    <div className="space-y-2">
-                      <div className="flex items-center text-sm text-gray-600">
-                        <MapPin className="h-4 w-4 mr-2 text-gray-400" />
-                        <span>{dealerData.location} {dealerData.zipCode}</span>
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Phone className="h-4 w-4 mr-2 text-gray-400" />
-                        <span>{dealerData.phoneNumber}</span>
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Globe className="h-4 w-4 mr-2 text-gray-400" />
-                        <span>{dealerData.websiteUrl}</span>
-                      </div>
-                      
-                      <Button className="w-full mt-2 bg-green-800 hover:bg-green-900">
-                        Contact Dealer
-                      </Button>
-                    </div>
+                    <h3 className="text-gray-500 text-sm mb-1">Address</h3>
+                    <p className="text-gray-700">123 street, New York City, NY</p>
                   </div>
+                  
+                  <div>
+                    <h3 className="text-gray-500 text-sm mb-1">Phone</h3>
+                    <p className="text-gray-700">+1234567890</p>
+                  </div>
+                  
+                  <Button className="w-full mt-4 bg-green-800 hover:bg-green-900 flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+                      <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
+                    </svg>
+                    Chat
+                  </Button>
                 </div>
               </div>
             </div>

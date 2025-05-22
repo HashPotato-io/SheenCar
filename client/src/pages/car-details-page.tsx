@@ -102,7 +102,7 @@ export default function CarDetailsPage() {
             <span className="mx-2">/</span>
             <Link href="/services/dealer" className="hover:text-gray-700">Dealers</Link>
             <span className="mx-2">/</span>
-            <Link href={`/services/dealer/${carData.seller.id}`} className="hover:text-gray-700">{carData.seller.name}</Link>
+            <Link href={`/services/dealer/1`} className="hover:text-gray-700">{carData.seller.name}</Link>
             <span className="mx-2">/</span>
             <span className="text-gray-900">{carData.make} {carData.model}</span>
           </div>

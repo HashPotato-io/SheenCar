@@ -13,13 +13,14 @@ const carData = {
   make: 'Honda',
   model: 'Accord',
   year: 2024,
-  price: 42000,
-  mainImage: 'https://images.unsplash.com/photo-1547245324-d777c6f05e80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+  price: 22500,
+  mainImage: 'https://images.unsplash.com/photo-1535732820275-9ffd998cac22?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3',
   galleryImages: [
-    'https://images.unsplash.com/photo-1547245324-d777c6f05e80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    'https://images.unsplash.com/photo-1535732820275-9ffd998cac22?q=80&w=2500&auto=format&fit=crop&ixlib=rb-4.0.3',
+    'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    'https://images.unsplash.com/photo-1542362567-b07e54358753?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    'https://images.unsplash.com/photo-1546614042-7df3c24c9e5d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
   ],
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl. Nullam euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl. Nullam euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl. Nullam euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.",
   specifications: {
@@ -113,9 +114,9 @@ export default function CarDetailsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Car Images Section */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg overflow-hidden shadow-sm">
+              <div>
                 {/* Main Image */}
-                <div className="relative h-[350px] bg-gray-100">
+                <div className="relative rounded-lg overflow-hidden h-[350px] bg-gray-100">
                   <img 
                     src={mainImage} 
                     alt={`${carData.make} ${carData.model}`} 
@@ -124,33 +125,33 @@ export default function CarDetailsPage() {
                   
                   {/* Navigation Arrows */}
                   <button 
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-1 hover:bg-opacity-70"
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 rounded-md w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100"
                     onClick={() => {
                       const newIndex = (galleryIndex - 1 + carData.galleryImages.length) % carData.galleryImages.length;
                       setGalleryIndex(newIndex);
                       setMainImage(carData.galleryImages[newIndex]);
                     }}
                   >
-                    <ChevronLeft className="w-5 h-5" />
+                    <ChevronLeft className="w-4 h-4" />
                   </button>
                   <button 
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-1 hover:bg-opacity-70"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 rounded-md w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100"
                     onClick={() => {
                       const newIndex = (galleryIndex + 1) % carData.galleryImages.length;
                       setGalleryIndex(newIndex);
                       setMainImage(carData.galleryImages[newIndex]);
                     }}
                   >
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
                 
                 {/* Thumbnails */}
-                <div className="flex p-2 gap-2 overflow-x-auto">
+                <div className="flex gap-2 mt-2 overflow-x-auto pb-1">
                   {carData.galleryImages.map((image, index) => (
                     <div 
                       key={index}
-                      className={`w-20 h-16 flex-shrink-0 cursor-pointer rounded overflow-hidden ${mainImage === image ? 'ring-2 ring-green-800' : 'ring-1 ring-gray-200'}`}
+                      className={`w-20 h-16 flex-shrink-0 cursor-pointer rounded-md overflow-hidden ${mainImage === image ? 'ring-2 ring-green-800' : ''}`}
                       onClick={() => handleThumbnailClick(image, index)}
                     >
                       <img src={image} alt={`thumbnail-${index}`} className="w-full h-full object-cover" />

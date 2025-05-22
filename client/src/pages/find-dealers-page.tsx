@@ -4,7 +4,6 @@ import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SearchIcon, Star } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
@@ -13,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
 interface Dealer {
@@ -160,15 +158,11 @@ export default function FindDealersPage() {
       {/* Main Content Area */}
       <div className="bg-gray-50 py-8">
         <div className="container mx-auto px-4">
-          <div className="flex">
+          <div className="flex flex-col md:flex-row">
+            {/* Filters Sidebar */}
             <div className="w-full md:w-64 pr-0 md:pr-6">
-              <div className="text-xl font-semibold text-neutral-800 mb-4">
-                <span className="text-amber-500">{totalDealers}</span> Car Dealers Found
-              </div>
-              
-              {/* Filters Sidebar */}
               <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
-                <h3 className="font-bold text-lg mb-4">Filters</h3>
+                <h3 className="font-bold text-xl mb-4">Filters</h3>
                 
                 <div className="space-y-6">
                   <div>
@@ -326,60 +320,80 @@ export default function FindDealersPage() {
             </div>
             
             {/* Dealers List */}
-            <div className="flex-1 bg-gray-100 rounded-lg p-4">
-              <div className="space-y-4">
-                {dealers.map((dealer) => (
-                  <div key={dealer.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
-                    <div className="flex p-4">
-                      <div className="w-24 h-24 bg-neutral-800 rounded overflow-hidden relative mr-4">
-                        <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-16 text-white" viewBox="0 0 640 512">
-                            <path fill="currentColor" d="M171.3 96H224v96H111.3l30.4-96h29.6zM272 192V96h81.2c9.7 0 16.8 8.8 17.2 18.5l4 96h-102.4zm170.2 0l-3.2-77.3c-.8-14.8-13.1-26.7-28-26.7H351.3l4.8 104H442.2zm39.7 0h-19.4l-4.8-104h45.5l-5.9 29.4c-.8 4.1 2.3 7.8 6.4 7.8h11.4c4.1 0 7.2-3.8 6.4-7.8l-5.8-29.4H624c8.8 0 16 7.2 16 16v80.8c-1.8-1.2-3.7-2.4-5.8-3.5-5.4-2.5-11.4-4.5-18-5.6-4.2-.7-8.5-1.1-12.8-1.1-2.1 0-4.1.1-6.2.2-17.3 1.7-32.8 9.5-44.2 21.6zM624 352c0-53-43-96-96-96s-96 43-96 96s43 96 96 96s96-43 96-96zm-96-32c17.7 0 32 14.3 32 32s-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32zM351.2 416c43 0 46.3-35 52.4-63.9c2.1-9.9 11-16.5 21.1-16l20.9 1c10.2 .5 18.4 9 18.4 19.2c0 10.2-8.1 18.4-18.2 19l-7.5 .3c-3.7 16.8-9.9 33.9-20.4 47.6c-19 24.7-48.3 36.9-87.4 36.9H144c-39.1 0-68.4-12.2-87.4-36.9c-10.5-13.6-16.7-30.7-20.4-47.6l-7.5-.3c-10.1-.5-18.2-8.8-18.2-19c0-10.2 8.2-18.6 18.4-19.2l20.9-1c10.1-.5 19 6.1 21.1 16c6.1 28.9 9.4 63.9 52.4 63.9H351.2zM208 416c-8.8 0-16-7.2-16-16s7.2-16 16-16h160c8.8 0 16 7.2 16 16s-7.2 16-16 16H208zm432-256c0 8.8-7.2 16-16 16H502.7l37.4-46.2c3.2-3.9 8.9-4.6 12.9-1.4l9.5 7.6c4 3.2 4.6 8.9 1.4 12.9L527.5 192H608c8.8 0 16 7.2 16 16c0 8.8-7.2 16-16 16h-53.5c-7.2 22.8-22.7 41.3-42.7 52c.3 2.6 .2 5.4-.5 8l-14.1 52.8c-2.2 8.5-11 13.7-19.5 11.4l-19.7-5.3c-8.5-2.3-13.6-11.1-11.3-19.6l5.4-20c-20.7-8.5-37.6-24-47.5-43.4H159c-9.9 19.4-26.8 34.9-47.5 43.4l5.4 20c2.3 8.5-2.8 17.3-11.3 19.6l-19.7 5.3c-8.5 2.3-17.3-2.9-19.5-11.4l-14.1-52.8c-.7-2.6-.8-5.4-.5-8c-20-10.6-35.6-29.2-42.7-52H16c-8.8 0-16-7.2-16-16c0-8.8 7.2-16 16-16h112c-2.7-5.4-5-11-6.2-16.9c-.2-1-1.1-1.7-2.1-1.6l-63 4c-10.1 .6-18.7-7.3-18.7-17.5c0-9.3 7.3-17.1 16.6-17.7l79.3-5c2.8-.2 5.6-.4 8.3-.4H223.5l-33.8 106.1c-1.9 6.1-7.6 10.1-13.9 10.1H96c-8.8 0-16-7.2-16-16s7.2-16 16-16h73.2l32-100.7c2.2-6.9 8.7-11.3 15.8-11.3h85c.2-7.1 3.1-14 8.5-19c6.3-5.8 14.5-8.3 22.7-7.1L486 74c8.3 1.2 15.6 6.5 19.3 14.5l60.1 130c4 8.5 3.5 18.6-1.3 26.8c2.3 6.2 3.9 12.9 4.9 19.6H608c8.8 0 16 7.2 16 16c0 8.8-7.2 16-16 16H456.9c-4 13.7-11.2 26-20.9 36v.4l-11.4 49.4c-2 8.5-10.6 13.9-19.1 12l-26.5-6.2c-8.6-2-14-10.6-12-19.2l1.3-5.4c-41 1.2-71.2-1.6-97.5-9c-24.6-6.9-45.1-18.1-64.3-33l-16.8 72.8c-2 8.6-10.6 14-19.2 12l-13.3-3.1c-8.5-2-14-10.6-12-19.1l24.5-105.5c-30.7-6.9-53.5-34.3-53.5-67.3c0-4.7 .5-9.3 1.4-13.8c-1.2-3.3-1.4-7-0-10.5L32.6 52.3C35.3 45.1 42.3 40 50 40h19.3c8.8 0 16 7.2 16 16s-7.2 16-16 16H62L79.1 96z"/>
-                          </svg>
-                          <div className="text-white text-xs absolute bottom-0 w-full text-center py-1 bg-green-800 font-bold">
-                            SALES • PARTS
+            <div className="flex-1">
+              <h2 className="text-xl font-semibold mb-4">
+                <span className="text-amber-500">{totalDealers}</span> Car Dealers Found
+              </h2>
+              
+              <div className="bg-gray-100 rounded-lg p-4">
+                <div className="space-y-4">
+                  {dealers.map((dealer) => (
+                    <div key={dealer.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
+                      <div className="flex p-4">
+                        <div className="w-[100px] h-[100px] bg-neutral-800 rounded overflow-hidden relative mr-4">
+                          <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <svg width="70" height="45" viewBox="0 0 229 101" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto">
+                              <path d="M186.897 30.4313C184.578 30.4313 182.465 30.7358 180.536 31.262C177.405 25.1649 170.997 20.9624 163.676 20.9624C161.009 20.9624 158.342 21.4886 155.955 22.4582C152.129 15.1803 144.329 10.1211 135.358 10.1211C132.86 10.1211 130.447 10.5646 128.128 11.3679C125.382 6.37598 120.12 3.24561 114.084 3.24561C107.932 3.24561 102.6 6.5071 99.9322 11.6724C97.6131 10.9518 95.1151 10.5646 92.6172 10.5646C83.5616 10.5646 75.8456 15.6238 72.0192 22.9845C69.632 22.0148 67.0525 21.4886 64.3823 21.4886C57.0613 21.4886 50.6534 25.6911 47.5224 31.788C45.5942 31.2618 43.4808 30.9572 41.1617 30.9572C32.4457 30.9572 25.4285 37.3846 25.4285 45.3358C25.4285 53.2869 32.4457 59.7143 41.1617 59.7143H186.897C200.29 59.7143 211.19 49.6639 211.19 37.2018C211.19 24.8224 200.29 30.4313 186.897 30.4313Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M12.7495 87.5711L12.7495 39.9992M12.7495 39.9992L7.3999 48.3989M12.7495 39.9992L18.4741 48.3989" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M140.532 72.3713H100.282C100.282 72.3713 100.282 80.3558 106.95 80.3558H138.115C140.54 80.3558 141.753 79.1429 140.532 76.7172L140.532 72.3713Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M147.2 92.4846C158.096 92.4846 166.907 83.6737 166.907 72.7773C166.907 61.8809 158.096 53.07 147.2 53.07C136.303 53.07 127.492 61.8809 127.492 72.7773C127.492 83.6737 136.303 92.4846 147.2 92.4846Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M80.5748 92.4846C91.4712 92.4846 100.282 83.6737 100.282 72.7773C100.282 61.8809 91.4712 53.07 80.5748 53.07C69.6783 53.07 60.8674 61.8809 60.8674 72.7773C60.8674 83.6737 69.6783 92.4846 80.5748 92.4846Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M149.617 72.7773C149.617 75.1055 148.695 77.3389 147.05 78.9838C145.405 80.6287 143.172 81.5503 140.843 81.5503C138.515 81.5503 136.282 80.6287 134.637 78.9838C132.992 77.3389 132.07 75.1055 132.07 72.7773C132.07 70.4491 132.992 68.2158 134.637 66.5709C136.282 64.926 138.515 64.0043 140.843 64.0043C143.172 64.0043 145.405 64.926 147.05 66.5709C148.695 68.2158 149.617 70.4491 149.617 72.7773Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M83.1531 72.7773C83.1531 75.1055 82.2315 77.3389 80.5866 78.9838C78.9417 80.6287 76.7084 81.5503 74.3802 81.5503C72.052 81.5503 69.8186 80.6287 68.1737 78.9838C66.5288 77.3389 65.6072 75.1055 65.6072 72.7773C65.6072 70.4491 66.5288 68.2158 68.1737 66.5709C69.8186 64.926 72.052 64.0043 74.3802 64.0043C76.7084 64.0043 78.9417 64.926 80.5866 66.5709C82.2315 68.2158 83.1531 70.4491 83.1531 72.7773Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M216.25 39.9992C216.25 36.0928 218.45 32.5631 221.846 30.927C223.32 30.2017 225.059 29.9993 226.6 30.9992V48.9992C225.059 49.9991 223.32 49.7968 221.846 49.0714C218.45 47.4354 216.25 43.9057 216.25 39.9992Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M216.25 39.9992H198.25V48.9992H216.25V39.9992Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M0 30.9992H26.9999V48.9992H0V30.9992Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M169.324 29.7845H187.324C187.324 29.7845 186.523 21.5 182.324 21.5H169.324V29.7845Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M80.5747 55.4845H147.2V39.9991H104.864C90.3648 39.9991 80.5747 41.8537 80.5747 55.4845Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M36 52.4845L44.4997 38.7346H67.9997L59.5 52.4845H36Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M67.9998 38.7346H156.5V29.7844H76.4995L67.9998 38.7346Z" fill="white" fillOpacity="0.12"/>
+                              <path d="M169.324 21.5H76.4993L67.9996 29.7845H169.324V21.5Z" fill="white" fillOpacity="0.12"/>
+                            </svg>
+                            <div className="text-white text-xs absolute bottom-0 w-full text-center py-1 bg-green-800 font-bold">
+                              SALES • PARTS
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      
-                      <div className="flex-1">
-                        <div className="flex flex-col">
-                          <h3 className="font-semibold text-lg text-gray-800">{dealer.name}</h3>
-                          <div className="flex items-center mb-2">
-                            <div className="flex">
-                              {[...Array(5)].map((_, i) => (
-                                <Star 
-                                  key={i} 
-                                  className={`w-4 h-4 ${i < Math.floor(dealer.rating) ? "fill-amber-500 text-amber-500" : "text-amber-500"}`} 
-                                />
-                              ))}
+                        
+                        <div className="flex-1">
+                          <div className="flex flex-col">
+                            <h3 className="font-bold text-lg text-gray-800">{dealer.name}</h3>
+                            <div className="flex items-center mb-2">
+                              <div className="flex">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star 
+                                    key={i} 
+                                    className={`w-4 h-4 ${i < Math.floor(dealer.rating) ? "fill-amber-500 text-amber-500" : "text-amber-500"}`} 
+                                  />
+                                ))}
+                              </div>
+                              <span className="ml-1 text-gray-500 text-xs">({dealer.reviewCount} Ratings)</span>
                             </div>
-                            <span className="ml-1 text-gray-500 text-xs">({dealer.reviewCount} Ratings)</span>
+                            
+                            <div className="flex items-center text-xs text-gray-500 mb-1">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                              ZIP Code: {dealer.zipCode}
+                            </div>
+                            
+                            <div className="flex items-center text-xs text-gray-500 mb-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                              </svg>
+                              Phone: {dealer.phoneNumber}
+                            </div>
+                            
+                            <p className="text-xs text-gray-600 line-clamp-3">
+                              {dealer.description}
+                            </p>
                           </div>
-                          
-                          <div className="flex items-center text-xs text-gray-500 mb-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            ZIP Code: {dealer.zipCode}
-                          </div>
-                          
-                          <div className="flex items-center text-xs text-gray-500 mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                            </svg>
-                            Phone: {dealer.phoneNumber}
-                          </div>
-                          
-                          <p className="text-xs text-gray-600 line-clamp-3">
-                            {dealer.description}
-                          </p>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
               
               {/* Pagination */}

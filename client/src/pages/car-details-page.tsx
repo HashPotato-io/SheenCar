@@ -4,6 +4,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, ThumbsUp, Heart, Share, Phone } from "lucide-react";
 
 // Mock car data
@@ -84,6 +85,8 @@ export default function CarDetailsPage() {
   const [activeTab, setActiveTab] = useState('description');
   const [mainImage, setMainImage] = useState(carData.mainImage);
   const [galleryIndex, setGalleryIndex] = useState(0);
+  const [similarCarIndex, setSimilarCarIndex] = useState(0);
+  const [contactDialogOpen, setContactDialogOpen] = useState(false);
 
   const handleThumbnailClick = (image: string, index: number) => {
     setMainImage(image);
@@ -270,7 +273,10 @@ export default function CarDetailsPage() {
                 
                 {/* Action Buttons */}
                 <div className="mt-4 space-y-3">
-                  <Button className="w-full bg-green-800 hover:bg-green-900 flex items-center justify-center gap-2">
+                  <Button 
+                    className="w-full bg-green-800 hover:bg-green-900 flex items-center justify-center gap-2"
+                    onClick={() => setContactDialogOpen(true)}
+                  >
                     <Phone className="w-4 h-4" />
                     Contact Seller
                   </Button>
@@ -300,13 +306,19 @@ export default function CarDetailsPage() {
             
             <div className="relative">
               {/* Left Control */}
-              <button className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900">
+              <button 
+                onClick={() => {
+                  setSimilarCarIndex(prev => Math.max(0, prev - 1));
+                }}
+                disabled={similarCarIndex === 0}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900 disabled:opacity-50"
+              >
                 <ChevronLeft className="h-6 w-6" />
               </button>
               
               {/* Car Cards */}
               <div className="mx-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-                {similarCars.map((car) => (
+                {similarCars.slice(similarCarIndex, similarCarIndex + 4).map((car) => (
                   <div key={car.id} className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 group">
                     <div className="h-40 bg-gray-200 relative overflow-hidden">
                       <img 
@@ -322,11 +334,13 @@ export default function CarDetailsPage() {
                       <h3 className="text-base font-medium text-gray-900">{car.make} {car.model}</h3>
                       <div className="flex justify-between items-center mt-1">
                         <p className="text-base font-bold text-gray-900">Price: ${car.price.toLocaleString()}</p>
-                        <div className="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center transition-all hover:bg-green-900">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                          </svg>
-                        </div>
+                        <Link href={`/cars/${car.id}`}>
+                          <div className="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center transition-all hover:bg-green-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -334,11 +348,57 @@ export default function CarDetailsPage() {
               </div>
               
               {/* Right Control */}
-              <button className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900">
+              <button 
+                onClick={() => {
+                  setSimilarCarIndex(prev => Math.min(prev + 1, similarCars.length - 4));
+                }}
+                disabled={similarCarIndex >= similarCars.length - 4}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900 disabled:opacity-50"
+              >
                 <ChevronRight className="h-6 w-6" />
               </button>
             </div>
           </div>
+          
+          {/* Contact Dialog */}
+          <Dialog open={contactDialogOpen} onOpenChange={setContactDialogOpen}>
+            <DialogContent className="sm:max-w-md">
+              <DialogTitle>Contact Seller</DialogTitle>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 border-b pb-4">
+                  <img 
+                    src={carData.seller.logo} 
+                    alt={carData.seller.name} 
+                    className="w-12 h-12 rounded-full" 
+                  />
+                  <div>
+                    <div className="font-medium">{carData.seller.name}</div>
+                    <div className="text-sm text-gray-500">{carData.seller.location}</div>
+                    <div className="flex items-center text-sm text-amber-500">
+                      <span>★★★★☆</span>
+                      <span className="ml-1 text-gray-500">{carData.seller.reviewCount} reviews</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 mb-1">Phone Number</h3>
+                  <p className="text-base font-medium">{carData.seller.phoneNumber}</p>
+                </div>
+                
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 mb-1">About this vehicle</h3>
+                  <p className="text-sm text-gray-700">
+                    {carData.make} {carData.model} {carData.year} - ${carData.price.toLocaleString()}
+                  </p>
+                </div>
+                
+                <div className="border-t pt-4">
+                  <Button className="w-full bg-green-800 hover:bg-green-900">Call Dealer</Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </main>
       

@@ -398,11 +398,27 @@ export default function FindDealersPage() {
               
               {/* Pagination */}
               <div className="flex justify-center mt-8">
-                <nav className="flex items-center">
+                <nav className="flex items-center gap-1">
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className="rounded w-8 h-8 border-gray-200 text-gray-500"
+                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  >
+                    «
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className="rounded w-8 h-8 border-gray-200 text-gray-500"
+                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  >
+                    ‹
+                  </Button>
                   <Button 
                     variant="default" 
                     size="icon"
-                    className="rounded-none bg-green-800 text-white hover:bg-green-900"
+                    className="rounded w-8 h-8 bg-green-800 text-white hover:bg-green-900"
                     onClick={() => setCurrentPage(1)}
                   >
                     1
@@ -410,7 +426,7 @@ export default function FindDealersPage() {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    className="rounded-none border-gray-300"
+                    className="rounded w-8 h-8 border-gray-200 bg-gray-100"
                     onClick={() => setCurrentPage(2)}
                   >
                     2
@@ -418,7 +434,7 @@ export default function FindDealersPage() {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    className="rounded-none border-gray-300"
+                    className="rounded w-8 h-8 border-gray-200 bg-gray-100"
                     onClick={() => setCurrentPage(3)}
                   >
                     3
@@ -426,7 +442,7 @@ export default function FindDealersPage() {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    className="rounded-none border-gray-300"
+                    className="rounded w-8 h-8 border-gray-200 bg-gray-100"
                     onClick={() => setCurrentPage(4)}
                   >
                     4
@@ -434,9 +450,18 @@ export default function FindDealersPage() {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    className="rounded-none border-gray-300"
+                    className="rounded w-8 h-8 border-gray-200 text-gray-500"
+                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   >
-                    <span className="text-lg leading-none">...</span>
+                    ›
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className="rounded w-8 h-8 border-gray-200 text-gray-500"
+                    onClick={() => setCurrentPage(totalPages)}
+                  >
+                    »
                   </Button>
                 </nav>
               </div>

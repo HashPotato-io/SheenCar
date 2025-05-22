@@ -16,6 +16,7 @@ import SecurityPage from "@/pages/security-page";
 import AboutPage from "@/pages/about-page";
 import TeamPage from "@/pages/team-page";
 import FindDealersPage from "@/pages/find-dealers-page";
+import DealerProfilePage from "@/pages/dealer-profile-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
 function Router() {
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/about" component={AboutPage} />
       <Route path="/team" component={TeamPage} />
       <Route path="/services/dealer" component={FindDealersPage} />
+      <Route path="/services/dealer/:id" component={DealerProfilePage} />
       <ProtectedRoute path="/dashboard" component={DashboardPage} />
       <ProtectedRoute path="/post-ad" component={PostAdPage} />
       <Route component={NotFound} />

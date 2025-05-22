@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,10 @@ import { Star, ChevronLeft, ChevronRight, MapPin, Phone, Globe } from "lucide-re
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useParams, Link } from "wouter";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 // Mock data for a dealer
 const dealerData = {
@@ -212,48 +216,66 @@ export default function DealerProfilePage() {
           </div>
           
           <div className="relative">
-            {/* Left Control */}
-            <button 
-              onClick={prevSlide}
-              disabled={carouselIndex === 0}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900"
-            >
+            {/* Custom navigation buttons */}
+            <div id="swiper-prev" className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900 cursor-pointer">
               <ChevronLeft className="h-6 w-6" />
-            </button>
-            
-            {/* Car Listings */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mx-14">
-              {visibleCars.map((car) => (
-                <div key={car.id} className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 group">
-                  <div className="h-44 bg-gray-200 relative overflow-hidden">
-                    <img src={car.image} alt={`${car.make} ${car.model}`} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute top-3 left-3 bg-black bg-opacity-60 text-white text-xs font-medium px-2 py-1 rounded">
-                      {car.year}
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-base font-medium text-gray-900">{car.make} {car.model}</h3>
-                    <div className="flex justify-between items-center mt-1">
-                      <p className="text-base font-bold text-gray-900">Price: ${car.price.toLocaleString()}</p>
-                      <div className="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center transition-all hover:bg-green-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
             
-            {/* Right Control */}
-            <button 
-              onClick={nextSlide}
-              disabled={carouselIndex >= maxIndex}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900"
-            >
+            <div id="swiper-next" className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900 cursor-pointer">
               <ChevronRight className="h-6 w-6" />
-            </button>
+            </div>
+
+            {/* Swiper */}
+            <div className="mx-14">
+              <Swiper
+                modules={[Navigation]}
+                spaceBetween={20}
+                slidesPerView={1}
+                navigation={{
+                  prevEl: '#swiper-prev',
+                  nextEl: '#swiper-next',
+                }}
+                breakpoints={{
+                  640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                  },
+                  768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                  },
+                  1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                  },
+                }}
+                className="car-listings-swiper"
+              >
+                {dealerData.carListings.map((car) => (
+                  <SwiperSlide key={car.id}>
+                    <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 group h-full">
+                      <div className="h-44 bg-gray-200 relative overflow-hidden">
+                        <img src={car.image} alt={`${car.make} ${car.model}`} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+                        <div className="absolute top-3 left-3 bg-black bg-opacity-60 text-white text-xs font-medium px-2 py-1 rounded">
+                          {car.year}
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-base font-medium text-gray-900">{car.make} {car.model}</h3>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-base font-bold text-gray-900">Price: ${car.price.toLocaleString()}</p>
+                          <div className="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center transition-all hover:bg-green-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
         </div>
         

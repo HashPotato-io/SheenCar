@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import CarDealer from "../assets/car-dealer.png";
 
 interface Dealer {
   id: number;
@@ -405,38 +406,21 @@ export default function FindDealersPage() {
             {/* Dealers List */}
             <div className="flex-1">
               <h2 className="text-xl font-semibold mb-4">
-                <span className="text-amber-500">{totalDealers}</span> Car Dealers Found
+                <span className="text-amber-500">{totalDealers}</span> Car
+                Dealers Found
               </h2>
 
               <div className="bg-gray-100 rounded-lg p-4">
                 <div className="space-y-4">
                   {dealers.map((dealer) => (
-                    <div key={dealer.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                    <div
+                      key={dealer.id}
+                      className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                    >
                       <Link href={`/services/dealer/${dealer.id}`}>
                         <div className="flex p-4">
-                          <div className="w-[100px] h-[100px] bg-neutral-800 rounded overflow-hidden relative mr-4">
-                            <div className="absolute inset-0 flex flex-col items-center justify-center">
-                              <svg width="70" height="45" viewBox="0 0 229 101" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto">
-                                <path d="M186.897 30.4313C184.578 30.4313 182.465 30.7358 180.536 31.262C177.405 25.1649 170.997 20.9624 163.676 20.9624C161.009 20.9624 158.342 21.4886 155.955 22.4582C152.129 15.1803 144.329 10.1211 135.358 10.1211C132.86 10.1211 130.447 10.5646 128.128 11.3679C125.382 6.37598 120.12 3.24561 114.084 3.24561C107.932 3.24561 102.6 6.5071 99.9322 11.6724C97.6131 10.9518 95.1151 10.5646 92.6172 10.5646C83.5616 10.5646 75.8456 15.6238 72.0192 22.9845C69.632 22.0148 67.0525 21.4886 64.3823 21.4886C57.0613 21.4886 50.6534 25.6911 47.5224 31.788C45.5942 31.2618 43.4808 30.9572 41.1617 30.9572C32.4457 30.9572 25.4285 37.3846 25.4285 45.3358C25.4285 53.2869 32.4457 59.7143 41.1617 59.7143H186.897C200.29 59.7143 211.19 49.6639 211.19 37.2018C211.19 24.8224 200.29 30.4313 186.897 30.4313Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M12.7495 87.5711L12.7495 39.9992M12.7495 39.9992L7.3999 48.3989M12.7495 39.9992L18.4741 48.3989" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M140.532 72.3713H100.282C100.282 72.3713 100.282 80.3558 106.95 80.3558H138.115C140.54 80.3558 141.753 79.1429 140.532 76.7172L140.532 72.3713Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M147.2 92.4846C158.096 92.4846 166.907 83.6737 166.907 72.7773C166.907 61.8809 158.096 53.07 147.2 53.07C136.303 53.07 127.492 61.8809 127.492 72.7773C127.492 83.6737 136.303 92.4846 147.2 92.4846Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M80.5748 92.4846C91.4712 92.4846 100.282 83.6737 100.282 72.7773C100.282 61.8809 91.4712 53.07 80.5748 53.07C69.6783 53.07 60.8674 61.8809 60.8674 72.7773C60.8674 83.6737 69.6783 92.4846 80.5748 92.4846Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M149.617 72.7773C149.617 75.1055 148.695 77.3389 147.05 78.9838C145.405 80.6287 143.172 81.5503 140.843 81.5503C138.515 81.5503 136.282 80.6287 134.637 78.9838C132.992 77.3389 132.07 75.1055 132.07 72.7773C132.07 70.4491 132.992 68.2158 134.637 66.5709C136.282 64.926 138.515 64.0043 140.843 64.0043C143.172 64.0043 145.405 64.926 147.05 66.5709C148.695 68.2158 149.617 70.4491 149.617 72.7773Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M83.1531 72.7773C83.1531 75.1055 82.2315 77.3389 80.5866 78.9838C78.9417 80.6287 76.7084 81.5503 74.3802 81.5503C72.052 81.5503 69.8186 80.6287 68.1737 78.9838C66.5288 77.3389 65.6072 75.1055 65.6072 72.7773C65.6072 70.4491 66.5288 68.2158 68.1737 66.5709C69.8186 64.926 72.052 64.0043 74.3802 64.0043C76.7084 64.0043 78.9417 64.926 80.5866 66.5709C82.2315 68.2158 83.1531 70.4491 83.1531 72.7773Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M216.25 39.9992C216.25 36.0928 218.45 32.5631 221.846 30.927C223.32 30.2017 225.059 29.9993 226.6 30.9992V48.9992C225.059 49.9991 223.32 49.7968 221.846 49.0714C218.45 47.4354 216.25 43.9057 216.25 39.9992Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M216.25 39.9992H198.25V48.9992H216.25V39.9992Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M0 30.9992H26.9999V48.9992H0V30.9992Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M169.324 29.7845H187.324C187.324 29.7845 186.523 21.5 182.324 21.5H169.324V29.7845Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M80.5747 55.4845H147.2V39.9991H104.864C90.3648 39.9991 80.5747 41.8537 80.5747 55.4845Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M36 52.4845L44.4997 38.7346H67.9997L59.5 52.4845H36Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M67.9998 38.7346H156.5V29.7844H76.4995L67.9998 38.7346Z" fill="white" fillOpacity="0.12"/>
-                                <path d="M169.324 21.5H76.4993L67.9996 29.7845H169.324V21.5Z" fill="white" fillOpacity="0.12"/>
-                              </svg>
-                              <div className="text-white text-xs absolute bottom-0 w-full text-center py-1 bg-green-800 font-bold">
-                                SALES • PARTS
-                              </div>
-                            </div>
+                          <div className="w-[203px] h-[161px] bg-neutral-800 rounded overflow-hidden relative mr-4">
+                            <img src={CarDealer} alt="car-dealer" />
                           </div>
 
                           <div className="flex-1">
@@ -449,28 +433,61 @@ export default function FindDealersPage() {
                                   {[...Array(5)].map((_, i) => (
                                     <Star
                                       key={i}
-                                      className={`w-4 h-4 ${i < Math.floor(dealer.rating) ? "fill-amber-500 text-amber-500" : "text-amber-500"}`}
+                                      className={`w-4 h-4 ${
+                                        i < Math.floor(dealer.rating)
+                                          ? "fill-amber-500 text-amber-500"
+                                          : "text-amber-500"
+                                      }`}
                                     />
                                   ))}
                                 </div>
-                                <span className="ml-1 text-gray-500 text-xs">({dealer.reviewCount} Ratings)</span>
+                                <span className="ml-1 text-gray-500 text-xs">
+                                  ({dealer.reviewCount} Ratings)
+                                </span>
                               </div>
-                              
+
                               <div className="flex items-center text-xs text-gray-500 mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-3 w-3 mr-1"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                  />
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                  />
                                 </svg>
                                 ZIP Code: {dealer.zipCode}
                               </div>
-                              
+
                               <div className="flex items-center text-xs text-gray-500 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-3 w-3 mr-1"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                  />
                                 </svg>
                                 Phone: {dealer.phoneNumber}
                               </div>
-                              
+
                               <p className="text-xs text-gray-600 line-clamp-3">
                                 {dealer.description}
                               </p>
@@ -486,64 +503,66 @@ export default function FindDealersPage() {
               {/* Pagination */}
               <div className="flex justify-center mt-8">
                 <nav className="flex items-center gap-1">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="icon"
                     className="rounded w-8 h-8 border-gray-200 text-gray-500"
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   >
                     «
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="icon"
                     className="rounded w-8 h-8 border-gray-200 text-gray-500"
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   >
                     ‹
                   </Button>
-                  <Button 
-                    variant="default" 
+                  <Button
+                    variant="default"
                     size="icon"
                     className="rounded w-8 h-8 bg-green-800 text-white hover:bg-green-900"
                     onClick={() => setCurrentPage(1)}
                   >
                     1
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="icon"
                     className="rounded w-8 h-8 border-gray-200 bg-gray-100"
                     onClick={() => setCurrentPage(2)}
                   >
                     2
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="icon"
                     className="rounded w-8 h-8 border-gray-200 bg-gray-100"
                     onClick={() => setCurrentPage(3)}
                   >
                     3
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="icon"
                     className="rounded w-8 h-8 border-gray-200 bg-gray-100"
                     onClick={() => setCurrentPage(4)}
                   >
                     4
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="icon"
                     className="rounded w-8 h-8 border-gray-200 text-gray-500"
-                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                    onClick={() =>
+                      setCurrentPage(Math.min(totalPages, currentPage + 1))
+                    }
                   >
                     ›
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="icon"
                     className="rounded w-8 h-8 border-gray-200 text-gray-500"
                     onClick={() => setCurrentPage(totalPages)}

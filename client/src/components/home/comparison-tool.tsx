@@ -34,6 +34,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Car1 from "../../assets/car1.png";
+import EmblaCarousel from "@/components/ui/embla-carousel";
 
 // Define car selection interface
 interface CarSelection {
@@ -1004,7 +1005,7 @@ export default function ComparisonTool() {
                       ))}
                     </TableRow>
                     <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-gray-200 px-4 py-3">
+                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
                         Transmission
                       </TableCell>
                       {selectedCars.map((car) => (
@@ -1026,80 +1027,13 @@ export default function ComparisonTool() {
               <h2 className="text-xl font-semibold mb-6 flex items-center">
                 <span className="text-green-900 mr-2">Similar</span> Listings
               </h2>
-              <div className="relative">
-                {/* Left Arrow */}
-                <button
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-green-900 text-white rounded-full p-1 shadow-md hover:bg-green-800 transition-colors"
-                  onClick={scrollPrev}
-                  aria-label="Previous"
-                >
-                  <ChevronLeft size={24} />
-                </button>
-
-                {/* Embla Carousel */}
-                <div className="overflow-hidden px-10" ref={emblaRef}>
-                  <div className="flex">
-                    {/* Duplicate cars to have more slides */}
-                    {Array.from({ length: 3 }).flatMap(() =>
-                      selectedCars.map((car, idx) => (
-                        <div
-                          key={`${car.id}-${idx}-${Math.random()}`}
-                          className="flex-[0_0_250px] mx-2 bg-white rounded-lg overflow-hidden shadow-sm relative"
-                        >
-                          <div className="absolute left-2 top-2">
-                            <span className="bg-green-900 text-white text-xs py-0.5 px-2 rounded-sm">
-                              {idx % 2 === 0 ? "New" : "Used"}
-                            </span>
-                          </div>
-                          <div className="h-32 overflow-hidden">
-                            <img
-                              src={car.imageUrl}
-                              alt={car.model}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          <div className="p-3">
-                            <p className="font-medium text-sm mb-1">
-                              {car.make === "Toyota" &&
-                              car.model === "Corolla Altis"
-                                ? "Toyota Corolla Altis"
-                                : `${car.make} ${car.model}`}
-                            </p>
-                            <p className="text-xs text-gray-500 mb-1">
-                              {idx % 2 === 0 ? car.year : car.year - 1}
-                            </p>
-                            <div className="flex justify-between items-center">
-                              <p className="text-green-800 text-sm font-medium">
-                                Price: $
-                                {(idx % 2 === 0
-                                  ? car.price
-                                  : car.price - 2000
-                                ).toLocaleString()}
-                              </p>
-
-                              {/* View details button */}
-                              <Link href={`/cars/${car.id}`}>
-                                <button className="rounded-full p-2 bg-green-500 text-white">
-                                  <ChevronRight className="h-4 w-4" />
-                                </button>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      )),
-                    )}
-                  </div>
-                </div>
-
-                {/* Right Arrow */}
-                <button
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-green-900 text-white rounded-full p-1 shadow-md hover:bg-green-800 transition-colors"
-                  onClick={scrollNext}
-                  aria-label="Next"
-                >
-                  <ChevronRight size={24} />
-                </button>
-              </div>
+              {/* Use EmblaCarousel component */}
+              <EmblaCarousel
+                selectedCars={selectedCars}
+                emblaRef={emblaRef}
+                scrollPrev={scrollPrev}
+                scrollNext={scrollNext}
+              />
             </div>
           </div>
         )}

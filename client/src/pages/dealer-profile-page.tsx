@@ -206,9 +206,9 @@ export default function DealerProfilePage() {
         
         {/* Car Listings Section */}
         <div className="container mx-auto px-4 py-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Recent <span className="text-green-800">Car</span> Listings</h2>
-            <Link href="/dealer-cars" className="text-sm text-green-800 font-medium">View All</Link>
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold">Recent <span className="text-amber-500">Car</span> Listings</h2>
+            <Link href="/dealer-cars" className="text-sm text-gray-600 hover:text-gray-900 font-medium">View All</Link>
           </div>
           
           <div className="relative">
@@ -216,28 +216,30 @@ export default function DealerProfilePage() {
             <button 
               onClick={prevSlide}
               disabled={carouselIndex === 0}
-              className={`absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 shadow-md flex items-center justify-center ${carouselIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'}`}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900"
             >
-              <ChevronLeft className="h-5 w-5 text-gray-600" />
+              <ChevronLeft className="h-6 w-6" />
             </button>
             
             {/* Car Listings */}
-            <div className="grid grid-cols-4 gap-4 mx-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mx-14">
               {visibleCars.map((car) => (
-                <div key={car.id} className="relative bg-white rounded-lg overflow-hidden shadow-sm group">
-                  <div className="h-36 bg-gray-200 relative">
-                    <img src={car.image} alt={`${car.make} ${car.model}`} className="w-full h-full object-cover" />
-                    <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded">
+                <div key={car.id} className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 group">
+                  <div className="h-44 bg-gray-200 relative overflow-hidden">
+                    <img src={car.image} alt={`${car.make} ${car.model}`} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+                    <div className="absolute top-3 left-3 bg-black bg-opacity-60 text-white text-xs font-medium px-2 py-1 rounded">
                       {car.year}
                     </div>
                   </div>
-                  <div className="p-3">
-                    <h3 className="text-sm font-medium">{car.make} {car.model}</h3>
-                    <p className="text-sm text-gray-500">Price: ${car.price.toLocaleString()}</p>
-                  </div>
-                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center">
-                      <span className="text-lg">→</span>
+                  <div className="p-4">
+                    <h3 className="text-base font-medium text-gray-900">{car.make} {car.model}</h3>
+                    <div className="flex justify-between items-center mt-1">
+                      <p className="text-base font-bold text-gray-900">Price: ${car.price.toLocaleString()}</p>
+                      <div className="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center transition-all hover:bg-green-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -248,9 +250,9 @@ export default function DealerProfilePage() {
             <button 
               onClick={nextSlide}
               disabled={carouselIndex >= maxIndex}
-              className={`absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 shadow-md flex items-center justify-center ${carouselIndex >= maxIndex ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'}`}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-green-900"
             >
-              <ChevronRight className="h-5 w-5 text-gray-600" />
+              <ChevronRight className="h-6 w-6" />
             </button>
           </div>
         </div>

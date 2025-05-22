@@ -160,93 +160,180 @@ export default function CarDetailsPage() {
                 </div>
               </div>
               
-              {/* Tabs Section */}
+              {/* Description Section */}
               <div className="mt-6">
-                <Tabs defaultValue="description" value={activeTab} onValueChange={setActiveTab}>
-                  <TabsList className="w-full justify-start border-b rounded-none bg-transparent mb-4">
-                    <TabsTrigger 
-                      value="description" 
-                      className={`${activeTab === 'description' ? 'border-b-2 border-green-800 text-green-800' : 'text-gray-500'} rounded-none pb-2 px-4 transition-all`}
-                    >
-                      Description
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="vehicle-details" 
-                      className={`${activeTab === 'vehicle-details' ? 'border-b-2 border-green-800 text-green-800' : 'text-gray-500'} rounded-none pb-2 px-4 transition-all`}
-                    >
-                      Vehicle Details
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="features" 
-                      className={`${activeTab === 'features' ? 'border-b-2 border-green-800 text-green-800' : 'text-gray-500'} rounded-none pb-2 px-4 transition-all`}
-                    >
-                      Features
-                    </TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="description" className="bg-white rounded-lg p-6 shadow-sm">
-                    <h3 className="text-lg font-semibold mb-4">Description</h3>
-                    <p className="text-gray-700 text-sm leading-relaxed">{carData.description}</p>
-                  </TabsContent>
-                  <TabsContent value="vehicle-details" className="bg-white rounded-lg p-6 shadow-sm">
-                    <h3 className="text-lg font-semibold mb-4">Vehicle Details</h3>
-                    <div className="grid grid-cols-2 gap-4">
-                      {Object.entries(carData.specifications).map(([key, value]) => (
-                        <div key={key} className="flex flex-col">
-                          <span className="text-xs text-gray-500 capitalize">{key}</span>
-                          <span className="text-sm text-gray-900">{value}</span>
+                <div className="bg-white rounded-lg p-6 shadow-sm mb-6">
+                  <h3 className="text-xl font-bold mb-4">Description</h3>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    Lorem ipsum dolor sit amet consectetur. Pellentesque egestas et leo congue. Enim tellus nullam bibendum ac in scelerisque neque cras aliquet. Felis at netus a amet velit ullamcorper pharetra iaculis et. Justo et augue orci purus ut magna blandit in tortor. Viverra morbi dignissim ac iaculis.
+                    <br/><br/>
+                    Id varius neque ac posuere pellentesque. Ultrices in ut faucibus non. Ut dignissim scelerisque tempor elit nibh diam. Facilisis viverra felis duis orci interdum in. Etiam aliauam maecenas pulvinar proin interdum scelerisque viverra aliquet lorem. Urna et enim aliquam sed tempus metus et duis. Nec molestie ac egestas maurus viverra.
+                    <br/><br/>
+                    Vitae tempus sed metus integer sem ornare eu gravida. Morbi et mauris adipiscing a gravida turpis accumsan elit. Ipsum lacus id faucibus senectus tincidunt cursus etiam.
+                  </p>
+                </div>
+                
+                {/* Tabs Section */}
+                <div className="mb-6">
+                  <Tabs defaultValue="basic-information">
+                    <TabsList className="w-full flex justify-between bg-white rounded-lg overflow-hidden shadow-sm mb-6">
+                      <TabsTrigger 
+                        value="basic-information" 
+                        className="flex-1 py-4 rounded-none bg-white data-[state=active]:bg-green-800 data-[state=active]:text-white"
+                      >
+                        Basic Information
+                      </TabsTrigger>
+                      <TabsTrigger 
+                        value="specifications" 
+                        className="flex-1 py-4 rounded-none bg-white data-[state=active]:bg-green-800 data-[state=active]:text-white"
+                      >
+                        Specifications
+                      </TabsTrigger>
+                      <TabsTrigger 
+                        value="features" 
+                        className="flex-1 py-4 rounded-none bg-white data-[state=active]:bg-green-800 data-[state=active]:text-white"
+                      >
+                        Features
+                      </TabsTrigger>
+                    </TabsList>
+                    
+                    {/* Vehicle Details Content */}
+                    <TabsContent value="basic-information" className="bg-white rounded-lg p-6 shadow-sm">
+                      <h3 className="text-xl font-bold mb-6">Vehicle Details</h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4">
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Make:</span>
+                          <span>Honda</span>
                         </div>
-                      ))}
-                    </div>
-                    <div className="mt-6 flex justify-center">
-                      <div className="w-32 h-32 bg-green-50 rounded-lg p-4 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 text-green-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                          <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                          <path d="M5 9h14l-1 7h-12z"></path>
-                          <path d="M5 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
-                          <path d="M15 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
-                        </svg>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Model:</span>
+                          <span>Accord</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Year:</span>
+                          <span>2024</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Condition:</span>
+                          <span>New</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Exterior:</span>
+                          <span>White</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Interior:</span>
+                          <span>Black</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">No. of Doors:</span>
+                          <span>4</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Body Type:</span>
+                          <span>Sedan</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Seating Capacity:</span>
+                          <span>4</span>
+                        </div>
                       </div>
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="features" className="bg-white rounded-lg p-6 shadow-sm">
-                    <h3 className="text-lg font-semibold mb-4">Features</h3>
-                    <ul className="grid grid-cols-2 gap-2">
-                      <li className="flex items-center text-sm text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
-                        Bluetooth Connectivity
-                      </li>
-                      <li className="flex items-center text-sm text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
-                        Power Windows
-                      </li>
-                      <li className="flex items-center text-sm text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
-                        Keyless Entry
-                      </li>
-                      <li className="flex items-center text-sm text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
-                        Backup Camera
-                      </li>
-                      <li className="flex items-center text-sm text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
-                        Navigation System
-                      </li>
-                      <li className="flex items-center text-sm text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
-                        Heated Seats
-                      </li>
-                      <li className="flex items-center text-sm text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
-                        Lane Departure Warning
-                      </li>
-                      <li className="flex items-center text-sm text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
-                        Adaptive Cruise Control
-                      </li>
-                    </ul>
-                  </TabsContent>
-                </Tabs>
+                      
+                      {/* Car illustration */}
+                      <div className="flex justify-end mt-6">
+                        <div className="w-40 h-40 bg-green-50 rounded-full flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-28 h-28 text-green-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                            <path d="M5 9h14l-1 7h-12z"></path>
+                            <path d="M5 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
+                            <path d="M15 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    
+                    {/* Specifications Content */}
+                    <TabsContent value="specifications" className="bg-white rounded-lg p-6 shadow-sm">
+                      <h3 className="text-xl font-bold mb-6">Specifications</h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4">
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Engine:</span>
+                          <span>2.0L Turbo</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Transmission:</span>
+                          <span>Automatic</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Drivetrain:</span>
+                          <span>AWD</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Fuel Type:</span>
+                          <span>Gasoline</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">MPG:</span>
+                          <span>24/34</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold">Horsepower:</span>
+                          <span>252 hp</span>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    
+                    {/* Features Content */}
+                    <TabsContent value="features" className="bg-white rounded-lg p-6 shadow-sm">
+                      <h3 className="text-xl font-bold mb-6">Features</h3>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Bluetooth Connectivity
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Power Windows
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Keyless Entry
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Backup Camera
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Navigation System
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Heated Seats
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Lane Departure Warning
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Adaptive Cruise Control
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Sunroof
+                        </li>
+                        <li className="flex items-center text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          Leather Seats
+                        </li>
+                      </ul>
+                    </TabsContent>
+                  </Tabs>
+                </div>
               </div>
             </div>
             

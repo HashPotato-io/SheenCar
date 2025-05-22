@@ -212,7 +212,7 @@ export default function DealerProfilePage() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold">Recent <span className="text-amber-500">Car</span> Listings</h2>
-            <Link href="/dealer-cars" className="text-sm text-gray-600 hover:text-gray-900 font-medium">View All</Link>
+            <Link href={`/services/dealer/${dealerData.id}/cars`} className="text-sm text-gray-600 hover:text-gray-900 font-medium">View All</Link>
           </div>
           
           <div className="relative">

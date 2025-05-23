@@ -14,9 +14,12 @@ interface Car {
 
 interface EmblaCarouselProps {
   selectedCars: any[];
-  emblaRef?: React.RefObject<HTMLDivElement> | ((node?: Element | null) => void);
+  emblaRef?:
+    | React.RefObject<HTMLDivElement>
+    | ((node?: Element | null) => void);
   scrollPrev?: () => void;
   scrollNext?: () => void;
+  listType?: "dealer" | "normal";
 }
 
 const EmblaCarousel: React.FC<EmblaCarouselProps> = ({
@@ -24,16 +27,17 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({
   emblaRef,
   scrollPrev,
   scrollNext,
+  listType = "normal",
 }) => {
   return (
     <div className="relative">
       <div className="flex items-center">
         <button
-          className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 mr-2"
+          className="p-2 rounded-full bg-[#003A2F] hover:bg-[#005C47] mr-2"
           onClick={scrollPrev}
           aria-label="Previous"
         >
-          <ChevronLeft />
+          <ChevronLeft color="white" />
         </button>
         <div className="overflow-hidden w-full" ref={emblaRef as any}>
           <div className="flex gap-4">
@@ -49,18 +53,22 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({
                     price: car.price,
                     image: car.imageUrl || car.image,
                   }}
-                  linkUrl={`/cars/${car.id}`}
+                  linkUrl={
+                    listType === "dealer"
+                      ? `/services/dealer/${car?.dealerId}/cars/${car.id}`
+                      : `/cars/${car.id}`
+                  }
                 />
               </div>
             ))}
           </div>
         </div>
         <button
-          className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 ml-2"
+          className="p-2 rounded-full bg-[#003A2F] hover:bg-[#005C47] ml-2"
           onClick={scrollNext}
           aria-label="Next"
         >
-          <ChevronRight />
+          <ChevronRight color="white" />
         </button>
       </div>
     </div>

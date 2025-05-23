@@ -19,7 +19,7 @@ const dealerCars = Array(20)
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
       "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
       "https://images.unsplash.com/photo-1542362567-b07e54358753?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-      "https://images.unsplash.com/photo-1617814076449-2e97c0ffd9ac?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     ][index % 4],
   }));
 
@@ -63,7 +63,7 @@ export default function DealerCarsPage() {
                     price: car.price,
                     image: car.image,
                   }}
-                  dealerId={dealerId}
+                  linkUrl={`/services/dealer/${dealerId}/cars/${car.id}`}
                 />
               ))}
           </div>

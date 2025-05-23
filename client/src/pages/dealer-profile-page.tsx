@@ -15,8 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useParams, Link } from "wouter";
 import CarDealer from "../assets/car-dealer.png";
 import CarCards from "@/components/cards/car-cards";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import EmblaCarousel from "@/components/ui/embla-carousel";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -86,7 +85,7 @@ const dealerData = {
       year: 2021,
       price: 36100,
       image:
-        "https://images.unsplash.com/photo-1558986377-c44f6a2b50d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     },
     {
       id: 104,
@@ -103,6 +102,35 @@ const dealerData = {
 export default function DealerProfilePage() {
   const [reviewRating, setReviewRating] = useState<number>(0);
   const [reviewText, setReviewText] = useState<string>("");
+
+  // Embla carousel setup for car listings
+  const [emblaRef, emblaApi] = React.useState<any>(null);
+  const emblaDivRef = React.useRef<HTMLDivElement>(null);
+
+  const [emblaInstance, setEmblaInstance] = useState<any>(null);
+
+  useEffect(() => {
+    if (emblaDivRef.current) {
+      import("embla-carousel").then(({ default: EmblaCarouselCore }) => {
+        const instance = EmblaCarouselCore(emblaDivRef.current, {
+          loop: true,
+          align: "start",
+        });
+        setEmblaInstance(instance);
+      });
+    }
+    return () => {
+      if (emblaInstance) emblaInstance.destroy();
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  const scrollPrev = () => {
+    if (emblaInstance) emblaInstance.scrollPrev();
+  };
+  const scrollNext = () => {
+    if (emblaInstance) emblaInstance.scrollNext();
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -235,26 +263,18 @@ export default function DealerProfilePage() {
             </Link>
           </div>
 
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            slidesPerView={4}
-            className="!overflow-visible"
-            breakpoints={{
-              320: { slidesPerView: 1, spaceBetween: 16 },
-              640: { slidesPerView: 2, spaceBetween: 20 },
-              1024: { slidesPerView: 4, spaceBetween: 24 },
-            }}
-          >
-            {dealerData?.carListings.map((car) => (
-              <SwiperSlide key={car?.id}>
-                <CarCards
-                  car={car}
-                  linkUrl={`/services/dealer/${dealerData?.id}/cars/${car?.id}`}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {/* Embla Carousel for car listings */}
+          <EmblaCarousel
+            selectedCars={dealerData?.carListings.map((car) => ({
+              ...car,
+              dealerId: dealerData.id,
+              imageUrl: car.image,
+            }))}
+            emblaRef={emblaDivRef}
+            scrollPrev={scrollPrev}
+            scrollNext={scrollNext}
+            listType="dealer"
+          />
         </div>
 
         {/* Reviews Section */}

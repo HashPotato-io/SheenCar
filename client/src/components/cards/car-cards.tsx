@@ -21,8 +21,8 @@ const CarCards: React.FC<CarCardsProps> = ({ car, linkUrl }) => {
     <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-white-100 group w-[303px] h-auto shadow-[1.52px_1.52px_9.14px_0px_#0000001F]">
       <div className="h-44 bg-gray-200 relative overflow-hidden">
         <img
-          src={car.image}
-          alt={`${car.make} ${car.model}`}
+          src={car?.image}
+          alt={`${car?.make} ${car?.model}`}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
         {/* <div className="absolute top-3 left-3 bg-black bg-opacity-60 text-white text-xs font-medium px-2 py-1 rounded">
@@ -46,13 +46,13 @@ const CarCards: React.FC<CarCardsProps> = ({ car, linkUrl }) => {
       <div className="bg-[#EEEEEE] p-[8px] w-[303px] h-[80px] flex justify-between">
         <div className="flex flex-col gap-[6px] ml-[10px] ">
           <div className="align-middle font-normal text-[#171616] leading-[1]">
-            Toyota Corolla Altis
+            {car.make} {car.model}
           </div>
           <div className="align-middle font-normal  text-[#585353] leading-[1]">
-            2025
+            {car.year}
           </div>
           <div className="align-middle font-normal text-[#171616] leading-[1]">
-            Price: $42,000
+            Price: ${car.price.toLocaleString()}
           </div>
         </div>
         <Link href={linkUrl}>

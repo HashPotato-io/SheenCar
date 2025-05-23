@@ -14,7 +14,9 @@ import {
   Phone,
 } from "lucide-react";
 import CarSvg from "../assets/car.svg";
-import EmblaCarousel, { CarDetails as EmblaCarDetails } from "@/components/ui/embla-carousel";
+import EmblaCarousel, {
+  CarDetails as EmblaCarDetails,
+} from "@/components/ui/embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 
 // Mock car data
@@ -109,7 +111,7 @@ const KeyValueRow: React.FC<{ label: string; value: string | number }> = ({
 );
 
 export default function DealerCarDetailsPage() {
-  const { id } = useParams();
+  const { id, dealerId } = useParams();
   const [activeTab, setActiveTab] = useState("description");
   const [mainImage, setMainImage] = useState(carData.mainImage);
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -132,7 +134,7 @@ export default function DealerCarDetailsPage() {
   };
 
   // Adapt similarCars to EmblaCarousel's CarDetails type (minimal fields used by carousel)
-  const similarCarsForCarousel: EmblaCarDetails[] = similarCars.map((car) => ({
+  const similarCarsForCarousel: EmblaCarDetails[] = similarCars?.map((car) => ({
     id: String(car.id),
     make: car.make,
     model: car.model,
@@ -301,7 +303,7 @@ export default function DealerCarDetailsPage() {
                     {/* Vehicle Details Content */}
                     <TabsContent
                       value="basic-information"
-                      className="bg-white rounded-lg p-6 shadow-sm"
+                      className="rounded-lg p-6 shadow-sm"
                     >
                       <h3 className="text-xl font-bold mb-6">
                         Vehicle Details
@@ -334,7 +336,7 @@ export default function DealerCarDetailsPage() {
                     {/* Specifications Content */}
                     <TabsContent
                       value="specifications"
-                      className="bg-white rounded-lg p-6 shadow-sm"
+                      className="rounded-lg p-6 shadow-sm"
                     >
                       <h3 className="text-xl font-bold mb-6">Specifications</h3>
 
@@ -369,7 +371,7 @@ export default function DealerCarDetailsPage() {
                     {/* Features Content */}
                     <TabsContent
                       value="features"
-                      className="bg-white rounded-lg p-6 shadow-sm"
+                      className="rounded-lg p-6 shadow-sm"
                     >
                       <h3 className="text-xl font-bold mb-6">Features</h3>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
@@ -581,10 +583,14 @@ export default function DealerCarDetailsPage() {
 
             {/* Use EmblaCarousel for similar listings */}
             <EmblaCarousel
-              selectedCars={similarCarsForCarousel}
+              selectedCars={similarCarsForCarousel?.map((car) => ({
+                ...car,
+                dealerId: dealerId,
+              }))}
               emblaRef={emblaRef}
               scrollPrev={scrollPrev}
               scrollNext={scrollNext}
+              listType="dealer"
             />
           </div>
 

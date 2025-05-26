@@ -1,0 +1,96 @@
+/* Phone Input Custom Styles */
+/* .react-tel-input .selected-flag {
+  background-color: transparent !important;
+}
+
+.react-tel-input .selected-flag:hover {
+  background-color: transparent !important;
+}
+
+.react-tel-input .country-list {
+  background-color: transparent !important;
+}
+
+.react-tel-input .country-list .country:hover {
+  background-color: transparent !important;
+} */
+
+/* You might need some minimal overrides depending on react-phone-input-2's default styles */
+/* For example, ensuring the input and flag button align perfectly */
+/* Add overrides here if needed after testing */
+
+/* Target the main container div created by the library */
+/* Apply the border and overall border-radius here */
+.react-tel-input {
+  border: 1px solid #CFCFCF; /* Apply the border here */
+  border-radius: 6px; /* Apply the overall border-radius here */
+  /* Do NOT set overflow: hidden here, as it clips the dropdown */
+}
+
+/* Ensure input and button backgrounds and specific borders/radii are set */
+/* Style for the flag button area */
+.react-tel-input .selected-flag {
+  background-color: #f5f5f5; /* Light grey background for the flag part */
+  border-radius: 6px 0 0 6px; /* Apply radius to the left side */
+  border-right: 1px solid #CFCFCF; /* Add the vertical separator */
+  height: 40px !important; /* Ensure height matches */
+  padding: 0 10px !important; /* Adjust padding as necessary */
+  /* Add transition for smoother hover effect */
+  transition: background-color 0.2s ease;
+}
+
+/* Style for the input field */
+.react-tel-input .form-control {
+  background-color: #ffffff; /* White background for the input part */
+  border: none !important; /* Remove default input border */
+  box-shadow: none !important; /* Remove default box-shadow */
+  height: 40px !important; /* Ensure height matches */
+  border-radius: 0 6px 6px 0 !important; /* Apply radius to the right side */
+  width: 100% !important; /* Ensure it takes available width */
+  padding: 10px 16px !important; /* Ensure input padding */
+}
+
+/* Hide any floating label that might appear by default */
+.react-tel-input .special-label {
+  display: none !important;
+}
+
+
+/* === Dropdown List Styling === */
+
+/* Style the main dropdown list container */
+.react-tel-input .country-list {
+  border-radius: 6px; /* Apply border radius to the dropdown box */
+  background: #fff !important; /* White background for the list */
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15); /* Optional shadow */
+  border: 1px solid #CFCFCF; /* Add a border to the dropdown list itself */
+  box-sizing: border-box; /* Include border in element's total width and height */
+}
+
+/* Style individual country list items */
+.react-tel-input .country-list .country {
+  padding: 10px 16px !important; /* Match padding of the input field */
+  color: #333 !important; /* Ensure text color is dark */
+}
+
+/* Style country list items on hover */
+.react-tel-input .country-list .country:hover {
+  background-color: #f0f0f0 !important; /* Light grey hover background */
+  cursor: pointer; /* Indicate it's clickable */
+}
+
+/* Style for the currently selected country in the dropdown list */
+.react-tel-input .country-list .country.highlight {
+   background-color: #e0e0e0 !important; /* Slightly darker grey for highlight/selected */
+}
+
+/* Adjust the position of the dropdown if needed (usually handled by the library) */
+/* .react-tel-input .country-list { top: 45px !important; } */ /* Example adjustment */
+
+/* === Specific Hover/Focus for Selected Flag Button === */
+
+/* Make the selected flag button background transparent on hover and focus */
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus {
+  background-color: transparent !important; /* Set background to transparent */
+} 

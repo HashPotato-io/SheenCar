@@ -3,10 +3,27 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import ProfileActionButton from "@/components/profile-action-button";
 import EditIcon from "../assets/Icon/edit.svg";
+import EditIcon2 from "../assets/Icon/edit2.svg";
 import ProductCardVariant2 from "@/components/cards/product-card-variant-2";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pencil, X } from "lucide-react";
 import Pagination2 from "@/components/ui/pagination2";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import CustomPhoneInput from "@/components/ui/phone-input";
 
 const tabList = ["Active", "Pending", "Closed", "Request"];
 
@@ -18,7 +35,8 @@ const dummyCars = [
     model: "Camry",
     year: 2023,
     price: 25000,
-    image: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -77,7 +95,8 @@ const dummyCars = [
     model: "ES",
     year: 2023,
     price: 42000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -86,7 +105,8 @@ const dummyCars = [
     model: "TLX",
     year: 2023,
     price: 38000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -95,7 +115,8 @@ const dummyCars = [
     model: "S60",
     year: 2023,
     price: 41000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -104,7 +125,8 @@ const dummyCars = [
     model: "G70",
     year: 2023,
     price: 45000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -113,7 +135,8 @@ const dummyCars = [
     model: "Mazda6",
     year: 2023,
     price: 32000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -122,7 +145,8 @@ const dummyCars = [
     model: "Legacy",
     year: 2023,
     price: 28000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -131,7 +155,8 @@ const dummyCars = [
     model: "K5",
     year: 2023,
     price: 26000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -140,7 +165,8 @@ const dummyCars = [
     model: "Sonata",
     year: 2023,
     price: 24000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -149,7 +175,8 @@ const dummyCars = [
     model: "Altima",
     year: 2023,
     price: 27000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -158,7 +185,8 @@ const dummyCars = [
     model: "Mirage",
     year: 2023,
     price: 22000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -167,7 +195,8 @@ const dummyCars = [
     model: "Regal",
     year: 2023,
     price: 35000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
   {
@@ -176,7 +205,8 @@ const dummyCars = [
     model: "300",
     year: 2023,
     price: 36000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
   },
 
@@ -187,7 +217,8 @@ const dummyCars = [
     model: "Mustang",
     year: 2023,
     price: 35000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -256,7 +287,8 @@ const dummyCars = [
     model: "Cayman",
     year: 2023,
     price: 65000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -265,7 +297,8 @@ const dummyCars = [
     model: "Ghibli",
     year: 2023,
     price: 72000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -274,7 +307,8 @@ const dummyCars = [
     model: "Giulia",
     year: 2023,
     price: 45000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -283,7 +317,8 @@ const dummyCars = [
     model: "XE",
     year: 2023,
     price: 42000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -292,7 +327,8 @@ const dummyCars = [
     model: "Continental",
     year: 2023,
     price: 220000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -301,7 +337,8 @@ const dummyCars = [
     model: "Ghost",
     year: 2023,
     price: 350000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -310,7 +347,8 @@ const dummyCars = [
     model: "DB11",
     year: 2023,
     price: 200000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -319,7 +357,8 @@ const dummyCars = [
     model: "720S",
     year: 2023,
     price: 300000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -328,7 +367,8 @@ const dummyCars = [
     model: "F8",
     year: 2023,
     price: 280000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -337,7 +377,8 @@ const dummyCars = [
     model: "Huracan",
     year: 2023,
     price: 250000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
   {
@@ -346,7 +387,8 @@ const dummyCars = [
     model: "Chiron",
     year: 2023,
     price: 3000000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
   },
 
@@ -357,7 +399,8 @@ const dummyCars = [
     model: "CX-5",
     year: 2022,
     price: 32000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -416,7 +459,8 @@ const dummyCars = [
     model: "Grand Cherokee",
     year: 2022,
     price: 45000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -425,7 +469,8 @@ const dummyCars = [
     model: "Grand Cherokee",
     year: 2022,
     price: 45000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -434,7 +479,8 @@ const dummyCars = [
     model: "Sierra",
     year: 2022,
     price: 42000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -443,7 +489,8 @@ const dummyCars = [
     model: "1500",
     year: 2022,
     price: 40000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -452,7 +499,8 @@ const dummyCars = [
     model: "Tacoma",
     year: 2022,
     price: 35000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -461,7 +509,8 @@ const dummyCars = [
     model: "Ridgeline",
     year: 2022,
     price: 38000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -470,7 +519,8 @@ const dummyCars = [
     model: "Frontier",
     year: 2022,
     price: 32000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -479,7 +529,8 @@ const dummyCars = [
     model: "Colorado",
     year: 2022,
     price: 34000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -488,7 +539,8 @@ const dummyCars = [
     model: "Canyon",
     year: 2022,
     price: 36000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -497,7 +549,8 @@ const dummyCars = [
     model: "Ranger",
     year: 2022,
     price: 33000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -506,7 +559,8 @@ const dummyCars = [
     model: "4Runner",
     year: 2022,
     price: 42000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -515,7 +569,8 @@ const dummyCars = [
     model: "Wrangler",
     year: 2022,
     price: 45000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -524,7 +579,8 @@ const dummyCars = [
     model: "Defender",
     year: 2022,
     price: 65000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -533,7 +589,8 @@ const dummyCars = [
     model: "G-Class",
     year: 2022,
     price: 150000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -542,7 +599,8 @@ const dummyCars = [
     model: "Land Cruiser",
     year: 2022,
     price: 85000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -551,7 +609,8 @@ const dummyCars = [
     model: "LX",
     year: 2022,
     price: 95000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -560,7 +619,8 @@ const dummyCars = [
     model: "Patrol",
     year: 2022,
     price: 75000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -569,7 +629,8 @@ const dummyCars = [
     model: "Pajero",
     year: 2022,
     price: 55000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -578,7 +639,8 @@ const dummyCars = [
     model: "Jimny",
     year: 2022,
     price: 35000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -587,7 +649,8 @@ const dummyCars = [
     model: "D-Max",
     year: 2022,
     price: 40000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
   {
@@ -596,7 +659,8 @@ const dummyCars = [
     model: "Thar",
     year: 2022,
     price: 30000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
   },
 
@@ -607,7 +671,8 @@ const dummyCars = [
     model: "Range Rover",
     year: 2023,
     price: 85000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -666,7 +731,8 @@ const dummyCars = [
     model: "Bentayga",
     year: 2023,
     price: 180000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -675,7 +741,8 @@ const dummyCars = [
     model: "Cullinan",
     year: 2023,
     price: 350000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -684,7 +751,8 @@ const dummyCars = [
     model: "Maybach",
     year: 2023,
     price: 200000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -693,7 +761,8 @@ const dummyCars = [
     model: "LX",
     year: 2023,
     price: 95000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -702,7 +771,8 @@ const dummyCars = [
     model: "QX80",
     year: 2023,
     price: 85000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -711,7 +781,8 @@ const dummyCars = [
     model: "Escalade",
     year: 2023,
     price: 78000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -720,7 +791,8 @@ const dummyCars = [
     model: "Navigator",
     year: 2023,
     price: 82000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -729,7 +801,8 @@ const dummyCars = [
     model: "Yukon",
     year: 2023,
     price: 75000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -738,7 +811,8 @@ const dummyCars = [
     model: "Suburban",
     year: 2023,
     price: 72000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -747,7 +821,8 @@ const dummyCars = [
     model: "Sequoia",
     year: 2023,
     price: 68000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
   },
   {
@@ -756,9 +831,10 @@ const dummyCars = [
     model: "Armada",
     year: 2023,
     price: 65000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-  }
+  },
 ];
 
 const Account = () => {
@@ -769,7 +845,9 @@ const Account = () => {
   const itemsPerPage = 9; // 3 columns * 3 rows
 
   // Calculate total pages based on filtered cars
-  const filteredCars = dummyCars.filter((car) => car.status === tabList[selectedTab]);
+  const filteredCars = dummyCars.filter(
+    (car) => car.status === tabList[selectedTab]
+  );
   const totalPages = Math.ceil(filteredCars.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
@@ -799,6 +877,32 @@ const Account = () => {
       setPostAdFade(false);
       // No navigation as per requirements
     }, 300);
+  };
+
+  // Add new state for modal
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [profileData, setProfileData] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    password: "",
+  });
+
+  // Add handler for profile edit
+  const handleEditProfile = () => {
+    setIsEditProfileOpen(true);
+  };
+
+  // Add handler for saving profile changes
+  const handleSaveProfile = () => {
+    // TODO: Implement save logic
+    setIsEditProfileOpen(false);
+  };
+
+  // Add handler for password change
+  const handleChangePassword = () => {
+    // TODO: Implement password change logic
   };
 
   return (
@@ -865,6 +969,7 @@ const Account = () => {
               />
             }
             title="Edit Profile"
+            onClick={handleEditProfile}
           />
         </div>
         {/* Tabs inside HeroSection, at the bottom */}
@@ -1024,6 +1129,213 @@ const Account = () => {
           />
         </div>
       </div>
+
+      {/* Update the Edit Profile Modal */}
+      <Dialog open={isEditProfileOpen} onOpenChange={setIsEditProfileOpen}>
+        <DialogContent
+          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:max-w-[633px] rounded-[34px] bg-[#F8F8F8]"
+          style={{
+            width: 633,
+            height: 500,
+            padding: 0,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {/* Fixed Header */}
+          <div className="flex items-center justify-between px-[42px] py-4 border-b">
+            <DialogTitle
+              className="text-2xl font-semibold"
+              style={{
+                fontWeight: 600,
+                fontSize: "30px",
+                lineHeight: "180%",
+                letterSpacing: "1%",
+                color: "#000000",
+              }}
+            >
+              Edit Profile
+            </DialogTitle>
+          </div>
+
+          {/* Scrollable Content */}
+          <div
+            className="overflow-y-auto px-[42px] pb-[45px] flex-1"
+            style={{
+              maxHeight: "calc(645px - 80px)", // Adjust based on header height
+            }}
+          >
+            <div className="grid gap-6 py-4">
+              {/* Profile Image Upload with Edit Icon */}
+              <div className="flex flex-col items-center gap-4">
+                <div className="relative">
+                  <div className="w-[133px] h-[133px] rounded-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-2xl text-gray-500">U</span>
+                  </div>
+                  <button
+                    className="absolute bottom-0 right-0 w-8 h-8 flex items-center justify-center text-white"
+                    onClick={() => {
+                      /* TODO: Implement image upload */
+                    }}
+                  >
+                    <img
+                      src={EditIcon2}
+                      alt="Edit"
+                      style={{ width: 20, height: 20, display: "block" }}
+                    />
+                  </button>
+                </div>
+              </div>
+
+              {/* Form Fields */}
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  placeholder="First Name"
+                  value={profileData.firstName}
+                  onChange={(e) =>
+                    setProfileData({
+                      ...profileData,
+                      firstName: e.target.value,
+                    })
+                  }
+                  style={{
+                    width: 263,
+                    height: 40,
+                    padding: "10px 16px",
+                    borderRadius: 6,
+                    border: "1px solid #CFCFCF",
+                    background: "transparent",
+                  }}
+                />
+                <Input
+                  placeholder="Last Name"
+                  value={profileData.lastName}
+                  onChange={(e) =>
+                    setProfileData({ ...profileData, lastName: e.target.value })
+                  }
+                  style={{
+                    width: 263,
+                    height: 40,
+                    padding: "10px 16px",
+                    borderRadius: 6,
+                    border: "1px solid #CFCFCF",
+                    background: "transparent",
+                  }}
+                />
+              </div>
+
+              {/* Phone Number with Country Selector */}
+              <CustomPhoneInput
+                value={profileData.phone}
+                onChange={(phone) => setProfileData({ ...profileData, phone })}
+              />
+
+              {/* Email Input */}
+              <Input
+                placeholder="Email"
+                type="email"
+                value={profileData.email}
+                onChange={(e) =>
+                  setProfileData({ ...profileData, email: e.target.value })
+                }
+                className="w-full"
+                style={{
+                  height: 40,
+                  padding: "10px 16px",
+                  borderRadius: 6,
+                  border: "1px solid #CFCFCF",
+                  background: "transparent",
+                }}
+              />
+
+              {/* Password Label, Input, and Button */}
+              <div>
+                <div className="flex items-center gap-2">
+                  {/*    <Input
+                    id="password" // Add id to link with label
+                    placeholder="********" // Updated placeholder to match image
+                    type="password"
+                    value={profileData.password}
+                    onChange={(e) =>
+                      setProfileData({ ...profileData, password: e.target.value })
+                    }
+                    className="flex-1" // Allow input to grow and take remaining space
+                    style={{
+                      height: 40,
+                      padding: "10px 16px",
+                      borderRadius: 6,
+                      border: "1px solid #CFCFCF",
+                      background: "transparent",
+                    }}
+                  /> */}
+                  <div style={{
+                    display: "flex", flexDirection: "column", flex: 1, width: "100%",}}>
+                    <Label
+                      htmlFor="password"
+                      className="mb-2 block text-base font-normal text-black"
+                      style={{
+                        fontWeight: 400,
+                        fontSize: 16,
+                        lineHeight: "100%",
+                        letterSpacing: "0%",
+                        color: "#000000",
+                        marginBottom: 8, // Add some space below the label
+                      }}
+                    >
+                      Password
+                    </Label>
+                    <div
+                      style={{
+                        fontFamily: "Open Sans",
+                        fontWeight: 400,
+                        fontSize: 14,
+                        lineHeight: "100%",
+                        letterSpacing: "0%",
+                        color: "#747474",
+                      }}
+                    >
+                      *********
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleChangePassword}
+                    style={{
+                      width: 189, // Keep button fixed width
+                      height: 40,
+                      padding: "0 20px", // Padding inside the button
+                      borderRadius: 6,
+                      border: "1px solid #000000",
+                      color: "#000000",
+                      fontFamily: "Gilroy-Regular",
+                      fontWeight: 400,
+                      fontSize: 16,
+                      lineHeight: "100%",
+                      letterSpacing: 0,
+                      background: "transparent",
+                      cursor: "pointer",
+                      flexShrink: 0, // Prevent button from shrinking
+                    }}
+                  >
+                    Change Password
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              {" "}
+              {/* Container for Save Changes button */}
+              <button
+                onClick={handleSaveProfile}
+                className="px-6 py-2 text-sm text-white bg-primary rounded-md hover:bg-primary/90 w-full" // Added w-full utility class
+                style={{ height: 40 }} // Ensure height is consistent with other inputs/buttons
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </>

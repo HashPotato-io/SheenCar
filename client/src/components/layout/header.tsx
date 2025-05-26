@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function Header() {
-  const [location] = useLocation();
+  const [, navigate] = useLocation();
   const { user, logoutMutation } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -22,8 +22,8 @@ export default function Header() {
     logoutMutation.mutate(undefined, {
       onSuccess: () => {
         // Clear user state and redirect to home
-        window.location.href = '/';
-      }
+        navigate("/");
+      },
     });
   };
 
@@ -99,9 +99,9 @@ export default function Header() {
             </Button>
           </Link>
           {user ? (
-            <Button 
+            <Button
               onClick={handleLogout}
-              style={{background: '#761B1C', width: "120px"}}
+              style={{ background: "#761B1C", width: "120px" }}
             >
               Logout
             </Button>

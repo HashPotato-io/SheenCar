@@ -22,11 +22,13 @@ import { ProtectedRoute } from "./lib/protected-route";
 import DealerCarDetailsPage from "./pages/car-dealer-details-page";
 import TradeCarDetailsPage from "./pages/car-trade-details-page";
 import TradeCar from "./pages/trade-car";
+import Account from "@/pages/account-page";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={HomePage} />
+      <Route path="/account" component={Account} />
       <Route path="/auth" component={AuthPage} />
       <Route path="/search" component={SearchPage} />
       <Route path="/new-cars" component={NewCarsPage} />
@@ -37,9 +39,18 @@ function Router() {
       <Route path="/team" component={TeamPage} />
       <Route path="/services/dealer" component={FindDealersPage} />
       <Route path="/services/dealer/:dealerId" component={DealerProfilePage} />
-      <Route path="/services/dealer/:dealerId/cars" component={DealerCarsPage} />
-      <Route path="/services/dealer/:dealerId/cars/:id" component={DealerCarDetailsPage} />
-      <Route path="/trade-car/sellers/:sellerId/cars/:id" component={TradeCarDetailsPage} />
+      <Route
+        path="/services/dealer/:dealerId/cars"
+        component={DealerCarsPage}
+      />
+      <Route
+        path="/services/dealer/:dealerId/cars/:id"
+        component={DealerCarDetailsPage}
+      />
+      <Route
+        path="/trade-car/sellers/:sellerId/cars/:id"
+        component={TradeCarDetailsPage}
+      />
       <Route path="/trade-car" component={TradeCar} />
       <ProtectedRoute path="/dashboard" component={DashboardPage} />
       <ProtectedRoute path="/post-ad" component={PostAdPage} />

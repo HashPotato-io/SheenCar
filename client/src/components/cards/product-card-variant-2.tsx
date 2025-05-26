@@ -17,7 +17,7 @@ interface CarCardsProps {
   small?: boolean;
 }
 
-const CarCards: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
+const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   if (small) {
     // Small version
     return (
@@ -74,7 +74,7 @@ const CarCards: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   return (
     <div
       className="bg-white rounded-lg overflow-hidden shadow-sm border border-white-100 group w-[303px] shadow-[1.52px_1.52px_9.14px_0px_#0000001F]"
-      style={{ height: 235 }} // 176 + 80 - 21
+      style={{ height: 290 }} // Increased height to accommodate the button
     >
       <div className="relative h-full">
         <div className="h-44 bg-gray-200 overflow-hidden">
@@ -85,14 +85,14 @@ const CarCards: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
           />
         </div>
         <div
-          className="bg-[#EEEEEE] p-[8px] w-[303px] h-[80px] flex justify-between absolute left-0 right-0"
+          className="bg-[#EEEEEE] p-[8px] w-[303px] h-[200px] flex flex-col absolute left-0 right-0"
           style={{
             top: "155px",
             borderRadius: "12px 12px 0 0",
             boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
           }}
         >
-          <div className="flex flex-col gap-[6px] ml-[10px] ">
+          <div className="flex flex-col gap-[6px] ml-[10px]">
             <div className="align-middle font-normal text-[#171616] leading-[1]">
               {car.make} {car.model}
             </div>
@@ -103,16 +103,25 @@ const CarCards: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
               Price: ${car.price.toLocaleString()}
             </div>
           </div>
-          <Link href={linkUrl}>
-            <div className="mt-[10px] mr-[10px]">
-              <img src={Arrow} alt="arrow" />
-            </div>
-          </Link>
+
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={() => (window.location.href = "boost ad")}
+              className="w-[280px] h-[44px] rounded-[7.27px] bg-[#003A2F] text-white font-['Gilroy-Regular'] text-[19.4px] leading-[100%] text-center"
+              style={{
+                fontFamily: "Gilroy-Regular",
+                fontWeight: 400,
+                letterSpacing: "0%",
+                animationDuration: "0ms",
+              }}
+            >
+              Boost Ad
+            </button>
+          </div>
         </div>
-        {/* Removed spacer div */}
       </div>
     </div>
   );
 };
 
-export default CarCards;
+export default Card;

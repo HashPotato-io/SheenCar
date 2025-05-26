@@ -4,6 +4,7 @@ import Footer from "@/components/layout/footer";
 import ProfileActionButton from "@/components/profile-action-button";
 import EditIcon from "../assets/Icon/edit.svg";
 import EditIcon2 from "../assets/Icon/edit2.svg";
+import Plus from "../assets/Icon/Plus.svg";
 import ProductCardVariant2 from "@/components/cards/product-card-variant-2";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Pencil, X } from "lucide-react";
@@ -1052,12 +1053,12 @@ const Account = () => {
               color: "#fff",
               border: "1px solid #003A2F",
               borderRadius: 6,
-              fontWeight: 500,
+              fontWeight: 300,
               fontSize: 16,
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
-              gap: 12,
+              gap: 8,
               paddingRight: 20,
               paddingLeft: 20,
               opacity: postAdFade ? 0 : 1,
@@ -1068,7 +1069,7 @@ const Account = () => {
             onClick={handlePostAdClick}
           >
             {/* Plus icon */}
-            <span style={{ fontSize: 22, lineHeight: 1 }}>+</span>
+            <img src={Plus} />
             <span>Post Ad</span>
           </button>
         </div>
@@ -1143,13 +1144,12 @@ const Account = () => {
           }}
         >
           {/* Fixed Header */}
-          <div className="flex items-center justify-between px-[42px] py-4 border-b">
+          <div className="flex items-center justify-between px-[42px] py-4">
             <DialogTitle
               className="text-2xl font-semibold"
               style={{
                 fontWeight: 600,
-                fontSize: "30px",
-                lineHeight: "180%",
+                fontSize: "24px",
                 letterSpacing: "1%",
                 color: "#000000",
               }}
@@ -1268,8 +1268,14 @@ const Account = () => {
                       background: "transparent",
                     }}
                   /> */}
-                  <div style={{
-                    display: "flex", flexDirection: "column", flex: 1, width: "100%",}}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      flex: 1,
+                      width: "100%",
+                    }}
+                  >
                     <Label
                       htmlFor="password"
                       className="mb-2 block text-base font-normal text-black"

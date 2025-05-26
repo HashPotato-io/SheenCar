@@ -263,9 +263,8 @@ export default function TradeCar() {
             <div
               className="text-center mb-2"
               style={{
-                fontFamily: "Gilroy-SemiBold",
                 fontWeight: 400,
-                fontSize: "50px",
+                fontSize: "40px",
                 lineHeight: "100%",
                 letterSpacing: "-1%",
                 color: "#FFFFFF",

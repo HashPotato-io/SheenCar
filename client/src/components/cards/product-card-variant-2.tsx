@@ -157,26 +157,26 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
         <div
           className="bg-[#EEEEEE] p-[8px] w-[303px] h-[200px] flex flex-col absolute left-0 right-0"
           style={{
-            top: "140px",
+            top: "150px",
             borderRadius: "12px 12px 0 0",
             boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
           }}
         >
           <div className="flex flex-col gap-[6px] ml-[10px]">
             <div
-              style={{ fontSize: "20px", fontWeight: 600 }}
+              style={{ fontSize: "18px", fontWeight: 600 }}
               className="align-middle font-normal text-[#171616] leading-[1]"
             >
               {car.make} {car.model}
             </div>
             <div
-              style={{ fontSize: "16px", fontWeight: 400 }}
+              style={{ fontSize: "14px", fontWeight: 400 }}
               className="align-middle font-normal  text-[#585353] leading-[1]"
             >
               {car.year}
             </div>
             <div
-              style={{ fontSize: "20px", fontWeight: 600 }}
+              style={{ fontSize: "18px", fontWeight: 600 }}
               className="align-middle font-normal text-[#171616] leading-[1]"
             >
               Price: ${car.price.toLocaleString()}

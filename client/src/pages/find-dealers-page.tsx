@@ -159,7 +159,7 @@ export default function FindDealersPage() {
               </div>
               <Button
                 type="submit"
-                className="bg-green-800 hover:bg-green-900 rounded-full px-6 py-2 text-white ml-2"
+                className="bg-[#003A2F] hover:bg-[#00251C] rounded-full px-6 py-2 text-white ml-2"
               >
                 Search
               </Button>
@@ -522,7 +522,7 @@ export default function FindDealersPage() {
                   <Button
                     variant="default"
                     size="icon"
-                    className="rounded w-8 h-8 bg-green-800 text-white hover:bg-green-900"
+                    className="rounded w-8 h-8 bg-[#003A2F] text-white hover:bg-[#00251C]"
                     onClick={() => setCurrentPage(1)}
                   >
                     1

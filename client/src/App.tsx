@@ -20,6 +20,8 @@ import DealerProfilePage from "@/pages/dealer-profile-page";
 import DealerCarsPage from "@/pages/dealer-cars-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import DealerCarDetailsPage from "./pages/car-dealer-details-page";
+import TradeCarDetailsPage from "./pages/car-trade-details-page";
+import TradeCar from "./pages/trade-car";
 
 function Router() {
   return (
@@ -37,6 +39,8 @@ function Router() {
       <Route path="/services/dealer/:dealerId" component={DealerProfilePage} />
       <Route path="/services/dealer/:dealerId/cars" component={DealerCarsPage} />
       <Route path="/services/dealer/:dealerId/cars/:id" component={DealerCarDetailsPage} />
+      <Route path="/trade-car/sellers/:sellerId/cars/:id" component={TradeCarDetailsPage} />
+      <Route path="/trade-car" component={TradeCar} />
       <ProtectedRoute path="/dashboard" component={DashboardPage} />
       <ProtectedRoute path="/post-ad" component={PostAdPage} />
       <Route component={NotFound} />

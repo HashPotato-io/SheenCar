@@ -110,7 +110,7 @@ export default function DealerCarsPage() {
                   size="icon"
                   className={`rounded-md w-8 h-8 ${
                     currentPage === pageNum
-                      ? "bg-green-800 text-white hover:bg-green-900"
+                      ? "bg-[#003A2F] text-white hover:bg-[#00251C]"
                       : "border-gray-200 text-gray-700"
                   }`}
                   onClick={() => handlePageChange(pageNum)}

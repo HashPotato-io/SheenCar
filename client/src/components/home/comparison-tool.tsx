@@ -763,7 +763,7 @@ export default function ComparisonTool() {
           <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
             <Button
               variant="default"
-              className={`bg-green-900 hover:bg-green-800 text-white px-8 py-2 h-11 ${!canCompare && "opacity-70 cursor-not-allowed"}`}
+              className={`bg-green-900 hover:bg-[#003A2F] text-white px-8 py-2 h-11 ${!canCompare && "opacity-70 cursor-not-allowed"}`}
               disabled={!canCompare}
               onClick={handleCompareClick}
             >

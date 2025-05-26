@@ -376,43 +376,43 @@ export default function DealerCarDetailsPage() {
                       <h3 className="text-xl font-bold mb-6">Features</h3>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Bluetooth Connectivity
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Power Windows
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Keyless Entry
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Backup Camera
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Navigation System
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Heated Seats
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Lane Departure Warning
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Adaptive Cruise Control
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Sunroof
                         </li>
                         <li className="flex items-center text-sm text-gray-700">
-                          <div className="w-1.5 h-1.5 bg-green-800 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#003A2F] rounded-full mr-2"></div>
                           Leather Seats
                         </li>
                       </ul>
@@ -551,7 +551,7 @@ export default function DealerCarDetailsPage() {
                   {/* Chat button */}
                   <div className="mt-4">
                     <Button
-                      className="w-full bg-green-800 hover:bg-green-900 flex items-center justify-center gap-2"
+                      className="w-full bg-[#003A2F] hover:bg-[#00251C] flex items-center justify-center gap-2"
                       onClick={() => setContactDialogOpen(true)}
                     >
                       <svg
@@ -639,7 +639,7 @@ export default function DealerCarDetailsPage() {
                 </div>
 
                 <div className="border-t pt-4">
-                  <Button className="w-full bg-green-800 hover:bg-green-900">
+                  <Button className="w-full bg-[#003A2F] hover:bg-[#00251C]">
                     Call Dealer
                   </Button>
                 </div>

@@ -231,7 +231,7 @@ export default function DealerProfilePage() {
                     <p className="text-gray-700">+1234567890</p>
                   </div>
 
-                  <Button className="w-full mt-4 bg-green-800 hover:bg-green-900 flex items-center justify-center gap-2">
+                  <Button className="w-full mt-4 bg-[#003A2F] hover:bg-[#00251C] flex items-center justify-center gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5"
@@ -300,7 +300,7 @@ export default function DealerProfilePage() {
                         </div>
                         <div className="flex-1 mx-2 bg-gray-200 h-2 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-green-800 rounded-full"
+                            className="h-full bg-[#003A2F] rounded-full"
                             style={{ width: `${percentage}%` }}
                           ></div>
                         </div>
@@ -426,7 +426,7 @@ export default function DealerProfilePage() {
                 <button className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
                   Cancel
                 </button>
-                <button className="px-6 py-2 bg-green-800 text-white rounded-md hover:bg-green-900">
+                <button className="px-6 py-2 bg-[#003A2F] text-white rounded-md hover:bg-[#00251C]">
                   Post
                 </button>
               </div>

@@ -2,19 +2,9 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import SheenCarLogo from "../../assets/SheenCar-Logo.png";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import {
-  ChevronDown,
-  Menu,
-  Search,
-  User,
-  LogOut
-} from "lucide-react";
+import { ChevronDown, Menu, Search, User, LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,6 +27,7 @@ export default function Header() {
       name: "Cars",
       children: [
         { name: "Browse All Cars", href: "/search" },
+        { name: "Trade Car", href: "/trade-car" }, 
         { name: "New Cars", href: "/new-cars" },
         { name: "Used Cars", href: "/search?condition=used" },
         { name: "Certified Pre-Owned", href: "/search?condition=certified" },
@@ -158,7 +149,7 @@ export default function Header() {
                   </div>
                 ))}
                 <Link href="/post-ad" onClick={() => setMobileMenuOpen(false)}>
-                  <Button 
+                  <Button
                     variant="outline"
                     className="w-full mt-4 border-[#AF8C32] text-[#AF8C32] hover:bg-[#AF8C32] hover:text-white"
                   >

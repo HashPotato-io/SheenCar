@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "wouter";
 import Arrow from "../../assets/Icon/arrow.svg";
 
@@ -18,6 +18,72 @@ interface CarCardsProps {
 }
 
 const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowMenu(!showMenu);
+  };
+
+  const handleCloseAd = () => {
+    // Add your close ad logic here
+    setShowMenu(false);
+  };
+
+  const handleDeleteAd = () => {
+    // Add your delete ad logic here
+    setShowMenu(false);
+  };
+
+  const MenuButton = () => (
+    <div
+      className="absolute top-2 right-2 cursor-pointer"
+      style={{
+        background: "#FFFFFF",
+        width: "39px",
+        height: "39px",
+        borderRadius: "19.5px",
+        padding: "5px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+      onClick={handleMenuClick}
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="12" cy="6" r="2" fill="#171616" />
+        <circle cx="12" cy="12" r="2" fill="#171616" />
+        <circle cx="12" cy="18" r="2" fill="#171616" />
+      </svg>
+    </div>
+  );
+
+  const DropdownMenu = () => (
+    <div
+      className="absolute top-12 right-2 bg-white rounded-lg shadow-lg py-2 z-10"
+      style={{ minWidth: "120px" }}
+    >
+      <button
+        onClick={handleCloseAd}
+        className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+      >
+        Close Ad
+      </button>
+      <button
+        onClick={handleDeleteAd}
+        className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+      >
+        Delete Ad
+      </button>
+    </div>
+  );
+
   if (small) {
     // Small version
     return (
@@ -31,13 +97,15 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
         }}
       >
         <div className="relative h-full">
-          <div className="h-[163px] bg-gray-200 overflow-hidden rounded-t-[9px]">
+          <div className="h-[163px] bg-gray-200 overflow-hidden rounded-t-[9px] relative">
             <img
               src={car?.image}
               alt={`${car?.make} ${car?.model}`}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               style={{ borderTopLeftRadius: 9, borderTopRightRadius: 9 }}
             />
+            <MenuButton />
+            {showMenu && <DropdownMenu />}
           </div>
           <div
             className="bg-[#EEEEEE] p-[8px] w-full h-[75px] flex justify-between absolute left-0 right-0"
@@ -77,29 +145,40 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
       style={{ height: 290 }} // Increased height to accommodate the button
     >
       <div className="relative h-full">
-        <div className="h-44 bg-gray-200 overflow-hidden">
+        <div className="h-44 bg-gray-200 overflow-hidden relative">
           <img
             src={car?.image}
             alt={`${car?.make} ${car?.model}`}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
+          <MenuButton />
+          {showMenu && <DropdownMenu />}
         </div>
         <div
           className="bg-[#EEEEEE] p-[8px] w-[303px] h-[200px] flex flex-col absolute left-0 right-0"
           style={{
-            top: "155px",
+            top: "140px",
             borderRadius: "12px 12px 0 0",
             boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
           }}
         >
           <div className="flex flex-col gap-[6px] ml-[10px]">
-            <div className="align-middle font-normal text-[#171616] leading-[1]">
+            <div
+              style={{ fontSize: "20px", fontWeight: 600 }}
+              className="align-middle font-normal text-[#171616] leading-[1]"
+            >
               {car.make} {car.model}
             </div>
-            <div className="align-middle font-normal  text-[#585353] leading-[1]">
+            <div
+              style={{ fontSize: "16px", fontWeight: 400 }}
+              className="align-middle font-normal  text-[#585353] leading-[1]"
+            >
               {car.year}
             </div>
-            <div className="align-middle font-normal text-[#171616] leading-[1]">
+            <div
+              style={{ fontSize: "20px", fontWeight: 600 }}
+              className="align-middle font-normal text-[#171616] leading-[1]"
+            >
               Price: ${car.price.toLocaleString()}
             </div>
           </div>

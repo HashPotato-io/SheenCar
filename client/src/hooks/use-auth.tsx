@@ -28,13 +28,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isLoading,
   } = useQuery<SelectUser | undefined, Error>({
     queryKey: ["/api/user"],
-    queryFn: getQueryFn({ on401: "returnNull" }),
+    queryFn: () => Promise.resolve(undefined),
   });
 
   const loginMutation = useMutation({
     mutationFn: async (credentials: LoginData) => {
-      const res = await apiRequest("POST", "/api/login", credentials);
-      return await res.json();
+      // Mock successful login without API call
+      return {
+        id: 1,
+        username: credentials.username,
+        password: credentials.password,
+        firstName: "Demo",
+        lastName: "User",
+        email: credentials.username,
+        phoneNumber: null,
+        avatar: null,
+        createdAt: new Date()
+      } as SelectUser;
     },
     onSuccess: (user: SelectUser) => {
       queryClient.setQueryData(["/api/user"], user);

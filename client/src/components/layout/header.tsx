@@ -19,7 +19,12 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    logoutMutation.mutate();
+    logoutMutation.mutate(undefined, {
+      onSuccess: () => {
+        // Clear user state and redirect to home
+        window.location.href = '/';
+      }
+    });
   };
 
   const menuItems = [
@@ -27,7 +32,7 @@ export default function Header() {
       name: "Cars",
       children: [
         { name: "Browse All Cars", href: "/search" },
-        { name: "Trade Car", href: "/trade-car" }, 
+        { name: "Trade Car", href: "/trade-car" },
         { name: "New Cars", href: "/new-cars" },
         { name: "Used Cars", href: "/search?condition=used" },
         { name: "Certified Pre-Owned", href: "/search?condition=certified" },
@@ -94,25 +99,12 @@ export default function Header() {
             </Button>
           </Link>
           {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="default">
-                  <User className="mr-2 h-4 w-4" /> Account
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard">Dashboard</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/post-ad">Post Ad</Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout}>
-                  <LogOut className="mr-2 h-4 w-4" /> Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Button 
+              onClick={handleLogout}
+              style={{background: '#761B1C', width: "120px"}}
+            >
+              Logout
+            </Button>
           ) : (
             <Link href="/auth">
               <Button>Login</Button>

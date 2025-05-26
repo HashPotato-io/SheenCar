@@ -70,7 +70,7 @@ export default function AuthForms() {
   const onLoginSubmit = (data: LoginFormValues) => {
     loginMutation.mutate(data, {
       onSuccess: () => {
-        navigate("/");
+        navigate("/account");
       }
     });
   };
@@ -79,7 +79,7 @@ export default function AuthForms() {
     const { confirmPassword, firstName, lastName, email, phoneNumber, ...userData } = data;
     registerMutation.mutate(userData, {
       onSuccess: () => {
-        navigate("/");
+        navigate("/account");
       }
     });
   };

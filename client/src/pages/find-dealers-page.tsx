@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import CarDealer from "../assets/car-dealer.png";
+import DealerBanner from "../assets/DealerHS.png";
+import HeroSection from "@/components/hero-section";
 
 interface Dealer {
   id: number;
@@ -127,46 +129,22 @@ export default function FindDealersPage() {
       <Header />
 
       {/* Hero Section with Dealer Search */}
-      <div className="relative w-full bg-gradient-to-r from-neutral-900 to-neutral-800 py-12">
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80')`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        ></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-4xl font-bold text-white text-center mb-2">
-            Trusted <span className="text-amber-500">Dealerships</span>, Endless
-            Choices:
-          </h1>
-          <h2 className="text-2xl font-bold text-white text-center mb-8">
-            Find Your Perfect Car!
-          </h2>
-
-          <form onSubmit={handleSearchSubmit} className="max-w-3xl mx-auto">
-            <div className="flex items-center justify-between bg-white rounded-full shadow-md overflow-hidden pl-4 pr-2 py-1">
-              <div className="flex items-center flex-grow">
-                <SearchIcon className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
-                <Input
-                  type="text"
-                  placeholder="What do you need help with?"
-                  className="w-full border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 py-2 px-0"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                />
+      <HeroSection
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearchSubmit={handleSearchSubmit}
+        headingContent={
+          <>
+            <div className="flex justify-center items-center w-full">
+              <div className="w-[926px] font-['Gilroy-SemiBold'] font-normal text-[50px] leading-[100%] tracking-[-0.01em] text-center text-white">
+                Find Your <span style={{ color: "#AF8C32" }}>Perfect Ride</span>{" "}
+                – Search, Buy, and Drive Away!
               </div>
-              <Button
-                type="submit"
-                className="bg-[#003A2F] hover:bg-[#00251C] rounded-full px-6 py-2 text-white ml-2"
-              >
-                Search
-              </Button>
             </div>
-          </form>
-        </div>
-      </div>
+          </>
+        }
+        bgImage={DealerBanner}
+      />
 
       {/* Main Content Area */}
       <div className="bg-gray-50 py-8">

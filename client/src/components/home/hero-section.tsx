@@ -47,7 +47,10 @@ export default function HeroSection() {
           color: "#FFFFFF",
         }}
       >
-        We are the best place to <span style={{ color: "#AF8C32" }}>Buy</span>{" "}
+        We are the best place to{" "}
+        <span style={{ color: "#AF8C32", textDecoration: "underline" }}>
+          Buy
+        </span>{" "}
         cars with confidence!
       </div>
       <div

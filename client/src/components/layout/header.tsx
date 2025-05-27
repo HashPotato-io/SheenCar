@@ -31,11 +31,12 @@ export default function Header() {
     {
       name: "Cars",
       children: [
-        { name: "Browse All Cars", href: "/search" },
+        /*     { name: "Browse All Cars", href: "/search" }, */
         { name: "Trade Car", href: "/trade-car" },
         { name: "New Cars", href: "/new-cars" },
         { name: "Used Cars", href: "/search?condition=used" },
-        { name: "Certified Pre-Owned", href: "/search?condition=certified" },
+        { name: "Find Dealers", href: "/services/dealer" },
+        /*    { name: "Certified Pre-Owned", href: "/search?condition=certified" }, */
       ],
     },
     {
@@ -44,7 +45,6 @@ export default function Header() {
         { name: "Create Listing", href: "/post-ad" },
         { name: "Pricing", href: "/pricing" },
         { name: "Sell it for Me Service", href: "/services/sell-for-me" },
-        { name: "Find Dealers", href: "/services/dealer" },
       ],
     },
     {

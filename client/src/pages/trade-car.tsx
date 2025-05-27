@@ -9,6 +9,7 @@ import CarCards from "@/components/cards/car-cards";
 import { Input } from "@/components/ui/input";
 import { Search as SearchIcon } from "lucide-react";
 import HeroSection from "@/components/hero-section";
+import TradeBanner from "../assets/tradeHS.png";
 
 // Add this type definition above your component if not already defined elsewhere:
 type Car = {
@@ -263,6 +264,7 @@ export default function TradeCar() {
             <div
               className="text-center mb-2"
               style={{
+                fontFamily: "Gilroy-SemiBold",
                 fontWeight: 400,
                 fontSize: "40px",
                 lineHeight: "100%",
@@ -276,6 +278,7 @@ export default function TradeCar() {
             </div>
           </>
         }
+        bgImage={TradeBanner}
       />
       <main className="flex-1 bg-neutral-50 py-8">
         <div className="container mx-auto px-4">

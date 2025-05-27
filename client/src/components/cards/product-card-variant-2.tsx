@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "wouter";
 import Arrow from "../../assets/Icon/arrow.svg";
+import BoostAdModal from "../modals/BoostAdModal";
+import ProceedToPayModal from "../modals/ProceedToPayModal";
 
 type Car = {
   id: number;
@@ -11,6 +13,8 @@ type Car = {
   image: string;
 };
 
+type ModalStep = 'none' | 'boostAd' | 'proceedToPay';
+
 interface CarCardsProps {
   car: Car;
   linkUrl: string;
@@ -19,6 +23,7 @@ interface CarCardsProps {
 
 const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [currentStep, setCurrentStep] = useState<ModalStep>('none');
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -26,13 +31,27 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   };
 
   const handleCloseAd = () => {
-    // Add your close ad logic here
     setShowMenu(false);
   };
 
   const handleDeleteAd = () => {
-    // Add your delete ad logic here
     setShowMenu(false);
+  };
+
+  const handleBoostClick = () => {
+    setCurrentStep('boostAd');
+  };
+
+  const handleBoostAdClose = () => {
+    setCurrentStep('none');
+  };
+
+  const handleProceedToPay = () => {
+    setCurrentStep('proceedToPay');
+  };
+
+  const handleProceedToPayClose = () => {
+    setCurrentStep('none');
   };
 
   const MenuButton = () => (
@@ -142,7 +161,7 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   return (
     <div
       className="bg-white rounded-lg overflow-hidden shadow-sm border border-white-100 group w-[303px] shadow-[1.52px_1.52px_9.14px_0px_#0000001F]"
-      style={{ height: 290 }} // Increased height to accommodate the button
+      style={{ height: 290 }}
     >
       <div className="relative h-full">
         <div className="h-44 bg-gray-200 overflow-hidden relative">
@@ -185,7 +204,7 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
 
           <div className="flex justify-center mt-4">
             <button
-              onClick={() => (window.location.href = "boost ad")}
+              onClick={handleBoostClick}
               className="w-[280px] h-[44px] rounded-[7.27px] bg-[#003A2F] text-white font-['Gilroy-Regular'] text-[19.4px] leading-[100%] text-center"
               style={{
                 fontFamily: "Gilroy-Regular",
@@ -199,6 +218,29 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
           </div>
         </div>
       </div>
+
+      {/* Boost Ad Modal */}
+      <BoostAdModal
+        isOpen={currentStep === 'boostAd'}
+        onClose={handleBoostAdClose}
+        carDetails={{
+          make: car.make,
+          model: car.model,
+          year: car.year
+        }}
+        onProceed={handleProceedToPay}
+      />
+
+      {/* Proceed to Pay Modal */}
+      <ProceedToPayModal
+        isOpen={currentStep === 'proceedToPay'}
+        onClose={handleProceedToPayClose}
+        carDetails={{
+          make: car.make,
+          model: car.model,
+          year: car.year
+        }}
+      />
     </div>
   );
 };

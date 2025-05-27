@@ -39,7 +39,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({
         >
           <ChevronLeft color="white" />
         </button>
-        <div className="overflow-hidden w-full" ref={emblaRef as any}>
+        <div className="overflow-hidden w-full p-4" ref={emblaRef as any}>
           <div className="flex gap-4">
             {selectedCars.map((car, idx) => (
               <div key={car.id || idx} className="min-w-[320px]">

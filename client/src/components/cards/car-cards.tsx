@@ -22,15 +22,17 @@ const CarCards: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
     // Small version
     return (
       <div
-        className="bg-white rounded-[9px] overflow-hidden shadow-sm border border-white-100 group"
+        className="bg-white rounded-[9px] overflow-hidden"
         style={{
           width: 208.8,
-          height: 215, // 163 + 75 - 23
-          top: 1.51,
-          left: 1.51,
+          height: 215,
+          boxShadow: "1.52px 1.52px 9.14px 0px #0000001F",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <div className="relative h-full">
+        <div className="relative h-full w-[202.8px]">
           <div className="h-[163px] bg-gray-200 overflow-hidden rounded-t-[9px]">
             <img
               src={car?.image}
@@ -73,43 +75,56 @@ const CarCards: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   // Default (large) version
   return (
     <div
-      className="bg-white rounded-lg overflow-hidden shadow-sm border border-white-100 group w-[303px] shadow-[1.52px_1.52px_9.14px_0px_#0000001F]"
-      style={{ height: 235 }} // 176 + 80 - 21
+      style={{
+        boxShadow: "1.52px 1.52px 9.14px 0px #0000001F",
+        width: "309px",
+        height: "309px",
+        borderRadius: 16,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      <div className="relative h-full">
-        <div className="h-44 bg-gray-200 overflow-hidden">
-          <img
-            src={car?.image}
-            alt={`${car?.make} ${car?.model}`}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-          />
-        </div>
-        <div
-          className="bg-[#EEEEEE] p-[8px] w-[303px] h-[80px] flex justify-between absolute left-0 right-0"
-          style={{
-            top: "155px",
-            borderRadius: "12px 12px 0 0",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-          }}
-        >
-          <div className="flex flex-col gap-[6px] ml-[10px] ">
-            <div className="align-middle font-normal text-[#171616] leading-[1]">
-              {car.make} {car.model}
-            </div>
-            <div className="align-middle font-normal  text-[#585353] leading-[1]">
-              {car.year}
-            </div>
-            <div className="align-middle font-normal text-[#171616] leading-[1]">
-              Price: ${car.price.toLocaleString()}
-            </div>
+      <div className="overflow-hidden group w-[303px] h-[303px]">
+        <div className="relative h-full">
+          <div
+            style={{ borderRadius: "13px" }}
+            className="h-[238px] overflow-hidden"
+          >
+            <img
+              style={{ borderRadius: "13px" }}
+              src={car?.image}
+              alt={`${car?.make} ${car?.model}`}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            />
           </div>
-          <Link href={linkUrl}>
-            <div className="mt-[10px] mr-[10px]">
-              <img src={Arrow} alt="arrow" />
+          <div
+            className="bg-[#EEEEEE] p-[12px] w-[303px] h-[110px] flex justify-between absolute left-0 right-0"
+            style={{
+              top: "192px",
+              borderRadius: "13px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+            }}
+          >
+            <div className="flex flex-col gap-[6px] ml-[10px] ">
+              <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[22px] font-['Gilroy-SemiBold']">
+                {car.make} {car.model}
+              </div>
+              <div className="align-middle font-normal text-[#585353] leading-[100%] tracking-[-0.01em] text-[16px] font-['Poppins']">
+                {car.year}
+              </div>
+              <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[22px] font-['Gilroy-SemiBold']">
+                Price: ${car.price.toLocaleString()}
+              </div>
             </div>
-          </Link>
+            <Link href={linkUrl}>
+              <div className="mt-[44px] mr-[10px]">
+                <img src={Arrow} alt="arrow" />
+              </div>
+            </Link>
+          </div>
+          {/* Removed spacer div */}
         </div>
-        {/* Removed spacer div */}
       </div>
     </div>
   );

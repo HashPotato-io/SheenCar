@@ -41,6 +41,7 @@ const CustomSelectContent = React.forwardRef<
         className
       )}
       position={position}
+      style={{ zIndex: 1001 }}
       {...props}
     >
       <SelectPrimitive.Viewport

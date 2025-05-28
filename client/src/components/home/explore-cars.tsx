@@ -184,7 +184,6 @@ export default function CarCategories() {
           emblaRef={emblaDivRef}
           scrollPrev={scrollPrev}
           scrollNext={scrollNext}
-          listType="dealer"
         />
       </div>
     </div>

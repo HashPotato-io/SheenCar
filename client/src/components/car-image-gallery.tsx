@@ -22,18 +22,30 @@ const CarImageGallery: React.FC<CarImageGalleryProps> = ({
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
       {/* Main Image */}
-      <div className="relative rounded-lg overflow-hidden w-[618px] h-[350px] bg-gray-100">
+      <div
+        style={{
+          boxShadow: "0px 4px 12px 0px #00000040",
+          borderRadius: "12px",
+        }}
+        className="relative overflow-hidden w-[618px] h-[475px]"
+      >
         <img
+          style={{ boxShadow: "0px 4px 12px 0px #00000040" }}
           src={mainImage}
           alt="car-main"
           className="w-full h-full object-cover"
         />
 
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows - Moved to bottom */}
         <button
-          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 rounded-md w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100"
+          style={{
+            border: "0.97px solid #000000",
+            width: "50px",
+            height: "50px",
+          }}
+          className="absolute left-2 bottom-2 bg-white text-gray-800 rounded-md w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100"
           onClick={() => {
             const newIndex =
               (galleryIndex - 1 + galleryImages.length) % galleryImages.length;
@@ -44,7 +56,12 @@ const CarImageGallery: React.FC<CarImageGalleryProps> = ({
           <ChevronLeft className="w-4 h-4" />
         </button>
         <button
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 rounded-md w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100"
+          style={{
+            border: "0.97px solid #000000",
+            width: "50px",
+            height: "50px",
+          }}
+          className="absolute right-2 bottom-2 bg-white text-gray-800 rounded-md w-8 h-8 flex items-center justify-center shadow hover:bg-gray-100"
           onClick={() => {
             const newIndex = (galleryIndex + 1) % galleryImages.length;
             setGalleryIndex(newIndex);
@@ -56,13 +73,18 @@ const CarImageGallery: React.FC<CarImageGalleryProps> = ({
       </div>
 
       {/* Thumbnails */}
-      <div className="flex gap-2 mt-2 overflow-x-auto pb-1">
-        {galleryImages.map((image, index) => (
+      <div style={{gap: "27px"}} className="flex mt-2 overflow-x-auto pb-1">
+        {galleryImages?.map((image, index) => (
           <div
+            style={{
+              boxShadow: "0px 4px 12px 0px #00000040",
+              borderRadius: "8px",
+              border: mainImage === image ? "2px solid #000000" : "none",
+              width: "102px",
+              height: "97px"
+            }}
             key={index}
-            className={`w-20 h-16 flex-shrink-0 cursor-pointer rounded-md overflow-hidden ${
-              mainImage === image ? "ring-2 ring-green-800" : ""
-            }`}
+            className={`flex-shrink-0 cursor-pointer overflow-hidden`}
             onClick={() => handleThumbnailClick(image, index)}
           >
             <img

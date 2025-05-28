@@ -1,0 +1,76 @@
+.swiper{
+  height: 292px;
+}
+.car-type-slider {
+  padding: 60px;
+  height: auto;
+}
+
+.section-title {
+  font-family: Gilroy-SemiBold;
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 100%;
+  letter-spacing: -1%;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.car-type-swiper {
+  padding: 20px;
+}
+
+.car-type-card {
+  width: 209px;
+  height: 209px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 12px 0px #00000012;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.car-type-card:hover {
+  transform: translateY(-5px);
+}
+
+.car-type-card img {
+  width: 114px;
+  height: 74px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.car-type-card p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #171616;
+}
+
+/* Custom pagination styles */
+.swiper-pagination {
+
+top: 800px;
+z-index: 100;
+
+}
+
+.swiper-pagination-bullet {
+  background: #D9D9D9 !important;
+  opacity: 1 !important;
+  border-radius: 50% !important;
+  margin: 0 4px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #AF8C32 !important;
+} 

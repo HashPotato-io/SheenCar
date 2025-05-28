@@ -38,7 +38,7 @@ export function AdvanceSearch() {
     <>
       <div
         style={{
-          width: "80vw",
+          width: "90vw",
           height: "145px",
           background: "#F8F8F8",
           borderRadius: "34px",

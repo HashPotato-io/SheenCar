@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { CheckCircle } from "lucide-react";
+import CarNewsLetter from "../../assets/car-newsletter.svg";
+import { CustomButton } from "@/components/ui/custom-button";
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
@@ -12,7 +14,9 @@ export default function NewsletterSection() {
 
   const { mutate: subscribe, isPending } = useMutation({
     mutationFn: async (email: string) => {
-      const res = await apiRequest("POST", "/api/newsletter/subscribe", { email });
+      const res = await apiRequest("POST", "/api/newsletter/subscribe", {
+        email,
+      });
       return res.json();
     },
     onSuccess: () => {
@@ -39,7 +43,133 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 bg-primary text-white">
+    <div
+      style={{
+        background: "#101010",
+        height: "524px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          width: "95%",
+          height: "404px",
+          gap: "10px",
+          borderRadius: "24px",
+          background: "#003A2F",
+          margin: "auto",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "30px",
+        }}
+      >
+        <div
+          style={{
+            width: "723px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "16px",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "Gilroy-SemiBold",
+              fontWeight: 400,
+              fontSize: "46px",
+              lineHeight: "100%",
+              letterSpacing: "-1%",
+              color: "#FFFFFF",
+            }}
+          >
+            Driven by Passion? Stay Updated with SheenCar!
+          </div>
+          <div
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: 400,
+              fontSize: "16px",
+              lineHeight: "100%",
+              letterSpacing: "0%",
+              color: "#FFFFFF",
+              width: "723px",
+            }}
+          >
+            Get exclusive access to the latest car listings, expert tips, market
+            insights, and exciting deals – delivered straight to your inbox. No
+            spam, just pure car goodness!
+          </div>
+          <div
+            style={{
+              display: "flex",
+              gap: "6px",
+              alignItems: "center",
+              marginTop: "8px",
+            }}
+          >
+            <Input
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{
+                width: 263,
+                height: 40,
+                padding: "10px 16px",
+                borderRadius: 6,
+                border: '1px solid #A2A2A2',
+                background: "transparent",
+                color: "#FFFFFF",
+              }}
+              className="placeholder:text-[#A2A2A2] placeholder:font-poppins placeholder:text-base placeholder:leading-none"
+            />
+            <CustomButton
+              onClick={handleSubmit}
+              disabled={isPending}
+              customStyles={{
+                width: 111,
+                height: 40,
+                gap: 8,
+                borderRadius: 6,
+                background: "#AF8C32",
+                fontFamily: "Gilroy-Regular",
+                fontWeight: 400,
+                fontSize: 16,
+                lineHeight: "100%",
+                letterSpacing: "0%",
+                textAlign: "center",
+                color: "#000000",
+              }}
+            >
+              {isPending ? "Submitting..." : "Submit"}
+            </CustomButton>
+          </div>
+          <div
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: 400,
+              fontSize: "12px",
+              lineHeight: "100%",
+              letterSpacing: "0%",
+              color: "#FFFFFF",
+              width: "418px",
+            }}
+          >
+            By subscribing, you agree to our Privacy Notice and consent to
+            receive updates from our company.
+          </div>
+        </div>
+        <div>
+          <img
+            style={{ width: "469px", height: "309px" }}
+            src={CarNewsLetter}
+            alt="car"
+          />
+        </div>
+      </div>
+    </div>
+    /*   <section className="py-16 bg-primary text-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 mb-8 md:mb-0">
@@ -90,6 +220,6 @@ export default function NewsletterSection() {
           </div>
         </div>
       </div>
-    </section>
+    </section> */
   );
 }

@@ -8,8 +8,8 @@ const KeyValueRow: React.FC<{ label: string; value: string | number }> = ({
   value,
 }) => (
   <div className="flex gap-[4px]">
-    <span className="font-semibold">{label}</span>
-    <span>{value}</span>
+    <span className="font-['Gilroy-Bold'] font-normal text-[20px] leading-[100%] tracking-[0%] text-black">{label}</span>
+    <span className="font-['Gilroy-Regular'] font-normal text-[20px] leading-[100%] tracking-[0%] text-black">{value}</span>
   </div>
 );
 
@@ -32,15 +32,32 @@ export default function CarTabs({ carData }: CarTabsProps) {
   return (
       <div className="m-6">
         <Tabs defaultValue="basic-information">
-          <TabsList className="w-full flex justify-between bg-[#003A2F] rounded-lg overflow-hidden shadow-sm mb-6">
+          <TabsList 
+            style={{
+              height: '60px',
+              gap: '80px',
+              borderRadius: '18px',
+              background: '#003A2F'
+            }} 
+            className="w-full flex justify-between overflow-hidden mb-6"
+          >
             <TabsTrigger
               value="basic-information"
               className="flex-1 py-4 rounded-none 
                     data-[state=active]:bg-white 
-                    data-[state=active]:text-[#003A2F] 
+                    data-[state=active]:text-[#026442] 
                     data-[state=inactive]:bg-[#003A2F] 
                     data-[state=inactive]:text-white
-                    transition-colors"
+                    transition-colors
+                    font-['Gilroy-SemiBold']
+                    font-normal
+                    text-[20px]
+                    leading-[100%]
+                    tracking-[0%]
+                    data-[state=active]:w-[335px]
+                    data-[state=active]:h-[54px]
+                    data-[state=active]:gap-[10px]
+                    data-[state=active]:rounded-[16px]"
             >
               Basic Information
             </TabsTrigger>
@@ -48,10 +65,19 @@ export default function CarTabs({ carData }: CarTabsProps) {
               value="specifications"
               className="flex-1 py-4 rounded-none 
                     data-[state=active]:bg-white 
-                    data-[state=active]:text-[#003A2F] 
+                    data-[state=active]:text-[#026442] 
                     data-[state=inactive]:bg-[#003A2F] 
                     data-[state=inactive]:text-white
-                    transition-colors"
+                    transition-colors
+                    font-['Gilroy-SemiBold']
+                    font-normal
+                    text-[20px]
+                    leading-[100%]
+                    tracking-[0%]
+                    data-[state=active]:w-[335px]
+                    data-[state=active]:h-[54px]
+                    data-[state=active]:gap-[10px]
+                    data-[state=active]:rounded-[16px]"
             >
               Specifications
             </TabsTrigger>
@@ -59,10 +85,19 @@ export default function CarTabs({ carData }: CarTabsProps) {
               value="features"
               className="flex-1 py-4 rounded-none 
                     data-[state=active]:bg-white 
-                    data-[state=active]:text-[#003A2F] 
+                    data-[state=active]:text-[#026442] 
                     data-[state=inactive]:bg-[#003A2F] 
                     data-[state=inactive]:text-white
-                    transition-colors"
+                    transition-colors
+                    font-['Gilroy-SemiBold']
+                    font-normal
+                    text-[20px]
+                    leading-[100%]
+                    tracking-[0%]
+                    data-[state=active]:w-[335px]
+                    data-[state=active]:h-[54px]
+                    data-[state=active]:gap-[10px]
+                    data-[state=active]:rounded-[16px]"
             >
               Features
             </TabsTrigger>
@@ -72,7 +107,7 @@ export default function CarTabs({ carData }: CarTabsProps) {
             value="basic-information"
             className="rounded-lg p-6 shadow-sm"
           >
-            <h3 className="text-xl font-bold mb-6">Vehicle Details</h3>
+            <h3 className="font-['Gilroy-SemiBold'] font-normal text-[28px] leading-[100%] tracking-[1%] text-black mb-6">Vehicle Details</h3>
 
             <div className="flex gap-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-1 w-[70%]">

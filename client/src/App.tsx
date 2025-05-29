@@ -24,6 +24,8 @@ import TradeCarDetailsPage from "./pages/car-trade-details-page";
 import TradeCar from "./pages/trade-car";
 import Account from "@/pages/account-page";
 import SignupPage from "@/pages/signup-page";
+import ForgotPasswordPage from "./pages/forgot-password-page";
+
 
 function Router() {
   return (
@@ -33,7 +35,7 @@ function Router() {
       <Route path="/auth" component={AuthPage} />
       <Route path="/search" component={SearchPage} />
       <Route path="/new-cars" component={NewCarsPage} />
-      <Route path="/cars/:id" component={CarDetailsPage} />
+      <Route path="/cars/:id" component={DealerCarDetailsPage} />
       <Route path="/compare" component={ComparePage} />
       <Route path="/security" component={SecurityPage} />
       <Route path="/about" component={AboutPage} />
@@ -57,6 +59,7 @@ function Router() {
       <ProtectedRoute path="/post-ad" component={PostAdPage} />
       <Route path="/signup" component={SignupPage} />
       <Route path="/login" component={AuthPage} />
+      <Route path="/forgot-password" component={ForgotPasswordPage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -54,6 +54,10 @@ export function LoginForm() {
         <div style={{ width: "330px", textAlign: "left" }}>
           <a
             href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/forgot-password");
+            }}
             style={{
               fontFamily: "Poppins",
               fontWeight: 400,

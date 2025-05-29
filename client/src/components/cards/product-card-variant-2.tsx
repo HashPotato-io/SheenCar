@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import Arrow from "../../assets/Icon/arrow.svg";
 import BoostAdModal from "../modals/BoostAdModal";
 import ProceedToPayModal from "../modals/ProceedToPayModal";
+import { CustomButton } from "../ui/custom-button";
 
 type Car = {
   id: number;
@@ -13,7 +14,7 @@ type Car = {
   image: string;
 };
 
-type ModalStep = 'none' | 'boostAd' | 'proceedToPay';
+type ModalStep = "none" | "boostAd" | "proceedToPay";
 
 interface CarCardsProps {
   car: Car;
@@ -23,7 +24,7 @@ interface CarCardsProps {
 
 const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [currentStep, setCurrentStep] = useState<ModalStep>('none');
+  const [currentStep, setCurrentStep] = useState<ModalStep>("none");
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -39,19 +40,19 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   };
 
   const handleBoostClick = () => {
-    setCurrentStep('boostAd');
+    setCurrentStep("boostAd");
   };
 
   const handleBoostAdClose = () => {
-    setCurrentStep('none');
+    setCurrentStep("none");
   };
 
   const handleProceedToPay = () => {
-    setCurrentStep('proceedToPay');
+    setCurrentStep("proceedToPay");
   };
 
   const handleProceedToPayClose = () => {
-    setCurrentStep('none');
+    setCurrentStep("none");
   };
 
   const MenuButton = () => (
@@ -160,85 +161,82 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
   // Default (large) version
   return (
     <div
-      className="bg-white rounded-lg overflow-hidden shadow-sm border border-white-100 group w-[303px] shadow-[1.52px_1.52px_9.14px_0px_#0000001F]"
-      style={{ height: 290 }}
+      style={{
+        boxShadow: "1.52px 1.52px 9.14px 0px #0000001F",
+        width: "398px",
+        height: "454px",
+        borderRadius: 16,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      <div className="relative h-full">
-        <div className="h-44 bg-gray-200 overflow-hidden relative">
-          <img
-            src={car?.image}
-            alt={`${car?.make} ${car?.model}`}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-          />
-          <MenuButton />
-          {showMenu && <DropdownMenu />}
-        </div>
-        <div
-          className="bg-[#EEEEEE] p-[8px] w-[303px] h-[200px] flex flex-col absolute left-0 right-0"
-          style={{
-            top: "150px",
-            borderRadius: "12px 12px 0 0",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-          }}
-        >
-          <div className="flex flex-col gap-[6px] ml-[10px]">
-            <div
-              style={{ fontSize: "18px", fontWeight: 600 }}
-              className="align-middle font-normal text-[#171616] leading-[1]"
-            >
-              {car.make} {car.model}
-            </div>
-            <div
-              style={{ fontSize: "14px", fontWeight: 400 }}
-              className="align-middle font-normal  text-[#585353] leading-[1]"
-            >
-              {car.year}
-            </div>
-            <div
-              style={{ fontSize: "18px", fontWeight: 600 }}
-              className="align-middle font-normal text-[#171616] leading-[1]"
-            >
-              Price: ${car.price.toLocaleString()}
-            </div>
+      <div className="overflow-hidden group w-[391px] h-[448px]">
+        <div className="relative h-full">
+          <div
+            style={{ borderRadius: "13px" }}
+            className="h-[309px] overflow-hidden"
+          >
+            <img
+              style={{ borderRadius: "13px" }}
+              src={car?.image}
+              alt={`${car?.make} ${car?.model}`}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            />
+            <MenuButton />
+            {showMenu && <DropdownMenu />}
           </div>
+          <div
+            className="bg-[#EEEEEE] p-[12px] w-[391px] h-[197px] flex flex-col absolute left-0 right-0"
+            style={{
+              top: "250px",
+              borderRadius: "13px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+            }}
+          >
+            <div className="flex flex-col gap-[10px] ml-[10px] ">
+              <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[27px] font-['Gilroy-SemiBold']">
+                {car.make} {car.model}
+              </div>
+              <div className="align-middle font-normal text-[#585353] leading-[100%] tracking-[-0.01em] text-[18px] font-['Poppins']">
+                {car.year}
+              </div>
+              <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[26px] font-['Gilroy-SemiBold']">
+                Price: ${car.price.toLocaleString()}
+              </div>
+            </div>
 
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={handleBoostClick}
-              className="w-[280px] h-[44px] rounded-[7.27px] bg-[#003A2F] text-white font-['Gilroy-Regular'] text-[19.4px] leading-[100%] text-center"
-              style={{
-                fontFamily: "Gilroy-Regular",
-                fontWeight: 400,
-                letterSpacing: "0%",
-                animationDuration: "0ms",
-              }}
-            >
-              Boost Ad
-            </button>
+            <div className="flex justify-center mt-4">
+              <CustomButton
+                customStyles={{ width: "357px", height: "44px" }}
+                onClick={handleBoostClick}
+              >
+                Boost Ad
+              </CustomButton>
+            </div>
           </div>
         </div>
       </div>
-
       {/* Boost Ad Modal */}
       <BoostAdModal
-        isOpen={currentStep === 'boostAd'}
+        isOpen={currentStep === "boostAd"}
         onClose={handleBoostAdClose}
         carDetails={{
           make: car.make,
           model: car.model,
-          year: car.year
+          year: car.year,
         }}
         onProceed={handleProceedToPay}
       />
 
       {/* Proceed to Pay Modal */}
       <ProceedToPayModal
-        isOpen={currentStep === 'proceedToPay'}
+        isOpen={currentStep === "proceedToPay"}
         onClose={handleProceedToPayClose}
         carDetails={{
           make: car.make,
           model: car.model,
-          year: car.year
+          year: car.year,
         }}
       />
     </div>

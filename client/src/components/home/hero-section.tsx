@@ -26,7 +26,7 @@ export default function HeroSection() {
         backgroundImage: `url(${Banner})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "1059px",
+   
         display: "flex",
         alignItems: "center",
         flexDirection: "column",

@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import CustomPhoneInput from "@/components/ui/phone-input";
+import TabSection from "@/components/ui/tab-section";
 
 const tabList = ["Active", "Pending", "Closed", "Request"];
 
@@ -1073,62 +1074,17 @@ const Account = () => {
             <span>Post Ad</span>
           </button>
         </div>
-        {/* Four tabs */}
-        <div style={{ display: "flex", gap: 12, marginBottom: 32 }}>
-          {tabList.map((tab, idx) => (
-            <button
-              key={tab}
-              onClick={() => handleTabClick(idx)}
-              style={{
-                width: 194,
-                height: 44,
-                borderRadius: 24,
-                border: "0.7px solid #003A2F",
-                background: selectedTab === idx ? "#003A2F" : "#fff",
-                color: selectedTab === idx ? "#fff" : "#003A2F",
-                fontWeight: 500,
-                fontSize: 18,
-                paddingRight: 20,
-                paddingLeft: 20,
-                cursor: "pointer",
-                transition: "background 0.3s, color 0.3s",
-                outline: "none",
-              }}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-        {/* Tab content with dissolve animation */}
-        <div
-          style={{
-            minHeight: 120,
-            transition: "opacity 300ms ease-in-out",
-            opacity: tabFade ? 0 : 1,
-          }}
-        >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "24px",
-              marginBottom: 32,
-            }}
-          >
-            {getCurrentPageItems().map((car) => (
-              <ProductCardVariant2
-                key={car.id}
-                car={car}
-                linkUrl={`/car/${car.id}`}
-              />
-            ))}
-          </div>
-          <Pagination2
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
+        {/* Replace the tabs section with: */}
+        <TabSection
+          tabList={tabList}
+          selectedTab={selectedTab}
+          tabFade={tabFade}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          getCurrentPageItems={getCurrentPageItems}
+          onTabClick={handleTabClick}
+          onPageChange={handlePageChange}
+        />
       </div>
 
       {/* Update the Edit Profile Modal */}

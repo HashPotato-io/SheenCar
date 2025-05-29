@@ -28,6 +28,7 @@ import SellerDetails from "@/components/seller/SellerDetails";
 import CarDetails from "@/components/car/CarDetails";
 import CarDescription from "@/components/car/CarDescription";
 import CarTabs from "@/components/car/CarTabs";
+import SimilarListings from "@/components/similar-listings";
 
 // Mock car data
 const carData = {
@@ -123,7 +124,7 @@ export default function TradeCarDetailsPage() {
   const scrollPrev = () => {
     if (emblaApi) emblaApi.scrollPrev();
   };
-  
+
   const scrollNext = () => {
     if (emblaApi) emblaApi.scrollNext();
   };
@@ -156,8 +157,8 @@ export default function TradeCarDetailsPage() {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
 
-      <main className="flex-1 py-6">
-        <div className="container mx-auto px-4">
+      <main className="flex-1">
+        <div className="container mx-auto">
           {/* Breadcrumb */}
           {/*    <div className="flex items-center text-sm text-gray-500 mb-4">
             <Link href="/" className="hover:text-gray-700">
@@ -187,7 +188,7 @@ export default function TradeCarDetailsPage() {
               setGalleryIndex={setGalleryIndex}
             />
 
-            <CarDetails 
+            <CarDetails
               car={carData}
               onContactClick={() => setContactDialogOpen(true)}
             />
@@ -198,23 +199,13 @@ export default function TradeCarDetailsPage() {
           <CarTabs carData={carData} />
 
           {/* Similar Listings */}
-          <div className="mt-8">
-            <h2 className="text-2xl font-bold mb-4">
-              Similar <span className="text-amber-500">Listings</span>
-            </h2>
-
-            {/* Use EmblaCarousel for similar listings */}
-            <EmblaCarousel
-              selectedCars={similarCarsForCarousel?.map((car) => ({
-                ...car,
-                dealerId: dealerId,
-              }))}
-              emblaRef={emblaRef}
-              scrollPrev={scrollPrev}
-              scrollNext={scrollNext}
-              listType="dealer"
-            />
-          </div>
+          <SimilarListings
+            similarCarsForCarousel={similarCarsForCarousel}
+            dealerId={dealerId}
+            emblaRef={emblaRef}
+            scrollPrev={scrollPrev}
+            scrollNext={scrollNext}
+          />
 
           {/* Contact Dialog */}
           <TradeContactDialog

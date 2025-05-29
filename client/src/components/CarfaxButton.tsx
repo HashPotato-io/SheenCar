@@ -10,7 +10,7 @@ const CarfaxButton: React.FC<CarfaxButtonProps> = ({ onClick }) => {
     <button
       onClick={onClick}
       className="flex items-center gap-[13.73px] px-[18.24px] py-[7.3px] rounded-[6px] bg-black text-white"
-      style={{ width: 300, height: 36 }}
+      style={{ width: 310, height: 36 }}
     >
       <img src={Carfax} alt="carfax-icon" />
       <span style={{

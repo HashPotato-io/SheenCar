@@ -324,3 +324,37 @@ export const PhoneIcon: React.FC<IconProps> = ({
     </svg>
   );
 };
+
+export const TickIcon: React.FC<IconProps> = ({
+  className = "",
+  width = 28,
+  height = 28,
+  fill = "black",
+}) => {
+  return (
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 17 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clip-path="url(#clip0_1978_39378)">
+        <path
+          d="M14.1656 1.4375L6.83437 11.1031L2.5 6.77187L0.5 8.77188L7.16563 15.4375L16.5 3.4375L14.1656 1.4375Z"
+          fill="black"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_1978_39378">
+          <rect
+            width="16"
+            height="16"
+            fill="white"
+            transform="translate(0.5 0.5)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};

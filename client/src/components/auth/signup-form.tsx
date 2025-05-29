@@ -1,10 +1,15 @@
 import { Input } from "@/components/ui/input";
 import { CustomButton } from "@/components/ui/custom-button";
 import { SocialLoginButton } from "@/components/ui/social-login-button";
-import { FacebookIcon, GoogleIcon } from "../icons";
+import { EyeClose, EyeOpen, FacebookIcon, GoogleIcon } from "../icons";
+import CustomPhoneInput from "@/components/ui/phone-input";
+import { useState } from "react";
 import { useLocation } from "wouter";
 
-export function LoginForm() {
+export function SignupForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [, navigate] = useLocation();
 
   return (
@@ -32,7 +37,7 @@ export function LoginForm() {
           color: "#171616",
         }}
       >
-        Login
+        Sign Up
       </h2>
       <div
         style={{
@@ -42,35 +47,71 @@ export function LoginForm() {
         }}
       >
         <Input
+          type="text"
+          placeholder="First Name"
+          style={{ width: "330px", height: "40px", background: "transparent" }}
+        />
+        <Input
+          type="text"
+          placeholder="Last Name"
+          style={{ width: "330px", height: "40px", background: "transparent" }}
+        />
+        <Input
           type="email"
           placeholder="Email"
           style={{ width: "330px", height: "40px", background: "transparent" }}
         />
-        <Input
-          type="password"
-          placeholder="Password"
-          style={{ width: "330px", height: "40px", background: "transparent" }}
-        />
-        <div style={{ width: "330px", textAlign: "left" }}>
-          <a
-            href="#"
+        <div style={{ position: "relative", width: "330px" }}>
+          <Input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            style={{ width: "100%", height: "40px", background: "transparent" }}
+          />
+          <button
+            onClick={() => setShowPassword(!showPassword)}
             style={{
-              fontFamily: "Poppins",
-              fontWeight: 400,
-              fontSize: 14,
-              lineHeight: "100%",
-              letterSpacing: "0%",
-              color: "#003A2F",
-              textDecoration: "none",
+              position: "absolute",
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
             }}
           >
-            Forgot Password?
-          </a>
+            {showPassword ? <EyeOpen /> : <EyeClose />}
+          </button>
         </div>
+        <div style={{ position: "relative", width: "330px" }}>
+          <Input
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            style={{ width: "100%", height: "40px", background: "transparent" }}
+          />
+          <button
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            {showConfirmPassword ? <EyeOpen /> : <EyeClose />}
+          </button>
+        </div>
+        <CustomPhoneInput
+          value={phoneNumber}
+          onChange={setPhoneNumber}
+          className="w-[330px]"
+        />
       </div>
 
       <CustomButton customStyles={{ width: "330px", height: "40px" }}>
-        Login
+        Sign Up
       </CustomButton>
 
       <div
@@ -91,7 +132,7 @@ export function LoginForm() {
             marginBottom: 16,
           }}
         >
-          <div style={{ flex: 1, height: 1, background: "#AAAAAA66" }} />
+          <div style={{ flex: 1, height: 1, background: "#E5E5E5" }} />
           <span style={{ 
             fontFamily: "Poppins",
             fontWeight: 400,
@@ -100,15 +141,29 @@ export function LoginForm() {
             letterSpacing: "0%",
             color: "#858585"
           }}>or</span>
-          <div style={{ flex: 1, height: 1, background: "#AAAAAA66" }} />
+          <div style={{ flex: 1, height: 1, background: "#E5E5E5" }} />
         </div>
 
         <SocialLoginButton icon={<GoogleIcon />} text="Continue with Google" />
-
         <SocialLoginButton
           icon={<FacebookIcon />}
           text="Continue with Facebook"
         />
+
+        <div
+          style={{
+            fontFamily: "Poppins",
+            fontWeight: 400,
+            fontSize: 12,
+            lineHeight: "100%",
+            letterSpacing: "0%",
+            textAlign: "center",
+            color: "#000000",
+          }}
+        >
+          By creating an account using email, Google or Apple, I agree to the
+          Terms & Conditions and acknowledge the Privacy Notice.
+        </div>
 
         <div
           style={{
@@ -122,12 +177,12 @@ export function LoginForm() {
             color: "#000000",
           }}
         >
-          New here?{" "}
+          Already have an account?{" "}
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              navigate("/signup");
+              navigate("/login");
             }}
             style={{
               fontFamily: "Poppins",
@@ -140,7 +195,7 @@ export function LoginForm() {
               textDecoration: "none",
             }}
           >
-            Sign Up!
+            Log in
           </a>
         </div>
       </div>

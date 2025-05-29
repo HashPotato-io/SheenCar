@@ -23,6 +23,7 @@ import DealerCarDetailsPage from "./pages/car-dealer-details-page";
 import TradeCarDetailsPage from "./pages/car-trade-details-page";
 import TradeCar from "./pages/trade-car";
 import Account from "@/pages/account-page";
+import SignupPage from "@/pages/signup-page";
 
 function Router() {
   return (
@@ -54,6 +55,8 @@ function Router() {
       <Route path="/trade-car" component={TradeCar} />
       <ProtectedRoute path="/dashboard" component={DashboardPage} />
       <ProtectedRoute path="/post-ad" component={PostAdPage} />
+      <Route path="/signup" component={SignupPage} />
+      <Route path="/login" component={AuthPage} />
       <Route component={NotFound} />
     </Switch>
   );

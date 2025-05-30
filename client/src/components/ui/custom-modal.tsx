@@ -32,7 +32,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
           transform 
           -translate-x-1/2 
           -translate-y-1/2
-          max-h-[90vh]
+          max-h-[95vh]
           overflow-y-auto
           transition-all
           duration-300

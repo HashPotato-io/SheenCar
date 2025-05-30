@@ -4,6 +4,8 @@ import Arrow from "../../assets/Icon/arrow.svg";
 import BoostAdModal from "../modals/BoostAdModal";
 import ProceedToPayModal from "../modals/ProceedToPayModal";
 import RenewBoostModal from "../modals/RenewBoostModal";
+import CloseAdModal from "../modals/CloseAdModal";
+import CloseAdBoostedModal from "../modals/ClosedAdBoostedModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
@@ -17,7 +19,7 @@ type Car = {
   image: string;
 };
 
-type ModalStep = "none" | "boostAd" | "proceedToPay" | "renewBoost";
+type ModalStep = "none" | "boostAd" | "proceedToPay" | "renewBoost" | "closeAd" | "closeAdBoosted";
 
 type ButtonState =
   | "boostAd"
@@ -48,6 +50,7 @@ const Card: React.FC<CarCardsProps> = ({
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [currentStep, setCurrentStep] = useState<ModalStep>("none");
+  const [daysActive, setDaysActive] = useState(5);
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -56,6 +59,11 @@ const Card: React.FC<CarCardsProps> = ({
 
   const handleCloseAd = () => {
     setShowMenu(false);
+    if (buttonState === "boosted") {
+      setCurrentStep("closeAdBoosted");
+    } else {
+      setCurrentStep("closeAd");
+    }
   };
 
   const handleDeleteAd = () => {
@@ -84,6 +92,10 @@ const Card: React.FC<CarCardsProps> = ({
 
   const handleEditAd = () => {
     console.log("Edit ad clicked");
+  };
+
+  const handleCloseAdConfirm = () => {
+    setCurrentStep("none");
   };
 
   const getButtonText = (state: ButtonState): string => {
@@ -387,6 +399,20 @@ const Card: React.FC<CarCardsProps> = ({
           year: car.year,
         }}
         onProceed={handleProceedToPay}
+      />
+
+      <CloseAdModal
+        isOpen={currentStep === "closeAd"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={handleCloseAdConfirm}
+        daysActive={daysActive}
+      />
+
+      <CloseAdBoostedModal
+        isOpen={currentStep === "closeAdBoosted"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={handleCloseAdConfirm}
+        daysActive={daysActive}
       />
     </div>
   );

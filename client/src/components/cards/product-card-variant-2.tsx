@@ -4,6 +4,8 @@ import Arrow from "../../assets/Icon/arrow.svg";
 import BoostAdModal from "../modals/BoostAdModal";
 import ProceedToPayModal from "../modals/ProceedToPayModal";
 import { CustomButton } from "../ui/custom-button";
+import StatusBadge from "../ui/status-badge";
+import { DeleteIcon, EditIcon } from "../icons";
 
 type Car = {
   id: number;
@@ -16,24 +18,31 @@ type Car = {
 
 type ModalStep = "none" | "boostAd" | "proceedToPay";
 
-type ButtonState = 
-  | 'boostAd' 
-  | 'boosted' 
-  | 'renewAd' 
-  | 'reopenAd' 
-  | 'withdrawAd' 
-  | 'closeRequest' 
-  | 'reopenRequest' 
-  | 'disabled';
+type ButtonState =
+  | "boostAd"
+  | "boosted"
+  | "renewAd"
+  | "reopenAd"
+  | "withdrawAd"
+  | "closeRequest"
+  | "reopenRequest"
+  | "disabled";
 
 interface CarCardsProps {
   car: Car;
   linkUrl: string;
   small?: boolean;
   buttonState?: ButtonState;
+  status?: "active" | "completed" | "closed";
 }
 
-const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small, buttonState = 'boostAd' }) => {
+const Card: React.FC<CarCardsProps> = ({
+  car,
+  linkUrl,
+  small,
+  buttonState = "boostAd",
+  status,
+}) => {
   const [showMenu, setShowMenu] = useState(false);
   const [currentStep, setCurrentStep] = useState<ModalStep>("none");
 
@@ -66,16 +75,28 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small, buttonState = 'boo
     setCurrentStep("none");
   };
 
+  const handleEditAd = () => {
+    console.log("Edit ad clicked");
+  };
+
   const getButtonText = (state: ButtonState): string => {
     switch (state) {
-      case 'boostAd': return 'Boost Ad';
-      case 'boosted': return 'Boosted';
-      case 'renewAd': return 'Renew Ad';
-      case 'reopenAd': return 'Reopen Ad';
-      case 'withdrawAd': return 'Withdraw Ad';
-      case 'closeRequest': return 'Close Request';
-      case 'reopenRequest': return 'Reopen Request';
-      default: return 'Boost Ad';
+      case "boostAd":
+        return "Boost Ad";
+      case "boosted":
+        return "Boosted";
+      case "renewAd":
+        return "Renew Ad";
+      case "reopenAd":
+        return "Reopen Ad";
+      case "withdrawAd":
+        return "Withdraw Ad";
+      case "closeRequest":
+        return "Close Request";
+      case "reopenRequest":
+        return "Reopen Request";
+      default:
+        return "Boost Ad";
     }
   };
 
@@ -88,9 +109,9 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small, buttonState = 'boo
     };
 
     switch (state) {
-      case 'boosted':
-      case 'closeRequest':
-      case 'reopenRequest':
+      case "boosted":
+      case "closeRequest":
+      case "reopenRequest":
         return {
           ...baseStyles,
           opacity: 0.4,
@@ -101,34 +122,82 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small, buttonState = 'boo
     }
   };
 
-  const MenuButton = () => (
-    <div
-      className="absolute top-2 right-2 cursor-pointer"
-      style={{
-        background: "#FFFFFF",
-        width: "39px",
-        height: "39px",
-        borderRadius: "19.5px",
-        padding: "5px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      onClick={handleMenuClick}
-    >
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="12" cy="6" r="2" fill="#171616" />
-        <circle cx="12" cy="12" r="2" fill="#171616" />
-        <circle cx="12" cy="18" r="2" fill="#171616" />
-      </svg>
-    </div>
-  );
+  const MenuButton = () => {
+    if (status === "active") {
+      return (
+        <div
+          className="absolute top-2 right-2 cursor-pointer"
+          style={{
+            background: "#FFFFFF",
+            width: "39px",
+            height: "39px",
+            borderRadius: "19.5px",
+            padding: "5px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={handleMenuClick}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="12" cy="6" r="2" fill="#171616" />
+            <circle cx="12" cy="12" r="2" fill="#171616" />
+            <circle cx="12" cy="18" r="2" fill="#171616" />
+          </svg>
+        </div>
+      );
+    }
+
+    if (status === "closed" || status === "completed") {
+      return (
+        <div
+          className="absolute top-2 right-2 cursor-pointer"
+          style={{
+            background: "#FFFFFF",
+            width: "39px",
+            height: "39px",
+            borderRadius: "19.5px",
+            padding: "5px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={handleDeleteAd}
+        >
+          <DeleteIcon />
+        </div>
+      );
+    }
+
+    if (status === "pending") {
+      return (
+        <div
+          className="absolute top-2 right-2 cursor-pointer"
+          style={{
+            background: "#FFFFFF",
+            width: "39px",
+            height: "39px",
+            borderRadius: "19.5px",
+            padding: "5px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={handleEditAd}
+        >
+          <EditIcon />
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   const DropdownMenu = () => (
     <div
@@ -170,8 +239,13 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small, buttonState = 'boo
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               style={{ borderTopLeftRadius: 9, borderTopRightRadius: 9 }}
             />
+            {status && (
+              <div className="absolute top-2 left-2">
+                <StatusBadge status={status} />
+              </div>
+            )}
             <MenuButton />
-            {showMenu && <DropdownMenu />}
+            {showMenu && status === "active" && <DropdownMenu />}
           </div>
           <div
             className="bg-[#EEEEEE] p-[8px] w-full h-[75px] flex justify-between absolute left-0 right-0"
@@ -229,8 +303,13 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small, buttonState = 'boo
               alt={`${car?.make} ${car?.model}`}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             />
+            {status && (
+              <div className="absolute top-2 left-2">
+                <StatusBadge status={status} />
+              </div>
+            )}
             <MenuButton />
-            {showMenu && <DropdownMenu />}
+            {showMenu && status === "active" && <DropdownMenu />}
           </div>
           <div
             className="bg-[#EEEEEE] p-[12px] w-[391px] h-[197px] flex flex-col absolute left-0 right-0"
@@ -255,8 +334,10 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small, buttonState = 'boo
             <div className="flex justify-center mt-4">
               <CustomButton
                 customStyles={getButtonStyles(buttonState)}
-                onClick={buttonState === 'disabled' ? undefined : handleBoostClick}
-                disabled={buttonState === 'disabled'}
+                onClick={
+                  buttonState === "disabled" ? undefined : handleBoostClick
+                }
+                disabled={buttonState === "disabled"}
               >
                 {getButtonText(buttonState)}
               </CustomButton>

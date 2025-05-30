@@ -34,6 +34,23 @@ const TabSection: React.FC<TabSectionProps> = ({
   onTabClick,
   onPageChange,
 }) => {
+  // Add function to get status based on tab
+  const getStatusForTab = (tab: string): 'active' | 'completed' | 'closed' | 'pending' | 'rejected' => {
+    switch (tab) {
+      case 'Active':
+        return 'active';
+      case 'Pending':
+        return 'pending';
+      case 'Closed':
+        return 'closed';
+      case 'Request':
+        // For Request tab, we'll need to determine status based on buttonState
+        return 'completed'; // Default for Request tab
+      default:
+        return 'active';
+    }
+  };
+
   return (
     <>
       {/* Tab Buttons */}
@@ -79,14 +96,29 @@ const TabSection: React.FC<TabSectionProps> = ({
             marginBottom: 32,
           }}
         >
-          {getCurrentPageItems().map((car) => (
-            <ProductCardVariant2
-              key={car.id}
-              car={car}
-              linkUrl={`/car/${car.id}`}
-              buttonState={car.buttonState}
-            />
-          ))}
+          {getCurrentPageItems().map((car) => {
+            // Determine status based on tab and buttonState
+            let status: 'active' | 'completed' | 'closed' | 'pending' | 'rejected' = getStatusForTab(tabList[selectedTab]);
+            
+            // For Request tab, determine status based on buttonState
+            if (tabList[selectedTab] === 'Request') {
+              if (car.buttonState === 'closeRequest') {
+                status = 'completed';
+              } else if (car.buttonState === 'reopenRequest') {
+                status = 'rejected';
+              }
+            }
+
+            return (
+              <ProductCardVariant2
+                key={car.id}
+                car={car}
+                linkUrl={`/car/${car.id}`}
+                buttonState={car.buttonState as ButtonState}
+                status={status}
+              />
+            );
+          })}
         </div>
         <Pagination2
           currentPage={currentPage}

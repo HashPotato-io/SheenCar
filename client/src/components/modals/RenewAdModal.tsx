@@ -1,26 +1,44 @@
 import React from "react";
+import { useLocation } from "wouter";
 import CustomModal from "../ui/custom-modal";
 import { CustomButton } from "../ui/custom-button";
 import CloseAdIcon from "../../assets/ClosedAd.svg";
 
-interface MaxListLimitReachedModalProps {
+interface RenewAdModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  daysActive: number;
+  carDetails: {
+    make: string;
+    model: string;
+    year: number;
+  };
 }
 
-const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
+const RenewAdModal: React.FC<RenewAdModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  daysActive,
+  carDetails,
 }) => {
+  const [, setLocation] = useLocation();
+
+  const handleRenewal = () => {
+    // Navigate to checkout page with state
+    setLocation('/checkout', { 
+      state: {
+        duration: 30, 
+        budget: 50,   
+        carDetails
+      }
+    });
+  };
+
   return (
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Maximum Active Listings Reached!"
+      title="Your Listing is Expiring Soon! Renew Now!"
       icon={CloseAdIcon}
     >
       <div className="flex flex-col items-center gap-6 w-[339px]">
@@ -34,9 +52,9 @@ const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
             color: "#585353",
           }}
         >
-          You can only have 2 active listings at a time. To post an additional
-          car, you'll need to pay a one-time fee of $10 for exceeding your
-          active ad limit.
+          Your ad is set to expire in 24 hours. Keep your listing live and visible to potential buyers by renewing now! 
+          <br /><br />
+          Renewal requires a payment to extend your listing duration. Don't miss out—stay on top of search results.
         </p>
 
         <CustomButton
@@ -45,13 +63,13 @@ const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
             height: "44px",
             borderRadius: "7.27px",
           }}
-          onClick={onConfirm}
+          onClick={handleRenewal}
         >
-          Proceed to Pay
+          Renew Ad
         </CustomButton>
       </div>
     </CustomModal>
   );
 };
 
-export default MaxListLimitReachedModal;
+export default RenewAdModal; 

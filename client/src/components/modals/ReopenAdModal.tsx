@@ -1,27 +1,25 @@
 import React from "react";
 import CustomModal from "../ui/custom-modal";
 import { CustomButton } from "../ui/custom-button";
-import CloseAdIcon from "../../assets/ClosedAd.svg";
+import ReopenIcon from "../../assets/reopen.svg";
 
-interface MaxListLimitReachedModalProps {
+interface ReopenAdModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  daysActive: number;
 }
 
-const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
+const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  daysActive,
 }) => {
   return (
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Maximum Active Listings Reached!"
-      icon={CloseAdIcon}
+      title="Reopen This Ad?"
+      icon={ReopenIcon}
     >
       <div className="flex flex-col items-center gap-6 w-[339px]">
         <p
@@ -34,9 +32,9 @@ const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
             color: "#585353",
           }}
         >
-          You can only have 2 active listings at a time. To post an additional
-          car, you'll need to pay a one-time fee of $10 for exceeding your
-          active ad limit.
+          This is your first time reopening this ad. Once reopened, it must stay
+          active for at least 5 days before you can close it again. That next
+          closure will be final and irreversible.
         </p>
 
         <CustomButton
@@ -47,11 +45,11 @@ const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
           }}
           onClick={onConfirm}
         >
-          Proceed to Pay
+          Reopen Ad
         </CustomButton>
       </div>
     </CustomModal>
   );
 };
 
-export default MaxListLimitReachedModal;
+export default ReopenAdModal;

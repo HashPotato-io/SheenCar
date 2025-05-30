@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import Arrow from "../../assets/Icon/arrow.svg";
 import BoostAdModal from "../modals/BoostAdModal";
 import ProceedToPayModal from "../modals/ProceedToPayModal";
+import RenewBoostModal from "../modals/RenewBoostModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
@@ -16,7 +17,7 @@ type Car = {
   image: string;
 };
 
-type ModalStep = "none" | "boostAd" | "proceedToPay";
+type ModalStep = "none" | "boostAd" | "proceedToPay" | "renewBoost";
 
 type ButtonState =
   | "boostAd"
@@ -26,7 +27,9 @@ type ButtonState =
   | "withdrawAd"
   | "closeRequest"
   | "reopenRequest"
-  | "disabled";
+  | "disabled"
+  | "renewBoost"
+  ;
 
 interface CarCardsProps {
   car: Car;
@@ -60,7 +63,11 @@ const Card: React.FC<CarCardsProps> = ({
   };
 
   const handleBoostClick = () => {
-    setCurrentStep("boostAd");
+    if (buttonState === "renewBoost") {
+      setCurrentStep("renewBoost");
+    } else {
+      setCurrentStep("boostAd");
+    }
   };
 
   const handleBoostAdClose = () => {
@@ -95,6 +102,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "Close Request";
       case "reopenRequest":
         return "Reopen Request";
+      case "renewBoost":
+        return "Renew Boost";
       default:
         return "Boost Ad";
     }
@@ -366,6 +375,18 @@ const Card: React.FC<CarCardsProps> = ({
           model: car.model,
           year: car.year,
         }}
+      />
+
+      {/* RenewBoostModal */}
+      <RenewBoostModal
+        isOpen={currentStep === "renewBoost"}
+        onClose={() => setCurrentStep("none")}
+        carDetails={{
+          make: car.make,
+          model: car.model,
+          year: car.year,
+        }}
+        onProceed={handleProceedToPay}
       />
     </div>
   );

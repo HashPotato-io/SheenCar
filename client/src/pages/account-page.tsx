@@ -63,7 +63,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boostAd"
+    buttonState: "renewAd"
   },
   {
     id: 4,

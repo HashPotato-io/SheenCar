@@ -3,9 +3,20 @@ import { CustomButton } from "@/components/ui/custom-button";
 import { SocialLoginButton } from "@/components/ui/social-login-button";
 import { FacebookIcon, GoogleIcon } from "../icons";
 import { useLocation } from "wouter";
+import { useAuth } from "@/contexts/auth-context";
+import { useState } from "react";
 
 export function LoginForm() {
   const [, navigate] = useLocation();
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(email, password);
+    navigate("/account");
+  };
 
   return (
     <div
@@ -34,48 +45,67 @@ export function LoginForm() {
       >
         Login
       </h2>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
-        }}
-      >
-        <Input
-          type="email"
-          placeholder="Email"
-          style={{ width: "330px", height: "40px", background: "transparent" }}
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          style={{ width: "330px", height: "40px", background: "transparent" }}
-        />
-        <div style={{ width: "330px", textAlign: "left" }}>
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate("/forgot-password");
-            }}
+      <form onSubmit={handleLogin}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             style={{
-              fontFamily: "Poppins",
-              fontWeight: 400,
-              fontSize: 14,
-              lineHeight: "100%",
-              letterSpacing: "0%",
-              color: "#003A2F",
-              textDecoration: "none",
+              width: "330px",
+              height: "40px",
+              background: "transparent",
             }}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{
+              width: "330px",
+              height: "40px",
+              background: "transparent",
+            }}
+          />
+          <div
+            style={{ width: "330px", textAlign: "left", marginBottom: "10px" }}
           >
-            Forgot Password?
-          </a>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/forgot-password");
+              }}
+              style={{
+                fontFamily: "Poppins",
+                fontWeight: 400,
+                fontSize: 14,
+                lineHeight: "100%",
+                letterSpacing: "0%",
+                color: "#003A2F",
+                textDecoration: "none",
+              }}
+            >
+              Forgot Password?
+            </a>
+          </div>
         </div>
-      </div>
 
-      <CustomButton customStyles={{ width: "330px", height: "40px" }}>
-        Login
-      </CustomButton>
+        <CustomButton
+          type="submit"
+          customStyles={{ width: "330px", height: "40px" }}
+        >
+          Login
+        </CustomButton>
+      </form>
 
       <div
         style={{
@@ -96,14 +126,18 @@ export function LoginForm() {
           }}
         >
           <div style={{ flex: 1, height: 1, background: "#AAAAAA66" }} />
-          <span style={{ 
-            fontFamily: "Poppins",
-            fontWeight: 400,
-            fontSize: 12,
-            lineHeight: "100%",
-            letterSpacing: "0%",
-            color: "#858585"
-          }}>or</span>
+          <span
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: 400,
+              fontSize: 12,
+              lineHeight: "100%",
+              letterSpacing: "0%",
+              color: "#858585",
+            }}
+          >
+            or
+          </span>
           <div style={{ flex: 1, height: 1, background: "#AAAAAA66" }} />
         </div>
 

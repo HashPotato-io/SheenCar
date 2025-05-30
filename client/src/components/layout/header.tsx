@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from "@/contexts/auth-context";
 import SheenCarLogo from "../../assets/SheenCar-Logo.png";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -15,16 +15,12 @@ import {
 
 export default function Header() {
   const [, navigate] = useLocation();
-  const { user, logoutMutation } = useAuth();
+  const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    logoutMutation.mutate(undefined, {
-      onSuccess: () => {
-        // Clear user state and redirect to home
-        navigate("/");
-      },
-    });
+    logout();
+    navigate('/');
   };
 
   const menuItems = [

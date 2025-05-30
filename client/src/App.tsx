@@ -27,6 +27,7 @@ import SignupPage from "@/pages/signup-page";
 import ForgotPasswordPage from "./pages/forgot-password-page";
 import UsedCars from "./pages/used-cars";
 import CheckoutPage from './pages/CheckoutPage';
+import { AuthProvider } from '@/contexts/auth-context';
 
 
 function Router() {
@@ -71,12 +72,14 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </AuthProvider>
   );
 }
 

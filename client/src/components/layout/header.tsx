@@ -34,7 +34,7 @@ export default function Header() {
         /*     { name: "Browse All Cars", href: "/search" }, */
         { name: "Trade Car", href: "/trade-car" },
         { name: "New Cars", href: "/new-cars" },
-        { name: "Used Cars", href: "/search?condition=used" },
+        { name: "Used Cars", href: "/used-cars" },
         { name: "Find Dealers", href: "/services/dealer" },
         /*    { name: "Certified Pre-Owned", href: "/search?condition=certified" }, */
       ],

@@ -30,8 +30,8 @@ export default function HeroSection({
       <div className="container mx-auto px-4 relative z-10">
         {headingContent}
         <div className="mt-8">
-          <form onSubmit={handleSearchSubmit} className="max-w-3xl mx-auto">
-            <div className="flex items-center justify-between bg-white rounded-full shadow-md overflow-hidden pl-4 pr-2 py-1">
+          <form onSubmit={handleSearchSubmit} className="max-w-4xl mx-auto">
+            <div className="max-w-4xl w-full flex items-center justify-between bg-white rounded-full shadow-md overflow-hidden pl-4 pr-2 py-1">
               <div className="flex items-center flex-grow">
                 <SearchIcon className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
                 <Input

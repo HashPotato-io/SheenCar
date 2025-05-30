@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import CustomPhoneInput from "@/components/ui/phone-input";
 import TabSection from "@/components/ui/tab-section";
+import AccountBanner from "../assets/account-banner.png";
 
 const tabList = ["Active", "Pending", "Closed", "Request"];
 
@@ -920,7 +921,9 @@ const Account = () => {
           flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundImage: `url(https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80)`,
+          backgroundImage: `url(${AccountBanner})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div

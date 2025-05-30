@@ -25,6 +25,7 @@ import TradeCar from "./pages/trade-car";
 import Account from "@/pages/account-page";
 import SignupPage from "@/pages/signup-page";
 import ForgotPasswordPage from "./pages/forgot-password-page";
+import UsedCars from "./pages/used-cars";
 
 
 function Router() {
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/auth" component={AuthPage} />
       <Route path="/search" component={SearchPage} />
       <Route path="/new-cars" component={NewCarsPage} />
+      <Route path="/used-cars" component={UsedCars} />
       <Route path="/cars/:id" component={DealerCarDetailsPage} />
       <Route path="/compare" component={ComparePage} />
       <Route path="/security" component={SecurityPage} />

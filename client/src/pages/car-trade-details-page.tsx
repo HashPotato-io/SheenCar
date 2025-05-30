@@ -158,7 +158,7 @@ export default function TradeCarDetailsPage() {
       <Header />
 
       <main className="flex-1">
-        <div className="container mx-auto">
+        <div>
           {/* Breadcrumb */}
           {/*    <div className="flex items-center text-sm text-gray-500 mb-4">
             <Link href="/" className="hover:text-gray-700">

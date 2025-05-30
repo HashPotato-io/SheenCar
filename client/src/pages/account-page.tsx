@@ -41,6 +41,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 2,
@@ -51,6 +52,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
   {
     id: 3,
@@ -61,6 +63,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 4,
@@ -71,6 +74,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
   {
     id: 5,
@@ -81,6 +85,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 6,
@@ -91,6 +96,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
   {
     id: 7,
@@ -101,6 +107,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 8,
@@ -111,6 +118,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
   {
     id: 9,
@@ -121,6 +129,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 10,
@@ -131,6 +140,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
   {
     id: 11,
@@ -141,6 +151,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 12,
@@ -151,6 +162,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
   {
     id: 13,
@@ -161,6 +173,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 14,
@@ -171,6 +184,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
   {
     id: 15,
@@ -181,6 +195,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 16,
@@ -191,6 +206,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
   {
     id: 17,
@@ -201,6 +217,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boostAd"
   },
   {
     id: 18,
@@ -211,6 +228,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
+    buttonState: "boosted"
   },
 
   // Pending Tab Cars (18 cars = 2 pages)
@@ -223,6 +241,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 20,
@@ -233,6 +252,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 21,
@@ -243,6 +263,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 22,
@@ -253,6 +274,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 23,
@@ -263,6 +285,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 24,
@@ -273,6 +296,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 25,
@@ -283,6 +307,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 26,
@@ -293,6 +318,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 27,
@@ -303,6 +329,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 28,
@@ -313,6 +340,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 29,
@@ -323,6 +351,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 30,
@@ -333,6 +362,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 31,
@@ -343,6 +373,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 32,
@@ -353,6 +384,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 33,
@@ -363,6 +395,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 34,
@@ -373,6 +406,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 35,
@@ -383,6 +417,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
   {
     id: 36,
@@ -393,6 +428,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
+    buttonState: "withdrawAd"
   },
 
   // Closed Tab Cars (27 cars = 3 pages)
@@ -405,6 +441,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 38,
@@ -415,6 +452,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 39,
@@ -425,6 +463,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 40,
@@ -435,6 +474,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 41,
@@ -445,6 +485,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 42,
@@ -455,6 +496,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 43,
@@ -465,6 +507,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 44,
@@ -475,6 +518,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 45,
@@ -485,6 +529,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 46,
@@ -495,6 +540,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 47,
@@ -505,6 +551,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 48,
@@ -515,6 +562,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 49,
@@ -525,6 +573,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 50,
@@ -535,6 +584,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 51,
@@ -545,6 +595,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 52,
@@ -555,6 +606,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 53,
@@ -565,6 +617,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 54,
@@ -575,6 +628,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 55,
@@ -585,6 +639,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 56,
@@ -595,6 +650,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 57,
@@ -605,6 +661,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 58,
@@ -615,6 +672,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 59,
@@ -625,6 +683,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 60,
@@ -635,6 +694,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 61,
@@ -645,6 +705,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 62,
@@ -655,6 +716,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
   {
     id: 63,
@@ -665,6 +727,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
+    buttonState: "reopenAd"
   },
 
   // Request Tab Cars (18 cars = 2 pages)
@@ -677,6 +740,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 65,
@@ -687,6 +751,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 66,
@@ -697,6 +762,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "reopenRequest"
   },
   {
     id: 67,
@@ -707,6 +773,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "reopenRequest"
   },
   {
     id: 68,
@@ -717,6 +784,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 69,
@@ -727,6 +795,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 70,
@@ -737,6 +806,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 71,
@@ -747,6 +817,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 72,
@@ -757,6 +828,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 73,
@@ -767,6 +839,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 74,
@@ -777,6 +850,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 75,
@@ -787,6 +861,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 76,
@@ -797,6 +872,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 77,
@@ -807,6 +883,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 78,
@@ -817,6 +894,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 79,
@@ -827,6 +905,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
   {
     id: 80,
@@ -837,6 +916,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    buttonState: "closeRequest"
   },
 ];
 

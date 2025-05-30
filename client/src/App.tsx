@@ -26,6 +26,7 @@ import Account from "@/pages/account-page";
 import SignupPage from "@/pages/signup-page";
 import ForgotPasswordPage from "./pages/forgot-password-page";
 import UsedCars from "./pages/used-cars";
+import CheckoutPage from './pages/CheckoutPage';
 
 
 function Router() {
@@ -62,6 +63,7 @@ function Router() {
       <Route path="/signup" component={SignupPage} />
       <Route path="/login" component={AuthPage} />
       <Route path="/forgot-password" component={ForgotPasswordPage} />
+      <Route path="/checkout" component={CheckoutPage} />
       <Route component={NotFound} />
     </Switch>
   );

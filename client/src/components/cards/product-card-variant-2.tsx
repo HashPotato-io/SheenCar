@@ -16,13 +16,24 @@ type Car = {
 
 type ModalStep = "none" | "boostAd" | "proceedToPay";
 
+type ButtonState = 
+  | 'boostAd' 
+  | 'boosted' 
+  | 'renewAd' 
+  | 'reopenAd' 
+  | 'withdrawAd' 
+  | 'closeRequest' 
+  | 'reopenRequest' 
+  | 'disabled';
+
 interface CarCardsProps {
   car: Car;
   linkUrl: string;
   small?: boolean;
+  buttonState?: ButtonState;
 }
 
-const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
+const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small, buttonState = 'boostAd' }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [currentStep, setCurrentStep] = useState<ModalStep>("none");
 
@@ -53,6 +64,41 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
 
   const handleProceedToPayClose = () => {
     setCurrentStep("none");
+  };
+
+  const getButtonText = (state: ButtonState): string => {
+    switch (state) {
+      case 'boostAd': return 'Boost Ad';
+      case 'boosted': return 'Boosted';
+      case 'renewAd': return 'Renew Ad';
+      case 'reopenAd': return 'Reopen Ad';
+      case 'withdrawAd': return 'Withdraw Ad';
+      case 'closeRequest': return 'Close Request';
+      case 'reopenRequest': return 'Reopen Request';
+      default: return 'Boost Ad';
+    }
+  };
+
+  const getButtonStyles = (state: ButtonState) => {
+    const baseStyles = {
+      width: "357px",
+      height: "44px",
+      gap: "9.7px",
+      borderRadius: "7.27px",
+    };
+
+    switch (state) {
+      case 'boosted':
+      case 'closeRequest':
+      case 'reopenRequest':
+        return {
+          ...baseStyles,
+          opacity: 0.4,
+          backgroundColor: "#003A2F",
+        };
+      default:
+        return baseStyles;
+    }
   };
 
   const MenuButton = () => (
@@ -208,10 +254,11 @@ const Card: React.FC<CarCardsProps> = ({ car, linkUrl, small }) => {
 
             <div className="flex justify-center mt-4">
               <CustomButton
-                customStyles={{ width: "357px", height: "44px" }}
-                onClick={handleBoostClick}
+                customStyles={getButtonStyles(buttonState)}
+                onClick={buttonState === 'disabled' ? undefined : handleBoostClick}
+                disabled={buttonState === 'disabled'}
               >
-                Boost Ad
+                {getButtonText(buttonState)}
               </CustomButton>
             </div>
           </div>

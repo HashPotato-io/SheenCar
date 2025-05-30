@@ -10,6 +10,7 @@ interface Car {
   price: number;
   image: string;
   status: string;
+  buttonState: string;
 }
 
 interface TabSectionProps {
@@ -83,6 +84,7 @@ const TabSection: React.FC<TabSectionProps> = ({
               key={car.id}
               car={car}
               linkUrl={`/car/${car.id}`}
+              buttonState={car.buttonState}
             />
           ))}
         </div>

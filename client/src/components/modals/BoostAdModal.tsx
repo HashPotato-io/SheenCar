@@ -61,6 +61,7 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
                 <h2
                   className="mb-4"
                   style={{
+                    fontFamily: "Gilroy-Medium",
                     width: "335px",
                     fontWeight: 400,
                     fontSize: "26px",
@@ -75,6 +76,7 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
                 <h3
                   className="mb-3"
                   style={{
+                    fontFamily: "Gilroy-Medium",
                     fontWeight: 400,
                     fontSize: "18px",
                     lineHeight: "100%",
@@ -140,6 +142,7 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
                 <h3
                   className="mb-3"
                   style={{
+                    fontFamily: "Gilroy-Medium",
                     fontWeight: 400,
                     fontSize: "18px",
                     lineHeight: "100%",
@@ -220,6 +223,7 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
               <p
                 className="text-center"
                 style={{
+                  fontFamily: "Gilroy-Regular",
                   fontWeight: 400,
                   fontSize: "12px",
                   lineHeight: "100%",

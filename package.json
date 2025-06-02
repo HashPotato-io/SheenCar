@@ -74,6 +74,7 @@
     "react-icons": "^5.5.0",
     "react-phone-input-2": "^2.15.1",
     "react-resizable-panels": "^2.1.7",
+    "react-router-dom": "^6.30.1",
     "react-swiper": "^0.1.5",
     "recharts": "^2.15.2",
     "stripe": "^18.2.0",

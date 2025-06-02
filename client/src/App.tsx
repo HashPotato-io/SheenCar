@@ -28,6 +28,8 @@ import ForgotPasswordPage from "./pages/forgot-password-page";
 import UsedCars from "./pages/used-cars";
 import CheckoutPage from './pages/CheckoutPage';
 import { AuthProvider } from '@/contexts/auth-context';
+import Dashboard from "./AdminPages/dashboard";
+import { BrowserRouter } from "react-router-dom";
 
 
 function Router() {
@@ -65,6 +67,7 @@ function Router() {
       <Route path="/login" component={AuthPage} />
       <Route path="/forgot-password" component={ForgotPasswordPage} />
       <Route path="/checkout" component={CheckoutPage} />
+      <Route path="/admin/dashboard" component={Dashboard} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -55,6 +55,8 @@ interface Car {
   dealType?: "sell" | "buy";
   tradeWith?: string;
   tabType: string; // For tab filtering
+  isTraded?: boolean;
+  tradeAmount?: number;
 }
 
 // Add these new interfaces and dummy data after the existing Car interface
@@ -1057,10 +1059,12 @@ const dummyTradeDeals = [
     year: 2023,
     price: 25000,
     image: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
-    status: "active", // Status badge
+    status: "active",
     buttonState: "pending",
     tradeWith: "Honda Civic 2022",
-    tabType: "My Trade Proposals" // Add this to identify which tab it belongs to
+    tabType: "My Trade Proposals",
+    isTraded: false,
+    tradeAmount: 5000
   },
   {
     id: 2,
@@ -1069,12 +1073,13 @@ const dummyTradeDeals = [
     year: 2022,
     price: 55000,
     image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
-    status: "pending", // Status badge
+    status: "pending",
     buttonState: "accepted",
     tradeWith: "Mercedes GLE 2023",
-    tabType: "My Trade Proposals"
+    tabType: "My Trade Proposals",
+    isTraded: true,
+    tradeAmount: 0
   },
-  // ... more My Trade Proposals items ...
 
   // Deals Received (second tab)
   {

@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useSearchParams, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -9,15 +9,16 @@ import { UserRoutes } from "./routes/user-routes";
 import { DealerRoutes } from "./routes/dealer-routes";
 import { AdminRoutes } from "./routes/admin-routes";
 import { useEffect } from "react";
-import { useLocation } from "wouter";
+
 
 // Add ScrollToTop component
 function ScrollToTop() {
   const [location] = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
+  }, [location, searchParams]);
 
   return null;
 }

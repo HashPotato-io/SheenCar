@@ -23,6 +23,10 @@ type Car = {
   year: number;
   price: number;
   image: string;
+  tabType?: string;
+  isTraded?: boolean;
+  tradeWith?: string;
+  tradeAmount?: number;
 };
 
 type ModalStep =
@@ -38,7 +42,8 @@ type ModalStep =
   | "closeRequest"
   | "deleteAd"
   | "viewDeals"
-  | "withdrawProposal";
+  | "withdrawProposal"
+  | "viewOffers";
 
 export type ButtonState =
   | "boostAd"
@@ -51,7 +56,8 @@ export type ButtonState =
   | "disabled"
   | "renewBoost"
   | "viewDeals"
-  | "withdrawProposal";
+  | "withdrawProposal"
+  | "viewOffers";
 
 interface CarCardsProps {
   car: Car;
@@ -111,6 +117,10 @@ const Card: React.FC<CarCardsProps> = ({
 
   const handleProceedToPay = () => {
     setCurrentStep("proceedToPay");
+  };
+
+  const handleWithDrawProposal = () => {
+    setCurrentStep("withdrawProposal");
   };
 
   const handleProceedToPayClose = () => {
@@ -175,6 +185,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "View Deals";
       case "withdrawProposal":
         return "Withdraw Proposal";
+      case "viewOffers":
+        return "View Offers";
       default:
         return "Boost Ad";
     }
@@ -190,10 +202,10 @@ const Card: React.FC<CarCardsProps> = ({
 
     switch (state) {
       case "boosted":
-        /*       case "reopenRequest": */
+      case "withdrawProposal":
         return {
           ...baseStyles,
-          opacity: 0.4,
+          opacity: car.isTraded ? 0.4 : 1,
           backgroundColor: "#003A2F",
         };
       default:
@@ -202,7 +214,7 @@ const Card: React.FC<CarCardsProps> = ({
   };
 
   const getButtonClickHandler = (state: ButtonState) => {
-    if (state === "disabled") {
+    if (state === "disabled" || (state === "withdrawProposal" && car?.isTraded)) {
       return undefined;
     }
 
@@ -232,8 +244,14 @@ const Card: React.FC<CarCardsProps> = ({
       };
     }
 
-    if (state === "withdrawProposal") {
-      return () => setCurrentStep("withdrawProposal");
+    if (state === "viewOffers") {
+      return () => {
+        setLocation(`/account?view=offers&id=${car.id}`);
+      };
+    }
+
+    if(state === "withdrawProposal"){
+      return handleWithDrawProposal;
     }
 
     // Default case - handle boost click
@@ -241,6 +259,11 @@ const Card: React.FC<CarCardsProps> = ({
   };
 
   const MenuButton = () => {
+    // Add early return if tabType is My Trade Proposals
+    if (car.tabType === "My Trade Proposals") {
+      return null;
+    }
+
     if (status === "active") {
       return (
         <div
@@ -471,9 +494,35 @@ const Card: React.FC<CarCardsProps> = ({
               <div className="align-middle font-normal text-[#585353] leading-[100%] tracking-[-0.01em] text-[18px] font-['Poppins']">
                 {car?.year}
               </div>
-              <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[26px] font-['Gilroy-SemiBold']">
-                Price: ${car?.price.toLocaleString()}
-              </div>
+              {car?.tabType === "My Trade Proposals" ? (
+                <div style={{
+                  fontFamily: 'Gilroy-Regular',
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                  verticalAlign: 'middle',
+                  color: '#585353'
+                }}>
+                  {car.isTraded ? (
+                    <>
+                      Traded with: {car.tradeWith}
+                      <br />
+                      No Amount Involved: Even Trade
+                    </>
+                  ) : (
+                    <>
+                      To Trade with: {car.tradeWith}
+                      <br />
+                      Amount to Pay: ${car.tradeAmount?.toLocaleString()}
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[26px] font-['Gilroy-SemiBold']">
+                  Price: ${car?.price.toLocaleString()}
+                </div>
+              )}
             </div>
 
             <div className="flex justify-center mt-4">

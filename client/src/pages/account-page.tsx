@@ -28,8 +28,25 @@ import CustomPhoneInput from "@/components/ui/phone-input";
 import TabSection from "@/components/ui/tab-section";
 import AccountBanner from "../assets/account-banner.png";
 import RequestTypeModal from "@/components/modals/request-type-modal";
+import AccountHero from "@/components/account-hero";
 
 const tabList = ["Active", "Pending", "Closed", "Request"];
+
+// Add new tab list for Trade Deals
+const tradeDealsTabList = ["My Trade Proposals", "Deals Received"];
+
+// First, define the Car interface
+interface Car {
+  id: number;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  image: string;
+  status: string;
+  buttonState: string;
+  dealType?: "sell" | "buy";
+}
 
 const dummyCars = [
   // Active Tab Cars (18 cars = 2 pages)
@@ -42,7 +59,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boostAd"
+    buttonState: "boostAd",
   },
   {
     id: 2,
@@ -53,7 +70,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
   {
     id: 3,
@@ -64,7 +81,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "renewAd"
+    buttonState: "renewAd",
   },
   {
     id: 4,
@@ -75,7 +92,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
   {
     id: 5,
@@ -86,7 +103,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "renewBoost"
+    buttonState: "renewBoost",
   },
   {
     id: 6,
@@ -97,7 +114,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
   {
     id: 7,
@@ -108,7 +125,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boostAd"
+    buttonState: "boostAd",
   },
   {
     id: 8,
@@ -119,7 +136,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
   {
     id: 9,
@@ -130,7 +147,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boostAd"
+    buttonState: "boostAd",
   },
   {
     id: 10,
@@ -141,7 +158,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
   {
     id: 11,
@@ -152,7 +169,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boostAd"
+    buttonState: "boostAd",
   },
   {
     id: 12,
@@ -163,7 +180,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
   {
     id: 13,
@@ -174,7 +191,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boostAd"
+    buttonState: "boostAd",
   },
   {
     id: 14,
@@ -185,7 +202,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
   {
     id: 15,
@@ -196,7 +213,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boostAd"
+    buttonState: "boostAd",
   },
   {
     id: 16,
@@ -207,7 +224,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
   {
     id: 17,
@@ -218,7 +235,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boostAd"
+    buttonState: "boostAd",
   },
   {
     id: 18,
@@ -229,7 +246,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Active",
-    buttonState: "boosted"
+    buttonState: "boosted",
   },
 
   // Pending Tab Cars (18 cars = 2 pages)
@@ -242,7 +259,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 20,
@@ -253,7 +270,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 21,
@@ -264,7 +281,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 22,
@@ -275,7 +292,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 23,
@@ -286,7 +303,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 24,
@@ -297,7 +314,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 25,
@@ -308,7 +325,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 26,
@@ -319,7 +336,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 27,
@@ -330,7 +347,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 28,
@@ -341,7 +358,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 29,
@@ -352,7 +369,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 30,
@@ -363,7 +380,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 31,
@@ -374,7 +391,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 32,
@@ -385,7 +402,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 33,
@@ -396,7 +413,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 34,
@@ -407,7 +424,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 35,
@@ -418,7 +435,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
   {
     id: 36,
@@ -429,7 +446,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Pending",
-    buttonState: "withdrawAd"
+    buttonState: "withdrawAd",
   },
 
   // Closed Tab Cars (27 cars = 3 pages)
@@ -442,7 +459,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 38,
@@ -453,7 +470,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 39,
@@ -464,7 +481,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 40,
@@ -475,7 +492,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 41,
@@ -486,7 +503,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 42,
@@ -497,7 +514,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 43,
@@ -508,7 +525,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 44,
@@ -519,7 +536,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 45,
@@ -530,7 +547,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 46,
@@ -541,7 +558,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 47,
@@ -552,7 +569,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 48,
@@ -563,7 +580,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 49,
@@ -574,7 +591,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 50,
@@ -585,7 +602,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 51,
@@ -596,7 +613,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 52,
@@ -607,7 +624,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 53,
@@ -618,7 +635,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 54,
@@ -629,7 +646,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 55,
@@ -640,7 +657,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 56,
@@ -651,7 +668,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 57,
@@ -662,7 +679,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 58,
@@ -673,7 +690,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 59,
@@ -684,7 +701,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 60,
@@ -695,7 +712,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 61,
@@ -706,7 +723,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 62,
@@ -717,7 +734,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
   {
     id: 63,
@@ -728,7 +745,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Closed",
-    buttonState: "reopenAd"
+    buttonState: "reopenAd",
   },
 
   // Request Tab Cars (18 cars = 2 pages)
@@ -742,7 +759,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
     dealType: "sell",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 65,
@@ -754,7 +771,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
     dealType: "buy",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 66,
@@ -765,7 +782,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "reopenRequest"
+    buttonState: "reopenRequest",
   },
   {
     id: 67,
@@ -776,7 +793,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "reopenRequest"
+    buttonState: "reopenRequest",
   },
   {
     id: 68,
@@ -787,7 +804,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 69,
@@ -798,7 +815,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 70,
@@ -809,7 +826,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 71,
@@ -820,7 +837,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 72,
@@ -831,7 +848,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 73,
@@ -842,7 +859,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 74,
@@ -853,7 +870,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 75,
@@ -864,7 +881,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 76,
@@ -875,7 +892,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 77,
@@ -886,7 +903,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 78,
@@ -897,7 +914,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 79,
@@ -908,7 +925,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
   },
   {
     id: 80,
@@ -919,7 +936,230 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
-    buttonState: "closeRequest"
+    buttonState: "closeRequest",
+  },
+];
+
+// Add new dummy data for Trade Deals
+const dummyTradeDeals = [
+  // My Trade Proposals (18 items)
+  {
+    id: 1,
+    make: "Toyota",
+    model: "Camry",
+    year: 2023,
+    price: 25000,
+    image:
+      "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "pending",
+    tradeWith: "Honda Civic 2022",
+  },
+  {
+    id: 2,
+    make: "BMW",
+    model: "X5",
+    year: 2022,
+    price: 55000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "accepted",
+    tradeWith: "Mercedes GLE 2023",
+  },
+  {
+    id: 3,
+    make: "Tesla",
+    model: "Model 3",
+    year: 2023,
+    price: 45000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "pending",
+    tradeWith: "Audi A4 2022",
+  },
+  {
+    id: 4,
+    make: "Mercedes",
+    model: "C-Class",
+    year: 2023,
+    price: 48000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "rejected",
+    tradeWith: "Lexus ES 2023",
+  },
+  {
+    id: 5,
+    make: "Audi",
+    model: "A4",
+    year: 2022,
+    price: 42000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "pending",
+    tradeWith: "BMW 3 Series 2023",
+  },
+  {
+    id: 6,
+    make: "Lexus",
+    model: "ES",
+    year: 2023,
+    price: 42000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "accepted",
+    tradeWith: "Genesis G70 2023",
+  },
+  {
+    id: 7,
+    make: "Acura",
+    model: "TLX",
+    year: 2023,
+    price: 38000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "pending",
+    tradeWith: "Volvo S60 2023",
+  },
+  {
+    id: 8,
+    make: "Volvo",
+    model: "S60",
+    year: 2023,
+    price: 41000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "rejected",
+    tradeWith: "Mazda Mazda6 2023",
+  },
+  {
+    id: 9,
+    make: "Genesis",
+    model: "G70",
+    year: 2023,
+    price: 45000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "My Trade Proposals",
+    buttonState: "pending",
+    tradeWith: "Subaru Legacy 2023",
+  },
+
+  // Deals Received (18 items)
+  {
+    id: 10,
+    make: "Honda",
+    model: "Civic",
+    year: 2022,
+    price: 22000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "pending",
+    tradeWith: "Toyota Corolla 2023",
+  },
+  {
+    id: 11,
+    make: "Mercedes",
+    model: "GLE",
+    year: 2023,
+    price: 65000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "accepted",
+    tradeWith: "BMW X5 2022",
+  },
+  {
+    id: 12,
+    make: "Audi",
+    model: "A4",
+    year: 2022,
+    price: 42000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "pending",
+    tradeWith: "Tesla Model 3 2023",
+  },
+  {
+    id: 13,
+    make: "Lexus",
+    model: "ES",
+    year: 2023,
+    price: 42000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "rejected",
+    tradeWith: "Mercedes C-Class 2023",
+  },
+  {
+    id: 14,
+    make: "Genesis",
+    model: "G70",
+    year: 2023,
+    price: 45000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "pending",
+    tradeWith: "Audi A4 2022",
+  },
+  {
+    id: 15,
+    make: "Volvo",
+    model: "S60",
+    year: 2023,
+    price: 41000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "accepted",
+    tradeWith: "Lexus ES 2023",
+  },
+  {
+    id: 16,
+    make: "Acura",
+    model: "TLX",
+    year: 2023,
+    price: 38000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "pending",
+    tradeWith: "Genesis G70 2023",
+  },
+  {
+    id: 17,
+    make: "Mazda",
+    model: "Mazda6",
+    year: 2023,
+    price: 32000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "rejected",
+    tradeWith: "Volvo S60 2023",
+  },
+  {
+    id: 18,
+    make: "Subaru",
+    model: "Legacy",
+    year: 2023,
+    price: 28000,
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "Deals Received",
+    buttonState: "pending",
+    tradeWith: "Acura TLX 2023",
   },
 ];
 
@@ -928,7 +1168,8 @@ const Account = () => {
   const [tabFade, setTabFade] = useState(false);
   const [postAdFade, setPostAdFade] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9; // 3 columns * 3 rows
+  const [activeMainTab, setActiveMainTab] = useState("My Ads");
+  const itemsPerPage = 9;
 
   // Calculate total pages based on filtered cars
   const filteredCars = dummyCars.filter(
@@ -940,21 +1181,29 @@ const Account = () => {
     setCurrentPage(page);
   };
 
-  // Get current page items
-  const getCurrentPageItems = () => {
+  // Update the getCurrentPageItems function to explicitly return Car[]
+  const getCurrentPageItems = (): Car[] => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return filteredCars.slice(startIndex, endIndex);
+    return filteredCars.slice(startIndex, endIndex) as Car[];
   };
 
-  const handleTabClick = (idx: number) => {
-    if (selectedTab !== idx) {
-      setTabFade(true);
-      setTimeout(() => {
-        setSelectedTab(idx);
-        setTabFade(false);
-      }, 300);
-    }
+  // Update the handleTabChange function to handle both main tabs and sub-tabs
+  const handleTabChange = (index: number) => {
+    setContentFade(true);
+    setTimeout(() => {
+      setSelectedTab(index); // This controls which tab content is shown
+      setContentFade(false);
+    }, 300);
+  };
+
+  // Add a separate handler for main tab changes
+  const handleMainTabChange = (tab: string) => {
+    setContentFade(true);
+    setTimeout(() => {
+      setActiveMainTab(tab);
+      setContentFade(false);
+    }, 300);
   };
 
   // Add new state for request modal
@@ -962,7 +1211,8 @@ const Account = () => {
 
   // Update handlePostAdClick
   const handlePostAdClick = () => {
-    if (selectedTab === 3) { // Request tab
+    if (selectedTab === 3) {
+      // Request tab
       setIsRequestModalOpen(true);
     } else {
       setPostAdFade(true);
@@ -1010,186 +1260,166 @@ const Account = () => {
     // TODO: Implement password change logic
   };
 
+  // Add this state
+  const [contentFade, setContentFade] = useState(false);
+
+  // Add new state for Trade Deals
+  const [selectedTradeTab, setSelectedTradeTab] = useState(0);
+  const [tradeTabFade, setTradeTabFade] = useState(false);
+  const [currentTradePage, setCurrentTradePage] = useState(1);
+
+  // Calculate total pages for trade deals
+  const filteredTradeDeals = dummyTradeDeals.filter(
+    (deal) => deal?.status === tradeDealsTabList?.[selectedTradeTab]
+  );
+  const totalTradePages = Math.ceil(filteredTradeDeals.length / itemsPerPage);
+
+  const handleTradePageChange = (page: number) => {
+    setCurrentTradePage(page);
+  };
+
+  // Get current page items for trade deals
+  const getCurrentTradePageItems = () => {
+    const startIndex = (currentTradePage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredTradeDeals.slice(startIndex, endIndex);
+  };
+
+  const handleTradeTabClick = (index: number) => {
+    if (selectedTradeTab !== index) {
+      setTradeTabFade(true);
+      setTimeout(() => {
+        console.log(index, "tarde-index");
+        setSelectedTradeTab(index);
+        setTradeTabFade(false);
+      }, 300);
+    }
+  };
+
+  // Render content based on active tab
+  const renderTabContent = () => {
+    switch (activeMainTab) {
+      case "My Ads":
+        return (
+          <div
+            style={{
+              opacity: contentFade ? 0 : 1,
+              transition: "opacity 300ms ease-in-out",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 32,
+              }}
+            >
+              <div style={{ fontWeight: 400, fontSize: 40, color: "#000000" }}>
+                My <span style={{ color: "#AF8C32" }}>Ads</span>
+              </div>
+              <button
+                style={{
+                  width: 216,
+                  height: 44,
+                  background: "#003A2F",
+                  color: "#fff",
+                  border: "1px solid #003A2F",
+                  borderRadius: 6,
+                  fontWeight: 300,
+                  fontSize: 16,
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  paddingRight: 20,
+                  paddingLeft: 20,
+                  opacity: postAdFade ? 0 : 1,
+                  transition: "opacity 300ms ease-in-out",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                onClick={handlePostAdClick}
+              >
+                <img src={Plus} />
+                <span>{selectedTab === 3 ? "Add Request" : "Post Ad"}</span>
+              </button>
+            </div>
+            <TabSection
+              tabList={tabList}
+              selectedTab={selectedTab}
+              tabFade={tabFade}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              getCurrentPageItems={getCurrentPageItems}
+              onTabClick={handleTabChange}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        );
+      case "Trade Deals":
+        return (
+          <div
+            style={{
+              opacity: contentFade ? 0 : 1,
+              transition: "opacity 300ms ease-in-out",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 32,
+              }}
+            >
+              <div style={{ fontWeight: 400, fontSize: 40, color: "#000000" }}>
+                Trade <span style={{ color: "#AF8C32" }}>Deals</span>
+              </div>
+            </div>
+            <TabSection
+              tabList={tradeDealsTabList}
+              selectedTab={selectedTradeTab}
+              tabFade={tradeTabFade}
+              currentPage={currentTradePage}
+              totalPages={totalTradePages}
+              getCurrentPageItems={getCurrentTradePageItems}
+              onTabClick={handleTradeTabClick}
+              onPageChange={handleTradePageChange}
+            />
+          </div>
+        );
+      case "Offers":
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "400px",
+              fontSize: "24px",
+              color: "#666",
+            }}
+          >
+            Offers Content Coming Soon
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Header />
-      <section
-        style={{
-          width: "100%",
-          height: 387,
-          background: "#f5f6fa",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-          backgroundImage: `url(${AccountBanner})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 1200,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "40px 32px 0 32px",
-          }}
-        >
-          {/* User Profile Left */}
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                width: 121,
-                height: 121,
-                borderRadius: "50%",
-                background: "#d1d5db",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 36,
-                color: "#555",
-                marginRight: 24,
-              }}
-            >
-              {/* Placeholder for profile image */}
-              <span>U</span>
-            </div>
-            <div>
-              <div style={{ fontWeight: 400, fontSize: 29, color: "#FFFFFF" }}>
-                User Name
-              </div>
-              <div style={{ color: "#FFFFFF", fontWeight: 400, fontSize: 19 }}>
-                user@email.com
-              </div>
-            </div>
-          </div>
-          {/* Edit Profile Button Right */}
-          <ProfileActionButton
-            icon={
-              <img
-                src={EditIcon}
-                alt="Edit"
-                style={{ width: 20, height: 20, display: "block" }}
-              />
-            }
-            title="Edit Profile"
-            onClick={handleEditProfile}
-          />
-        </div>
-        {/* Tabs inside HeroSection, at the bottom */}
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "stretch",
-            borderBottom: "1px solid #e5e7eb",
-            marginTop: 32,
-            color: "#FFFFFF",
-          }}
-        >
-          <button
-            style={{
-              flex: 1,
-              background: "none",
-              border: "none",
-              borderBottom: "3px solid #FFFFFF",
-              fontWeight: 400,
-              fontSize: 20,
-              padding: "20px 0",
-              cursor: "pointer",
-              color: "#FFFFFF",
-            }}
-          >
-            My Ads
-          </button>
-          <button
-            style={{
-              flex: 1,
-              background: "none",
-              border: "none",
-              borderBottom: "3px solid transparent",
-              fontWeight: 400,
-              fontSize: 20,
-              padding: "20px 0",
-              cursor: "pointer",
-            }}
-          >
-            Trade Deals
-          </button>
-          <button
-            style={{
-              flex: 1,
-              background: "none",
-              border: "none",
-              borderBottom: "3px solid transparent",
-              fontWeight: 400,
-              fontSize: 20,
-              padding: "20px 0",
-              cursor: "pointer",
-            }}
-          >
-            Offers
-          </button>
-        </div>
-      </section>
+      <AccountHero
+        onEditProfile={handleEditProfile}
+        onTabChange={handleMainTabChange}
+      />
       <div
         style={{ maxWidth: 1200, margin: "40px auto 0 auto", width: "100%" }}
       >
-        {/* My Ads header and Post Ad button */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 32,
-          }}
-        >
-          <div style={{ fontWeight: 400, fontSize: 40, color: "#000000" }}>
-            My <span style={{ color: "#AF8C32" }}>Ads</span>
-          </div>
-          <button
-            style={{
-              width: 216,
-              height: 44,
-              background: "#003A2F",
-              color: "#fff",
-              border: "1px solid #003A2F",
-              borderRadius: 6,
-              fontWeight: 300,
-              fontSize: 16,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              paddingRight: 20,
-              paddingLeft: 20,
-              opacity: postAdFade ? 0 : 1,
-              transition: "opacity 300ms ease-in-out",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-            onClick={handlePostAdClick}
-          >
-            {/* Plus icon */}
-            <img src={Plus} />
-            <span>{selectedTab === 3 ? "Add Request" : "Post Ad"}</span>
-          </button>
-        </div>
-        {/* Replace the tabs section with: */}
-        <TabSection
-          tabList={tabList}
-          selectedTab={selectedTab}
-          tabFade={tabFade}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          getCurrentPageItems={getCurrentPageItems}
-          onTabClick={handleTabClick}
-          onPageChange={handlePageChange}
-        />
+        {renderTabContent()}
       </div>
 
       {/* Update the Edit Profile Modal */}

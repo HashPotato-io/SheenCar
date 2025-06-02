@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCardVariant2 from "@/components/cards/product-card-variant-2";
+import ProductCardVariant2, { ButtonState } from "@/components/cards/product-card-variant-2";
 import Pagination2 from "@/components/ui/pagination2";
 
 interface Car {
@@ -36,7 +36,7 @@ const TabSection: React.FC<TabSectionProps> = ({
   onPageChange,
 }) => {
   // Add function to get status based on tab
-  const getStatusForTab = (tab: string): 'active' | 'completed' | 'closed' | 'pending' | 'rejected' => {
+  const getStatusForTab = (tab: string): 'active' | 'completed' | 'closed' | 'pending' => {
     switch (tab) {
       case 'Active':
         return 'active';
@@ -56,12 +56,12 @@ const TabSection: React.FC<TabSectionProps> = ({
     <>
       {/* Tab Buttons */}
       <div style={{ display: "flex", gap: 12, marginBottom: 32 }}>
-        {tabList.map((tab, idx) => (
+        {tabList?.map((tab, idx) => (
           <button
             key={tab}
             onClick={() => onTabClick(idx)}
             style={{
-              width: 194,
+              width: 210,
               height: 44,
               borderRadius: 24,
               border: "0.7px solid #003A2F",
@@ -99,14 +99,14 @@ const TabSection: React.FC<TabSectionProps> = ({
         >
           {getCurrentPageItems()?.map((car) => {
             // Determine status based on tab and buttonState
-            let status: 'active' | 'completed' | 'closed' | 'pending' | 'rejected' = getStatusForTab(tabList?.[selectedTab]);
+            let status: 'active' | 'completed' | 'closed' | 'pending' = getStatusForTab(tabList?.[selectedTab]);
             
             // For Request tab, determine status based on buttonState
             if (tabList[selectedTab] === 'Request') {
               if (car?.buttonState === 'closeRequest') {
                 status = 'completed';
               } else if (car.buttonState === 'reopenRequest') {
-                status = 'rejected';
+                status = 'pending';
               }
             }
 

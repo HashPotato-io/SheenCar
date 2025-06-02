@@ -37,7 +37,7 @@ type ModalStep =
   | "closeRequest"
   | "deleteAd";
 
-type ButtonState =
+export type ButtonState =
   | "boostAd"
   | "boosted"
   | "renewAd"

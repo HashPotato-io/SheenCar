@@ -8,6 +8,9 @@ interface CloseAdModalProps {
   onClose: () => void;
   onConfirm: () => void;
   daysActive: number;
+  title?: string;
+  message?: string;
+  confirmButtonText?: string;
 }
 
 const CloseAdModal: React.FC<CloseAdModalProps> = ({
@@ -15,12 +18,15 @@ const CloseAdModal: React.FC<CloseAdModalProps> = ({
   onClose,
   onConfirm,
   daysActive,
+  title = "Are You Sure You Want to Close This Ad?",
+  message = `This ad has been active for ${daysActive} days. You may close it now and reopen it once later. After reopening, it must stay open for 5 days before a final, irreversible closure.`,
+  confirmButtonText = "Close Ad"
 }) => {
   return (
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Are You Sure You Want to Close This Ad?"
+      title={title}
       icon={CloseAdIcon}
     >
       <div className="flex flex-col items-center gap-6 w-[339px]">
@@ -34,10 +40,7 @@ const CloseAdModal: React.FC<CloseAdModalProps> = ({
             color: "#585353",
           }}
         >
-          This ad has been active for{" "}
-          <span style={{ fontWeight: 600 }}>{daysActive}</span> days. You may
-          close it now and reopen it once later. After reopening, it must stay
-          open for 5 days before a final, irreversible closure.
+          {message}
         </p>
 
         <CustomButton
@@ -48,7 +51,7 @@ const CloseAdModal: React.FC<CloseAdModalProps> = ({
           }}
           onClick={onConfirm}
         >
-          Close Ad
+          {confirmButtonText}
         </CustomButton>
       </div>
     </CustomModal>

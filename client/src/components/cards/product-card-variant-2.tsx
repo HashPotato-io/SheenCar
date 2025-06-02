@@ -6,6 +6,9 @@ import ProceedToPayModal from "../modals/ProceedToPayModal";
 import RenewBoostModal from "../modals/RenewBoostModal";
 import CloseAdModal from "../modals/CloseAdModal";
 import CloseAdBoostedModal from "../modals/ClosedAdBoostedModal";
+import RenewAdModal from "../modals/RenewAdModal";
+import ReopenAdModal from "../modals/ReopenAdModal";
+import WithdrawAdModal from "../modals/WithdrawAdModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
@@ -19,7 +22,7 @@ type Car = {
   image: string;
 };
 
-type ModalStep = "none" | "boostAd" | "proceedToPay" | "renewBoost" | "closeAd" | "closeAdBoosted";
+type ModalStep = "none" | "boostAd" | "proceedToPay" | "renewBoost" | "closeAd" | "closeAdBoosted" | "renewAd" | "reopenAd" | "withdrawAd";
 
 type ButtonState =
   | "boostAd"
@@ -38,7 +41,7 @@ interface CarCardsProps {
   linkUrl: string;
   small?: boolean;
   buttonState?: ButtonState;
-  status?: "active" | "completed" | "closed";
+  status?: "active" | "completed" | "closed" | "pending";
 }
 
 const Card: React.FC<CarCardsProps> = ({
@@ -96,6 +99,25 @@ const Card: React.FC<CarCardsProps> = ({
 
   const handleCloseAdConfirm = () => {
     setCurrentStep("none");
+  };
+
+  const handleRenewAd = () => {
+    setCurrentStep("renewAd");
+  };
+
+  const handleReopenAd = () => {
+    setCurrentStep("reopenAd");
+  };
+
+  const handleWithdrawAd = () => {
+    console.log("hello")
+    setShowMenu(false);
+    setCurrentStep("withdrawAd");
+  };
+
+  const handleWithdrawAdConfirm = () => {
+    setCurrentStep("none");
+    // Add any additional withdrawal logic here
   };
 
   const getButtonText = (state: ButtonState): string => {
@@ -225,12 +247,22 @@ const Card: React.FC<CarCardsProps> = ({
       className="absolute top-12 right-2 bg-white rounded-lg shadow-lg py-2 z-10"
       style={{ minWidth: "120px" }}
     >
-      <button
-        onClick={handleCloseAd}
-        className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
-      >
-        Close Ad
-      </button>
+      {status === "active" && (
+        <button
+          onClick={handleCloseAd}
+          className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+        >
+          Close Ad
+        </button>
+      )}
+      {status === "pending" && (
+        <button
+          onClick={handleWithdrawAd}
+          className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+        >
+          Withdraw Ad
+        </button>
+      )}
       <button
         onClick={handleDeleteAd}
         className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
@@ -356,7 +388,15 @@ const Card: React.FC<CarCardsProps> = ({
               <CustomButton
                 customStyles={getButtonStyles(buttonState)}
                 onClick={
-                  buttonState === "disabled" ? undefined : handleBoostClick
+                  buttonState === "disabled" 
+                    ? undefined 
+                    : buttonState === "renewAd" 
+                      ? handleRenewAd 
+                      : buttonState === "reopenAd"
+                        ? handleReopenAd
+                        : buttonState === "withdrawAd"
+                          ? handleWithdrawAd
+                          : handleBoostClick
                 }
                 disabled={buttonState === "disabled"}
               >
@@ -413,6 +453,36 @@ const Card: React.FC<CarCardsProps> = ({
         onClose={() => setCurrentStep("none")}
         onConfirm={handleCloseAdConfirm}
         daysActive={daysActive}
+      />
+
+      <RenewAdModal
+        isOpen={currentStep === "renewAd"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={() => {
+          setCurrentStep("none");
+          // Add any additional renewal logic here
+        }}
+        carDetails={{
+          make: car.make,
+          model: car.model,
+          year: car.year,
+        }}
+      />
+
+      <ReopenAdModal
+        isOpen={currentStep === "reopenAd"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={() => {
+          setCurrentStep("none");
+          // Add any additional reopen logic here
+        }}
+      />
+
+      {/* Add WithdrawAdModal */}
+      <WithdrawAdModal
+        isOpen={currentStep === "withdrawAd"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={handleWithdrawAdConfirm}
       />
     </div>
   );

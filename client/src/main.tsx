@@ -8,7 +8,9 @@ import { BrowserRouter } from "react-router-dom";
 createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
    <BrowserRouter>
+   <AuthProvider>
       <App />
+      </AuthProvider>
     </BrowserRouter>
   </QueryClientProvider>
 );

@@ -3,24 +3,22 @@ import CustomModal from "../ui/custom-modal";
 import { CustomButton } from "../ui/custom-button";
 import CloseAdIcon from "../../assets/ClosedAd.svg";
 
-interface MaxListLimitReachedModalProps {
+interface WithdrawAdModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  daysActive: number;
 }
 
-const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
+const WithdrawAdModal: React.FC<WithdrawAdModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  daysActive,
 }) => {
   return (
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Maximum Active Listings Reached!"
+      title="Are You Sure You Want to Withdraw Your Ad?"
       icon={CloseAdIcon}
     >
       <div className="flex flex-col items-center gap-6 w-[339px]">
@@ -34,9 +32,8 @@ const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
             color: "#585353",
           }}
         >
-          You can only have 2 active listings at a time. To post an additional
-          car, you'll need to pay a one-time fee of $10 for exceeding your
-          active ad limit.
+          Your ad is currently under review. Withdrawing it will stop the review process, 
+          and the ad will not be published. You can always resubmit it later.
         </p>
 
         <CustomButton
@@ -47,11 +44,11 @@ const MaxListLimitReachedModal: React.FC<MaxListLimitReachedModalProps> = ({
           }}
           onClick={onConfirm}
         >
-          Proceed to Pay
+          Confirm Withdrawal
         </CustomButton>
       </div>
     </CustomModal>
   );
 };
 
-export default MaxListLimitReachedModal;
+export default WithdrawAdModal; 

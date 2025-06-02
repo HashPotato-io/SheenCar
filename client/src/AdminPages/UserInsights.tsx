@@ -2,6 +2,7 @@ import Sidebar from "@/components/AdminComponents/Sidebar";
 import dummyProfile from "../assets/dummyProfile.svg"
 import { useState } from "react";
 import { Dropdown } from "@/components/AdminComponents/CustomDropdown";
+import CarCards from "@/components/cards/car-cards";
 export default function UserInsights() {
 
     const userDetails = {
@@ -19,6 +20,49 @@ export default function UserInsights() {
         onOffer: 4
 
     }
+    const cars = [
+        {
+            id: 1,
+            make: "Toyota",
+            model: "Camry",
+            year: 2022,
+            price: 25000,
+               image: "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+            id: 2,
+            make: "Honda",
+            model: "Accord",
+            year: 2021,
+            price: 23000,
+             image: "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+            id: 3,
+            make: "Ford",
+            model: "Mustang",
+            year: 2023,
+            price: 35000,
+         image: "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+            id: 4,
+            make: "Tesla",
+            model: "Model 3",
+            year: 2022,
+            price: 45000,
+               image: "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+            id: 5,
+            make: "BMW",
+            model: "X5",
+            year: 2021,
+            price: 60000,
+               image: "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80",
+        },
+    ];
+
 
     const [status, setStatus] = useState("");
     const [make, setMake] = useState("");
@@ -46,10 +90,10 @@ export default function UserInsights() {
                 <h1 className="text-3xl font-semibold mt-6 px-6"
                 >User Insights</h1>
 
-                <div className="flex-1 justify-between flex gap-4  px-6">
+                <div className="flex-1 justify-between flex gap-5  px-6">
 
-                    <div className="flex-grow">
-                        <section className="flex items-center  rounded-lg shadow-md justify-between gap-4 xl:gap-6 py-6 px-6 my-6 bg-white focus:outline-none">
+                    <div className="">
+                        <section className="flex items-center  rounded-lg shadow-md justify-between py-6 px-6 my-6 bg-white focus:outline-none">
                             <Dropdown
                                 placeholder="Status"
                                 options={statusOptions}
@@ -88,11 +132,21 @@ export default function UserInsights() {
                             </button>
                         </section>
                         <section>
+                            <div className="flex flex-wrap gap-6">
+                                {cars.map((car) => (
+                                    <CarCards
+                                        key={car.id}
+                                        car={car}
+                                        linkUrl={`/cars/${car.id}`}
+                                        small={true} 
+                                    />
+                                ))}
+                            </div>
 
                         </section>
                     </div>
-                    <div className="bg-white rounded-lg py-6 my-6 shadow-lg px-8 min-w-sm">
-                        <div className="flex flex-col justify-between items-center mt-4 border-b  border-[#9F9F9F] pb-10">
+                    <div className="bg-white min-w-40 xl:min-w-64 rounded-lg py-6 my-6 shadow-lg px-8 ">
+                        <div className="flex flex-col justify-between items-center min-w-4xl mt-4 border-b  border-[#9F9F9F] pb-10">
 
                             <img src={userDetails.profile} />
                             <p className=" font-semibold text-lg">{userDetails.name}</p>

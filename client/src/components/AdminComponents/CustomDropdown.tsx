@@ -18,7 +18,7 @@ export function Dropdown({
   return (
     <div className={`relative inline-block w-full ${className}`}>
       <select
-        className="appearance-none text-sm  w-full border border-[#171616] rounded-md px-6 py-1  cursor-pointer focus:outline-none"
+        className="appearance-none text-sm  w-full border max-w-24 xl:max-w-32 border-[#171616] rounded-md px-3 xl:px-6 py-1  cursor-pointer focus:outline-none"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
@@ -33,7 +33,7 @@ export function Dropdown({
       </select>
 
       {/* Custom arrow (down chevron) */}
-      <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+      <div className="pointer-events-none absolute inset-y-0 left-16 xl:left-24 flex items-center">
         <svg
           className="h-4 w-4 text-gray-700"
           xmlns="http://www.w3.org/2000/svg"

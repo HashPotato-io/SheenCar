@@ -22,7 +22,16 @@ type Car = {
   image: string;
 };
 
-type ModalStep = "none" | "boostAd" | "proceedToPay" | "renewBoost" | "closeAd" | "closeAdBoosted" | "renewAd" | "reopenAd" | "withdrawAd";
+type ModalStep =
+  | "none"
+  | "boostAd"
+  | "proceedToPay"
+  | "renewBoost"
+  | "closeAd"
+  | "closeAdBoosted"
+  | "renewAd"
+  | "reopenAd"
+  | "withdrawAd";
 
 type ButtonState =
   | "boostAd"
@@ -33,8 +42,7 @@ type ButtonState =
   | "closeRequest"
   | "reopenRequest"
   | "disabled"
-  | "renewBoost"
-  ;
+  | "renewBoost";
 
 interface CarCardsProps {
   car: Car;
@@ -42,6 +50,7 @@ interface CarCardsProps {
   small?: boolean;
   buttonState?: ButtonState;
   status?: "active" | "completed" | "closed" | "pending";
+  dealType?: "sell" | "buy";
 }
 
 const Card: React.FC<CarCardsProps> = ({
@@ -50,10 +59,14 @@ const Card: React.FC<CarCardsProps> = ({
   small,
   buttonState = "boostAd",
   status,
+  dealType,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [currentStep, setCurrentStep] = useState<ModalStep>("none");
   const [daysActive, setDaysActive] = useState(5);
+
+  console.log(dealType);
+  console.log(status, "status");
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -110,7 +123,6 @@ const Card: React.FC<CarCardsProps> = ({
   };
 
   const handleWithdrawAd = () => {
-    console.log("hello")
     setShowMenu(false);
     setCurrentStep("withdrawAd");
   };
@@ -153,7 +165,6 @@ const Card: React.FC<CarCardsProps> = ({
 
     switch (state) {
       case "boosted":
-      case "closeRequest":
       case "reopenRequest":
         return {
           ...baseStyles,
@@ -309,6 +320,9 @@ const Card: React.FC<CarCardsProps> = ({
             }}
           >
             <div className="flex flex-col gap-[4px] ml-[6px]">
+              <div className="">
+                <StatusBadge status={"sell"} />
+              </div>
               <div className="font-normal text-[#171616] leading-[1] text-[14px]">
                 {car.make} {car.model}
               </div>
@@ -367,12 +381,18 @@ const Card: React.FC<CarCardsProps> = ({
           <div
             className="bg-[#EEEEEE] p-[12px] w-[391px] h-[197px] flex flex-col absolute left-0 right-0"
             style={{
-              top: "250px",
+              top: dealType ? "228px" : "250px",
               borderRadius: "13px",
               boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+              height: dealType ? "220px" : "197px",
             }}
           >
             <div className="flex flex-col gap-[10px] ml-[10px] ">
+              {dealType && (
+                <div className="">
+                  <StatusBadge status={dealType} />
+                </div>
+              )}
               <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[27px] font-['Gilroy-SemiBold']">
                 {car.make} {car.model}
               </div>
@@ -388,15 +408,15 @@ const Card: React.FC<CarCardsProps> = ({
               <CustomButton
                 customStyles={getButtonStyles(buttonState)}
                 onClick={
-                  buttonState === "disabled" 
-                    ? undefined 
-                    : buttonState === "renewAd" 
-                      ? handleRenewAd 
-                      : buttonState === "reopenAd"
-                        ? handleReopenAd
-                        : buttonState === "withdrawAd"
-                          ? handleWithdrawAd
-                          : handleBoostClick
+                  buttonState === "disabled"
+                    ? undefined
+                    : buttonState === "renewAd"
+                    ? handleRenewAd
+                    : buttonState === "reopenAd"
+                    ? handleReopenAd
+                    : buttonState === "withdrawAd"
+                    ? handleWithdrawAd
+                    : handleBoostClick
                 }
                 disabled={buttonState === "disabled"}
               >

@@ -740,6 +740,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    dealType: "sell",
     buttonState: "closeRequest"
   },
   {
@@ -751,6 +752,7 @@ const dummyCars = [
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "Request",
+    dealType: "buy",
     buttonState: "closeRequest"
   },
   {
@@ -929,7 +931,7 @@ const Account = () => {
 
   // Calculate total pages based on filtered cars
   const filteredCars = dummyCars.filter(
-    (car) => car.status === tabList[selectedTab]
+    (car) => car?.status === tabList?.[selectedTab]
   );
   const totalPages = Math.ceil(filteredCars.length / itemsPerPage);
 

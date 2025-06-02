@@ -11,6 +11,7 @@ interface Car {
   image: string;
   status: string;
   buttonState: string;
+  dealType?: "sell" | "buy";
 }
 
 interface TabSectionProps {
@@ -96,13 +97,13 @@ const TabSection: React.FC<TabSectionProps> = ({
             marginBottom: 32,
           }}
         >
-          {getCurrentPageItems().map((car) => {
+          {getCurrentPageItems()?.map((car) => {
             // Determine status based on tab and buttonState
-            let status: 'active' | 'completed' | 'closed' | 'pending' | 'rejected' = getStatusForTab(tabList[selectedTab]);
+            let status: 'active' | 'completed' | 'closed' | 'pending' | 'rejected' = getStatusForTab(tabList?.[selectedTab]);
             
             // For Request tab, determine status based on buttonState
             if (tabList[selectedTab] === 'Request') {
-              if (car.buttonState === 'closeRequest') {
+              if (car?.buttonState === 'closeRequest') {
                 status = 'completed';
               } else if (car.buttonState === 'reopenRequest') {
                 status = 'rejected';
@@ -116,6 +117,7 @@ const TabSection: React.FC<TabSectionProps> = ({
                 linkUrl={`/car/${car.id}`}
                 buttonState={car.buttonState as ButtonState}
                 status={status}
+                dealType={car?.dealType}
               />
             );
           })}

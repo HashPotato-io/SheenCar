@@ -38,7 +38,8 @@ type ModalStep =
   | "closeRequest"
   | "deleteAd"
   | "viewDeals"
-  | "withdrawProposal";
+  | "withdrawProposal"
+  | "viewOffers";
 
 export type ButtonState =
   | "boostAd"
@@ -51,7 +52,8 @@ export type ButtonState =
   | "disabled"
   | "renewBoost"
   | "viewDeals"
-  | "withdrawProposal";
+  | "withdrawProposal"
+  | "viewOffers";
 
 interface CarCardsProps {
   car: Car;
@@ -175,6 +177,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "View Deals";
       case "withdrawProposal":
         return "Withdraw Proposal";
+      case "viewOffers":
+        return "View Offers";
       default:
         return "Boost Ad";
     }
@@ -234,6 +238,12 @@ const Card: React.FC<CarCardsProps> = ({
 
     if (state === "withdrawProposal") {
       return () => setCurrentStep("withdrawProposal");
+    }
+
+    if (state === "viewOffers") {
+      return () => {
+        setLocation(`/account?view=offers&id=${car.id}`);
+      };
     }
 
     // Default case - handle boost click

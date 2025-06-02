@@ -36,6 +36,7 @@ import DealCard from "@/components/deal-card";
 import { useLocation, useSearchParams } from "wouter";
 import DealDetailsView from '@/components/deal-details-view';
 
+
 const tabList = ["Active", "Pending", "Closed", "Request"];
 
 // Keep the original tab list for UI navigation
@@ -55,6 +56,24 @@ interface Car {
   tradeWith?: string;
   tabType: string; // For tab filtering
 }
+
+// Add these new interfaces and dummy data after the existing Car interface
+interface Offer {
+  id: number;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  image: string;
+  status: string; // Changed to string to match Car interface
+  buttonState: string; // Added to match Car interface
+  offerAmount: number;
+  offerDate: string;
+  tabType: "My Listings" | "My Offers";
+}
+
+// Add the offers tab list
+const offersTabList = ["My Listings", "My Offers"];
 
 const dummyCars = [
   // Active Tab Cars (18 cars = 2 pages)
@@ -1085,6 +1104,91 @@ const dummyTradeDeals = [
   // ... more Deals Received items ...
 ];
 
+// First, update the dummy offers data to include the correct buttonState
+const dummyOffers = [
+  // My Listings (offers received)
+  {
+    id: 1,
+    make: "Toyota",
+    model: "Camry",
+    year: 2023,
+    price: 25000,
+    image: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
+    status: "pending",
+    buttonState: "viewOffers",
+    offerAmount: 23000,
+    offerDate: "2024-03-15",
+    tabType: "My Listings"
+  },
+  {
+    id: 2,
+    make: "Honda",
+    model: "Civic",
+    year: 2022,
+    price: 22000,
+    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "accepted",
+    buttonState: "viewOffers",
+    offerAmount: 21500,
+    offerDate: "2024-03-14",
+    tabType: "My Listings"
+  },
+  {
+    id: 3,
+    make: "Tesla",
+    model: "Model 3",
+    year: 2023,
+    price: 45000,
+    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "rejected",
+    buttonState: "viewOffers",
+    offerAmount: 42000,
+    offerDate: "2024-03-13",
+    tabType: "My Listings"
+  },
+
+  // My Offers (offers made)
+  {
+    id: 4,
+    make: "BMW",
+    model: "X5",
+    year: 2022,
+    price: 55000,
+    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "pending",
+    buttonState: "pending",
+    offerAmount: 52000,
+    offerDate: "2024-03-15",
+    tabType: "My Offers"
+  },
+  {
+    id: 5,
+    make: "Mercedes",
+    model: "C-Class",
+    year: 2023,
+    price: 48000,
+    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "accepted",
+    buttonState: "accepted",
+    offerAmount: 46000,
+    offerDate: "2024-03-14",
+    tabType: "My Offers"
+  },
+  {
+    id: 6,
+    make: "Audi",
+    model: "A4",
+    year: 2022,
+    price: 42000,
+    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "rejected",
+    buttonState: "rejected",
+    offerAmount: 40000,
+    offerDate: "2024-03-13",
+    tabType: "My Offers"
+  }
+];
+
 const Account = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [tabFade, setTabFade] = useState(false);
@@ -1265,17 +1369,75 @@ const Account = () => {
     setSearchParams({});
   };
 
-  // Modify renderTabContent to handle deal view
+  // Add new state for offers
+  const [selectedOfferTab, setSelectedOfferTab] = useState(0);
+  const [offerTabFade, setOfferTabFade] = useState(false);
+  const [currentOfferPage, setCurrentOfferPage] = useState(1);
+
+  // Update the renderOfferContent function to handle the view offers logic
+  const renderOfferContent = (items: Offer[]) => {
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "24px",
+          marginBottom: 32,
+        }}
+      >
+        {items?.map((offer) => (
+          <ProductCardVariant2
+            key={offer.id}
+            car={{
+              id: offer.id,
+              make: offer.make,
+              model: offer.model,
+              year: offer.year,
+              price: offer.price,
+              image: offer.image,
+              status: offer.status,
+              buttonState: offer.buttonState,
+              tabType: offer.tabType
+            }}
+            linkUrl={`/car/${offer.id}`}
+            buttonState={
+              offersTabList[selectedOfferTab] === "My Listings"
+                ? "viewOffers"
+                : (offer.buttonState as ButtonState)
+            }
+            status={offer.status as any}
+            offerDetails={{
+              amount: offer.offerAmount,
+              date: offer.offerDate
+            }}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  // Update the renderTabContent function to handle the offers view
   const renderTabContent = () => {
-    // If we're viewing a deal, show the deal details
+    // If we're viewing a deal or offer, show the details view
     if (view === "deal" && dealId) {
       return (
         <DealDetailsView
           onCloseTrade={handleCloseDealView}
           onViewProductDetails={() => {
-            // Handle view product details
             console.log("View product details");
           }}
+        />
+      );
+    }
+
+    if (view === "offers" && dealId) {
+      return (
+        <DealDetailsView
+          onCloseTrade={handleCloseDealView}
+          onViewProductDetails={() => {
+            console.log("View product details");
+          }}
+          isOffersView={true}
         />
       );
     }
@@ -1380,15 +1542,54 @@ const Account = () => {
         return (
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              minHeight: "400px",
-              fontSize: "24px",
-              color: "#666",
+              opacity: contentFade ? 0 : 1,
+              transition: "opacity 300ms ease-in-out",
             }}
           >
-            Offers Content Coming Soon
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 32,
+              }}
+            >
+              <div style={{ fontWeight: 400, fontSize: 40, color: "#000000" }}>
+                My <span style={{ color: "#AF8C32" }}>Offers</span>
+              </div>
+            </div>
+            <TabSection
+              tabList={offersTabList}
+              selectedTab={selectedOfferTab}
+              tabFade={offerTabFade}
+              currentPage={currentOfferPage}
+              totalPages={Math.ceil(
+                dummyOffers.filter(
+                  (offer) => offer.tabType === offersTabList[selectedOfferTab]
+                ).length / itemsPerPage
+              )}
+              getCurrentPageItems={() => {
+                const startIndex = (currentOfferPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                return dummyOffers
+                  .filter((offer) => offer.tabType === offersTabList[selectedOfferTab])
+                  .slice(startIndex, endIndex)
+                  .map(offer => ({
+                    ...offer,
+                    buttonState: offer.buttonState
+                  }));
+              }}
+              onTabClick={(index) => {
+                setOfferTabFade(true);
+                setSearchParams({});
+                setTimeout(() => {
+                  setSelectedOfferTab(index);
+                  setOfferTabFade(false);
+                }, 300);
+              }}
+              onPageChange={setCurrentOfferPage}
+              renderCustomContent={renderOfferContent}
+            />
           </div>
         );
       default:

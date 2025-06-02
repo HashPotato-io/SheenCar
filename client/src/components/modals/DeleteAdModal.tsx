@@ -3,28 +3,22 @@ import CustomModal from "../ui/custom-modal";
 import { CustomButton } from "../ui/custom-button";
 import ReopenIcon from "../../assets/reopen.svg";
 
-interface CloseRequestModalProps {
+interface DeleteAdModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  isSecondClosure?: boolean;
 }
 
-const CloseRequestModal: React.FC<CloseRequestModalProps> = ({
+const DeleteAdModal: React.FC<DeleteAdModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  isSecondClosure = false,
 }) => {
   return (
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      title={
-        isSecondClosure
-          ? "Confirm Final Closure of This Request"
-          : "Are You Sure You Want to Close This Request?"
-      }
+      title="Delete This Ad Permanently?"
       icon={ReopenIcon}
     >
       <div className="flex flex-col items-center gap-6 w-[339px]">
@@ -38,16 +32,9 @@ const CloseRequestModal: React.FC<CloseRequestModalProps> = ({
             color: "#585353",
           }}
         >
-          {isSecondClosure ? (
-            "This is your last opportunity to close this request. Once done, it cannot be reopened. If your needs change, you'll need to submit a new request."
-          ) : (
-            <>
-              This request has been active for{" "}
-              <span style={{ color: "#585353", fontWeight: 700 }}>5 days</span>.
-              You may close it now and reopen it once later. After reopening, it
-              must stay open for 5 days before a final, irreversible closure.
-            </>
-          )}
+          Deleting this ad will remove it from your account permanently. This
+          action cannot be undone, and all related data (offers, trades, or
+          boosts) will be lost.
         </p>
 
         <CustomButton
@@ -58,11 +45,11 @@ const CloseRequestModal: React.FC<CloseRequestModalProps> = ({
           }}
           onClick={onConfirm}
         >
-          Close Request
+          Delete Ad
         </CustomButton>
       </div>
     </CustomModal>
   );
 };
 
-export default CloseRequestModal;
+export default DeleteAdModal;

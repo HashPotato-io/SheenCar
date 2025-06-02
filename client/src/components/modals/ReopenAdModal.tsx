@@ -33,7 +33,7 @@ const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
           }}
         >
           This is your first time reopening this ad. Once reopened, it must stay
-          active for at least 5 days before you can close it again. That next
+          active for at least <span style={{ color: "#585353", fontWeight: 700 }}>5 days</span> before you can close it again. That next
           closure will be final and irreversible.
         </p>
 

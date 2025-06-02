@@ -10,6 +10,7 @@ import RenewAdModal from "../modals/RenewAdModal";
 import ReopenAdModal from "../modals/ReopenAdModal";
 import WithdrawAdModal from "../modals/WithdrawAdModal";
 import CloseRequestModal from "../modals/CloseRequestModal";
+import DeleteAdModal from "../modals/DeleteAdModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
@@ -33,7 +34,8 @@ type ModalStep =
   | "renewAd"
   | "reopenAd"
   | "withdrawAd"
-  | "closeRequest";
+  | "closeRequest"
+  | "deleteAd";
 
 type ButtonState =
   | "boostAd"
@@ -86,6 +88,7 @@ const Card: React.FC<CarCardsProps> = ({
 
   const handleDeleteAd = () => {
     setShowMenu(false);
+    setCurrentStep("deleteAd");
   };
 
   const handleBoostClick = () => {
@@ -139,6 +142,11 @@ const Card: React.FC<CarCardsProps> = ({
     setCurrentStep("closeRequest");
   };
 
+  const handleDeleteAdConfirm = () => {
+    setCurrentStep("none");
+    // Add any additional deletion logic here
+  };
+
   const getButtonText = (state: ButtonState): string => {
     switch (state) {
       case "boostAd":
@@ -172,7 +180,7 @@ const Card: React.FC<CarCardsProps> = ({
 
     switch (state) {
       case "boosted":
-      case "reopenRequest":
+        /*       case "reopenRequest": */
         return {
           ...baseStyles,
           opacity: 0.4,
@@ -181,6 +189,35 @@ const Card: React.FC<CarCardsProps> = ({
       default:
         return baseStyles;
     }
+  };
+
+  const getButtonClickHandler = (state: ButtonState) => {
+    if (state === "disabled") {
+      return undefined;
+    }
+
+    if (state === "renewAd") {
+      return handleRenewAd;
+    }
+
+    if (state === "reopenAd") {
+      return handleReopenAd;
+    }
+
+    if (state === "withdrawAd") {
+      return handleWithdrawAd;
+    }
+
+    if (state === "closeRequest") {
+      return handleCloseRequest;
+    }
+
+    if (state === "reopenRequest") {
+      return handleReopenAd;
+    }
+
+    // Default case - handle boost click
+    return handleBoostClick;
   };
 
   const MenuButton = () => {
@@ -422,19 +459,7 @@ const Card: React.FC<CarCardsProps> = ({
             <div className="flex justify-center mt-4">
               <CustomButton
                 customStyles={getButtonStyles(buttonState)}
-                onClick={
-                  buttonState === "disabled"
-                    ? undefined
-                    : buttonState === "renewAd"
-                    ? handleRenewAd
-                    : buttonState === "reopenAd"
-                    ? handleReopenAd
-                    : buttonState === "withdrawAd"
-                    ? handleWithdrawAd
-                    : buttonState === "closeRequest"
-                    ? handleCloseRequest
-                    : handleBoostClick
-                }
+                onClick={getButtonClickHandler(buttonState)}
                 disabled={buttonState === "disabled"}
               >
                 {getButtonText(buttonState)}
@@ -530,6 +555,12 @@ const Card: React.FC<CarCardsProps> = ({
           setCurrentStep("none");
           // Add any additional close request logic here
         }}
+      />
+
+      <DeleteAdModal
+        isOpen={currentStep === "deleteAd"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={handleDeleteAdConfirm}
       />
     </div>
   );

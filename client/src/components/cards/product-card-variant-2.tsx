@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import Arrow from "../../assets/Icon/arrow.svg";
 import BoostAdModal from "../modals/BoostAdModal";
 import ProceedToPayModal from "../modals/ProceedToPayModal";
@@ -35,7 +35,8 @@ type ModalStep =
   | "reopenAd"
   | "withdrawAd"
   | "closeRequest"
-  | "deleteAd";
+  | "deleteAd"
+  | "viewDeals";
 
 export type ButtonState =
   | "boostAd"
@@ -46,7 +47,8 @@ export type ButtonState =
   | "closeRequest"
   | "reopenRequest"
   | "disabled"
-  | "renewBoost";
+  | "renewBoost"
+  | "viewDeals";
 
 interface CarCardsProps {
   car: Car;
@@ -68,6 +70,7 @@ const Card: React.FC<CarCardsProps> = ({
   const [showMenu, setShowMenu] = useState(false);
   const [currentStep, setCurrentStep] = useState<ModalStep>("none");
   const [daysActive, setDaysActive] = useState(5);
+  const [, setLocation] = useLocation();
 
   console.log(dealType);
   console.log(status, "status");
@@ -165,6 +168,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "Reopen Request";
       case "renewBoost":
         return "Renew Boost";
+      case "viewDeals":
+        return "View Deals";
       default:
         return "Boost Ad";
     }
@@ -214,6 +219,12 @@ const Card: React.FC<CarCardsProps> = ({
 
     if (state === "reopenRequest") {
       return handleReopenAd;
+    }
+
+    if (state === "viewDeals") {
+      return () => {
+        setLocation(`/account?view=deal&id=${car.id}`);
+      };
     }
 
     // Default case - handle boost click

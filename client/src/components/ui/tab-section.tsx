@@ -1,5 +1,7 @@
-import React from 'react';
-import ProductCardVariant2, { ButtonState } from "@/components/cards/product-card-variant-2";
+import React from "react";
+import ProductCardVariant2, {
+  ButtonState,
+} from "@/components/cards/product-card-variant-2";
 import Pagination2 from "@/components/ui/pagination2";
 
 interface Car {
@@ -23,6 +25,8 @@ interface TabSectionProps {
   getCurrentPageItems: () => Car[];
   onTabClick: (index: number) => void;
   onPageChange: (page: number) => void;
+  renderCustomContent?: (items: Car[]) => React.ReactNode;
+  hidePagination?: boolean;
 }
 
 const TabSection: React.FC<TabSectionProps> = ({
@@ -34,21 +38,25 @@ const TabSection: React.FC<TabSectionProps> = ({
   getCurrentPageItems,
   onTabClick,
   onPageChange,
+  renderCustomContent,
+  hidePagination = false,
 }) => {
   // Add function to get status based on tab
-  const getStatusForTab = (tab: string): 'active' | 'completed' | 'closed' | 'pending' => {
+  const getStatusForTab = (
+    tab: string
+  ): "active" | "completed" | "closed" | "pending" => {
     switch (tab) {
-      case 'Active':
-        return 'active';
-      case 'Pending':
-        return 'pending';
-      case 'Closed':
-        return 'closed';
-      case 'Request':
+      case "Active":
+        return "active";
+      case "Pending":
+        return "pending";
+      case "Closed":
+        return "closed";
+      case "Request":
         // For Request tab, we'll need to determine status based on buttonState
-        return 'completed'; // Default for Request tab
+        return "completed"; // Default for Request tab
       default:
-        return 'active';
+        return "active";
     }
   };
 
@@ -89,39 +97,29 @@ const TabSection: React.FC<TabSectionProps> = ({
           opacity: tabFade ? 0 : 1,
         }}
       >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "24px",
-            marginBottom: 32,
-          }}
-        >
-          {getCurrentPageItems()?.map((car) => {
-            // Determine status based on tab and buttonState
-            let status: 'active' | 'completed' | 'closed' | 'pending' = getStatusForTab(tabList?.[selectedTab]);
-            
-            // For Request tab, determine status based on buttonState
-            if (tabList[selectedTab] === 'Request') {
-              if (car?.buttonState === 'closeRequest') {
-                status = 'completed';
-              } else if (car.buttonState === 'reopenRequest') {
-                status = 'pending';
-              }
-            }
-
-            return (
+        {renderCustomContent ? (
+          renderCustomContent(getCurrentPageItems())
+        ) : (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "24px",
+              marginBottom: 32,
+            }}
+          >
+            {getCurrentPageItems()?.map((car) => (
               <ProductCardVariant2
                 key={car.id}
                 car={car}
                 linkUrl={`/car/${car.id}`}
                 buttonState={car.buttonState as ButtonState}
-                status={status}
+                status={car.status as "active" | "completed" | "closed" | "pending" | "rejected"}
                 dealType={car?.dealType}
               />
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
         <Pagination2
           currentPage={currentPage}
           totalPages={totalPages}
@@ -132,4 +130,4 @@ const TabSection: React.FC<TabSectionProps> = ({
   );
 };
 
-export default TabSection; 
+export default TabSection;

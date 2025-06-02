@@ -70,7 +70,20 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
 }) => {
   const [showCloseModal, setShowCloseModal] = useState(false);
   const [showAcceptModal, setShowAcceptModal] = useState(false);
+  const [showRejectModal, setShowRejectModal] = useState(false);
+  const [showUnavailableModal, setShowUnavailableModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
+
+  // Add this function to handle product details view
+  const handleViewProductDetails = () => {
+    const isCarAvailable = false; 
+    
+    if (isCarAvailable) {
+      //Todo: Implement the logic to view product details
+    } else {
+      setShowUnavailableModal(true);
+    }
+  };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -143,15 +156,14 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
             user={deal.user}
             tradeWith={deal.tradeWith}
             priceAdjustment={deal.priceAdjustment}
-            onViewDetails={() => {
-              console.log("View details for deal:", deal.id);
-            }}
+            onViewDetails={handleViewProductDetails}
             onAccept={() => {
               setSelectedDeal(deal);
               setShowAcceptModal(true);
             }}
             onReject={() => {
-              console.log("Reject deal:", deal.id);
+              setSelectedDeal(deal);
+              setShowRejectModal(true);
             }}
           />
         ))}
@@ -170,6 +182,19 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
       />
 
       <CloseAdModal
+        isOpen={showRejectModal}
+        onClose={() => setShowRejectModal(false)}
+        onConfirm={() => {
+          console.log("Reject deal:", selectedDeal?.id);
+          setShowRejectModal(false);
+        }}
+        daysActive={0}
+        title="Are You Sure You Want to Reject This Proposal?"
+        message="This action cannot be undone. Once rejected, the buyer will be notified and the proposal will be marked as closed."
+        confirmButtonText="Reject Proposal"
+      />
+
+      <CloseAdModal
         isOpen={showCloseModal}
         onClose={() => setShowCloseModal(false)}
         onConfirm={() => {
@@ -180,6 +205,20 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
         title="Close This Trade?"
         message="This trade has been active for 5 days. You may close it now and reopen it once later. After reopening, it must stay open for another 5 days before a final closure."
         confirmButtonText="Close Trade"
+      />
+
+      {/* Add new modal for unavailable car */}
+      <CloseAdModal
+        isOpen={showUnavailableModal}
+        onClose={() => setShowUnavailableModal(false)}
+        onConfirm={() => {
+          console.log("Reject proposal due to unavailable car");
+          setShowUnavailableModal(false);
+        }}
+        daysActive={0}
+        title="Buyer's Car is No Longer Available"
+        message="This car is no longer available for trade."
+        confirmButtonText="Reject Proposal"
       />
     </div>
   );

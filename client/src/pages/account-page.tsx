@@ -1096,6 +1096,7 @@ const Account = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const view = searchParams.get("view");
   const dealId = searchParams.get("id");
+  const [,location]= useLocation();
 
   // Calculate total pages based on filtered cars
   const filteredCars = dummyCars.filter(

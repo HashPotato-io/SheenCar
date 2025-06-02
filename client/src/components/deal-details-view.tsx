@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CustomButton } from '@/components/ui/custom-button';
 import DealCard from '@/components/deal-card';
+import CloseAdModal from './modals/CloseAdModal';
+import AcceptTradeModal from './modals/AcceptTradeModal';
+
 
 // Define the interface for deal data
 interface Deal {
@@ -65,7 +68,9 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
   onCloseTrade,
   onViewProductDetails
 }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [showCloseModal, setShowCloseModal] = useState(false);
+  const [showAcceptModal, setShowAcceptModal] = useState(false);
+  const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -116,7 +121,7 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
               width: "244px",
               height: "40px",
             }}
-            onClick={onCloseTrade}
+            onClick={() => setShowCloseModal(true)}
           >
             Close Trade
           </CustomButton>
@@ -142,7 +147,8 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
               console.log("View details for deal:", deal.id);
             }}
             onAccept={() => {
-              console.log("Accept deal:", deal.id);
+              setSelectedDeal(deal);
+              setShowAcceptModal(true);
             }}
             onReject={() => {
               console.log("Reject deal:", deal.id);
@@ -150,6 +156,31 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
           />
         ))}
       </div>
+
+      <AcceptTradeModal
+        isOpen={showAcceptModal}
+        onClose={() => setShowAcceptModal(false)}
+        onConfirm={() => {
+          console.log("Accept deal:", selectedDeal?.id);
+        }}
+        onChatWithBuyer={() => {
+          console.log("Chat with buyer:", selectedDeal?.user.name);
+          setShowAcceptModal(false);
+        }}
+      />
+
+      <CloseAdModal
+        isOpen={showCloseModal}
+        onClose={() => setShowCloseModal(false)}
+        onConfirm={() => {
+          onCloseTrade();
+          setShowCloseModal(false);
+        }}
+        daysActive={5}
+        title="Close This Trade?"
+        message="This trade has been active for 5 days. You may close it now and reopen it once later. After reopening, it must stay open for another 5 days before a final closure."
+        confirmButtonText="Close Trade"
+      />
     </div>
   );
 };

@@ -3,13 +3,13 @@ import CustomModal from "../ui/custom-modal";
 import { CustomButton } from "../ui/custom-button";
 import ReopenIcon from "../../assets/reopen.svg";
 
-interface ReopenAdModalProps {
+interface DeleteAdModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
 }
 
-const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
+const DeleteAdModal: React.FC<DeleteAdModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
@@ -18,7 +18,7 @@ const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Reopen This Ad?"
+      title="Delete This Ad Permanently?"
       icon={ReopenIcon}
     >
       <div className="flex flex-col items-center gap-6 w-[339px]">
@@ -32,9 +32,9 @@ const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
             color: "#585353",
           }}
         >
-          This is your first time reopening this ad. Once reopened, it must stay
-          active for at least <span style={{ color: "#585353", fontWeight: 700 }}>5 days</span> before you can close it again. That next
-          closure will be final and irreversible.
+          Deleting this ad will remove it from your account permanently. This
+          action cannot be undone, and all related data (offers, trades, or
+          boosts) will be lost.
         </p>
 
         <CustomButton
@@ -45,11 +45,11 @@ const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
           }}
           onClick={onConfirm}
         >
-          Reopen Ad
+          Delete Ad
         </CustomButton>
       </div>
     </CustomModal>
   );
 };
 
-export default ReopenAdModal;
+export default DeleteAdModal;

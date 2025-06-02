@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import Arrow from "../../assets/Icon/arrow.svg";
 import BoostAdModal from "../modals/BoostAdModal";
 import ProceedToPayModal from "../modals/ProceedToPayModal";
@@ -9,6 +9,8 @@ import CloseAdBoostedModal from "../modals/ClosedAdBoostedModal";
 import RenewAdModal from "../modals/RenewAdModal";
 import ReopenAdModal from "../modals/ReopenAdModal";
 import WithdrawAdModal from "../modals/WithdrawAdModal";
+import CloseRequestModal from "../modals/CloseRequestModal";
+import DeleteAdModal from "../modals/DeleteAdModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
@@ -22,9 +24,21 @@ type Car = {
   image: string;
 };
 
-type ModalStep = "none" | "boostAd" | "proceedToPay" | "renewBoost" | "closeAd" | "closeAdBoosted" | "renewAd" | "reopenAd" | "withdrawAd";
+type ModalStep =
+  | "none"
+  | "boostAd"
+  | "proceedToPay"
+  | "renewBoost"
+  | "closeAd"
+  | "closeAdBoosted"
+  | "renewAd"
+  | "reopenAd"
+  | "withdrawAd"
+  | "closeRequest"
+  | "deleteAd"
+  | "viewDeals";
 
-type ButtonState =
+export type ButtonState =
   | "boostAd"
   | "boosted"
   | "renewAd"
@@ -34,7 +48,7 @@ type ButtonState =
   | "reopenRequest"
   | "disabled"
   | "renewBoost"
-  ;
+  | "viewDeals";
 
 interface CarCardsProps {
   car: Car;
@@ -42,6 +56,7 @@ interface CarCardsProps {
   small?: boolean;
   buttonState?: ButtonState;
   status?: "active" | "completed" | "closed" | "pending";
+  dealType?: "sell" | "buy";
 }
 
 const Card: React.FC<CarCardsProps> = ({
@@ -50,10 +65,15 @@ const Card: React.FC<CarCardsProps> = ({
   small,
   buttonState = "boostAd",
   status,
+  dealType,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [currentStep, setCurrentStep] = useState<ModalStep>("none");
   const [daysActive, setDaysActive] = useState(5);
+  const [, setLocation] = useLocation();
+
+  console.log(dealType);
+  console.log(status, "status");
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -71,6 +91,7 @@ const Card: React.FC<CarCardsProps> = ({
 
   const handleDeleteAd = () => {
     setShowMenu(false);
+    setCurrentStep("deleteAd");
   };
 
   const handleBoostClick = () => {
@@ -110,7 +131,6 @@ const Card: React.FC<CarCardsProps> = ({
   };
 
   const handleWithdrawAd = () => {
-    console.log("hello")
     setShowMenu(false);
     setCurrentStep("withdrawAd");
   };
@@ -118,6 +138,16 @@ const Card: React.FC<CarCardsProps> = ({
   const handleWithdrawAdConfirm = () => {
     setCurrentStep("none");
     // Add any additional withdrawal logic here
+  };
+
+  const handleCloseRequest = () => {
+    setShowMenu(false);
+    setCurrentStep("closeRequest");
+  };
+
+  const handleDeleteAdConfirm = () => {
+    setCurrentStep("none");
+    // Add any additional deletion logic here
   };
 
   const getButtonText = (state: ButtonState): string => {
@@ -138,6 +168,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "Reopen Request";
       case "renewBoost":
         return "Renew Boost";
+      case "viewDeals":
+        return "View Deals";
       default:
         return "Boost Ad";
     }
@@ -153,8 +185,7 @@ const Card: React.FC<CarCardsProps> = ({
 
     switch (state) {
       case "boosted":
-      case "closeRequest":
-      case "reopenRequest":
+        /*       case "reopenRequest": */
         return {
           ...baseStyles,
           opacity: 0.4,
@@ -163,6 +194,41 @@ const Card: React.FC<CarCardsProps> = ({
       default:
         return baseStyles;
     }
+  };
+
+  const getButtonClickHandler = (state: ButtonState) => {
+    if (state === "disabled") {
+      return undefined;
+    }
+
+    if (state === "renewAd") {
+      return handleRenewAd;
+    }
+
+    if (state === "reopenAd") {
+      return handleReopenAd;
+    }
+
+    if (state === "withdrawAd") {
+      return handleWithdrawAd;
+    }
+
+    if (state === "closeRequest") {
+      return handleCloseRequest;
+    }
+
+    if (state === "reopenRequest") {
+      return handleReopenAd;
+    }
+
+    if (state === "viewDeals") {
+      return () => {
+        setLocation(`/account?view=deal&id=${car.id}`);
+      };
+    }
+
+    // Default case - handle boost click
+    return handleBoostClick;
   };
 
   const MenuButton = () => {
@@ -256,12 +322,20 @@ const Card: React.FC<CarCardsProps> = ({
         </button>
       )}
       {status === "pending" && (
-        <button
-          onClick={handleWithdrawAd}
-          className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
-        >
-          Withdraw Ad
-        </button>
+        <>
+          <button
+            onClick={handleWithdrawAd}
+            className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+          >
+            Withdraw Ad
+          </button>
+          <button
+            onClick={handleCloseRequest}
+            className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+          >
+            Close Request
+          </button>
+        </>
       )}
       <button
         onClick={handleDeleteAd}
@@ -309,6 +383,9 @@ const Card: React.FC<CarCardsProps> = ({
             }}
           >
             <div className="flex flex-col gap-[4px] ml-[6px]">
+              <div className="">
+                <StatusBadge status={"sell"} />
+              </div>
               <div className="font-normal text-[#171616] leading-[1] text-[14px]">
                 {car.make} {car.model}
               </div>
@@ -367,37 +444,33 @@ const Card: React.FC<CarCardsProps> = ({
           <div
             className="bg-[#EEEEEE] p-[12px] w-[391px] h-[197px] flex flex-col absolute left-0 right-0"
             style={{
-              top: "250px",
+              top: dealType ? "228px" : "250px",
               borderRadius: "13px",
               boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+              height: dealType ? "220px" : "197px",
             }}
           >
             <div className="flex flex-col gap-[10px] ml-[10px] ">
+              {dealType && (
+                <div className="">
+                  <StatusBadge status={dealType} />
+                </div>
+              )}
               <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[27px] font-['Gilroy-SemiBold']">
-                {car.make} {car.model}
+                {car?.make} {car?.model}
               </div>
               <div className="align-middle font-normal text-[#585353] leading-[100%] tracking-[-0.01em] text-[18px] font-['Poppins']">
-                {car.year}
+                {car?.year}
               </div>
               <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[26px] font-['Gilroy-SemiBold']">
-                Price: ${car.price.toLocaleString()}
+                Price: ${car?.price.toLocaleString()}
               </div>
             </div>
 
             <div className="flex justify-center mt-4">
               <CustomButton
                 customStyles={getButtonStyles(buttonState)}
-                onClick={
-                  buttonState === "disabled" 
-                    ? undefined 
-                    : buttonState === "renewAd" 
-                      ? handleRenewAd 
-                      : buttonState === "reopenAd"
-                        ? handleReopenAd
-                        : buttonState === "withdrawAd"
-                          ? handleWithdrawAd
-                          : handleBoostClick
-                }
+                onClick={getButtonClickHandler(buttonState)}
                 disabled={buttonState === "disabled"}
               >
                 {getButtonText(buttonState)}
@@ -411,9 +484,9 @@ const Card: React.FC<CarCardsProps> = ({
         isOpen={currentStep === "boostAd"}
         onClose={handleBoostAdClose}
         carDetails={{
-          make: car.make,
-          model: car.model,
-          year: car.year,
+          make: car?.make,
+          model: car?.model,
+          year: car?.year,
         }}
         onProceed={handleProceedToPay}
       />
@@ -483,6 +556,22 @@ const Card: React.FC<CarCardsProps> = ({
         isOpen={currentStep === "withdrawAd"}
         onClose={() => setCurrentStep("none")}
         onConfirm={handleWithdrawAdConfirm}
+      />
+
+      {/* Add CloseRequestModal */}
+      <CloseRequestModal
+        isOpen={currentStep === "closeRequest"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={() => {
+          setCurrentStep("none");
+          // Add any additional close request logic here
+        }}
+      />
+
+      <DeleteAdModal
+        isOpen={currentStep === "deleteAd"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={handleDeleteAdConfirm}
       />
     </div>
   );

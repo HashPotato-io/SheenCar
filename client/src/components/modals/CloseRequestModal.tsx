@@ -3,22 +3,28 @@ import CustomModal from "../ui/custom-modal";
 import { CustomButton } from "../ui/custom-button";
 import ReopenIcon from "../../assets/reopen.svg";
 
-interface ReopenAdModalProps {
+interface CloseRequestModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  isSecondClosure?: boolean;
 }
 
-const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
+const CloseRequestModal: React.FC<CloseRequestModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
+  isSecondClosure = false,
 }) => {
   return (
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Reopen This Ad?"
+      title={
+        isSecondClosure
+          ? "Confirm Final Closure of This Request"
+          : "Are You Sure You Want to Close This Request?"
+      }
       icon={ReopenIcon}
     >
       <div className="flex flex-col items-center gap-6 w-[339px]">
@@ -32,9 +38,16 @@ const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
             color: "#585353",
           }}
         >
-          This is your first time reopening this ad. Once reopened, it must stay
-          active for at least <span style={{ color: "#585353", fontWeight: 700 }}>5 days</span> before you can close it again. That next
-          closure will be final and irreversible.
+          {isSecondClosure ? (
+            "This is your last opportunity to close this request. Once done, it cannot be reopened. If your needs change, you'll need to submit a new request."
+          ) : (
+            <>
+              This request has been active for{" "}
+              <span style={{ color: "#585353", fontWeight: 700 }}>5 days</span>.
+              You may close it now and reopen it once later. After reopening, it
+              must stay open for 5 days before a final, irreversible closure.
+            </>
+          )}
         </p>
 
         <CustomButton
@@ -45,11 +58,11 @@ const ReopenAdModal: React.FC<ReopenAdModalProps> = ({
           }}
           onClick={onConfirm}
         >
-          Reopen Ad
+          Close Request
         </CustomButton>
       </div>
     </CustomModal>
   );
 };
 
-export default ReopenAdModal;
+export default CloseRequestModal;

@@ -27,6 +27,7 @@ import {
 import CustomPhoneInput from "@/components/ui/phone-input";
 import TabSection from "@/components/ui/tab-section";
 import AccountBanner from "../assets/account-banner.png";
+import RequestTypeModal from "@/components/modals/request-type-modal";
 
 const tabList = ["Active", "Pending", "Closed", "Request"];
 
@@ -956,12 +957,31 @@ const Account = () => {
     }
   };
 
+  // Add new state for request modal
+  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+
+  // Update handlePostAdClick
   const handlePostAdClick = () => {
-    setPostAdFade(true);
-    setTimeout(() => {
-      setPostAdFade(false);
-      // No navigation as per requirements
-    }, 300);
+    if (selectedTab === 3) { // Request tab
+      setIsRequestModalOpen(true);
+    } else {
+      setPostAdFade(true);
+      setTimeout(() => {
+        setPostAdFade(false);
+        // Handle regular post ad logic
+      }, 300);
+    }
+  };
+
+  // Add handlers for request type selection
+  const handleSellRequest = () => {
+    setIsRequestModalOpen(false);
+    // Add your sell request logic here
+  };
+
+  const handleBuyRequest = () => {
+    setIsRequestModalOpen(false);
+    // Add your buy request logic here
   };
 
   // Add new state for modal
@@ -1156,7 +1176,7 @@ const Account = () => {
           >
             {/* Plus icon */}
             <img src={Plus} />
-            <span>Post Ad</span>
+            <span>{selectedTab === 3 ? "Add Request" : "Post Ad"}</span>
           </button>
         </div>
         {/* Replace the tabs section with: */}
@@ -1383,6 +1403,13 @@ const Account = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      <RequestTypeModal
+        isOpen={isRequestModalOpen}
+        onClose={() => setIsRequestModalOpen(false)}
+        onSellClick={handleSellRequest}
+        onBuyClick={handleBuyRequest}
+      />
 
       <Footer />
     </>

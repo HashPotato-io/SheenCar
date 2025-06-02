@@ -9,6 +9,7 @@ import CloseAdBoostedModal from "../modals/ClosedAdBoostedModal";
 import RenewAdModal from "../modals/RenewAdModal";
 import ReopenAdModal from "../modals/ReopenAdModal";
 import WithdrawAdModal from "../modals/WithdrawAdModal";
+import CloseRequestModal from "../modals/CloseRequestModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
@@ -31,7 +32,8 @@ type ModalStep =
   | "closeAdBoosted"
   | "renewAd"
   | "reopenAd"
-  | "withdrawAd";
+  | "withdrawAd"
+  | "closeRequest";
 
 type ButtonState =
   | "boostAd"
@@ -130,6 +132,11 @@ const Card: React.FC<CarCardsProps> = ({
   const handleWithdrawAdConfirm = () => {
     setCurrentStep("none");
     // Add any additional withdrawal logic here
+  };
+
+  const handleCloseRequest = () => {
+    setShowMenu(false);
+    setCurrentStep("closeRequest");
   };
 
   const getButtonText = (state: ButtonState): string => {
@@ -267,12 +274,20 @@ const Card: React.FC<CarCardsProps> = ({
         </button>
       )}
       {status === "pending" && (
-        <button
-          onClick={handleWithdrawAd}
-          className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
-        >
-          Withdraw Ad
-        </button>
+        <>
+          <button
+            onClick={handleWithdrawAd}
+            className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+          >
+            Withdraw Ad
+          </button>
+          <button
+            onClick={handleCloseRequest}
+            className="w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+          >
+            Close Request
+          </button>
+        </>
       )}
       <button
         onClick={handleDeleteAd}
@@ -394,13 +409,13 @@ const Card: React.FC<CarCardsProps> = ({
                 </div>
               )}
               <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[27px] font-['Gilroy-SemiBold']">
-                {car.make} {car.model}
+                {car?.make} {car?.model}
               </div>
               <div className="align-middle font-normal text-[#585353] leading-[100%] tracking-[-0.01em] text-[18px] font-['Poppins']">
-                {car.year}
+                {car?.year}
               </div>
               <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[26px] font-['Gilroy-SemiBold']">
-                Price: ${car.price.toLocaleString()}
+                Price: ${car?.price.toLocaleString()}
               </div>
             </div>
 
@@ -416,6 +431,8 @@ const Card: React.FC<CarCardsProps> = ({
                     ? handleReopenAd
                     : buttonState === "withdrawAd"
                     ? handleWithdrawAd
+                    : buttonState === "closeRequest"
+                    ? handleCloseRequest
                     : handleBoostClick
                 }
                 disabled={buttonState === "disabled"}
@@ -431,9 +448,9 @@ const Card: React.FC<CarCardsProps> = ({
         isOpen={currentStep === "boostAd"}
         onClose={handleBoostAdClose}
         carDetails={{
-          make: car.make,
-          model: car.model,
-          year: car.year,
+          make: car?.make,
+          model: car?.model,
+          year: car?.year,
         }}
         onProceed={handleProceedToPay}
       />
@@ -503,6 +520,16 @@ const Card: React.FC<CarCardsProps> = ({
         isOpen={currentStep === "withdrawAd"}
         onClose={() => setCurrentStep("none")}
         onConfirm={handleWithdrawAdConfirm}
+      />
+
+      {/* Add CloseRequestModal */}
+      <CloseRequestModal
+        isOpen={currentStep === "closeRequest"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={() => {
+          setCurrentStep("none");
+          // Add any additional close request logic here
+        }}
       />
     </div>
   );

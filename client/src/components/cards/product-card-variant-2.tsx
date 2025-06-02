@@ -11,6 +11,7 @@ import ReopenAdModal from "../modals/ReopenAdModal";
 import WithdrawAdModal from "../modals/WithdrawAdModal";
 import CloseRequestModal from "../modals/CloseRequestModal";
 import DeleteAdModal from "../modals/DeleteAdModal";
+import WithdrawTradeProposalModal from "../modals/WithdrawTradeProposalModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
@@ -36,7 +37,8 @@ type ModalStep =
   | "withdrawAd"
   | "closeRequest"
   | "deleteAd"
-  | "viewDeals";
+  | "viewDeals"
+  | "withdrawProposal";
 
 export type ButtonState =
   | "boostAd"
@@ -48,7 +50,8 @@ export type ButtonState =
   | "reopenRequest"
   | "disabled"
   | "renewBoost"
-  | "viewDeals";
+  | "viewDeals"
+  | "withdrawProposal";
 
 interface CarCardsProps {
   car: Car;
@@ -170,6 +173,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "Renew Boost";
       case "viewDeals":
         return "View Deals";
+      case "withdrawProposal":
+        return "Withdraw Proposal";
       default:
         return "Boost Ad";
     }
@@ -225,6 +230,10 @@ const Card: React.FC<CarCardsProps> = ({
       return () => {
         setLocation(`/account?view=deal&id=${car.id}`);
       };
+    }
+
+    if (state === "withdrawProposal") {
+      return () => setCurrentStep("withdrawProposal");
     }
 
     // Default case - handle boost click
@@ -572,6 +581,15 @@ const Card: React.FC<CarCardsProps> = ({
         isOpen={currentStep === "deleteAd"}
         onClose={() => setCurrentStep("none")}
         onConfirm={handleDeleteAdConfirm}
+      />
+
+      <WithdrawTradeProposalModal
+        isOpen={currentStep === "withdrawProposal"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={() => {
+          setCurrentStep("none");
+          // Add any additional withdrawal logic here
+        }}
       />
     </div>
   );

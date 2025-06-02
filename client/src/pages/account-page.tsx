@@ -1247,6 +1247,8 @@ const Account = () => {
             buttonState={
               tradeDealsTabList[selectedTradeTab] === "Deals Received"
                 ? "viewDeals"
+                : tradeDealsTabList[selectedTradeTab] === "My Trade Proposals"
+                ? "withdrawProposal"
                 : (car.buttonState as ButtonState)
             }
             status={car.status as any}

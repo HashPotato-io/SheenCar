@@ -8,6 +8,19 @@ import NotFound from "@/pages/not-found";
 import { UserRoutes } from "./routes/user-routes";
 import { DealerRoutes } from "./routes/dealer-routes";
 import { AdminRoutes } from "./routes/admin-routes";
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+
+// Add ScrollToTop component
+function ScrollToTop() {
+  const [location] = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+}
 
 function Router() {
   return (
@@ -33,6 +46,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
+          <ScrollToTop />
           <Router />
         </TooltipProvider>
       </QueryClientProvider>

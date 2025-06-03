@@ -37,7 +37,6 @@ import { useLocation, useSearchParams } from "wouter";
 import DealDetailsView from "@/components/deal-details-view";
 import OfferDetailsView from "@/components/offer-details-view";
 
-
 const tabList = ["Active", "Pending", "Closed", "Request"];
 
 // Keep the original tab list for UI navigation
@@ -1390,10 +1389,17 @@ const Account = () => {
   const [offerTabFade, setOfferTabFade] = useState(false);
   const [currentOfferPage, setCurrentOfferPage] = useState(1);
 
-  // Update the renderOfferContent function to handle the view offers logic
+  // Update the renderOfferContent function
   const renderOfferContent = (items: Offer[]) => {
     return (
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", marginBottom: 32 }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "24px",
+          marginBottom: 32,
+        }}
+      >
         {items?.map((offer) => (
           <ProductCardVariant2
             key={offer.id}
@@ -1404,12 +1410,18 @@ const Account = () => {
               year: offer.year,
               price: offer.price,
               image: offer.image,
-              status: offer.status,
-              buttonState: "withdrawOffer",
+              buttonState:
+                offersTabList[selectedOfferTab] === "My Listings"
+                  ? "viewOffers"
+                  : "withdrawOffer",
               tabType: offer.tabType,
             }}
             linkUrl={`/car/${offer.id}`}
-            buttonState="withdrawOffer"
+            buttonState={
+              offersTabList[selectedOfferTab] === "My Listings"
+                ? "viewOffers"
+                : "withdrawOffer"
+            }
             status={offer.status as any}
             disabled={offer.status !== "pending"}
             offerDetails={{
@@ -1443,10 +1455,10 @@ const Account = () => {
         <OfferDetailsView
           onCloseOffer={handleCloseDealView}
           onViewProductDetails={() => {
-            location(`/trade-car/sellers/${sellerId}/cars/${carId}`);
+            location(`/trade-car/sellers/5/cars/1`);
           }}
-          sellerId={sellerId}
-          carId={carId}
+          sellerId={"5"}
+          carId={"1"}
         />
       );
     }

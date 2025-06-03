@@ -4,6 +4,7 @@ import DealCard from '@/components/deal-card';
 import CloseAdModal from './modals/CloseAdModal';
 import AcceptOfferModal from './modals/AcceptOfferModal';
 import OfferCard from '@/components/offer-card';
+import NoItemsFound from './no-items-found';
 
 
 // Rename interface from Deal to Offer
@@ -157,22 +158,28 @@ const OfferDetailsView: React.FC<OfferDetailsViewProps> = ({
           marginBottom: "24px",
         }}
       >
-        {dummyOffers.map((offer) => (
-          <OfferCard
-            key={offer.id}
-            user={offer.user}
-            priceAdjustment={offer.priceAdjustment}
-            timeAgo={offer.timeAgo}
-            onAccept={() => {
-              setSelectedOffer(offer);
-              setShowAcceptModal(true);
-            }}
-            onReject={() => {
-              setSelectedOffer(offer);
-              setShowRejectModal(true);
-            }}
-          />
-        ))}
+        {dummyOffers.length > 0  ? (
+          dummyOffers.map((offer) => (
+            <OfferCard
+              key={offer.id}
+              user={offer.user}
+              priceAdjustment={offer.priceAdjustment}
+              timeAgo={offer.timeAgo}
+              sellerId={offer.id}
+              carId={offer.id}
+              onAccept={() => {
+                setSelectedOffer(offer);
+                setShowAcceptModal(true);
+              }}
+              onReject={() => {
+                setSelectedOffer(offer);
+                setShowRejectModal(true);
+              }}
+            />
+          ))
+        ) : (
+          <NoItemsFound title="No offers found" />
+        )}
       </div>
 
       <AcceptOfferModal

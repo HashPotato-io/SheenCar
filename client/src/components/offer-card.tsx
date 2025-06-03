@@ -11,8 +11,8 @@ interface OfferCardProps {
   timeAgo: string;
   onAccept: () => void;
   onReject: () => void;
-  sellerId: string;
-  carId: string;
+  sellerId: string | number;
+  carId: string | number;
 }
 
 const OfferCard: React.FC<OfferCardProps> = ({

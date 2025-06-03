@@ -3,6 +3,7 @@ import { CustomButton } from '@/components/ui/custom-button';
 import DealCard from '@/components/deal-card';
 import CloseAdModal from './modals/CloseAdModal';
 import AcceptTradeModal from './modals/AcceptTradeModal';
+import NoItemsFound from './no-items-found';
 
 
 // Define the interface for deal data
@@ -150,23 +151,27 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
           marginBottom: "24px",
         }}
       >
-        {dummyDeals.map((deal) => (
-          <DealCard
-            key={deal.id}
-            user={deal.user}
-            tradeWith={deal.tradeWith}
-            priceAdjustment={deal.priceAdjustment}
-            onViewDetails={handleViewProductDetails}
-            onAccept={() => {
-              setSelectedDeal(deal);
-              setShowAcceptModal(true);
-            }}
-            onReject={() => {
-              setSelectedDeal(deal);
-              setShowRejectModal(true);
-            }}
-          />
-        ))}
+        {dummyDeals.length > 0 ? (
+          dummyDeals.map((deal) => (
+            <DealCard
+              key={deal.id}
+              user={deal.user}
+              tradeWith={deal.tradeWith}
+              priceAdjustment={deal.priceAdjustment}
+              onViewDetails={handleViewProductDetails}
+              onAccept={() => {
+                setSelectedDeal(deal);
+                setShowAcceptModal(true);
+              }}
+              onReject={() => {
+                setSelectedDeal(deal);
+                setShowRejectModal(true);
+              }}
+            />
+          ))
+        ) : (
+          <NoItemsFound title="No deals found" />
+        )}
       </div>
 
       <AcceptTradeModal

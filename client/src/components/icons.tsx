@@ -657,3 +657,29 @@ export const InActiveStepper: React.FC<IconProps> = ({
     </svg>
   );
 };
+
+export const CompleteStepper: React.FC<IconProps> = ({
+  className = "",
+  width = 28,
+  height = 28,
+  fill = "black",
+}) => {
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="31.7733" cy="31.8651" r="31.7733" fill="#137440" />
+      <path
+        d="M20.1875 33.521L26.8069 40.1404L43.3555 23.5918"
+        stroke="white"
+        stroke-width="3.97166"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};

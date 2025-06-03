@@ -3,10 +3,12 @@ import {
   CustomSelect,
   CustomSelectContent,
   CustomSelectTrigger,
+  CustomSelectItem,
 } from "@/components/ui/custom-select";
 import { CustomInput } from "@/components/ui/custom-input";
 import { CustomTextarea } from "@/components/ui/custom-textarea";
 import CarSvg from "../assets/car.svg";
+import * as SelectPrimitive from "@radix-ui/react-select";
 
 // Import or define the FormData interface
 interface FormData {
@@ -58,32 +60,48 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             {/* Make and Model */}
             <div style={{ display: "flex", gap: "26px" }}>
               <div>
-                <CustomSelect>
+                <CustomSelect value={formData.make} onValueChange={(value) => handleInputChange("make", value)}>
                   <CustomSelectTrigger
                     style={{ width: "364px" }}
                     variant="outline"
                     required
-                    value={formData.make}
-                    onChange={(e) => handleInputChange("make", e.target.value)}
                   >
-                    Make
+                    <SelectPrimitive.Value placeholder="Make" />
                   </CustomSelectTrigger>
-                  <CustomSelectContent></CustomSelectContent>
+                  <CustomSelectContent>
+                    <CustomSelectItem value="toyota">Toyota</CustomSelectItem>
+                    <CustomSelectItem value="honda">Honda</CustomSelectItem>
+                    <CustomSelectItem value="ford">Ford</CustomSelectItem>
+                    <CustomSelectItem value="bmw">BMW</CustomSelectItem>
+                    <CustomSelectItem value="mercedes">Mercedes</CustomSelectItem>
+                    <CustomSelectItem value="audi">Audi</CustomSelectItem>
+                    <CustomSelectItem value="volkswagen">Volkswagen</CustomSelectItem>
+                    <CustomSelectItem value="hyundai">Hyundai</CustomSelectItem>
+                    <CustomSelectItem value="kia">Kia</CustomSelectItem>
+                    <CustomSelectItem value="nissan">Nissan</CustomSelectItem>
+                  </CustomSelectContent>
                 </CustomSelect>
               </div>
 
               <div>
-                <CustomSelect>
+                <CustomSelect value={formData.model} onValueChange={(value) => handleInputChange("model", value)}>
                   <CustomSelectTrigger
                     style={{ width: "364px" }}
                     variant="outline"
                     required
-                    value={formData.model}
-                    onChange={(e) => handleInputChange("model", e.target.value)}
                   >
-                    Model
+                    <SelectPrimitive.Value placeholder="Model" />
                   </CustomSelectTrigger>
-                  <CustomSelectContent></CustomSelectContent>
+                  <CustomSelectContent>
+                    <CustomSelectItem value="sedan">Sedan</CustomSelectItem>
+                    <CustomSelectItem value="suv">SUV</CustomSelectItem>
+                    <CustomSelectItem value="hatchback">Hatchback</CustomSelectItem>
+                    <CustomSelectItem value="coupe">Coupe</CustomSelectItem>
+                    <CustomSelectItem value="wagon">Wagon</CustomSelectItem>
+                    <CustomSelectItem value="convertible">Convertible</CustomSelectItem>
+                    <CustomSelectItem value="pickup">Pickup</CustomSelectItem>
+                    <CustomSelectItem value="van">Van</CustomSelectItem>
+                  </CustomSelectContent>
                 </CustomSelect>
               </div>
             </div>
@@ -91,17 +109,20 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             {/* Year, Zip Code, and Interior Color */}
             <div style={{ display: "flex", gap: "15.3px" }}>
               <div>
-                <CustomSelect>
+                <CustomSelect value={formData.year} onValueChange={(value) => handleInputChange("year", value)}>
                   <CustomSelectTrigger
                     variant="outline"
                     required
                     style={{ width: "239px" }}
-                    value={formData.year}
-                    onChange={(e) => handleInputChange("year", e.target.value)}
                   >
-                    Year
+                    <SelectPrimitive.Value placeholder="Year" />
                   </CustomSelectTrigger>
-                  <CustomSelectContent></CustomSelectContent>
+                  <CustomSelectContent>
+                    {Array.from({ length: 25 }, (_, i) => {
+                      const year = new Date().getFullYear() - i;
+                      return <CustomSelectItem key={year} value={year.toString()}>{year}</CustomSelectItem>;
+                    })}
+                  </CustomSelectContent>
                 </CustomSelect>
               </div>
               <div>
@@ -110,7 +131,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   placeholder="Zip Code"
                   className="w-[242px] h-[40px]"
                   value={formData.zipCode}
-                  onChange={(e) => handleInputChange("zipCode", e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("zipCode", e.target.value)}
                 />
               </div>
               <div>
@@ -119,7 +140,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   placeholder="Interior Color"
                   className="w-[242px] h-[40px]"
                   value={formData.interiorColor}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("interiorColor", e.target.value)
                   }
                 />
@@ -135,7 +156,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   placeholder="No. of doors"
                   className="w-[234px] h-[40px]"
                   value={formData.doors}
-                  onChange={(e) => handleInputChange("doors", e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("doors", e.target.value)}
                   required
                 />
               </div>
@@ -146,7 +167,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   placeholder="Seating Capacity"
                   className="w-[234px] h-[40px]"
                   value={formData.seatingCapacity}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("seatingCapacity", e.target.value)
                   }
                   required
@@ -162,7 +183,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                 placeholder="Body Type"
                 className="h-[40px]"
                 value={formData.bodyType}
-                onChange={(e) => handleInputChange("bodyType", e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("bodyType", e.target.value)}
                 required
               />
             </div>
@@ -170,19 +191,21 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             {/* Condition and Mileage */}
             <div style={{ display: "flex", gap: "24px" }}>
               <div>
-                <CustomSelect>
+                <CustomSelect value={formData.condition} onValueChange={(value) => handleInputChange("condition", value)}>
                   <CustomSelectTrigger
                     style={{ width: "364px" }}
                     variant="outline"
                     required
-                    value={formData.condition}
-                    onChange={(e) =>
-                      handleInputChange("condition", e.target.value)
-                    }
                   >
-                    Condition
+                    <SelectPrimitive.Value placeholder="Condition" />
                   </CustomSelectTrigger>
-                  <CustomSelectContent></CustomSelectContent>
+                  <CustomSelectContent>
+                    <CustomSelectItem value="excellent">Excellent</CustomSelectItem>
+                    <CustomSelectItem value="very-good">Very Good</CustomSelectItem>
+                    <CustomSelectItem value="good">Good</CustomSelectItem>
+                    <CustomSelectItem value="fair">Fair</CustomSelectItem>
+                    <CustomSelectItem value="poor">Poor</CustomSelectItem>
+                  </CustomSelectContent>
                 </CustomSelect>
               </div>
               <div>
@@ -192,7 +215,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   placeholder="Mileage"
                   className="h-[40px]"
                   value={formData.mileage}
-                  onChange={(e) => handleInputChange("mileage", e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("mileage", e.target.value)}
                   required
                 />
               </div>
@@ -206,7 +229,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                 placeholder="ZIP Code"
                 className="h-[40px]"
                 value={formData.zipCode}
-                onChange={(e) => handleInputChange("zipCode", e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("zipCode", e.target.value)}
                 required
               />
             </div>
@@ -224,7 +247,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             placeholder="VIN (Vehicle Identification Number)"
             className="w-[752px] h-[40px]"
             value={formData.vin}
-            onChange={(e) => handleInputChange("vin", e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("vin", e.target.value)}
           />
         </div>
 
@@ -237,7 +260,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             variant="outline"
             placeholder="Description"
             value={formData.description}
-            onChange={(e) => handleInputChange("description", e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleInputChange("description", e.target.value)}
             className="w-[752px]"
           />
         </div>

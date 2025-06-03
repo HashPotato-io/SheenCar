@@ -80,6 +80,7 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    background-color: #F8F8F8;
   }
 
   ::-webkit-scrollbar {

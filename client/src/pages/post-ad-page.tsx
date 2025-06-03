@@ -1,746 +1,635 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "wouter";
-import { useAuth } from "@/hooks/use-auth";
-import { useMutation } from "@tanstack/react-query";
-import { useToast } from "@/hooks/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { apiRequest, queryClient } from "@/lib/queryClient";
-import { insertCarSchema } from "@shared/schema";
-import { carMakes, carModels, carTypes } from "@/lib/car-types";
+import Stepper from "../components/Stepper";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Loader2, Upload, Camera, Trash2 } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+  CustomSelect,
+  CustomSelectContent,
+  CustomSelectTrigger,
+} from "@/components/ui/custom-select";
+import { CustomInput } from "@/components/ui/custom-input";
+import { CustomTextarea } from "@/components/ui/custom-textarea";
+import { CustomButton } from "@/components/ui/custom-button";
+import CarSvg from "../assets/car4.svg";
+import CarDetailsForm from "../components/CarDetailsForm";
+import { CustomCheckbox } from "@/components/ui/custom-checkbox";
 
-const MAX_IMAGES = 10;
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+const steps = [
+  {
+    name: "Basic Information",
+    style: { marginLeft: "-24px" },
+  },
+  {
+    name: "Features",
+    style: { marginLeft: "-2px" },
+  },
+  {
+    name: "Specifications",
+    style: { marginLeft: "-6px" },
+  },
+  {
+    name: "Pricing & Listing",
+    style: {},
+  },
+];
 
-const postAdSchema = insertCarSchema.extend({
-  images: z
-    .any()
-    .refine((files) => files?.length >= 1, "At least one image is required")
-    .refine(
-      (files) => Array.from(files).every((file: File) => file.size <= MAX_FILE_SIZE),
-      `Each file should be less than 5MB`
-    )
-    .refine(
-      (files) =>
-        Array.from(files).every((file: File) =>
-          ACCEPTED_IMAGE_TYPES.includes(file.type)
-        ),
-      "Only .jpg, .jpeg, .png and .webp formats are supported"
-    ),
-});
+// Add interface for form data
+interface FormData {
+  make: string;
+  model: string;
+  year: string;
+  mileage: string;
+  transmission: string;
+  fuelType: string;
+  condition: string;
+  seatingCapacity: string;
+  description: string;
+  price: string;
+  doors: string;
+  mileageType: string;
+  engineSize?: string;
+  powerOutput?: string;
+  currency?: string;
+  zipCode: string;
+  interiorColor: string;
+  bodyType: string;
+  vin: string;
+  immobilizer: boolean;
+  abs: boolean;
+  childLock: boolean;
+  isofix: boolean;
+  alloyWheels: boolean;
+  sideMirrorsWithIndicators: boolean;
+  frontFogLights: boolean;
+  displaySize: string;
+  frontSpeakers: boolean;
+  usbAuxCable: boolean;
+  rearSpeakers: boolean;
+  seatMaterial: string;
+  airConditioner: boolean;
+  powerWindows: boolean;
+  keylessEntry: boolean;
+  climateControl: boolean;
+  rearFoldingSeat: boolean;
+}
 
-type PostAdFormValues = z.infer<typeof postAdSchema>;
-
-export default function PostAdPage() {
-  const { user } = useAuth();
-  const { toast } = useToast();
-  const [, navigate] = useLocation();
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
-  const [imagePreviewUrls, setImagePreviewUrls] = useState<string[]>([]);
-
-  const form = useForm<PostAdFormValues>({
-    resolver: zodResolver(postAdSchema),
-    defaultValues: {
-      sellerId: user?.id,
-      title: "",
-      description: "",
-      price: 0,
-      year: new Date().getFullYear(),
-      make: "",
-      model: "",
-      trim: "",
-      bodyType: "",
-      mileage: 0,
-      exteriorColor: "",
-      interiorColor: "",
-      fuelType: "Gasoline",
-      transmission: "Automatic",
-      drivetrain: "FWD",
-      engine: "",
-      vin: "",
-      condition: "Used",
-      features: [],
-      sellerType: "Private Seller",
-      location: "",
-      images: undefined,
-    },
+const PostAdPage = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [, setLocation] = useLocation();
+  const [formData, setFormData] = useState<FormData>({
+    make: "",
+    model: "",
+    year: "",
+    mileage: "",
+    transmission: "",
+    fuelType: "",
+    condition: "",
+    seatingCapacity: "",
+    description: "",
+    price: "",
+    doors: "",
+    mileageType: "",
+    zipCode: "",
+    interiorColor: "",
+    bodyType: "",
+    vin: "",
+    immobilizer: false,
+    abs: false,
+    childLock: false,
+    isofix: false,
+    alloyWheels: false,
+    sideMirrorsWithIndicators: false,
+    frontFogLights: false,
+    displaySize: "",
+    frontSpeakers: false,
+    usbAuxCable: false,
+    rearSpeakers: false,
+    seatMaterial: "",
+    airConditioner: false,
+    powerWindows: false,
+    keylessEntry: false,
+    climateControl: false,
+    rearFoldingSeat: false,
   });
 
-  const { mutate: postAd, isPending } = useMutation({
-    mutationFn: async (values: PostAdFormValues) => {
-      const formData = new FormData();
-      
-      // Append all car data
-      Object.entries(values).forEach(([key, value]) => {
-        if (key !== "images") {
-          if (Array.isArray(value)) {
-            formData.append(key, JSON.stringify(value));
-          } else {
-            formData.append(key, String(value));
-          }
-        }
-      });
-      
-      // Append images
-      if (imageFiles.length > 0) {
-        imageFiles.forEach((file) => {
-          formData.append("images", file);
-        });
-      }
-      
-      const res = await fetch("/api/cars", {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
-      
-      if (!res.ok) {
-        const error = await res.text();
-        throw new Error(error || "Failed to post ad");
-      }
-      
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/user/cars"] });
-      toast({
-        title: "Ad posted successfully",
-        description: "Your car listing has been created",
-      });
-      navigate("/dashboard");
-    },
-    onError: (error) => {
-      toast({
-        title: "Failed to post ad",
-        description: error.message,
-        variant: "destructive",
-      });
-    },
-  });
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
-    
-    const newFiles = Array.from(files);
-    if (imageFiles.length + newFiles.length > MAX_IMAGES) {
-      toast({
-        title: "Too many images",
-        description: `You can upload a maximum of ${MAX_IMAGES} images`,
-        variant: "destructive",
-      });
-      return;
+  // Add validation function
+  const validateCurrentStep = () => {
+    console.log(formData);
+    switch (currentStep) {
+      case 0:
+        return (
+          formData?.make !== "" &&
+          formData?.model !== "" &&
+          formData?.year !== "" &&
+          formData?.mileage !== "" &&
+          formData?.doors !== "" &&
+          formData?.seatingCapacity !== "" &&
+          formData?.condition !== "" &&
+          /*           formData?.mileageType !== "" && */
+          formData?.description !== ""
+        );
+      case 1:
+        return formData.transmission && formData.fuelType;
+      case 2:
+        return formData.engineSize && formData.powerOutput;
+      case 3:
+        return formData.price && formData.currency;
+      default:
+        return true;
     }
-    
-    const newPreviews: string[] = [];
-    
-    newFiles.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        newPreviews.push(reader.result as string);
-        if (newPreviews.length === newFiles.length) {
-          setImageFiles([...imageFiles, ...newFiles]);
-          setImagePreviewUrls([...imagePreviewUrls, ...newPreviews]);
-          form.setValue("images", [...imageFiles, ...newFiles]);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
   };
 
-  const removeImage = (index: number) => {
-    const newFiles = [...imageFiles];
-    const newPreviews = [...imagePreviewUrls];
-    newFiles.splice(index, 1);
-    newPreviews.splice(index, 1);
-    setImageFiles(newFiles);
-    setImagePreviewUrls(newPreviews);
-    form.setValue("images", newFiles);
+  const handleNext = () => {
+    if (validateCurrentStep()) {
+      setCompletedSteps((prev) => [...prev, currentStep]);
+
+      if (currentStep < steps.length - 1) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        // Handle form submission
+        console.log("Form submitted:", formData);
+        setLocation("/account");
+      }
+    } else {
+      alert("Please fill in all required fields");
+    }
   };
 
-  function onSubmit(values: PostAdFormValues) {
-    postAd(values);
-  }
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+      setCompletedSteps((prev) => prev.filter((step) => step !== currentStep));
+    } else {
+      setLocation("/account");
+    }
+  };
 
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-1 bg-neutral-50 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-2 font-montserrat">
-            Post Your <span className="text-secondary">Car</span>
-          </h1>
-          <p className="text-neutral-600 mb-8">
-            Fill out the form below to list your car on SheenCar
-          </p>
-          
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Car Details</CardTitle>
-                      <CardDescription>
-                        Basic information about your car
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <FormField
-                        control={form.control}
-                        name="title"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Listing Title</FormLabel>
-                            <FormControl>
-                              <Input placeholder="e.g., 2020 Toyota Camry XSE in Excellent Condition" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+  const handleInputChange = (
+    field: keyof FormData,
+    value: string | boolean
+  ) => {
+    setFormData({ ...formData, [field]: value });
+  };
+
+  const renderStepContent = () => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <CarDetailsForm
+            formData={formData}
+            handleInputChange={handleInputChange}
+          />
+        );
+      case 1:
+        return (
+          <div style={{ display: "flex", gap: "40px" }}>
+            <div className="flex flex-col gap-8">
+              <div className="text-[34px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-[#000000]">
+                Highlight Your <span className="text-[#AF8C32]">Car's</span>{" "}
+                Features
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                }}
+              >
+                <div className="flex flex-col gap-8">
+                  <p className="text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
+                    Safety Feature
+                  </p>
+                  <div className="flex flex-col gap-8">
+                    <div style={{ display: "flex", gap: "20px" }}>
+                      <CustomInput
+                        required
+                        variant="outline"
+                        placeholder="No. of Airbags"
+                        className="w-[364px] h-[40px]"
+                        value={formData.zipCode}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          handleInputChange("zipCode", e.target.value)
+                        }
                       />
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="year"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Year</FormLabel>
-                              <FormControl>
-                                <Input
-                                  type="number"
-                                  min={1900}
-                                  max={new Date().getFullYear() + 1}
-                                  {...field}
-                                  onChange={e => field.onChange(parseInt(e.target.value))}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="price"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Price ($)</FormLabel>
-                              <FormControl>
-                                <Input
-                                  type="number"
-                                  min={0}
-                                  placeholder="0"
-                                  {...field}
-                                  onChange={e => field.onChange(parseInt(e.target.value))}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="make"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Make</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select Make" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  {carMakes.map((make) => (
-                                    <SelectItem key={make.id} value={make.id}>
-                                      {make.name}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="model"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Model</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                                disabled={!form.watch("make")}
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder={form.watch("make") ? "Select Model" : "Select Make First"} />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  {carModels
-                                    .filter(model => model.makeId === form.watch("make"))
-                                    .map((model) => (
-                                      <SelectItem key={model.id} value={model.id}>
-                                        {model.name}
-                                      </SelectItem>
-                                    ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="trim"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Trim</FormLabel>
-                              <FormControl>
-                                <Input placeholder="e.g., XSE, Sport, Limited" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="mileage"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Mileage</FormLabel>
-                              <FormControl>
-                                <Input
-                                  type="number"
-                                  min={0}
-                                  placeholder="0"
-                                  {...field}
-                                  onChange={e => field.onChange(parseInt(e.target.value))}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <FormField
-                        control={form.control}
-                        name="description"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Description</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder="Describe your car in detail - include condition, history, features, and any other relevant information"
-                                className="resize-y min-h-[150px]"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+                      <CustomInput
+                        required
+                        variant="outline"
+                        placeholder="No. of Seatbelt"
+                        className="w-[364px] h-[40px]"
+                        value={formData.zipCode}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          handleInputChange("zipCode", e.target.value)
+                        }
                       />
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Vehicle Specifications</CardTitle>
-                      <CardDescription>
-                        Detailed specifications of your vehicle
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="bodyType"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Body Type</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select Body Type" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  {carTypes.map((type) => (
-                                    <SelectItem key={type.id} value={type.id}>
-                                      {type.name}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
+                    </div>
+
+                    <div className="flex gap-[220px]">
+                      <div className="flex flex-col gap-4">
+                        <CustomCheckbox
+                          label="Immobilizer"
+                          name="safetyFeatures"
+                          value="immobilizer"
+                          checked={formData.immobilizer}
+                          onChange={(checked) =>
+                            handleInputChange("immobilizer", checked)
+                          }
                         />
-                        
-                        <FormField
-                          control={form.control}
-                          name="condition"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Condition</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select Condition" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="New">New</SelectItem>
-                                  <SelectItem value="Used">Used</SelectItem>
-                                  <SelectItem value="Certified Pre-Owned">Certified Pre-Owned</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
+                        <CustomCheckbox
+                          label="ABS (Anti-Lock Braking)"
+                          name="safetyFeatures"
+                          value="abs"
+                          checked={formData.abs}
+                          onChange={(value) => handleInputChange("abs", value)}
                         />
                       </div>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="exteriorColor"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Exterior Color</FormLabel>
-                              <FormControl>
-                                <Input placeholder="e.g., Pearl White, Midnight Black" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
+                      <div className="flex flex-col gap-4">
+                        <CustomCheckbox
+                          label="Child Lock"
+                          name="safetyFeatures"
+                          value="childLock"
+                          checked={formData.childLock}
+                          onChange={(value) =>
+                            handleInputChange("childLock", value)
+                          }
                         />
-                        
-                        <FormField
-                          control={form.control}
-                          name="interiorColor"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Interior Color</FormLabel>
-                              <FormControl>
-                                <Input placeholder="e.g., Black Leather, Tan Cloth" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
+                        <CustomCheckbox
+                          label="ISOFIX Child Seat Anchors"
+                          name="safetyFeatures"
+                          value="isofix"
+                          checked={formData.isofix}
+                          onChange={(value) =>
+                            handleInputChange("isofix", value)
+                          }
                         />
                       </div>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="fuelType"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Fuel Type</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select Fuel Type" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="Gasoline">Gasoline</SelectItem>
-                                  <SelectItem value="Diesel">Diesel</SelectItem>
-                                  <SelectItem value="Hybrid">Hybrid</SelectItem>
-                                  <SelectItem value="Electric">Electric</SelectItem>
-                                  <SelectItem value="Plug-in Hybrid">Plug-in Hybrid</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="transmission"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Transmission</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select Transmission" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="Automatic">Automatic</SelectItem>
-                                  <SelectItem value="Manual">Manual</SelectItem>
-                                  <SelectItem value="CVT">CVT</SelectItem>
-                                  <SelectItem value="DCT">Dual Clutch (DCT)</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="drivetrain"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Drivetrain</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select Drivetrain" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="FWD">Front-Wheel Drive (FWD)</SelectItem>
-                                  <SelectItem value="RWD">Rear-Wheel Drive (RWD)</SelectItem>
-                                  <SelectItem value="AWD">All-Wheel Drive (AWD)</SelectItem>
-                                  <SelectItem value="4WD">Four-Wheel Drive (4WD)</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="engine"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Engine</FormLabel>
-                              <FormControl>
-                                <Input placeholder="e.g., 2.5L 4-Cylinder, V6 3.5L" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <FormField
-                        control={form.control}
-                        name="vin"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>VIN</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Vehicle Identification Number" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 </div>
-                
-                <div className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Photos</CardTitle>
-                      <CardDescription>
-                        Upload high-quality photos of your car (max 10)
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <FormField
-                        control={form.control}
-                        name="images"
-                        render={({ field: { onChange, value, ...field } }) => (
-                          <FormItem>
-                            <FormControl>
-                              <div className="space-y-4">
-                                <div className="border-2 border-dashed border-neutral-300 rounded-lg p-6 text-center">
-                                  <Camera className="h-10 w-10 text-neutral-400 mx-auto mb-4" />
-                                  <p className="mb-2 text-sm text-neutral-500">
-                                    Drag and drop images here, or click to browse
-                                  </p>
-                                  <Button
-                                    type="button"
-                                    variant="outline"
-                                    onClick={() => document.getElementById("image-upload")?.click()}
-                                  >
-                                    <Upload className="h-4 w-4 mr-2" /> Browse Files
-                                  </Button>
-                                  <input
-                                    id="image-upload"
-                                    type="file"
-                                    multiple
-                                    accept=".jpg,.jpeg,.png,.webp"
-                                    className="hidden"
-                                    onChange={handleImageUpload}
-                                    {...field}
-                                  />
-                                </div>
-                                
-                                {imagePreviewUrls.length > 0 && (
-                                  <div className="grid grid-cols-2 gap-4">
-                                    {imagePreviewUrls.map((url, index) => (
-                                      <div key={index} className="relative">
-                                        <img
-                                          src={url}
-                                          alt={`Preview ${index + 1}`}
-                                          className="w-full h-24 object-cover rounded-md"
-                                        />
-                                        <Button
-                                          type="button"
-                                          variant="destructive"
-                                          size="icon"
-                                          className="absolute top-1 right-1 h-6 w-6"
-                                          onClick={() => removeImage(index)}
-                                        >
-                                          <Trash2 className="h-3 w-3" />
-                                        </Button>
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-                            </FormControl>
-                            <FormDescription>
-                              Upload at least one photo of your car. First image will be the cover.
-                            </FormDescription>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+                <div className="flex flex-col gap-8">
+                  <p className="text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
+                    Exterior Features
+                  </p>
+                  <div className="flex gap-[220px]">
+                    <div className="flex flex-col gap-4">
+                      <CustomCheckbox
+                        label="Alloy Wheels"
+                        name="exteriorFeatures"
+                        value="alloyWheels"
+                        checked={formData.alloyWheels}
+                        onChange={(checked) =>
+                          handleInputChange("alloyWheels", checked)
+                        }
                       />
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Seller Information</CardTitle>
-                      <CardDescription>
-                        Your contact information for buyers
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <FormField
-                        control={form.control}
-                        name="sellerType"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Seller Type</FormLabel>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select Seller Type" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="Private Seller">Private Seller</SelectItem>
-                                <SelectItem value="Dealer">Dealer</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+                      <CustomCheckbox
+                        label="Side Mirrors with Indicators"
+                        name="exteriorFeatures"
+                        value="sideMirrorsWithIndicators"
+                        checked={formData.sideMirrorsWithIndicators}
+                        onChange={(value) =>
+                          handleInputChange("sideMirrorsWithIndicators", value)
+                        }
                       />
-                      
-                      <FormField
-                        control={form.control}
-                        name="location"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Location</FormLabel>
-                            <FormControl>
-                              <Input placeholder="City, State or ZIP Code" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <CustomCheckbox
+                        label="Front Fog Lights"
+                        name="exteriorFeatures"
+                        value="frontFogLights"
+                        checked={formData.frontFogLights}
+                        onChange={(value) =>
+                          handleInputChange("frontFogLights", value)
+                        }
                       />
-                    </CardContent>
-                  </Card>
-                  
-                  <Button type="submit" className="w-full" disabled={isPending}>
-                    {isPending ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Posting Ad...
-                      </>
-                    ) : (
-                      "Post Ad"
-                    )}
-                  </Button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-8">
+                  <p className="text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
+                    Infotainment Features
+                  </p>
+                  <div className="flex gap-[40px]">
+                    <div className="flex flex-col gap-4">
+                      <CustomInput
+                        required
+                        variant="outline"
+                        placeholder="Display Size"
+                        className="w-[364px] h-[40px]"
+                        value={formData.displaySize}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          handleInputChange("displaySize", e.target.value)
+                        }
+                      />
+                      <CustomCheckbox
+                        label="Front Speakers"
+                        name="infotainmentFeatures"
+                        value="frontSpeakers"
+                        checked={formData.frontSpeakers}
+                        onChange={(value) =>
+                          handleInputChange("frontSpeakers", value)
+                        }
+                      />
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <CustomCheckbox
+                        label="USB & Aux Cable"
+                        name="infotainmentFeatures"
+                        value="usbAuxCable"
+                        checked={formData.usbAuxCable}
+                        onChange={(value) =>
+                          handleInputChange("usbAuxCable", value)
+                        }
+                      />
+                      <CustomCheckbox
+                        label="Rear Speakers"
+                        name="infotainmentFeatures"
+                        value="rearSpeakers"
+                        checked={formData.rearSpeakers}
+                        onChange={(value) =>
+                          handleInputChange("rearSpeakers", value)
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-8">
+                  <p className="text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
+                    Comfort and Convenience
+                  </p>
+                  <div className="flex gap-[40px]">
+                    <div className="flex flex-col gap-4">
+                      <CustomInput
+                        required
+                        variant="outline"
+                        placeholder="Seat Material"
+                        className="w-[364px] h-[40px]"
+                        value={formData.seatMaterial}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          handleInputChange("seatMaterial", e.target.value)
+                        }
+                      />
+                      <CustomCheckbox
+                        label="Air Conditioner"
+                        name="comfortFeatures"
+                        value="airConditioner"
+                        checked={formData.airConditioner}
+                        onChange={(value) =>
+                          handleInputChange("airConditioner", value)
+                        }
+                      />
+                      <CustomCheckbox
+                        label="Power Windows"
+                        name="comfortFeatures"
+                        value="powerWindows"
+                        checked={formData.powerWindows}
+                        onChange={(value) =>
+                          handleInputChange("powerWindows", value)
+                        }
+                      />
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <CustomCheckbox
+                        label="Keyless Entry"
+                        name="comfortFeatures"
+                        value="keylessEntry"
+                        checked={formData.keylessEntry}
+                        onChange={(value) =>
+                          handleInputChange("keylessEntry", value)
+                        }
+                      />
+                      <CustomCheckbox
+                        label="Climate Control"
+                        name="comfortFeatures"
+                        value="climateControl"
+                        checked={formData.climateControl}
+                        onChange={(value) =>
+                          handleInputChange("climateControl", value)
+                        }
+                      />
+                      <CustomCheckbox
+                        label="Rear Folding Seat"
+                        name="comfortFeatures"
+                        value="rearFoldingSeat"
+                        checked={formData.rearFoldingSeat}
+                        onChange={(value) =>
+                          handleInputChange("rearFoldingSeat", value)
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </form>
-          </Form>
+            </div>
+            {/* Right Column - Car Illustration */}
+            <div className="flex flex-col gap-4 items-center mt-[100px]">
+              <div className="flex item-center justify-center bg-[#D7FFF1] w-[249px] h-[249px] rounded-[206px]">
+                <img
+                  src={CarSvg}
+                  alt="car-illustration"
+                  width="195"
+                  height="111"
+                />
+              </div>
+              <p className="w-[353px] text-[16px] font-['Poppins'] font-[300] leading-[21px] text-center text-[#585353]">
+                Buyers love knowing what makes your car stand out. Select the
+                features and options it comes with — from tech upgrades to
+                safety perks and beyond.
+              </p>
+            </div>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="flex gap-8">
+            <div className="flex-1 space-y-6">
+              <div>
+                <h2 className="text-2xl font-semibold mb-2">
+                  Car <span className="text-teal-600">Specifications</span>
+                </h2>
+                <p className="text-gray-600 text-sm mb-6">
+                  Additional specifications
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Engine Size
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full p-3 border border-gray-300 rounded-md"
+                    placeholder="e.g., 2.0L"
+                    value={formData.engineSize || ""}
+                    onChange={(e) =>
+                      handleInputChange("engineSize", e.target.value)
+                    }
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Power Output
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full p-3 border border-gray-300 rounded-md"
+                    placeholder="e.g., 150 HP"
+                    value={formData.powerOutput || ""}
+                    onChange={(e) =>
+                      handleInputChange("powerOutput", e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="w-80 flex flex-col items-center">
+              <div className="w-64 h-64 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+                <svg
+                  width="120"
+                  height="80"
+                  viewBox="0 0 120 80"
+                  className="text-teal-600"
+                >
+                  {/* Car Specifications SVG */}
+                  <path
+                    fill="currentColor"
+                    d="M20 45c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm80 0c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zM15 35h90c2.8 0 5-2.2 5-5V20c0-5.5-4.5-10-10-10H20c-5.5 0-10 4.5-10 10v10c0 2.8 2.2 5 5 5z"
+                  />
+                </svg>
+              </div>
+              <div className="text-center px-4">
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Add technical specifications of your car. These details are
+                  important for buyers who are looking for specific performance
+                  characteristics.
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="flex gap-8">
+            <div className="flex-1 space-y-6">
+              <div>
+                <h2 className="text-2xl font-semibold mb-2">
+                  Pricing & <span className="text-teal-600">Listing</span>
+                </h2>
+                <p className="text-gray-600 text-sm mb-6">
+                  Set your price and listing preferences
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Price
+                  </label>
+                  <input
+                    type="number"
+                    className="w-full p-3 border border-gray-300 rounded-md"
+                    placeholder="Enter price"
+                    value={formData.price}
+                    onChange={(e) => handleInputChange("price", e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Currency
+                  </label>
+                  <select
+                    className="w-full p-3 border border-gray-300 rounded-md bg-white"
+                    value={formData.currency || "USD"}
+                    onChange={(e) =>
+                      handleInputChange("currency", e.target.value)
+                    }
+                  >
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-80 flex flex-col items-center">
+              <div className="w-64 h-64 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+                <svg
+                  width="120"
+                  height="80"
+                  viewBox="0 0 120 80"
+                  className="text-teal-600"
+                >
+                  {/* Pricing SVG */}
+                  <path
+                    fill="currentColor"
+                    d="M20 45c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm80 0c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zM15 35h90c2.8 0 5-2.2 5-5V20c0-5.5-4.5-10-10-10H20c-5.5 0-10 4.5-10 10v10c0 2.8 2.2 5 5 5z"
+                  />
+                </svg>
+              </div>
+              <div className="text-center px-4">
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Set your asking price and preferred currency. Make sure to
+                  research similar listings to set a competitive price.
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div>
+      <Header />
+
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-[46px] font-[400] leading-[100%] tracking-[-0.01em] text-center text-black font-['Gilroy-SemiBold'] mb-8">
+            Car Listing Details
+          </h1>
+
+          <Stepper
+            steps={steps}
+            currentStep={currentStep}
+            completedSteps={completedSteps}
+          />
         </div>
-      </main>
+
+        {/* Content */}
+        <div>{renderStepContent()}</div>
+
+        {/* Navigation Buttons */}
+        <div className="flex gap-10 mt-14">
+          <CustomButton
+            onClick={handleBack}
+            variant="outline"
+            customStyles={{ width: "355px", height: "40px" }}
+            outlineColor="#AF8C32"
+          >
+            {currentStep === 0 ? "Cancel" : "Back"}
+          </CustomButton>
+          <CustomButton
+            onClick={handleNext}
+            /*       disabled={!validateCurrentStep()} */
+            customStyles={{ width: "354px", height: "40px" }}
+          >
+            {currentStep === steps.length - 1 ? "Submit" : "Next"}
+          </CustomButton>
+        </div>
+      </div>
       <Footer />
     </div>
   );
-}
+};
+
+export default PostAdPage;

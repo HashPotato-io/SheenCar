@@ -1,0 +1,40 @@
+import React from "react";
+import { ActiveStepper, InActiveStepper } from "./icons";
+
+interface Step {
+  name: string;
+  style?: React.CSSProperties;
+}
+
+interface StepperProps {
+  steps: Step[];
+  currentStep: number;
+}
+
+const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
+  return (
+    <div className="flex justify-center items-center mb-12">
+      {steps?.map((step, index) => (
+        <div key={step.name} className="flex items-center">
+          <div className="flex flex-col">
+            {index <= currentStep ? (
+              <ActiveStepper className="w-[66px] h-[63.55px]" />
+            ) : (
+              <InActiveStepper className="w-[66px] h-[63.55px]" />
+            )}
+            <span
+              className={`text-xs mt-2 font-['Poppins'] font-normal text-[18px] leading-[100%] tracking-[1%] text-[#000000]`}
+            >
+              {step.name}
+            </span>
+          </div>
+          {index < steps.length - 1 && (
+            <div style={step.style} className={`h-[3.97px] w-[171.34px] bg-[#02553C80] mb-[14px]`} />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Stepper;

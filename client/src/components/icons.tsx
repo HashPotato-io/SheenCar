@@ -590,3 +590,70 @@ export const ChatIcon: React.FC<IconProps> = ({
     </svg>
   );
 };
+
+export const ActiveStepper: React.FC<IconProps> = ({
+  className = "",
+  width = 28,
+  height = 28,
+  fill = "black",
+}) => {
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      style={{ zIndex: 10 }}
+    >
+      <circle
+        cx="31.7733"
+        cy="31.8651"
+        r="29.7875"
+        stroke="#137440"
+        stroke-width="3.97166"
+        className={className}
+        style={{ zIndex: 10 }}
+      />
+      <circle
+        cx="31.7729"
+        cy="31.8647"
+        r="9.92916"
+        fill="#137440"
+        style={{ zIndex: 10 }}
+        className={className}
+      />
+    </svg>
+  );
+};
+
+export const InActiveStepper: React.FC<IconProps> = ({
+  className = "",
+  width = 28,
+  height = 28,
+  fill = "black",
+}) => {
+  return (
+    <svg
+      width="65"
+      height="64"
+      viewBox="0 0 65 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      style={{ zIndex: 10 }}
+    >
+      <circle
+        cx="32.4549"
+        cy="31.8651"
+        r="29.7875"
+        stroke="#02553C"
+        stroke-opacity="0.5"
+        stroke-width="3.97166"
+        className={className}
+        style={{ zIndex: 10 }}
+      />
+    </svg>
+  );
+};

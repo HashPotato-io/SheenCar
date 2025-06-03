@@ -1268,7 +1268,8 @@ const Account = () => {
       setPostAdFade(true);
       setTimeout(() => {
         setPostAdFade(false);
-        // Handle regular post ad logic
+        // Navigate to post ad page
+        location("/post-ad");
       }, 300);
     }
   };

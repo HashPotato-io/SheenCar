@@ -9,21 +9,39 @@ const CustomSelect = SelectPrimitive.Root
 
 const CustomSelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Trigger
-    ref={ref}
-    className={cn(
-      "flex h-10 w-full items-center justify-between border-b border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-black placeholder:text-black",
-      className
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
+    label?: string;
+    required?: boolean;
+    variant?: 'default' | 'outline';
+  }
+>(({ className, children, label, required, variant = 'default', ...props }, ref) => (
+  <div className="flex flex-col gap-1 relative">
+    {label && (
+      <div className="flex items-center gap-1">
+        <span className="font-['Poppins'] text-sm text-black">{label}</span>
+        {required && <span className="text-[#DC1A1A]">*</span>}
+      </div>
     )}
-    {...props}
-  >
-    {children}
-    <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 opacity-50" />
-    </SelectPrimitive.Icon>
-  </SelectPrimitive.Trigger>
+    {!label && required && (
+      <span className="absolute left-[-12px] text-[#DC1A1A]">*</span>
+    )}
+    <SelectPrimitive.Trigger
+      ref={ref}
+      className={cn(
+        // Default variant styles
+        variant === 'default' && "flex h-10 w-full items-center justify-between border-b border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-black placeholder:text-black",
+        // Outline variant styles
+        variant === 'outline' && "flex h-10 w-[364px] items-center justify-between rounded-[6px] border border-[#CFCFCF] bg-transparent px-4 py-2.5 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-black placeholder:text-black",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <SelectPrimitive.Icon asChild>
+        <ChevronDown className="h-4 w-4 opacity-50" />
+      </SelectPrimitive.Icon>
+    </SelectPrimitive.Trigger>
+  </div>
 ))
 CustomSelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 

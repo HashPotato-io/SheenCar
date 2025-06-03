@@ -1393,14 +1393,7 @@ const Account = () => {
   // Update the renderOfferContent function to handle the view offers logic
   const renderOfferContent = (items: Offer[]) => {
     return (
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "24px",
-          marginBottom: 32,
-        }}
-      >
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", marginBottom: 32 }}>
         {items?.map((offer) => (
           <ProductCardVariant2
             key={offer.id}
@@ -1412,16 +1405,13 @@ const Account = () => {
               price: offer.price,
               image: offer.image,
               status: offer.status,
-              buttonState: offer.buttonState,
+              buttonState: "withdrawOffer",
               tabType: offer.tabType,
             }}
             linkUrl={`/car/${offer.id}`}
-            buttonState={
-              offersTabList[selectedOfferTab] === "My Listings"
-                ? "viewOffers"
-                : (offer.buttonState as ButtonState)
-            }
+            buttonState="withdrawOffer"
             status={offer.status as any}
+            disabled={offer.status !== "pending"}
             offerDetails={{
               amount: offer.offerAmount,
               date: offer.offerDate,

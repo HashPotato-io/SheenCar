@@ -12,6 +12,7 @@ import WithdrawAdModal from "../modals/WithdrawAdModal";
 import CloseRequestModal from "../modals/CloseRequestModal";
 import DeleteAdModal from "../modals/DeleteAdModal";
 import WithdrawTradeProposalModal from "../modals/WithdrawTradeProposalModal";
+import WithdrawOfferModal from "../modals/WithdrawOfferModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
@@ -43,7 +44,8 @@ type ModalStep =
   | "deleteAd"
   | "viewDeals"
   | "withdrawProposal"
-  | "viewOffers";
+  | "viewOffers"
+  | "withdrawOffer";
 
 export type ButtonState =
   | "boostAd"
@@ -57,7 +59,8 @@ export type ButtonState =
   | "renewBoost"
   | "viewDeals"
   | "withdrawProposal"
-  | "viewOffers";
+  | "viewOffers"
+  | "withdrawOffer";
 
 interface CarCardsProps {
   car: Car;
@@ -66,6 +69,7 @@ interface CarCardsProps {
   buttonState?: ButtonState;
   status?: "active" | "completed" | "closed" | "pending";
   dealType?: "sell" | "buy";
+  disabled?: boolean;
 }
 
 const Card: React.FC<CarCardsProps> = ({
@@ -75,6 +79,7 @@ const Card: React.FC<CarCardsProps> = ({
   buttonState = "boostAd",
   status,
   dealType,
+  disabled = false,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [currentStep, setCurrentStep] = useState<ModalStep>("none");
@@ -187,6 +192,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "Withdraw Proposal";
       case "viewOffers":
         return "View Offers";
+      case "withdrawOffer":
+        return "Withdraw Offer";
       default:
         return "Boost Ad";
     }
@@ -200,9 +207,19 @@ const Card: React.FC<CarCardsProps> = ({
       borderRadius: "7.27px",
     };
 
+    if (disabled) {
+      return {
+        ...baseStyles,
+        opacity: 0.4,
+        backgroundColor: "#003A2F",
+        cursor: "not-allowed",
+      };
+    }
+
     switch (state) {
       case "boosted":
       case "withdrawProposal":
+      case "withdrawOffer":
         return {
           ...baseStyles,
           opacity: car.isTraded ? 0.4 : 1,
@@ -214,7 +231,11 @@ const Card: React.FC<CarCardsProps> = ({
   };
 
   const getButtonClickHandler = (state: ButtonState) => {
-    if (state === "disabled" || (state === "withdrawProposal" && car?.isTraded)) {
+    if (disabled) {
+      return undefined;
+    }
+
+    if (state === "withdrawProposal" && car?.isTraded) {
       return undefined;
     }
 
@@ -252,6 +273,10 @@ const Card: React.FC<CarCardsProps> = ({
 
     if(state === "withdrawProposal"){
       return handleWithDrawProposal;
+    }
+
+    if (state === "withdrawOffer") {
+      return () => setCurrentStep("withdrawOffer");
     }
 
     // Default case - handle boost click
@@ -529,7 +554,7 @@ const Card: React.FC<CarCardsProps> = ({
               <CustomButton
                 customStyles={getButtonStyles(buttonState)}
                 onClick={getButtonClickHandler(buttonState)}
-                disabled={buttonState === "disabled"}
+                disabled={disabled}
               >
                 {getButtonText(buttonState)}
               </CustomButton>
@@ -634,6 +659,15 @@ const Card: React.FC<CarCardsProps> = ({
 
       <WithdrawTradeProposalModal
         isOpen={currentStep === "withdrawProposal"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={() => {
+          setCurrentStep("none");
+          // Add any additional withdrawal logic here
+        }}
+      />
+
+      <WithdrawOfferModal
+        isOpen={currentStep === "withdrawOffer"}
         onClose={() => setCurrentStep("none")}
         onConfirm={() => {
           setCurrentStep("none");

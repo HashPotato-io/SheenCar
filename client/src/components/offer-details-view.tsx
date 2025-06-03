@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { CustomButton } from '@/components/ui/custom-button';
 import DealCard from '@/components/deal-card';
 import CloseAdModal from './modals/CloseAdModal';
-import AcceptTradeModal from './modals/AcceptTradeModal';
+import AcceptOfferModal from './modals/AcceptOfferModal';
+import OfferCard from '@/components/offer-card';
 import NoItemsFound from './no-items-found';
 
 
-// Define the interface for deal data
-interface Deal {
+// Rename interface from Deal to Offer
+interface Offer {
   id: number;
   user: {
     name: string;
@@ -18,21 +19,23 @@ interface Deal {
   status: 'pending' | 'accepted' | 'rejected';
   message?: string;
   date: string;
+  timeAgo: string;
 }
 
-// Dummy data for deals
-const dummyDeals: Deal[] = [
+// Rename dummy data from dummyDeals to dummyOffers
+const dummyOffers: Offer[] = [
   {
     id: 1,
     user: {
-      name: "John Smith",
+      name: "Jane Smith",
       avatar: "https://i.pravatar.cc/150?img=1"
     },
     tradeWith: "Toyota Camry 2023",
     priceAdjustment: 25000,
     status: "pending",
     message: "I'm interested in trading my Honda Civic for your Toyota Camry. Would you be open to this trade?",
-    date: "2024-03-15"
+    date: "2024-03-15",
+    timeAgo: "5 mins ago"
   },
   {
     id: 2,
@@ -44,7 +47,8 @@ const dummyDeals: Deal[] = [
     priceAdjustment: 55000,
     status: "accepted",
     message: "I can offer my Mercedes GLE plus $5000 for your BMW X5.",
-    date: "2024-03-14"
+    date: "2024-03-14",
+    timeAgo: "1 hour ago"
   },
   {
     id: 3,
@@ -56,24 +60,27 @@ const dummyDeals: Deal[] = [
     priceAdjustment: 45000,
     status: "rejected",
     message: "Would you consider trading for my Audi A4 with some additional cash?",
-    date: "2024-03-13"
+    date: "2024-03-13",
+    timeAgo: "2 hours ago"
   }
 ];
 
-interface DealDetailsViewProps {
-  onCloseTrade: () => void;
+// Rename component props interface
+interface OfferDetailsViewProps {
+  onCloseOffer: () => void;
   onViewProductDetails: () => void;
 }
 
-const DealDetailsView: React.FC<DealDetailsViewProps> = ({
-  onCloseTrade,
+// Rename component and its props
+const OfferDetailsView: React.FC<OfferDetailsViewProps> = ({
+  onCloseOffer,
   onViewProductDetails
 }) => {
   const [showCloseModal, setShowCloseModal] = useState(false);
   const [showAcceptModal, setShowAcceptModal] = useState(false);
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [showUnavailableModal, setShowUnavailableModal] = useState(false);
-  const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
   // Add this function to handle product details view
   const handleViewProductDetails = () => {
@@ -107,7 +114,7 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
               color: "#000000",
             }}
           >
-            Deals <span style={{ color: "#AF8C32" }}>Received</span>
+            Offers <span style={{ color: "#AF8C32" }}>Received</span>
           </div>
           <div
             style={{
@@ -137,12 +144,12 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
             }}
             onClick={() => setShowCloseModal(true)}
           >
-            Close Trade
+            Close Offer
           </CustomButton>
         </div>
       </div>
 
-      {/* Deal Cards */}
+      {/* Offer Cards */}
       <div
         style={{
           display: "flex",
@@ -151,37 +158,38 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
           marginBottom: "24px",
         }}
       >
-        {dummyDeals.length > 0 ? (
-          dummyDeals.map((deal) => (
-            <DealCard
-              key={deal.id}
-              user={deal.user}
-              tradeWith={deal.tradeWith}
-              priceAdjustment={deal.priceAdjustment}
-              onViewDetails={handleViewProductDetails}
+        {dummyOffers.length > 0  ? (
+          dummyOffers.map((offer) => (
+            <OfferCard
+              key={offer.id}
+              user={offer.user}
+              priceAdjustment={offer.priceAdjustment}
+              timeAgo={offer.timeAgo}
+              sellerId={offer.id}
+              carId={offer.id}
               onAccept={() => {
-                setSelectedDeal(deal);
+                setSelectedOffer(offer);
                 setShowAcceptModal(true);
               }}
               onReject={() => {
-                setSelectedDeal(deal);
+                setSelectedOffer(offer);
                 setShowRejectModal(true);
               }}
             />
           ))
         ) : (
-          <NoItemsFound title="No deals found" />
+          <NoItemsFound title="No offers found" />
         )}
       </div>
 
-      <AcceptTradeModal
+      <AcceptOfferModal
         isOpen={showAcceptModal}
         onClose={() => setShowAcceptModal(false)}
         onConfirm={() => {
-          console.log("Accept deal:", selectedDeal?.id);
+          console.log("Accept offer:", selectedOffer?.id);
         }}
         onChatWithBuyer={() => {
-          console.log("Chat with buyer:", selectedDeal?.user.name);
+          console.log("Chat with buyer:", selectedOffer?.user.name);
           setShowAcceptModal(false);
         }}
       />
@@ -190,7 +198,7 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
         isOpen={showRejectModal}
         onClose={() => setShowRejectModal(false)}
         onConfirm={() => {
-          console.log("Reject deal:", selectedDeal?.id);
+          console.log("Reject offer:", selectedOffer?.id);
           setShowRejectModal(false);
         }}
         daysActive={0}
@@ -203,13 +211,13 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
         isOpen={showCloseModal}
         onClose={() => setShowCloseModal(false)}
         onConfirm={() => {
-          onCloseTrade();
+          onCloseOffer();
           setShowCloseModal(false);
         }}
         daysActive={5}
-        title="Close This Trade?"
-        message="This trade has been active for 5 days. You may close it now and reopen it once later. After reopening, it must stay open for another 5 days before a final closure."
-        confirmButtonText="Close Trade"
+        title="Close This Offer Ad?"
+        message="You can close this offer now and reopen it once later. After reopening, it must remain open for at least 5 days before a final, irreversible closure."
+        confirmButtonText="Close Ad"
       />
 
       {/* Add new modal for unavailable car */}
@@ -229,4 +237,4 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
   );
 };
 
-export default DealDetailsView; 
+export default OfferDetailsView; 

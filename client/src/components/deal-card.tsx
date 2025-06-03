@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "wouter";
 import { CustomButton } from "./ui/custom-button";
 
 interface DealCardProps {
@@ -11,6 +12,8 @@ interface DealCardProps {
   onViewDetails: () => void;
   onAccept: () => void;
   onReject: () => void;
+  sellerId: string;
+  carId: string;
 }
 
 const DealCard: React.FC<DealCardProps> = ({
@@ -20,7 +23,15 @@ const DealCard: React.FC<DealCardProps> = ({
   onViewDetails,
   onAccept,
   onReject,
+  sellerId,
+  carId,
 }) => {
+  const [, setLocation] = useLocation();
+
+  const handleViewProductDetails = () => {
+    setLocation(`/trade-car/sellers/${sellerId}/cars/${carId}`);
+  };
+
   return (
     <div
       style={{
@@ -151,7 +162,7 @@ const DealCard: React.FC<DealCardProps> = ({
             width: "300px",
             height: "40px",
           }}
-          onClick={onViewDetails}
+          onClick={handleViewProductDetails}
         >
           View Product Details
         </CustomButton>

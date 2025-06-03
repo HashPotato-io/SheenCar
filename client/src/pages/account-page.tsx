@@ -34,8 +34,8 @@ import AccountHero from "@/components/account-hero";
 import { CustomButton } from "@/components/ui/custom-button";
 import DealCard from "@/components/deal-card";
 import { useLocation, useSearchParams } from "wouter";
-import DealDetailsView from '@/components/deal-details-view';
-
+import DealDetailsView from "@/components/deal-details-view";
+import OfferDetailsView from "@/components/offer-details-view";
 
 const tabList = ["Active", "Pending", "Closed", "Request"];
 
@@ -89,7 +89,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boostAd",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 2,
@@ -101,7 +101,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 3,
@@ -113,7 +113,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "renewAd",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 4,
@@ -125,7 +125,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 5,
@@ -137,7 +137,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "renewBoost",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 6,
@@ -149,7 +149,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 7,
@@ -161,7 +161,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boostAd",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 8,
@@ -173,7 +173,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 9,
@@ -185,7 +185,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boostAd",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 10,
@@ -197,7 +197,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 11,
@@ -209,7 +209,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boostAd",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 12,
@@ -221,7 +221,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 13,
@@ -233,7 +233,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boostAd",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 14,
@@ -245,7 +245,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 15,
@@ -257,7 +257,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boostAd",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 16,
@@ -269,7 +269,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 17,
@@ -281,7 +281,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boostAd",
-    tabType: "Active"
+    tabType: "Active",
   },
   {
     id: 18,
@@ -293,7 +293,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "boosted",
-    tabType: "Active"
+    tabType: "Active",
   },
 
   // Pending Tab Cars (18 cars = 2 pages)
@@ -307,7 +307,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 20,
@@ -319,7 +319,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 21,
@@ -331,7 +331,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 22,
@@ -343,7 +343,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 23,
@@ -355,7 +355,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 24,
@@ -367,7 +367,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 25,
@@ -379,7 +379,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 26,
@@ -391,7 +391,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 27,
@@ -403,7 +403,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 28,
@@ -415,7 +415,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 29,
@@ -427,7 +427,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 30,
@@ -439,7 +439,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 31,
@@ -451,7 +451,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 32,
@@ -463,7 +463,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 33,
@@ -475,7 +475,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 34,
@@ -487,7 +487,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 35,
@@ -499,7 +499,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
   {
     id: 36,
@@ -511,7 +511,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "withdrawAd",
-    tabType: "Pending"
+    tabType: "Pending",
   },
 
   // Closed Tab Cars (27 cars = 3 pages)
@@ -525,7 +525,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 38,
@@ -537,7 +537,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 39,
@@ -549,7 +549,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 40,
@@ -561,7 +561,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 41,
@@ -573,7 +573,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 42,
@@ -585,7 +585,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 43,
@@ -597,7 +597,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 44,
@@ -609,7 +609,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 45,
@@ -621,7 +621,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 46,
@@ -633,7 +633,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 47,
@@ -645,7 +645,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 48,
@@ -657,7 +657,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 49,
@@ -669,7 +669,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 50,
@@ -681,7 +681,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 51,
@@ -693,7 +693,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 52,
@@ -705,7 +705,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 53,
@@ -717,7 +717,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 54,
@@ -729,7 +729,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 55,
@@ -741,7 +741,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 56,
@@ -753,7 +753,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 57,
@@ -765,7 +765,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 58,
@@ -777,7 +777,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 59,
@@ -789,7 +789,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 60,
@@ -801,7 +801,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 61,
@@ -813,7 +813,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 62,
@@ -825,7 +825,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
   {
     id: 63,
@@ -837,7 +837,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed",
     buttonState: "reopenAd",
-    tabType: "Closed"
+    tabType: "Closed",
   },
 
   // Request Tab Cars (18 cars = 2 pages)
@@ -852,7 +852,7 @@ const dummyCars = [
     status: "completed",
     dealType: "sell",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 65,
@@ -865,7 +865,7 @@ const dummyCars = [
     status: "completed",
     dealType: "buy",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 66,
@@ -877,7 +877,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "reopenRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 67,
@@ -889,7 +889,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "reopenRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 68,
@@ -901,7 +901,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 69,
@@ -913,7 +913,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 70,
@@ -925,7 +925,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 71,
@@ -937,7 +937,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 72,
@@ -949,7 +949,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 73,
@@ -961,7 +961,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 74,
@@ -973,7 +973,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 75,
@@ -985,7 +985,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 76,
@@ -997,7 +997,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 77,
@@ -1009,7 +1009,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 78,
@@ -1021,7 +1021,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 79,
@@ -1033,7 +1033,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
   {
     id: 80,
@@ -1045,7 +1045,7 @@ const dummyCars = [
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
     buttonState: "closeRequest",
-    tabType: "Request"
+    tabType: "Request",
   },
 ];
 
@@ -1058,13 +1058,14 @@ const dummyTradeDeals = [
     model: "Camry",
     year: 2023,
     price: 25000,
-    image: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
     status: "active",
     buttonState: "pending",
     tradeWith: "Honda Civic 2022",
     tabType: "My Trade Proposals",
     isTraded: false,
-    tradeAmount: 5000
+    tradeAmount: 5000,
   },
   {
     id: 2,
@@ -1072,13 +1073,14 @@ const dummyTradeDeals = [
     model: "X5",
     year: 2022,
     price: 55000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "accepted",
     tradeWith: "Mercedes GLE 2023",
     tabType: "My Trade Proposals",
     isTraded: true,
-    tradeAmount: 0
+    tradeAmount: 0,
   },
 
   // Deals Received (second tab)
@@ -1088,11 +1090,12 @@ const dummyTradeDeals = [
     model: "Civic",
     year: 2022,
     price: 22000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active", // Status badge
     buttonState: "pending",
     tradeWith: "Toyota Corolla 2023",
-    tabType: "Deals Received"
+    tabType: "Deals Received",
   },
   {
     id: 11,
@@ -1100,11 +1103,12 @@ const dummyTradeDeals = [
     model: "GLE",
     year: 2023,
     price: 65000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed", // Status badge
     buttonState: "accepted",
     tradeWith: "BMW X5 2022",
-    tabType: "Deals Received"
+    tabType: "Deals Received",
   },
   // ... more Deals Received items ...
 ];
@@ -1118,12 +1122,13 @@ const dummyOffers = [
     model: "Camry",
     year: 2023,
     price: 25000,
-    image: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "viewOffers",
     offerAmount: 23000,
     offerDate: "2024-03-15",
-    tabType: "My Listings"
+    tabType: "My Listings",
   },
   {
     id: 2,
@@ -1131,12 +1136,13 @@ const dummyOffers = [
     model: "Civic",
     year: 2022,
     price: 22000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
-    status: "accepted",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "completed",
     buttonState: "viewOffers",
     offerAmount: 21500,
     offerDate: "2024-03-14",
-    tabType: "My Listings"
+    tabType: "My Listings",
   },
   {
     id: 3,
@@ -1144,12 +1150,13 @@ const dummyOffers = [
     model: "Model 3",
     year: 2023,
     price: 45000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "rejected",
     buttonState: "viewOffers",
     offerAmount: 42000,
     offerDate: "2024-03-13",
-    tabType: "My Listings"
+    tabType: "My Listings",
   },
 
   // My Offers (offers made)
@@ -1159,12 +1166,13 @@ const dummyOffers = [
     model: "X5",
     year: 2022,
     price: 55000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "pending",
     buttonState: "pending",
     offerAmount: 52000,
     offerDate: "2024-03-15",
-    tabType: "My Offers"
+    tabType: "My Offers",
   },
   {
     id: 5,
@@ -1172,12 +1180,13 @@ const dummyOffers = [
     model: "C-Class",
     year: 2023,
     price: 48000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
-    status: "accepted",
-    buttonState: "accepted",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "completed",
+    buttonState: "completed",
     offerAmount: 46000,
     offerDate: "2024-03-14",
-    tabType: "My Offers"
+    tabType: "My Offers",
   },
   {
     id: 6,
@@ -1185,13 +1194,14 @@ const dummyOffers = [
     model: "A4",
     year: 2022,
     price: 42000,
-    image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "rejected",
     buttonState: "rejected",
     offerAmount: 40000,
     offerDate: "2024-03-13",
-    tabType: "My Offers"
-  }
+    tabType: "My Offers",
+  },
 ];
 
 const Account = () => {
@@ -1205,7 +1215,7 @@ const Account = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const view = searchParams.get("view");
   const dealId = searchParams.get("id");
-  const [,location]= useLocation();
+  const [, location] = useLocation();
 
   // Calculate total pages based on filtered cars
   const filteredCars = dummyCars.filter(
@@ -1379,7 +1389,7 @@ const Account = () => {
   const [offerTabFade, setOfferTabFade] = useState(false);
   const [currentOfferPage, setCurrentOfferPage] = useState(1);
 
-  // Update the renderOfferContent function to handle the view offers logic
+  // Update the renderOfferContent function
   const renderOfferContent = (items: Offer[]) => {
     return (
       <div
@@ -1400,20 +1410,23 @@ const Account = () => {
               year: offer.year,
               price: offer.price,
               image: offer.image,
-              status: offer.status,
-              buttonState: offer.buttonState,
-              tabType: offer.tabType
+              buttonState:
+                offersTabList[selectedOfferTab] === "My Listings"
+                  ? "viewOffers"
+                  : "withdrawOffer",
+              tabType: offer.tabType,
             }}
             linkUrl={`/car/${offer.id}`}
             buttonState={
               offersTabList[selectedOfferTab] === "My Listings"
                 ? "viewOffers"
-                : (offer.buttonState as ButtonState)
+                : "withdrawOffer"
             }
             status={offer.status as any}
+            disabled={offer.status !== "pending"}
             offerDetails={{
               amount: offer.offerAmount,
-              date: offer.offerDate
+              date: offer.offerDate,
             }}
           />
         ))}
@@ -1429,20 +1442,23 @@ const Account = () => {
         <DealDetailsView
           onCloseTrade={handleCloseDealView}
           onViewProductDetails={() => {
-            console.log("View product details");
+            location(`/trade-car/sellers/${"5"}/cars/${"1"}`);
           }}
+          sellerId={"5"}
+          carId={"1"}
         />
       );
     }
 
     if (view === "offers" && dealId) {
       return (
-        <DealDetailsView
-          onCloseTrade={handleCloseDealView}
+        <OfferDetailsView
+          onCloseOffer={handleCloseDealView}
           onViewProductDetails={() => {
-            console.log("View product details");
+            location(`/trade-car/sellers/5/cars/1`);
           }}
-          isOffersView={true}
+          sellerId={"5"}
+          carId={"1"}
         />
       );
     }
@@ -1577,11 +1593,13 @@ const Account = () => {
                 const startIndex = (currentOfferPage - 1) * itemsPerPage;
                 const endIndex = startIndex + itemsPerPage;
                 return dummyOffers
-                  .filter((offer) => offer.tabType === offersTabList[selectedOfferTab])
+                  .filter(
+                    (offer) => offer.tabType === offersTabList[selectedOfferTab]
+                  )
                   .slice(startIndex, endIndex)
-                  .map(offer => ({
+                  .map((offer) => ({
                     ...offer,
-                    buttonState: offer.buttonState
+                    buttonState: offer.buttonState,
                   }));
               }}
               onTabClick={(index) => {

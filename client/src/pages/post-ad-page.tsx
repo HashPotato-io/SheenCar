@@ -27,7 +27,7 @@ import AdSubmittedModal from "../components/modals/AdSubmittedModal";
 const steps = [
   {
     name: "Basic Information",
-    style: { marginLeft: "-40px" },
+    style: { marginLeft: "-24px" },
   },
   {
     name: "Features",
@@ -35,7 +35,7 @@ const steps = [
   },
   {
     name: "Specifications",
-    style: { marginLeft: "-20px" },
+    style: { marginLeft: "-4px" },
   },
   {
     name: "Pricing & Listing",
@@ -44,7 +44,7 @@ const steps = [
 ];
 
 const PostAdPage = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [, setLocation] = useLocation();
   const [showSubmittedModal, setShowSubmittedModal] = useState(false);

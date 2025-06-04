@@ -27,7 +27,7 @@ import AdSubmittedModal from "../components/modals/AdSubmittedModal";
 const steps = [
   {
     name: "Basic Information",
-    style: { marginLeft: "-24px" },
+    style: { marginLeft: "-40px" },
   },
   {
     name: "Features",
@@ -35,7 +35,7 @@ const steps = [
   },
   {
     name: "Specifications",
-    style: { marginLeft: "-6px" },
+    style: { marginLeft: "-20px" },
   },
   {
     name: "Pricing & Listing",

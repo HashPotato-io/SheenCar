@@ -20,7 +20,7 @@ const CarSpecificationsForm: React.FC<CarSpecificationsFormProps> = ({
   formData,
   handleInputChange,
 }) => (
-  <div style={{ display: "flex", gap: "40px" }}>
+  <div style={{ display: "flex", justifyContent: "space-between" }}>
     <div className="flex flex-col gap-8">
       <div className="text-[34px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-[#000000]">
         Highlight Your <span className="text-[#AF8C32]">Car's</span> Specs
@@ -144,7 +144,6 @@ const CarSpecificationsForm: React.FC<CarSpecificationsFormProps> = ({
               <CustomSelectTrigger
                 style={{ width: "364px" }}
                 variant="outline"
-                required
               >
                 <SelectPrimitive.Value placeholder="Gearbox" />
               </CustomSelectTrigger>
@@ -212,7 +211,6 @@ const CarSpecificationsForm: React.FC<CarSpecificationsFormProps> = ({
               <CustomSelectTrigger
                 style={{ width: "364px" }}
                 variant="outline"
-                required
               >
                 <SelectPrimitive.Value placeholder="Wheel Type" />
               </CustomSelectTrigger>
@@ -237,7 +235,6 @@ const CarSpecificationsForm: React.FC<CarSpecificationsFormProps> = ({
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handleInputChange("tireSize", e.target.value)
               }
-              required
             />
           </div>
         </div>
@@ -257,6 +254,7 @@ const CarSpecificationsForm: React.FC<CarSpecificationsFormProps> = ({
                 handleInputChange("fuelTankCapacity", e.target.value)
               }
               required
+              showGalIcon
             />
           </div>
         </div>

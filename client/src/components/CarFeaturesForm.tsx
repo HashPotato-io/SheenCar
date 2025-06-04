@@ -126,11 +126,11 @@ const CarFeaturesForm: React.FC<CarFeaturesFormProps> = ({ formData, handleInput
             <div className="flex gap-[40px]">
               <div className="flex flex-col gap-4">
                 <CustomInput
-                  required
                   variant="outline"
                   placeholder="Display Size"
                   className="w-[364px] h-[40px]"
                   value={formData.displaySize}
+                  showInchIcon={true}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("displaySize", e.target.value)
                   }
@@ -170,7 +170,6 @@ const CarFeaturesForm: React.FC<CarFeaturesFormProps> = ({ formData, handleInput
             <div className="flex gap-[40px]">
               <div className="flex flex-col gap-4">
                 <CustomInput
-                  required
                   variant="outline"
                   placeholder="Seat Material"
                   className="w-[364px] h-[40px]"

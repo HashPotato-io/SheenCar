@@ -35,7 +35,7 @@ const steps = [
   },
   {
     name: "Specifications",
-    style: { marginLeft: "-6px" },
+    style: { marginLeft: "-4px" },
   },
   {
     name: "Pricing & Listing",
@@ -44,7 +44,7 @@ const steps = [
 ];
 
 const PostAdPage = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [, setLocation] = useLocation();
   const [showSubmittedModal, setShowSubmittedModal] = useState(false);

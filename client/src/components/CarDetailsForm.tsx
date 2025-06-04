@@ -9,33 +9,11 @@ import { CustomInput } from "@/components/ui/custom-input";
 import { CustomTextarea } from "@/components/ui/custom-textarea";
 import CarSvg from "../assets/car.svg";
 import * as SelectPrimitive from "@radix-ui/react-select";
-
-// Import or define the FormData interface
-interface FormData {
-  make: string;
-  model: string;
-  year: string;
-  mileage: string;
-  transmission: string;
-  fuelType: string;
-  condition: string;
-  seatingCapacity: string;
-  description: string;
-  price: string;
-  doors: string;
-  mileageType: string;
-  engineSize?: string;
-  powerOutput?: string;
-  currency?: string;
-  zipCode: string;
-  interiorColor: string;
-  bodyType: string;
-  vin: string;
-}
+import { FormData } from "@/types/form";
 
 interface CarDetailsFormProps {
-  formData: FormData; // Update to use full FormData type
-  handleInputChange: (field: keyof FormData, value: string) => void; // Update to match PostAdPage
+  formData: FormData;
+  handleInputChange: (field: keyof FormData, value: string | boolean) => void;
 }
 
 const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
@@ -106,7 +84,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
               </div>
             </div>
 
-            {/* Year, Zip Code, and Interior Color */}
+            {/* Year, Zip Code, and Exterior Color */}
             <div style={{ display: "flex", gap: "15.3px" }}>
               <div>
                 <CustomSelect value={formData.year} onValueChange={(value) => handleInputChange("year", value)}>
@@ -128,21 +106,19 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
               <div>
                 <CustomInput
                   variant="outline"
-                  placeholder="Zip Code"
+                  placeholder="Interior Color"
                   className="w-[242px] h-[40px]"
-                  value={formData.zipCode}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("zipCode", e.target.value)}
+                  value={formData.interiorColor}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("interiorColor", e.target.value)}
                 />
               </div>
               <div>
                 <CustomInput
                   variant="outline"
-                  placeholder="Interior Color"
+                  placeholder="Exterior Color"
                   className="w-[242px] h-[40px]"
-                  value={formData.interiorColor}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInputChange("interiorColor", e.target.value)
-                  }
+                  value={formData.exteriorColor}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("exteriorColor", e.target.value)}
                 />
               </div>
             </div>

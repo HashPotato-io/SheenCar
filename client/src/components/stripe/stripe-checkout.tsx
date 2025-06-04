@@ -28,12 +28,14 @@ interface StripeCheckoutProps {
     model: string;
     year: number;
   };
+  onPaymentSuccess: () => void;
 }
 
 const StripeCheckout: React.FC<StripeCheckoutProps> = ({
   duration,
   budget,
   carDetails,
+  onPaymentSuccess,
 }) => {
   const [formData, setFormData] = useState<FormData>({
     email: "johndoe@email.com",
@@ -124,6 +126,7 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({
 
       // Handle successful payment
       alert("Payment processed successfully!");
+      onPaymentSuccess();
     } catch (error) {
       console.error("Payment failed:", error);
       alert("Payment failed. Please try again.");

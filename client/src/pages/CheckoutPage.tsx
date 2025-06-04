@@ -10,6 +10,7 @@ const CheckoutPage: React.FC = () => {
   const duration = searchParams.get('duration');
   const budget = searchParams.get('budget');
   const carDetails = JSON.parse(searchParams.get('carDetails') || '{}');
+  const returnUrl = searchParams.get('returnUrl') || '/';
 
   // Only redirect if we're trying to make a purchase without required parameters
   React.useEffect(() => {
@@ -22,12 +23,18 @@ const CheckoutPage: React.FC = () => {
     } */
   }, [duration, budget, setLocation]);
 
+  const handlePaymentSuccess = () => {
+    // Redirect back to the return URL with payment success parameter
+    setLocation(`${returnUrl}?paymentSuccess=true`);
+  };
+
   return (
     <div>
       <StripeCheckout
         duration={Number(duration) || 0}
         budget={Number(budget) || 0}
         carDetails={carDetails}
+        onPaymentSuccess={handlePaymentSuccess}
       />
     </div>
   );

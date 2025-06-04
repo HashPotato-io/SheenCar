@@ -24,6 +24,11 @@
   src: local('Gilroy-Regular'), url(./fonts/gilroy/Gilroy-Regular.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), url(./fonts/poppins/Poppins-Regular.ttf) format('truetype');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -150,5 +155,9 @@
 
   .gold-text {
     @apply text-secondary;
+  }
+
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
   }
 }

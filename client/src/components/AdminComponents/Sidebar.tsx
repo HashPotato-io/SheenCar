@@ -4,7 +4,7 @@ import sheencarLogo from "../../assets/sheencarLogo.svg";
 export default function Sidebar() {
     return (
         <aside  className="flex flex-col items-center bg-[#003A2F] rounded-tr-xl rounded-br-xl
-                 min-h-full min-w-64 py-4">
+                 min-h-full min-w-64 xl:min-w-68 py-4">
             <div className="my-8">
                 <img src={sheencarLogo} alt="SheenCar Logo" className="w-10 md:w-40" />
             </div>

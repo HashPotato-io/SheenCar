@@ -5,6 +5,7 @@ import Dashboard from "@/AdminPages/dashboard";
 import Notifications from "@/AdminPages/notifications";
 import UserTablePage from "@/AdminPages/UserManagement";
 import UserInsights from "@/AdminPages/UserInsights";
+import CarListingManagement from "@/AdminPages/car-listing-management";
 
 
 export function AdminRoutes() {
@@ -14,6 +15,7 @@ export function AdminRoutes() {
        <Route path="/admin/notifications" component={Notifications} />
         <Route path="/admin/user-management" component={UserTablePage} />
          <Route path="/admin/user-insights" component={UserInsights} />
+          <Route path="/admin/car-listings" component={CarListingManagement} />
     </Switch>
   );
 } 

@@ -61,4 +61,15 @@ export interface FormData {
   // Pricing
   price: string;
   currency: string;
+  priceNegotiable: boolean;
+  
+  // Trading Details
+  tradeCar: boolean;
+  acceptableTradeCars: string;
+  adjustPriceDifference: boolean;
+  tradeCarMake: string;
+  tradeCarModel: string;
+
+  // Contact Details
+  showContactDetails: boolean;
 } 

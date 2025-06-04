@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import Stepper from "../components/Stepper";
 import Header from "@/components/layout/header";
@@ -11,7 +11,7 @@ import {
 import { CustomInput } from "@/components/ui/custom-input";
 import { CustomTextarea } from "@/components/ui/custom-textarea";
 import { CustomButton } from "@/components/ui/custom-button";
-import CarSvg from "../assets/car3.svg";
+import CarSvg from "../assets/car5.svg";
 import CarDetailsForm from "../components/CarDetailsForm";
 import { CustomCheckbox } from "@/components/ui/custom-checkbox";
 import CustomFileUpload from "@/components/ui/custom-fileupload";
@@ -20,6 +20,9 @@ import { FormData } from "@/types/form";
 import { CustomSelectItem } from "@/components/ui/custom-select";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import CarSpecificationsForm from "../components/CarSpecificationsForm";
+import CustomToggle from "@/components/ui/custom-toggle";
+import PricingAndPreferencesForm from "../components/PricingAndPreferencesForm";
+import AdSubmittedModal from "../components/modals/AdSubmittedModal";
 
 const steps = [
   {
@@ -44,6 +47,7 @@ const PostAdPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [, setLocation] = useLocation();
+  const [showSubmittedModal, setShowSubmittedModal] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     // Basic Information
     make: "",
@@ -107,6 +111,15 @@ const PostAdPage = () => {
     // Pricing
     price: "",
     currency: "USD",
+    priceNegotiable: false,
+    tradeCar: false,
+    acceptableTradeCars: "",
+    adjustPriceDifference: false,
+    tradeCarMake: "",
+    tradeCarModel: "",
+
+    // Contact Details
+    showContactDetails: false,
   });
 
   const validateCurrentStep = () => {
@@ -131,7 +144,8 @@ const PostAdPage = () => {
         /* return formData.engineSize && formData.powerOutput; */
         return true;
       case 3:
-        return formData.price && formData.currency;
+      /*   return formData.price && formData.currency; */
+      return true;
       default:
         return true;
     }
@@ -144,9 +158,9 @@ const PostAdPage = () => {
       if (currentStep < steps.length - 1) {
         setCurrentStep(currentStep + 1);
       } else {
-        // Handle form submission
-        console.log("Form submitted:", formData);
-        setLocation("/account");
+        // Navigate to checkout with return URL
+        const returnUrl = encodeURIComponent(window.location.pathname);
+        setLocation(`/checkout?returnUrl=${returnUrl}`);
       }
     } else {
       alert("Please fill in all required fields");
@@ -197,48 +211,33 @@ const PostAdPage = () => {
         );
       case 3:
         return (
-          <div style={{ display: "flex", gap: "40px" }}>
-            <div className="flex flex-col gap-8">
-              <div className="text-[34px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-[#000000]">
-                Set Your <span className="text-[#AF8C32]">Price</span> &
-                Preferences
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "20px",
-                }}
-              ></div>
-            </div>
-
-            {/* Right Column - Car Illustration */}
-            <div className="flex flex-col gap-4 items-center mt-[100px]">
-              <div className="flex item-center justify-center bg-[#D7FFF1] w-[249px] h-[249px] rounded-[206px]">
-                <img
-                  src={CarSvg}
-                  alt="car-illustration"
-                  width="195"
-                  height="111"
-                />
-              </div>
-              <p className="w-[353px] text-[16px] font-['Poppins'] font-[300] leading-[21px] text-center text-[#585353]">
-                Let buyers know what makes your car stand out. Add details like
-                engine type, transmission, fuel type, and others to help them
-                make informed decisions.
-              </p>
-            </div>
-          </div>
+          <PricingAndPreferencesForm
+            formData={formData}
+            handleInputChange={handleInputChange}
+          />
         );
       default:
         return null;
     }
   };
 
+  // Add this function to handle successful payment return
+  const handlePaymentSuccess = () => {
+    setShowSubmittedModal(true);
+  };
+
+  // Check for payment success in URL params
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const paymentSuccess = searchParams.get('paymentSuccess');
+    if (paymentSuccess === 'true') {
+      handlePaymentSuccess();
+    }
+  }, []);
+
   return (
     <div>
       <Header />
-
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="text-center mb-8">
@@ -271,11 +270,16 @@ const PostAdPage = () => {
             /*       disabled={!validateCurrentStep()} */
             customStyles={{ width: "354px", height: "40px" }}
           >
-            {currentStep === steps.length - 1 ? "Submit" : "Next"}
+            {currentStep === steps.length - 1 ? "Proceed to Pay" : "Next"}
           </CustomButton>
         </div>
       </div>
       <Footer />
+      
+      <AdSubmittedModal 
+        isOpen={showSubmittedModal}
+        onClose={() => setShowSubmittedModal(false)}
+      />
     </div>
   );
 };

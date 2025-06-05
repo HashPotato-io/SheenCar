@@ -22,6 +22,7 @@ import PostAdPage from "@/pages/post-ad-page";
 import FAQPage from "@/pages/faq-page";
 import PressPage from "@/pages/press-page";
 import FraudPage from "@/pages/fraud-page";
+import AdvertisePage from "@/pages/advertise-page";
 
 export function UserRoutes() {
   return (
@@ -51,6 +52,7 @@ export function UserRoutes() {
       <Route path="/faq" component={FAQPage} />
       <Route path="/press" component={PressPage} />
       <Route path="/fraud" component={FraudPage} />
+      <Route path="/advertise" component={AdvertisePage} />
     </Switch>
   );
 } 

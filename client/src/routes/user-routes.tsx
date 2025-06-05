@@ -20,6 +20,7 @@ import ForgotPasswordPage from "@/pages/forgot-password-page";
 import CheckoutPage from '@/pages/CheckoutPage';
 import PostAdPage from "@/pages/post-ad-page";
 import FAQPage from "@/pages/faq-page";
+import PressPage from "@/pages/press-page";
 
 export function UserRoutes() {
   return (
@@ -47,6 +48,7 @@ export function UserRoutes() {
       <Route path="/checkout" component={CheckoutPage} />
       <Route path="/post-ad" component={PostAdPage} />
       <Route path="/faq" component={FAQPage} />
+      <Route path="/press" component={PressPage} />
     </Switch>
   );
 } 

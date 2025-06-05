@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Search, Plus } from "lucide-react";
 import Banner from "../../assets/banner.png";
 import CarBanner from "../../assets/car-banner.png";
-import Plus from "../../assets/Icon/plus.svg";
 import { CustomButton } from "@/components/ui/custom-button";
 import { AdvanceSearch } from "../advance-search";
 
@@ -76,7 +75,7 @@ export default function HeroSection() {
         to finish.
       </div>
       <CustomButton>
-        <img src={Plus} width="23px" height="23px" />
+        <Plus className="w-[23px] h-[23px]" />
         <span>Post Your Ad</span>
       </CustomButton>
       <div className="car-banner-container">

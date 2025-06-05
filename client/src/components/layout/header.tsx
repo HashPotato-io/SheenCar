@@ -68,15 +68,30 @@ export default function Header() {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="px-3 py-2 text-neutral-800 font-medium flex items-center"
+                      className="px-3 py-2 text-neutral-800 font-medium flex items-center hover:bg-transparent"
                     >
                       {item.name} <ChevronDown className="ml-1 h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent>
+                  <DropdownMenuContent 
+                    className="w-[200px] h-[163px] mt-5 ml-[228px] p-0 rounded-md bg-white shadow-lg border animate-none"
+                    style={{
+                      paddingTop: '8px',
+                      paddingRight: '20px',
+                      paddingBottom: '10px',
+                      paddingLeft: '20px',
+                      gap: '10px',
+                      animationDuration: '0ms'
+                    }}
+                  >
                     {item.children.map((child) => (
-                      <DropdownMenuItem key={child.name}>
-                        <Link href={child.href}>{child.name}</Link>
+                      <DropdownMenuItem 
+                        key={child.name}
+                        className="px-0 py-1 text-neutral-700 hover:bg-gray-50 cursor-pointer rounded-none border-none focus:bg-gray-50"
+                      >
+                        <Link href={child.href} className="w-full block text-sm font-normal">
+                          {child.name}
+                        </Link>
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>

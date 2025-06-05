@@ -5,7 +5,7 @@
   import { Search } from "lucide-react";
   import Banner from "../../assets/banner.png";
   import CarBanner from "../../assets/car-banner.png";
-  import Plus from "../../assets/Icon/plus.svg";
+  import { Plus } from "lucide-react";
   import { CustomButton } from "@/components/ui/custom-button";
   import { AdvanceSearch } from "../advance-search";
 

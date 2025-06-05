@@ -19,6 +19,7 @@ import SignupPage from "@/pages/signup-page";
 import ForgotPasswordPage from "@/pages/forgot-password-page";
 import CheckoutPage from '@/pages/CheckoutPage';
 import PostAdPage from "@/pages/post-ad-page";
+import FAQPage from "@/pages/faq-page";
 
 export function UserRoutes() {
   return (
@@ -45,6 +46,7 @@ export function UserRoutes() {
       <Route path="/forgot-password" component={ForgotPasswordPage} />
       <Route path="/checkout" component={CheckoutPage} />
       <Route path="/post-ad" component={PostAdPage} />
+      <Route path="/faq" component={FAQPage} />
     </Switch>
   );
 } 

@@ -76,7 +76,7 @@
           to finish.
         </div>
         <CustomButton customStyles={{ width: "216px", height: "49px" }}>
-          <img src={Plus} width="23px" height="23px" />
+          <Plus size={23} className="mr-2" />
           <span>Post Your Ad</span>
         </CustomButton>
         <div className="car-banner-container">

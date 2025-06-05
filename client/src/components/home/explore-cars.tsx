@@ -178,7 +178,7 @@ export default function CarCategories() {
         onValueChange={(value) => setSelectedTab(value)}
       />
 
-      <div style={{ width: "100%", maxWidth: "1200px", marginTop: "40px" }}>
+      <div style={{ width: "100%", marginTop: "40px" }}>
         <EmblaCarousel
           selectedCars={getFilteredCars()}
           emblaRef={emblaDivRef}

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
 import CarfaxButton from "@/components/CarfaxButton";
 import SellerDetails from "@/components/seller/SellerDetails";
+import { CustomButton } from "../ui/custom-button";
 
 interface CarDetailsProps {
   car: {
@@ -48,12 +49,19 @@ export default function CarDetails({ car, onContactClick }: CarDetailsProps) {
 
       {/* Chat button */}
       <div className="pl-3 mt-2">
-        <Button
-          className="w-[575px] bg-[#003A2F] hover:bg-[#00251C] flex items-center justify-center gap-2"
+        <CustomButton
+          customStyles={{
+            width: "575px",
+            backgroundColor: "#003A2F",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px"
+          }}
           onClick={onContactClick}
         >
           Propose a trade
-        </Button>
+        </CustomButton>
       </div>
 
       {/* Seller info card */}

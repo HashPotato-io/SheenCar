@@ -3,9 +3,10 @@ import EmptyIcon from "../assets/empty.svg";
 
 interface NoItemsFoundProps {
   title: string;
+  icon?: string;
 }
 
-const NoItemsFound: React.FC<NoItemsFoundProps> = ({ title }) => {
+const NoItemsFound: React.FC<NoItemsFoundProps> = ({ title, icon = EmptyIcon }) => {
   return (
     <div
       style={{
@@ -16,7 +17,7 @@ const NoItemsFound: React.FC<NoItemsFoundProps> = ({ title }) => {
         padding: "32px",
       }}
     >
-      <img src={EmptyIcon} alt="empty-icon" />
+      <img src={icon} alt="empty-icon" />
       <div
         style={{
           fontFamily: "Poppins",

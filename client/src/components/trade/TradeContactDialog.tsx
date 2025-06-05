@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { CustomButton } from "@/components/ui/custom-button";
 import Trade1 from "../../assets/trade-1.svg";
 import ProductCard from "../cards/product-card";
+import { useLocation } from "wouter";
 
 interface Seller {
   name: string;
@@ -57,6 +58,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
     "main" | "select" | "add" | "trade" | "proposal"
   >("main");
   const [selectedCarId, setSelectedCarId] = useState<number | null>(null);
+  const [, location] = useLocation();
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -102,19 +104,28 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
               </div>
               {/* Buttons */}
               <div className="space-y-3">
-                <Button
-                  className="w-full bg-[#003A2F] text-white py-3 px-4 rounded-lg font-medium transition-colors hover:bg-[#00251C] mb-2"
+                <CustomButton
+                  customStyles={{
+                    width: "100%",
+                    marginBottom: "8px",
+                  }}
                   onClick={() => setFlow("select")}
                 >
                   Select From Listings
-                </Button>
-                <Button
+                </CustomButton>
+                <CustomButton
                   variant="outline"
-                  className="w-full border-2 border-[#AF8C32] text-[#AF8C32] py-3 px-4 rounded-lg font-medium transition-colors hover:bg-[#AF8C32]/10 hover:text-[#AF8C32] hover:border-[#AF8C32]"
-                  onClick={() => setFlow("add")}
+                  outlineColor="#AF8C32"
+                  customStyles={{
+                    width: "100%",
+                    marginBottom: "8px",
+                  }}
+                  onClick={() => {
+                    location("/post-ad");
+                  }}
                 >
                   Add Car for Trade
-                </Button>
+                </CustomButton>
               </div>
               {/* Disclaimer */}
               <p className="text-xs text-gray-500 mt-4 leading-relaxed">
@@ -187,13 +198,16 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
               >
                 Only Cars that will keep the trade even are allowed.
               </p>
-              <Button
-                className="w-full bg-[#003A2F] hover:bg-[#00251C] text-white py-3 px-4 rounded-lg font-medium transition-colors mb-2"
+              <CustomButton
+                customStyles={{
+                  width: "100%",
+                  marginBottom: "8px",
+                }}
                 disabled={selectedCarId === null}
                 onClick={() => setFlow("trade")}
               >
                 Confirm Selection
-              </Button>
+              </CustomButton>
               {/* <Button
                 variant="ghost"
                 className="w-full mt-2"
@@ -216,16 +230,24 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
               <div className="mb-4 border rounded p-4 text-gray-500">
                 [Add car for trade form goes here]
               </div>
-              <Button className="w-full bg-[#003A2F] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#00251C] transition-colors mb-2">
+              <CustomButton
+                customStyles={{
+                  width: "100%",
+                  marginBottom: "8px",
+                }}
+              >
                 Submit Car for Trade
-              </Button>
-              <Button
-                variant="ghost"
-                className="w-full mt-2"
+              </CustomButton>
+              <CustomButton
+                variant="outline"
+                customStyles={{
+                  width: "100%",
+                  marginTop: "8px",
+                }}
                 onClick={() => setFlow("main")}
               >
                 Back
-              </Button>
+              </CustomButton>
             </>
           )}
 
@@ -346,15 +368,18 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 </div>
               </div> */}
 
-              <Button
-                className="w-full bg-[#003A2F] hover:bg-[#00251C] text-white py-3 px-4 rounded-lg font-medium transition-colors mb-2"
+              <CustomButton
+                customStyles={{
+                  width: "100%",
+                  marginBottom: "8px",
+                }}
                 disabled={selectedCarId === null}
                 onClick={() => {
                   setFlow("proposal");
                 }}
               >
                 Submit Proposal
-              </Button>
+              </CustomButton>
               {/* <Button
                 variant="ghost"
                 className="w-full mt-2"
@@ -399,7 +424,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 }}
               >
                 Your trade offer has been sent to the seller. Now, just sit
-                tight and wait for their response! You’ll get a notification
+                tight and wait for their response! You'll get a notification
                 once the seller reviews your proposal.
               </div>
             </>

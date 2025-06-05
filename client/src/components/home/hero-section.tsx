@@ -26,7 +26,7 @@ export default function HeroSection() {
         backgroundImage: `url(${Banner})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-   
+
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
@@ -75,7 +75,7 @@ export default function HeroSection() {
         Verified listings, trusted sellers, and a seamless experience from start
         to finish.
       </div>
-      <CustomButton>
+      <CustomButton customStyles={{ width: "216px", height: "49px" }}>
         <img src={Plus} width="23px" height="23px" />
         <span>Post Your Ad</span>
       </CustomButton>

@@ -1268,20 +1268,23 @@ const Account = () => {
       setPostAdFade(true);
       setTimeout(() => {
         setPostAdFade(false);
-        // Handle regular post ad logic
+        // Navigate to post ad page
+        location("/post-ad");
       }, 300);
     }
   };
 
-  // Add handlers for request type selection
+  // Update the handlers for request type selection
   const handleSellRequest = () => {
     setIsRequestModalOpen(false);
-    // Add your sell request logic here
+    // Navigate to post-ad page with sell request type
+    location("/post-ad?requestType=sell");
   };
 
   const handleBuyRequest = () => {
     setIsRequestModalOpen(false);
-    // Add your buy request logic here
+    // Navigate to post-ad page with buy request type
+    location("/post-ad?requestType=buy");
   };
 
   // Add new state for modal

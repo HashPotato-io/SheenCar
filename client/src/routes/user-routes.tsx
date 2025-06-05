@@ -18,6 +18,7 @@ import TradeCar from "@/pages/trade-car";
 import SignupPage from "@/pages/signup-page";
 import ForgotPasswordPage from "@/pages/forgot-password-page";
 import CheckoutPage from '@/pages/CheckoutPage';
+import PostAdPage from "@/pages/post-ad-page";
 
 export function UserRoutes() {
   return (
@@ -43,6 +44,7 @@ export function UserRoutes() {
       <Route path="/login" component={AuthPage} />
       <Route path="/forgot-password" component={ForgotPasswordPage} />
       <Route path="/checkout" component={CheckoutPage} />
+      <Route path="/post-ad" component={PostAdPage} />
     </Switch>
   );
 } 

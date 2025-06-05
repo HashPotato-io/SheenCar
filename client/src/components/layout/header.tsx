@@ -20,7 +20,7 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   const menuItems = [
@@ -38,18 +38,15 @@ export default function Header() {
     {
       name: "Sell Your Car",
       children: [
-        { name: "Create Listing", href: "/post-ad" },
-        { name: "Pricing", href: "/pricing" },
-        { name: "Sell it for Me Service", href: "/services/sell-for-me" },
+        { name: "Post an Ad", href: "/post-ad" },
+        { name: "Sell It for Me", href: "/post-ad?requestType=sell" },
       ],
     },
     {
       name: "Buyer's Tools",
       children: [
+        { name: "Buy It for Me", href: "/post-ad?requestType=buy" },
         { name: "Car Comparison", href: "/compare" },
-        { name: "Buy it for Me Service", href: "/services/buy-for-me" },
-        { name: "Vehicle History", href: "/services/history" },
-        { name: "Finance Calculator", href: "/services/calculator" },
       ],
     },
   ];
@@ -63,33 +60,45 @@ export default function Header() {
           </Link>
           <nav className="hidden md:flex ml-8">
             {menuItems.map((item) => (
-              <div key={item.name} className="relative group">
+              <div key={item.name} className="w-[200px] relative group">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
                       className="px-3 py-2 text-neutral-800 font-medium flex items-center hover:bg-transparent"
+                      style={{
+                        fontFamily: "Gilroy-Regular",
+                        fontWeight: 400,
+                        fontSize: "18px",
+                        lineHeight: "100%",
+                        letterSpacing: "0%",
+                        textAlign: "center",
+                        color: "#171616",
+                      }}
                     >
                       {item.name} <ChevronDown className="ml-1 h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent 
+                  <DropdownMenuContent
                     className="w-[200px] h-[163px] mt-5 ml-[228px] p-0 rounded-md bg-white shadow-lg border animate-none"
                     style={{
-                      paddingTop: '8px',
-                      paddingRight: '20px',
-                      paddingBottom: '10px',
-                      paddingLeft: '20px',
-                      gap: '10px',
-                      animationDuration: '0ms'
+                      paddingTop: "8px",
+                      paddingRight: "20px",
+                      paddingBottom: "10px",
+                      paddingLeft: "20px",
+                      gap: "10px",
+                      animationDuration: "0ms",
                     }}
                   >
                     {item.children.map((child) => (
-                      <DropdownMenuItem 
+                      <DropdownMenuItem
                         key={child.name}
                         className="px-0 py-1 text-neutral-700 hover:bg-gray-50 cursor-pointer rounded-none border-none focus:bg-gray-50"
                       >
-                        <Link href={child.href} className="w-full block text-sm font-normal">
+                        <Link
+                          href={child.href}
+                          className="w-full block text-sm font-normal"
+                        >
                           {child.name}
                         </Link>
                       </DropdownMenuItem>
@@ -134,7 +143,7 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent>
               <div className="flex flex-col space-y-4 mt-6">
-                {menuItems.map((item) => (
+                {menuItems?.map((item) => (
                   <div key={item.name} className="flex flex-col space-y-2">
                     <h3 className="font-bold">{item.name}</h3>
                     <div className="flex flex-col space-y-2 ml-2">

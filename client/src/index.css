@@ -24,6 +24,11 @@
   src: local('Gilroy-Regular'), url(./fonts/gilroy/Gilroy-Regular.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), url(./fonts/poppins/Poppins-Regular.ttf) format('truetype');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -80,6 +85,7 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    background-color: #F8F8F8;
   }
 
   ::-webkit-scrollbar {
@@ -149,5 +155,9 @@
 
   .gold-text {
     @apply text-secondary;
+  }
+
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
   }
 }

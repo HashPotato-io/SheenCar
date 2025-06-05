@@ -23,6 +23,7 @@ import CarDetails from "@/components/car/CarDetails";
 import CarDescription from "@/components/car/CarDescription";
 import SimilarListings from "@/components/similar-listings";
 import CarTabs from "@/components/car/CarTabs";
+import TradeContactDialog from "@/components/trade/TradeContactDialog";
 
 // Mock car data
 const carData = {
@@ -211,58 +212,13 @@ export default function DealerCarDetailsPage() {
             scrollNext={scrollNext}
           />
 
-          {/* Contact Dialog */}
-          <Dialog open={contactDialogOpen} onOpenChange={setContactDialogOpen}>
-            <DialogContent className="sm:max-w-md">
-              <DialogTitle>Contact Seller</DialogTitle>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 border-b pb-4">
-                  <img
-                    src={carData.seller.logo}
-                    alt={carData.seller.name}
-                    className="w-12 h-12 rounded-full"
-                  />
-                  <div>
-                    <div className="font-medium">{carData.seller.name}</div>
-                    <div className="text-sm text-gray-500">
-                      {carData.seller.location}
-                    </div>
-                    <div className="flex items-center text-sm text-amber-500">
-                      <span>★★★★☆</span>
-                      <span className="ml-1 text-gray-500">
-                        {carData.seller.reviewCount} reviews
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500 mb-1">
-                    Phone Number
-                  </h3>
-                  <p className="text-base font-medium">
-                    {carData.seller.phoneNumber}
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500 mb-1">
-                    About this vehicle
-                  </h3>
-                  <p className="text-sm text-gray-700">
-                    {carData.make} {carData.model} {carData.year} - $
-                    {carData.price.toLocaleString()}
-                  </p>
-                </div>
-
-                <div className="border-t pt-4">
-                  <Button className="w-full bg-[#003A2F] hover:bg-[#00251C]">
-                    Call Dealer
-                  </Button>
-                </div>
-              </div>
-            </DialogContent>
-          </Dialog>
+         {/* Contact Dialog */}
+         <TradeContactDialog
+            open={contactDialogOpen}
+            onOpenChange={setContactDialogOpen}
+            seller={carData.seller}
+            car={carData}
+          />
         </div>
       </main>
 

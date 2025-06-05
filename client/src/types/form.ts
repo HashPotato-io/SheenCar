@@ -62,6 +62,8 @@ export interface FormData {
   price: string;
   currency: string;
   priceNegotiable: boolean;
+  minPrice?: string;
+  maxPrice?: string;
   
   // Trading Details
   tradeCar: boolean;
@@ -72,4 +74,7 @@ export interface FormData {
 
   // Contact Details
   showContactDetails: boolean;
+
+  // Service Agreement
+  serviceAgreement: boolean;
 } 

@@ -48,6 +48,8 @@ const PostAdPage = () => {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [, setLocation] = useLocation();
   const [showSubmittedModal, setShowSubmittedModal] = useState(false);
+  const [requestType, setRequestType] = useState<string>("");
+  const [serviceAgreementError, setServiceAgreementError] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     // Basic Information
     make: "",
@@ -120,9 +122,18 @@ const PostAdPage = () => {
 
     // Contact Details
     showContactDetails: false,
+
+    // Service Agreement
+    serviceAgreement: false,
   });
 
   const validateCurrentStep = () => {
+    if (currentStep === 3 && requestType === "sell" && !formData.serviceAgreement) {
+      setServiceAgreementError(true);
+      return false;
+    }
+    setServiceAgreementError(false);
+    
     console.log(formData);
     switch (currentStep) {
       case 0:
@@ -144,8 +155,8 @@ const PostAdPage = () => {
         /* return formData.engineSize && formData.powerOutput; */
         return true;
       case 3:
-      /*   return formData.price && formData.currency; */
-      return true;
+        /*   return formData.price && formData.currency; */
+        return true;
       default:
         return true;
     }
@@ -162,15 +173,15 @@ const PostAdPage = () => {
         const returnUrl = encodeURIComponent(window.location.pathname);
         setLocation(`/checkout?returnUrl=${returnUrl}`);
       }
-    } else {
-      alert("Please fill in all required fields");
     }
+    return false;
   };
 
   const handleBack = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
       setCompletedSteps((prev) => prev.filter((step) => step !== currentStep));
+      setServiceAgreementError(false);
     } else {
       setLocation("/account");
     }
@@ -214,6 +225,8 @@ const PostAdPage = () => {
           <PricingAndPreferencesForm
             formData={formData}
             handleInputChange={handleInputChange}
+            requestType={requestType}
+            serviceAgreementError={serviceAgreementError}
           />
         );
       default:
@@ -229,10 +242,17 @@ const PostAdPage = () => {
   // Check for payment success in URL params
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    const paymentSuccess = searchParams.get('paymentSuccess');
-    if (paymentSuccess === 'true') {
+    const paymentSuccess = searchParams.get("paymentSuccess");
+    if (paymentSuccess === "true") {
       handlePaymentSuccess();
     }
+  }, []);
+
+  // Add useEffect to get requestType from URL
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const type = searchParams.get("requestType");
+    setRequestType(type || "");
   }, []);
 
   return (
@@ -242,7 +262,19 @@ const PostAdPage = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-[46px] font-[400] leading-[100%] tracking-[-0.01em] text-center text-black font-['Gilroy-SemiBold'] mb-8">
-            Car Listing Details
+            {requestType ? (
+              requestType === "sell" ? (
+                <>
+                  <span style={{ color: "#AF8C32" }}>Sell</span> It for Me
+                </>
+              ) : (
+                <>
+                  <span style={{ color: "#AF8C32" }}>Buy</span> It for Me
+                </>
+              )
+            ) : (
+              "Car Listing Details"
+            )}
           </h1>
 
           <Stepper
@@ -254,6 +286,22 @@ const PostAdPage = () => {
 
         {/* Content */}
         <div>{renderStepContent()}</div>
+
+        {serviceAgreementError && (
+                  <div
+                    style={{
+                      fontFamily: "Poppins",
+                      fontWeight: 400,
+                      fontSize: "12px",
+                      lineHeight: "100%",
+                      letterSpacing: "0%",
+                      verticalAlign: "middle",
+                      color: "#FF0000",
+                    }}
+                  >
+                    You must agree to the Service Agreement before submitting your request.
+                  </div>
+                )}
 
         {/* Navigation Buttons */}
         <div className="flex gap-10 mt-14">
@@ -270,13 +318,13 @@ const PostAdPage = () => {
             /*       disabled={!validateCurrentStep()} */
             customStyles={{ width: "354px", height: "40px" }}
           >
-            {currentStep === steps.length - 1 ? "Proceed to Pay" : "Next"}
+            {currentStep === steps?.length - 1 ? "Proceed to Pay" : "Next"}
           </CustomButton>
         </div>
       </div>
       <Footer />
-      
-      <AdSubmittedModal 
+
+      <AdSubmittedModal
         isOpen={showSubmittedModal}
         onClose={() => setShowSubmittedModal(false)}
       />

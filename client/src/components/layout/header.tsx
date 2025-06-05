@@ -20,7 +20,7 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   const menuItems = [
@@ -38,18 +38,15 @@ export default function Header() {
     {
       name: "Sell Your Car",
       children: [
-        { name: "Create Listing", href: "/post-ad" },
-        { name: "Pricing", href: "/pricing" },
-        { name: "Sell it for Me Service", href: "/services/sell-for-me" },
+        { name: "Post an Ad", href: "/post-ad" },
+        { name: "Sell It for Me", href: "/post-ad?requestType=sell" },
       ],
     },
     {
       name: "Buyer's Tools",
       children: [
+        { name: "Buy It for Me", href: "/post-ad?requestType=buy" },
         { name: "Car Comparison", href: "/compare" },
-        { name: "Buy it for Me Service", href: "/services/buy-for-me" },
-        { name: "Vehicle History", href: "/services/history" },
-        { name: "Finance Calculator", href: "/services/calculator" },
       ],
     },
   ];
@@ -63,19 +60,39 @@ export default function Header() {
           </Link>
           <nav className="hidden md:flex ml-8">
             {menuItems.map((item) => (
-              <div key={item.name} className="relative group">
+              <div key={item.name} className="w-[200px] relative group">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
                       className="px-3 py-2 text-neutral-800 font-medium flex items-center"
+                      style={{
+                        fontFamily: "Gilroy-Regular",
+                        fontWeight: 400,
+                        fontSize: "18px",
+                        lineHeight: "100%",
+                        letterSpacing: "0%",
+                        textAlign: "center",
+                        color: "#171616",
+                      }}
                     >
                       {item.name} <ChevronDown className="ml-1 h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     {item.children.map((child) => (
-                      <DropdownMenuItem key={child.name}>
+                      <DropdownMenuItem
+                        style={{
+                          fontFamily: "Gilroy-Regular",
+                          fontWeight: 400,
+                          fontSize: "16px",
+                          lineHeight: "100%",
+                          letterSpacing: "0%",
+                          textAlign: "center",
+                          color: "#171616",
+                        }}
+                        key={child.name}
+                      >
                         <Link href={child.href}>{child.name}</Link>
                       </DropdownMenuItem>
                     ))}
@@ -119,7 +136,7 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent>
               <div className="flex flex-col space-y-4 mt-6">
-                {menuItems.map((item) => (
+                {menuItems?.map((item) => (
                   <div key={item.name} className="flex flex-col space-y-2">
                     <h3 className="font-bold">{item.name}</h3>
                     <div className="flex flex-col space-y-2 ml-2">

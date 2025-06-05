@@ -1,9 +1,9 @@
 import React from 'react';
 
 interface CustomCheckboxProps {
-  label: string;
-  name: string;
-  value: string;
+  label?: string;
+  name?: string;
+  value?: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
 }

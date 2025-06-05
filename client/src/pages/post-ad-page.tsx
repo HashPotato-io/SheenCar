@@ -128,12 +128,16 @@ const PostAdPage = () => {
   });
 
   const validateCurrentStep = () => {
-    if (currentStep === 3 && requestType === "sell" && !formData.serviceAgreement) {
+    if (
+      currentStep === 3 &&
+      requestType === "sell" &&
+      !formData.serviceAgreement
+    ) {
       setServiceAgreementError(true);
       return false;
     }
     setServiceAgreementError(false);
-    
+
     console.log(formData);
     switch (currentStep) {
       case 0:
@@ -286,22 +290,6 @@ const PostAdPage = () => {
 
         {/* Content */}
         <div>{renderStepContent()}</div>
-
-        {serviceAgreementError && (
-                  <div
-                    style={{
-                      fontFamily: "Poppins",
-                      fontWeight: 400,
-                      fontSize: "12px",
-                      lineHeight: "100%",
-                      letterSpacing: "0%",
-                      verticalAlign: "middle",
-                      color: "#FF0000",
-                    }}
-                  >
-                    You must agree to the Service Agreement before submitting your request.
-                  </div>
-                )}
 
         {/* Navigation Buttons */}
         <div className="flex gap-10 mt-14">

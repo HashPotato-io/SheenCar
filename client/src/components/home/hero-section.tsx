@@ -26,7 +26,6 @@
           backgroundImage: `url(${Banner})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-
           display: "flex",
           alignItems: "center",
           flexDirection: "column",

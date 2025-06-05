@@ -4,21 +4,25 @@ import { CustomInput } from "@/components/ui/custom-input";
 import { CustomTextarea } from "@/components/ui/custom-textarea";
 import { CustomButton } from "@/components/ui/custom-button";
 import CustomModal from "@/components/ui/custom-modal";
+import HeroSection from "@/components/hero-section";
 import { useState } from "react";
 import { Mail } from "lucide-react";
+import ContactImage from "../assets/contact.svg";
+import ContactBanner from "../assets/contact-banner.png";
+import ContactModalImage from "../assets/contact-modal.svg"
 
 export default function ContactPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -29,7 +33,7 @@ export default function ContactPage() {
     setFormData({
       email: "",
       subject: "",
-      message: ""
+      message: "",
     });
   };
 
@@ -41,79 +45,100 @@ export default function ContactPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section */}
-      <div 
-        className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-24 bg-cover bg-center relative"
-        style={{ 
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80")' 
-        }}
-      >
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-yellow-400">Dealer</span> Support Center – We're 
-            <br />
-            Here to Help
-          </h1>
-        </div>
-      </div>
+      <HeroSection
+        searchInput=""
+        setSearchInput={() => {}}
+        handleSearchSubmit={() => {}}
+        headingContent={
+          <div
+            style={{
+              fontFamily: "Gilroy-SemiBold",
+              fontWeight: 400,
+              fontSize: "50px",
+              lineHeight: "100%",
+              letterSpacing: "-1%",
+              textAlign: "center",
+              color: "#FFFFFF",
+              width: "100%",
+              maxWidth: "802px",
+              margin: "90px auto",
+              padding: "0 20px",
+            }}
+          >
+            <span style={{ color: "#AF8C32" }}>Customer</span> Support – How Can
+            We Assist You?
+          </div>
+        }
+        bgImage={ContactBanner}
+        hideSearch={true}
+      />
 
       {/* Contact Form Section */}
       <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-start gap-12 max-w-6xl mx-auto">
-            
             {/* Left Side - Contact Form */}
-            <div className="lg:w-1/2">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8">Contact Us</h2>
-              
+            <div className="w-full">
+              <h2
+                className="text-2xl font-bold text-gray-900 mb-8"
+                style={{
+                  fontFamily: "Gilroy-SemiBold",
+                  fontWeight: 400,
+                  fontSize: "34px",
+                  lineHeight: "100%",
+                  letterSpacing: "-1%",
+                  color: "#171616",
+                }}
+              >
+                Contact Us
+              </h2>
+
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
+                <div className="flex flex-col md:flex-row gap-[12px]">
+                  <div className="w-full md:w-1/2">
                     <CustomInput
                       type="email"
                       placeholder="Email"
                       value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
                       variant="outline"
-                      required
-                      className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      style={{ width: "100%" }}
                     />
                   </div>
-                  <div>
+                  <div className="w-full md:w-1/2">
                     <CustomInput
                       type="text"
                       placeholder="Subject"
                       value={formData.subject}
-                      onChange={(e) => handleInputChange("subject", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("subject", e.target.value)
+                      }
                       variant="outline"
-                      required
-                      className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      style={{ width: "100%" }}
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <CustomTextarea
                     placeholder="Message"
                     value={formData.message}
-                    onChange={(e) => handleInputChange("message", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("message", e.target.value)
+                    }
                     variant="outline"
-                    required
                     rows={6}
-                    className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent resize-none"
+                    style={{ width: "100%" }}
                   />
                 </div>
 
-                <CustomButton 
+                <CustomButton
                   type="submit"
-                  customStyles={{ 
-                    width: "100%", 
+                  customStyles={{
+                    width: "100%",
                     height: "50px",
-                    backgroundColor: "#003A2F",
-                    color: "white",
-                    borderRadius: "6px",
-                    fontSize: "16px",
-                    fontWeight: "600"
                   }}
                 >
                   Submit
@@ -122,16 +147,11 @@ export default function ContactPage() {
             </div>
 
             {/* Right Side - Car Image */}
-            <div className="lg:w-1/2 flex justify-center">
-              <div className="relative">
-                <div 
-                  className="w-80 h-80 rounded-full bg-cover bg-center shadow-lg"
-                  style={{ 
-                    backgroundImage: 'url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")' 
-                  }}
-                />
-              </div>
-            </div>
+            <img
+              className="w-full lg:w-[435px] h-auto lg:h-[435px] object-contain"
+              src={ContactImage}
+              alt="contact-us"
+            />
           </div>
         </div>
       </div>
@@ -140,32 +160,24 @@ export default function ContactPage() {
       <CustomModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        width="max-w-md"
+        width="max-w-[419px] w-[90%]"
+        title="Thanks for Reaching Out!"
+        icon={ContactModalImage}
       >
-        <div className="text-center p-6">
-          {/* Close button */}
-          <button
-            onClick={handleCloseModal}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold"
-          >
-            ×
-          </button>
-          
-          {/* Icon */}
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
-              <Mail className="w-10 h-10 text-green-600" />
-            </div>
-          </div>
-          
-          {/* Title */}
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
-            Thanks for Reaching Out!
-          </h3>
-          
+        <div className="flex flex-col items-center gap-6 w-full max-w-[339px]">
           {/* Message */}
-          <p className="text-gray-600 mb-6">
-            Your message has been received, and our team will review it shortly. If necessary, we'll get back to you as soon as possible.
+          <p
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: 300,
+              fontSize: "16px",
+              lineHeight: "22px",
+              textAlign: "center",
+              color: "#585353",
+            }}
+          >
+            Your message has been received, and our team will review it shortly.
+            If necessary, we'll get back to you as soon as possible.
           </p>
         </div>
       </CustomModal>

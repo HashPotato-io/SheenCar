@@ -12,11 +12,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { AccountIcon, Chat2Icon, NotificationIcon } from "../icons";
 
 export default function Header() {
   const [, navigate] = useLocation();
   const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  console.log(user);
 
   const handleLogout = () => {
     logout();
@@ -65,7 +68,7 @@ export default function Header() {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="px-3 py-2 text-neutral-800 font-medium flex items-center hover:bg-transparent"
+                      className="px-3 py-2 text-neutral-800 font-medium flex items-center"
                       style={{
                         fontFamily: "Gilroy-Regular",
                         fontWeight: 400,
@@ -80,24 +83,40 @@ export default function Header() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
-                    className="w-[200px] h-[163px] mt-5 ml-[228px] p-0 rounded-md bg-white shadow-lg border animate-none"
+                    className="w-[200px] p-0"
                     style={{
+                      width: "200px",
+                      height: "auto",
+                      gap: "10px",
                       paddingTop: "8px",
                       paddingRight: "20px",
                       paddingBottom: "10px",
                       paddingLeft: "20px",
-                      gap: "10px",
+                      borderRadius: "6px",
+                      background: "#FFFFFF",
+                      marginTop: "20px",
                       animationDuration: "0ms",
                     }}
                   >
-                    {item.children.map((child) => (
+                    {item.children.map((child, index) => (
                       <DropdownMenuItem
                         key={child.name}
-                        className="px-0 py-1 text-neutral-700 hover:bg-gray-50 cursor-pointer rounded-none border-none focus:bg-gray-50"
+                        className="p-0 focus:bg-transparent hover:bg-gray-50"
+                        style={{
+                          fontFamily: "Gilroy-Regular",
+                          fontWeight: 400,
+                          fontSize: "16px",
+                          lineHeight: "100%",
+                          letterSpacing: "0%",
+                          color: "#171616",
+                          marginBottom:
+                            index < item.children.length - 1 ? "10px" : "0",
+                          padding: "8px 0",
+                        }}
                       >
                         <Link
                           href={child.href}
-                          className="w-full block text-sm font-normal"
+                          className="w-full block hover:text-inherit"
                         >
                           {child.name}
                         </Link>
@@ -110,6 +129,26 @@ export default function Header() {
           </nav>
         </div>
         <div className="flex items-center space-x-3">
+          {user ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "20px",
+                marginRight: "20px",
+              }}
+            >
+              <Link href="/notification">
+                <NotificationIcon />
+              </Link>
+              <Link href="/chat">
+                <Chat2Icon />
+              </Link>
+              <Link href="/account">
+                <AccountIcon />
+              </Link>
+            </div>
+          ) : null}
           <Link href="/post-ad">
             <Button
               variant="outline"
@@ -160,6 +199,7 @@ export default function Header() {
                     </div>
                   </div>
                 ))}
+
                 <Link href="/post-ad" onClick={() => setMobileMenuOpen(false)}>
                   <Button
                     variant="outline"

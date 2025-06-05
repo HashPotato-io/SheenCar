@@ -3,6 +3,7 @@ import { carTypes } from "@/lib/car-types";
 import { ToggleTabs } from "../ui/toggle-tabs";
 import EmblaCarousel from "../ui/embla-carousel";
 import React, { useEffect, useState } from "react";
+import NoItemsFound from "../no-items-found";
 
 export default function CarCategories() {
   const emblaDivRef = React.useRef<HTMLDivElement>(null);
@@ -21,7 +22,7 @@ export default function CarCategories() {
       });
     }
     return () => {
-      if (emblaInstance) emblaInstance.destroy();
+      if (emblaInstance) emblaInstance?.destroy();
     };
     // eslint-disable-next-line
   }, []);
@@ -179,12 +180,16 @@ export default function CarCategories() {
       />
 
       <div style={{ width: "100%", marginTop: "40px" }}>
-        <EmblaCarousel
-          selectedCars={getFilteredCars()}
-          emblaRef={emblaDivRef}
-          scrollPrev={scrollPrev}
-          scrollNext={scrollNext}
-        />
+        {getFilteredCars()?.length > 0 ? (
+          <EmblaCarousel
+            selectedCars={getFilteredCars()}
+            emblaRef={emblaDivRef}
+            scrollPrev={scrollPrev}
+            scrollNext={scrollNext}
+          />
+        ) : (
+          <NoItemsFound title={`No ${selectedTab} listings available right now. Check back again soon!`} />
+        )}
       </div>
     </div>
     /*  <section className="py-16 bg-neutral-100">

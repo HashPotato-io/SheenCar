@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Mail } from "lucide-react";
 import ContactImage from "../assets/contact.svg";
 import ContactBanner from "../assets/contact-banner.png";
+import ContactModalImage from "../assets/contact-modal.svg"
 
 export default function ContactPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,16 +50,24 @@ export default function ContactPage() {
         setSearchInput={() => {}}
         handleSearchSubmit={() => {}}
         headingContent={
-          <h1 style={{
-            fontFamily: "Gilroy-SemiBold",
-            fontWeight: 400,
-            fontSize: "50px",
-            lineHeight: "100%",
-            letterSpacing: "-1%",
-            textAlign: "center"
-          }}>
-            Customer Support – How Can We Assist You?
-          </h1>
+          <div
+            style={{
+              fontFamily: "Gilroy-SemiBold",
+              fontWeight: 400,
+              fontSize: "50px",
+              lineHeight: "100%",
+              letterSpacing: "-1%",
+              textAlign: "center",
+              color: "#FFFFFF",
+              width: "100%",
+              maxWidth: "802px",
+              margin: "90px auto",
+              padding: "0 20px",
+            }}
+          >
+            <span style={{ color: "#AF8C32" }}>Customer</span> Support – How Can
+            We Assist You?
+          </div>
         }
         bgImage={ContactBanner}
         hideSearch={true}
@@ -69,7 +78,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-start gap-12 max-w-6xl mx-auto">
             {/* Left Side - Contact Form */}
-            <div >
+            <div className="w-full">
               <h2
                 className="text-2xl font-bold text-gray-900 mb-8"
                 style={{
@@ -85,8 +94,8 @@ export default function ContactPage() {
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="flex gap-[12px]">
-                  <div>
+                <div className="flex flex-col md:flex-row gap-[12px]">
+                  <div className="w-full md:w-1/2">
                     <CustomInput
                       type="email"
                       placeholder="Email"
@@ -95,10 +104,10 @@ export default function ContactPage() {
                         handleInputChange("email", e.target.value)
                       }
                       variant="outline"
-                      style={{ width: "331px" }}
+                      style={{ width: "100%" }}
                     />
                   </div>
-                  <div>
+                  <div className="w-full md:w-1/2">
                     <CustomInput
                       type="text"
                       placeholder="Subject"
@@ -107,7 +116,7 @@ export default function ContactPage() {
                         handleInputChange("subject", e.target.value)
                       }
                       variant="outline"
-                      style={{ width: "331px" }}
+                      style={{ width: "100%" }}
                     />
                   </div>
                 </div>
@@ -121,7 +130,7 @@ export default function ContactPage() {
                     }
                     variant="outline"
                     rows={6}
-                    style={{ width: "674px" }}
+                    style={{ width: "100%" }}
                   />
                 </div>
 
@@ -130,11 +139,6 @@ export default function ContactPage() {
                   customStyles={{
                     width: "100%",
                     height: "50px",
-                    backgroundColor: "#003A2F",
-                    color: "white",
-                    borderRadius: "6px",
-                    fontSize: "16px",
-                    fontWeight: "600",
                   }}
                 >
                   Submit
@@ -144,7 +148,7 @@ export default function ContactPage() {
 
             {/* Right Side - Car Image */}
             <img
-              style={{ width: "435px", height: "435px" }}
+              className="w-full lg:w-[435px] h-auto lg:h-[435px] object-contain"
               src={ContactImage}
               alt="contact-us"
             />
@@ -156,31 +160,22 @@ export default function ContactPage() {
       <CustomModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        width="max-w-md"
+        width="max-w-[419px] w-[90%]"
+        title="Thanks for Reaching Out!"
+        icon={ContactModalImage}
       >
-        <div className="text-center p-6">
-          {/* Close button */}
-          <button
-            onClick={handleCloseModal}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold"
-          >
-            ×
-          </button>
-
-          {/* Icon */}
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
-              <Mail className="w-10 h-10 text-green-600" />
-            </div>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
-            Thanks for Reaching Out!
-          </h3>
-
+        <div className="flex flex-col items-center gap-6 w-full max-w-[339px]">
           {/* Message */}
-          <p className="text-gray-600 mb-6">
+          <p
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: 300,
+              fontSize: "16px",
+              lineHeight: "22px",
+              textAlign: "center",
+              color: "#585353",
+            }}
+          >
             Your message has been received, and our team will review it shortly.
             If necessary, we'll get back to you as soon as possible.
           </p>

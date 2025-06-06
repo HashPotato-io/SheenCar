@@ -138,7 +138,7 @@ export default function Header() {
                 marginRight: "20px",
               }}
             >
-              <Link href="/notification">
+              <Link href="/notifications">
                 <NotificationIcon />
               </Link>
               <Link href="/chat">

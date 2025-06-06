@@ -24,6 +24,7 @@ import PressPage from "@/pages/press-page";
 import FraudPage from "@/pages/fraud-page";
 import AdvertisePage from "@/pages/advertise-page";
 import ContactPage from "@/pages/contact-page";
+import ChatPage from "@/pages/chat-page";
 
 export function UserRoutes() {
   return (
@@ -55,6 +56,7 @@ export function UserRoutes() {
       <Route path="/fraud" component={FraudPage} />
       <Route path="/advertise" component={AdvertisePage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/chat" component={ChatPage} />
     </Switch>
   );
 } 

@@ -894,8 +894,45 @@ export const Chat2Icon: React.FC<IconProps> = ({
   fill = "black",
 }) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12.5014 22C14.6093 21.9997 16.6571 21.2984 18.3227 20.0064C19.9882 18.7145 21.1767 16.9053 21.7012 14.8638C22.2257 12.8222 22.0563 10.6642 21.2197 8.7295C20.3831 6.79478 18.9268 5.19323 17.0801 4.177C15.2334 3.16077 13.1012 2.78757 11.0191 3.11615C8.93701 3.44473 7.02334 4.45644 5.57934 5.99199C4.13535 7.52754 3.24305 9.49972 3.04293 11.598C2.8428 13.6964 3.34622 15.8017 4.47392 17.5825L3.00142 22L7.41891 20.5275C8.93846 21.4919 10.7016 22.0027 12.5014 22Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12.5014 22C14.6093 21.9997 16.6571 21.2984 18.3227 20.0064C19.9882 18.7145 21.1767 16.9053 21.7012 14.8638C22.2257 12.8222 22.0563 10.6642 21.2197 8.7295C20.3831 6.79478 18.9268 5.19323 17.0801 4.177C15.2334 3.16077 13.1012 2.78757 11.0191 3.11615C8.93701 3.44473 7.02334 4.45644 5.57934 5.99199C4.13535 7.52754 3.24305 9.49972 3.04293 11.598C2.8428 13.6964 3.34622 15.8017 4.47392 17.5825L3.00142 22L7.41891 20.5275C8.93846 21.4919 10.7016 22.0027 12.5014 22Z"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const ChatSendIcon: React.FC<IconProps> = ({
+  className = "",
+  width = 28,
+  height = 28,
+  fill = "black",
+}) => {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 10L1 19L19 10L1 1L4 10ZM4 10H10"
+        stroke="white"
+        stroke-width="1.3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </svg>
   );
 };

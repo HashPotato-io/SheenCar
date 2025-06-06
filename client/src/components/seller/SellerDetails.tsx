@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChatIcon, MessageIcon, PersonIcon, PhoneIcon } from "../icons";
 import { CustomButton } from "../ui/custom-button";
-
+import { useLocation } from "wouter";
 interface SellerDetailsProps {
   seller: {
     name: string;
@@ -19,6 +19,7 @@ const SellerDetails: React.FC<SellerDetailsProps> = ({
   seller,
   onContactClick,
 }) => {
+  const [, setLocation] = useLocation();
   return (
     <div className="flex flex-col w-[577px] h-[187px] gap-[4px] rounded-[11.32px] p-[18px] bg-white shadow-[0px_4px_12px_0px_#00000014]">
       <div className="flex items-center gap-3 mb-4">
@@ -87,7 +88,9 @@ const SellerDetails: React.FC<SellerDetailsProps> = ({
             justifyContent: 'center',
             gap: '8px'
           }}
-          onClick={onContactClick}
+          onClick={()=>{
+            setLocation("/chat");
+          }}
         >
           <ChatIcon />
           Chat

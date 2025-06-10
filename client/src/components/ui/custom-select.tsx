@@ -13,8 +13,10 @@ const CustomSelectTrigger = React.forwardRef<
     label?: string;
     required?: boolean;
     variant?: 'default' | 'outline';
+    placeholderColor?: string;
+    borderColor?: string;
   }
->(({ className, children, label, required, variant = 'default', ...props }, ref) => (
+>(({ className, children, label, required, variant = 'default', placeholderColor = "#696969", borderColor = "#CFCFCF", ...props }, ref) => (
   <div className="flex flex-col gap-1 relative">
     {label && (
       <div className="flex items-center gap-1">
@@ -27,11 +29,15 @@ const CustomSelectTrigger = React.forwardRef<
     )}
     <SelectPrimitive.Trigger
       ref={ref}
+      style={{
+        borderColor: borderColor,
+        color: placeholderColor
+      }}
       className={cn(
         // Default variant styles
-        variant === 'default' && "flex h-10 w-full items-center justify-between border-b border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-[#696969] placeholder:text-[#696969]",
+        variant === 'default' && "flex h-10 w-full items-center justify-between border-b bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
         // Outline variant styles
-        variant === 'outline' && "flex h-10 w-[364px] items-center justify-between rounded-[6px] border border-[#CFCFCF] bg-transparent px-4 py-2.5 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-[#696969] placeholder:text-[#696969]",
+        variant === 'outline' && "flex h-10 w-[364px] items-center justify-between rounded-[6px] border bg-transparent px-4 py-2.5 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
         className
       )}
       {...props}

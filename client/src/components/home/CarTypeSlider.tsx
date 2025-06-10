@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
@@ -63,13 +63,38 @@ const carTypes: CarType[] = [
 ];
 
 const CarTypeSlider = () => {
+  const [slidesPerView, setSlidesPerView] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setSlidesPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setSlidesPerView(3);
+      } else {
+        setSlidesPerView(4);
+      }
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className="car-type-slider">
-      <h2 className="section-title">Browse by Type</h2>
+      <h2 className="text-2xl md:text-3xl lg:text-[46px] font-semibold text-center text-black mb-5 font-gilroy">
+        Browse by Type
+      </h2>
       <Swiper
         modules={[Pagination]}
         spaceBetween={20}
-        slidesPerView={4}
+        slidesPerView={slidesPerView}
         pagination={{
           clickable: true,
         }}

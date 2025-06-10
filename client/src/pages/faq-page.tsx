@@ -4,6 +4,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import HeroSection from "@/components/hero-section";
 import FaqBanner from "../assets/faq-banner.png";
+import { CustomAccordion } from "@/components/custom-accordion";
 
 interface FAQItem {
   id: number;
@@ -68,74 +69,6 @@ const faqData: FAQItem[] = [
   },
 ];
 
-// Add this new component for the plus/minus icons
-function AccordionIcon({ isOpen }: { isOpen: boolean }) {
-  return (
-    <div className="w-6 h-6 flex items-center justify-center">
-      {isOpen ? (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M5 12H19"
-            stroke="#141414"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
-      ) : (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 5V19M5 12H19"
-            stroke="#141414"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
-      )}
-    </div>
-  );
-}
-
-function FAQAccordion({ item }: { item: FAQItem }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="mb-4">
-      <div className="w-full max-w-[1164px] mx-auto bg-white rounded-lg border border-[#1414141A] shadow-[0px_8px_24px_0px_#1414140A] overflow-hidden">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full h-auto min-h-[88px] flex items-center gap-4 px-4 sm:px-8 py-6 sm:py-8 hover:bg-gray-50 transition-colors"
-        >
-          <AccordionIcon isOpen={isOpen} />
-          <span className="text-gray-700 font-medium flex-grow text-left text-sm sm:text-base">
-            {item.question}
-          </span>
-        </button>
-        <div
-          className={`transition-all duration-300 ease-in-out ${
-            isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="px-4 sm:px-8 py-4 sm:py-6 border-t border-[#1414141A]">
-            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{item?.answer}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function FAQPage() {
   const [searchInput, setSearchInput] = useState("");
 
@@ -195,8 +128,8 @@ export default function FAQPage() {
           </h2>
 
           <div className="space-y-4">
-            {faqData?.map((item, index) => (
-              <FAQAccordion key={item.id} item={item} />
+            {faqData?.map((item) => (
+              <CustomAccordion key={item.id} item={item} />
             ))}
           </div>
         </div>

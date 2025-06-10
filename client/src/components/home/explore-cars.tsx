@@ -132,44 +132,12 @@ export default function CarCategories() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        padding: "60px",
-        background: "#F8F8F8",
-      }}
-    >
-      <div
-        style={{
-          width: "758px",
-          height: "112px",
-          fontFamily: "Gilroy-SemiBold",
-          fontWeight: 400,
-          fontSize: "46px",
-          lineHeight: "100%",
-          letterSpacing: "-1%",
-          textAlign: "center",
-          color: "#000000",
-        }}
-      >
-        Explore the <span style={{ color: "#AF8C32" }}>Cars</span> Everyone's
+    <div className="flex flex-col items-center px-4 sm:px-5 py-12 sm:py-[60px] bg-[#F8F8F8]">
+      <div className="w-full max-w-[331px] sm:max-w-[758px] min-h-[80px] sm:min-h-[112px] font-['Gilroy-SemiBold'] text-center text-black px-2 sm:px-5 text-[24px] sm:text-[clamp(24px,5vw,46px)] leading-[120%] tracking-[-0.01em]">
+        Explore the <span className="text-[#AF8C32]">Cars</span> Everyone's
         Obsessed With!
       </div>
-      <div
-        style={{
-          width: "600px",
-          height: "60px",
-          fontFamily: "Poppins",
-          fontWeight: 400,
-          fontSize: "20px",
-          lineHeight: "100%",
-          letterSpacing: "0%",
-          textAlign: "center",
-          color: "#585353",
-        }}
-      >
+      <div className="w-full max-w-[331px] sm:max-w-[600px] min-h-[40px] sm:min-h-[60px] font-poppins text-center text-[#585353] px-2 sm:px-5 mt-4 sm:mt-5 text-[14px] sm:text-[clamp(14px,3vw,20px)] leading-[140%]">
         Top-featured listings, trending vehicles, and the latest arrivals—all in
         one place.
       </div>
@@ -177,9 +145,10 @@ export default function CarCategories() {
         options={["Featured", "Popular", "Latest"]}
         value={selectedTab}
         onValueChange={(value) => setSelectedTab(value)}
+        className="w-[331px] sm:w-[433.45px]"
       />
 
-      <div style={{ width: "100%", marginTop: "40px" }}>
+      <div className="w-full mt-8 sm:mt-10">
         {getFilteredCars()?.length > 0 ? (
           <EmblaCarousel
             selectedCars={getFilteredCars()}
@@ -192,28 +161,5 @@ export default function CarCategories() {
         )}
       </div>
     </div>
-    /*  <section className="py-16 bg-neutral-100">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-neutral-800 mb-2 text-center font-montserrat">
-          Browse by Type
-        </h2>
-        <p className="text-neutral-600 text-center mb-10">
-          Find the perfect vehicle for your needs
-        </p>
-        
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-4xl mx-auto">
-          {carTypes.map((type) => (
-            <Link key={type.id} href={`/search?type=${type.id}`}>
-              <div className="car-type-icon text-center cursor-pointer">
-                <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
-                  <type.icon className="w-10 h-10 text-primary" />
-                </div>
-                <span className="text-neutral-800 font-medium">{type.name}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section> */
   );
 }

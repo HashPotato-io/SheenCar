@@ -7,46 +7,17 @@ const CarCategories = () => {
   return (
     <>
       <div
-        style={{
-          backgroundImage: `url(${CarCategoriesBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: "407px",
-          display: "flex",
-          justifyContent: "center",
-          position: "relative",
-          borderRadius: "12px 12px 0 0",
-        }}
+        className="relative flex justify-center h-[407px] rounded-t-xl bg-cover bg-center"
+        style={{ backgroundImage: `url(${CarCategoriesBg})` }}
       >
-        <div
-          style={{
-            fontFamily: "Gilroy-SemiBold",
-            fontWeight: 400,
-            fontSize: "46px",
-            lineHeight: "100%",
-            letterSpacing: "-1%",
-            textAlign: "center",
-            color: "#FFFFFF",
-            position: "relative",
-            zIndex: 20,
-            marginTop: "100px",
-          }}
-        >
-          The <span style={{ color: "#AF8C32" }}>Smarter</span> Way to Find Your
+        <div className="relative z-20 mt-[100px] text-center text-white font-['Gilroy-SemiBold'] text-[24px] sm:text-[46px] leading-[100%] tracking-[-1%]">
+          The <span className="text-[#AF8C32]">Smarter</span> Way to Find Your
           Next Car
         </div>
         <img
           src={Cars}
           alt="Cars"
-          style={{
-            position: "absolute",
-            bottom: "-50%",
-            left: "0",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: 10,
-          }}
+          className="absolute bottom-[-50%] left-0 w-full h-full object-cover z-10"
         />
       </div>
       <CarTypeSlider />

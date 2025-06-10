@@ -26,6 +26,7 @@ import AdvertisePage from "@/pages/advertise-page";
 import ContactPage from "@/pages/contact-page";
 import ChatPage from "@/pages/chat-page";
 import NotificationPage from "@/pages/notification-page";
+import DeliveryPage from "@/pages/delivery-page";
 
 export function UserRoutes() {
   return (
@@ -59,6 +60,7 @@ export function UserRoutes() {
       <Route path="/contact" component={ContactPage} />
       <Route path="/chat" component={ChatPage} />
       <Route path="/notifications" component={NotificationPage} />
+      <Route path="/delivery" component={DeliveryPage} />
     </Switch>
   );
 } 

@@ -1,0 +1,20 @@
+.hero-title {
+  font-family: "Gilroy-SemiBold";
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 100%;
+  letter-spacing: -1%;
+  text-align: center;
+  width: 788px;
+  height: 122px;
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 26px;
+    line-height: 30px;
+    width: 100%;
+    height: auto;
+  }
+} 

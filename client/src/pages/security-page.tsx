@@ -1,116 +1,235 @@
 import { Link } from "wouter";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import { Shield, Shield as ShieldIcon, FileCheck, AlertCircle, BarChart, ListChecks, Clock } from "lucide-react";
+import {
+  Shield,
+  Shield as ShieldIcon,
+  FileCheck,
+  AlertCircle,
+  BarChart,
+  ListChecks,
+  Clock,
+} from "lucide-react";
+import HeroSection from "@/components/hero-section";
+import TeamBanner from "../assets/team-banner.png";
+import { useState } from "react";
+
+// Add this type definition at the top of the file
+type SecuritySection = {
+  icon: React.ElementType;
+  title: string;
+  highlightedWord: string;
+  description: string;
+  listItems?: string[];
+};
+
+// Add this data array before the SecurityPage component
+const securitySections: SecuritySection[] = [
+  {
+    icon: FileCheck,
+    title: "Governance & Compliance",
+    highlightedWord: "Governance",
+    description:
+      "By using SheenCar, you acknowledge and agree to comply with this Visitor Agreement, our Privacy Notice, and any other applicable policies. If you do not agree with any part of these terms, please refrain from using our Platform.",
+  },
+  {
+    icon: AlertCircle,
+    title: "Risk Management",
+    highlightedWord: "Risk",
+    description:
+      "SheenCar provides a marketplace for buying, selling, and trading vehicles. As a visitor, you may browse listings, explore vehicle information, and use other available resources. However, unauthorized use of the Platform, including scraping data, attempting to access restricted areas, or engaging in fraudulent activities, is strictly prohibited.",
+  },
+  {
+    icon: ShieldIcon,
+    title: "Vendor Security & Third-Party Assessments",
+    highlightedWord: "Vendor Security",
+    description:
+      "When using SheenCar, you agree to:",
+    listItems: [
+      "Provide accurate and truthful information.",
+      "Respect the rights and privacy of other users.",
+      "Avoid posting or engaging in misleading, defamatory, or harmful activities.",
+      "Comply with all applicable laws and regulations.",
+    ],
+  },
+  {
+    icon: BarChart,
+    title: "Access Control & Identity Management",
+    highlightedWord: "Access Control",
+    description:
+      "Certain features on SheenCar may require account registration. If you choose to register, you are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.",
+  },
+  {
+    icon: ListChecks,
+    title: "Data Privacy & Protection",
+    highlightedWord: "Data Privacy",
+    description:
+      "Your data is important to us and we take steps to protect it.",
+    listItems: [
+      "All non-public customer data is classified as sensitive and has strict retention and usage requirements.",
+      "Customer data is used only for the agreed-upon business purpose in compliance with the SheenCar policies.",
+      "We protect data using encryption for data in transit and at rest, which helps prevent unauthorized access.",
+    ],
+  },
+  {
+    icon: Clock,
+    title: "Secure Operations & Threat Monitoring",
+    highlightedWord: "Secure Operations",
+    description:
+      "We monitor and run systems securely and continuously monitor for threats. Our security team is on-call 24/7/365 and responds immediately to security alerts. We deploy security tools such as threat monitoring, log management, intrusion detection, and data loss prevention solutions to maintain security.",
+  },
+  {
+    icon: Shield,
+    title: "Commitment to Continuous Improvement",
+    highlightedWord: "Commitment",
+    description:
+      "We continually improve our security posture to stay ahead of emerging threats. Our security team works with experts across the company to ensure that our defensive countermeasures evolve and keep pace with changing technological and security landscapes.",
+  },
+];
 
 export default function SecurityPage() {
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle search logic here
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Banner */}
-      <div className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-2">SheenCar's Commitment to Security</h1>
-          <p className="text-gray-300">Safeguarding your information is our top priority</p>
-        </div>
-      </div>
+      <HeroSection
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearchSubmit={handleSearchSubmit}
+        headingContent={
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "16px",
+              padding: "20px 0",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "Gilroy-SemiBold",
+                fontWeight: 400,
+                fontSize: "clamp(32px, 5vw, 50px)",
+                lineHeight: "120%",
+                letterSpacing: "-1%",
+                textAlign: "center",
+                color: "#FFFFFF",
+              }}
+            >
+              <span style={{ color: "#AF8C32" }}>SheenCar</span>'s Commitment to
+              Security
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins",
+                fontWeight: 400,
+                fontSize: "20px",
+                lineHeight: "100%",
+                letterSpacing: "0%",
+                textAlign: "center",
+                color: "#FFFFFF",
+                width: "878px",
+              }}
+            >
+              Protecting your data, securing your transactions, and ensuring a
+              safe car trading experience for all.
+            </div>
+          </div>
+        }
+        bgImage={TeamBanner}
+        hideSearch={true}
+      />
 
       {/* Main Content */}
       <div className="flex-grow bg-white">
         <div className="container mx-auto px-4 py-8">
-          <p className="text-gray-700 mb-6">
-            At SheenCar, we pride on the trust and confidence that the SheenCar community places in keeping all the categorized vehicle information, personal, and privacy information safe and to do so, we've put in place the best security technologies and practices industry can offer. We're committed to protecting your personal information and designed various security measures to thwart bad usage, and safeguard your personal information.
+          <p
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: 400,
+              fontSize: "20px",
+              lineHeight: "27px",
+              letterSpacing: "0%",
+              color: "#171616",
+              marginBottom: "24px",
+            }}
+          >
+            At SheenCar, security is at the core of everything we do. We employ
+            advanced security measures at the organizational, architectural, and
+            operational levels to safeguard our platform, infrastructure, and
+            customer data. Our team prioritizes security awareness, enforces
+            strict data protection protocols, and ensures best practices are
+            integrated into our daily operations.
           </p>
 
           {/* Security Sections */}
           <div className="space-y-8">
-            {/* Governance & Compliance */}
-            <div className="border-b pb-6">
-              <h2 className="flex items-center text-xl font-semibold mb-3">
-                <FileCheck className="text-amber-500 mr-2" size={24} />
-                <span className="text-amber-500">Governance</span> & Compliance
-              </h2>
-              <p className="text-gray-700">
-                Our security program is comprehensive and complies with industry recognized security frameworks. All systems are continually assessed against security requirements to ensure compliance with our policies and external standards.
-              </p>
-            </div>
-
-            {/* Risk Management */}
-            <div className="border-b pb-6">
-              <h2 className="flex items-center text-xl font-semibold mb-3">
-                <AlertCircle className="text-amber-500 mr-2" size={24} />
-                <span className="text-amber-500">Risk</span> Management
-              </h2>
-              <p className="text-gray-700">
-                Our risk management process helps us identify and manage risk on an ongoing basis. Our security team works alongside those managing our systems to help them identify, quantify, and address security risks throughout the system and application development lifecycle.
-              </p>
-            </div>
-
-            {/* Vendor Security & Third-Party Assessments */}
-            <div className="border-b pb-6">
-              <h2 className="flex items-center text-xl font-semibold mb-3">
-                <ShieldIcon className="text-amber-500 mr-2" size={24} />
-                <span className="text-amber-500">Vendor Security</span> & Third-Party Assessments
-              </h2>
-              <p className="text-gray-700 mb-4">
-                We hold our vendors to the same security standards that we hold ourselves. We require our vendors to comply with best security practices and perform security reviews when onboarding new vendors.
-              </p>
-              <ul className="list-disc pl-8 text-gray-700 space-y-2">
-                <li>We review the security practices of all of our third-party service providers.</li>
-                <li>We require all vendors to report security incidents that affect SheenCar data.</li>
-                <li>We assess all vendor software for secure coding practices prior to deployment to production.</li>
-              </ul>
-            </div>
-
-            {/* Access Control & Identity Management */}
-            <div className="border-b pb-6">
-              <h2 className="flex items-center text-xl font-semibold mb-3">
-                <BarChart className="text-amber-500 mr-2" size={24} />
-                <span className="text-amber-500">Access Control</span> & Identity Management
-              </h2>
-              <p className="text-gray-700">
-                Access to our systems and customer data is limited by role-based controls. We implement the principle of least privilege, ensuring the minimal level of data access needed can be granted to complete your job function.
-              </p>
-            </div>
-
-            {/* Data Privacy & Protection */}
-            <div className="border-b pb-6">
-              <h2 className="flex items-center text-xl font-semibold mb-3">
-                <ListChecks className="text-amber-500 mr-2" size={24} />
-                <span className="text-amber-500">Data Privacy</span> & Protection
-              </h2>
-              <p className="text-gray-700 mb-4">
-                Your data is important to us and we take steps to protect it.
-              </p>
-              <ul className="list-disc pl-8 text-gray-700 space-y-2">
-                <li>All non-public customer data is classified as sensitive and has strict retention and usage requirements.</li>
-                <li>Customer data is used only for the agreed-upon business purpose in compliance with the SheenCar policies.</li>
-                <li>We protect data using encryption for data in transit and at rest, which helps prevent unauthorized access.</li>
-              </ul>
-            </div>
-
-            {/* Secure Operations & Threat Monitoring */}
-            <div className="border-b pb-6">
-              <h2 className="flex items-center text-xl font-semibold mb-3">
-                <Clock className="text-amber-500 mr-2" size={24} />
-                <span className="text-amber-500">Secure Operations</span> & Threat Monitoring
-              </h2>
-              <p className="text-gray-700">
-                We monitor and run systems securely and continuously monitor for threats. Our security team is on-call 24/7/365 and responds immediately to security alerts. We deploy security tools such as threat monitoring, log management, intrusion detection, and data loss prevention solutions to maintain security.
-              </p>
-            </div>
-
-            {/* Commitment to Continuous Improvement */}
-            <div>
-              <h2 className="flex items-center text-xl font-semibold mb-3">
-                <Shield className="text-amber-500 mr-2" size={24} />
-                <span className="text-amber-500">Commitment</span> to Continuous Improvement
-              </h2>
-              <p className="text-gray-700">
-                We continually improve our security posture to stay ahead of emerging threats. Our security team works with experts across the company to ensure that our defensive countermeasures evolve and keep pace with changing technological and security landscapes.
-              </p>
-            </div>
+            {securitySections.map((section, index) => (
+              <div key={index} className="border-b pb-6">
+                <h2
+                  style={{
+                    fontFamily: "Gilroy-SemiBold",
+                    fontWeight: 400,
+                    fontSize: "34px",
+                    lineHeight: "100%",
+                    letterSpacing: "-1%",
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "12px",
+                    gap: "8px",
+                  }}
+                >
+                  <section.icon className="text-[#AF8C32]" size={24} />
+                  <span className="text-[#AF8C32]">
+                    {section.highlightedWord}
+                  </span>
+                  {section.title.replace(section.highlightedWord, "")}
+                </h2>
+                <p
+                  style={{
+                    fontFamily: "Poppins",
+                    fontWeight: 400,
+                    fontSize: "20px",
+                    lineHeight: "27px",
+                    letterSpacing: "0%",
+                    color: "#171616",
+                    marginBottom: section.listItems ? "16px" : "0",
+                  }}
+                >
+                  {section.description}
+                </p>
+                {section.listItems && (
+                  <ul
+                    style={{
+                      fontFamily: "Poppins",
+                      fontWeight: 400,
+                      fontSize: "20px",
+                      lineHeight: "27px",
+                      letterSpacing: "0%",
+                      color: "#171616",
+                      paddingLeft: "32px",
+                      listStyleType: "disc",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                    }}
+                  >
+                    {section.listItems.map((item, itemIndex) => (
+                      <li key={itemIndex}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>

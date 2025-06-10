@@ -22,14 +22,14 @@ export default function HeroSection({
   return (
     <div style={{minHeight: "376px"}} className="relative w-full bg-gradient-to-r from-neutral-800 to-neutral-700 py-12">
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0"
         style={{
           backgroundImage: `url(${bgImage})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
       ></div>
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="mx-auto px-4 relative z-10 mt-14">
         {headingContent}
         {!hideSearch && (
           <div className="mt-8">

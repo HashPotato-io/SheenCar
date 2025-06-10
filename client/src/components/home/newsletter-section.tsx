@@ -43,93 +43,30 @@ export default function NewsletterSection() {
   };
 
   return (
-    <div
-      style={{
-        background: "#101010",
-        height: "524px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          width: "95%",
-          height: "404px",
-          gap: "10px",
-          borderRadius: "24px",
-          background: "#003A2F",
-          margin: "auto",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "30px",
-        }}
-      >
-        <div
-          style={{
-            width: "723px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "16px",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "Gilroy-SemiBold",
-              fontWeight: 400,
-              fontSize: "46px",
-              lineHeight: "100%",
-              letterSpacing: "-1%",
-              color: "#FFFFFF",
-            }}
-          >
+    <div className="bg-[#101010] min-h-[524px] flex justify-center items-center p-10">
+      <div className="w-[95%] min-h-[404px] rounded-[24px] bg-[#003A2F] mx-auto flex flex-col md:flex-row justify-between items-center p-5 md:p-8">
+        <div className="w-full max-w-[723px] flex flex-col gap-4">
+          <h2 className="font-['Gilroy-SemiBold'] font-normal text-[clamp(24px,5vw,46px)] leading-[120%] tracking-[-1%] text-white break-words">
             Driven by Passion? Stay Updated with SheenCar!
-          </div>
-          <div
-            style={{
-              fontFamily: "Poppins",
-              fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: "100%",
-              letterSpacing: "0%",
-              color: "#FFFFFF",
-              width: "723px",
-            }}
-          >
+          </h2>
+          <p className="font-['Poppins'] font-normal text-[clamp(14px,3vw,16px)] leading-[140%] text-white w-full max-w-[723px] break-words">
             Get exclusive access to the latest car listings, expert tips, market
             insights, and exciting deals – delivered straight to your inbox. No
             spam, just pure car goodness!
-          </div>
-          <div
-            style={{
-              display: "flex",
-              gap: "6px",
-              alignItems: "center",
-              marginTop: "8px",
-            }}
-          >
+          </p>
+          <div className="flex flex-col sm:flex-row gap-1.5 items-center mt-2">
             <Input
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{
-                width: 263,
-                height: 40,
-                padding: "10px 16px",
-                borderRadius: 6,
-                border: '1px solid #A2A2A2',
-                background: "transparent",
-                color: "#FFFFFF",
-              }}
-              className="placeholder:text-[#A2A2A2] placeholder:font-poppins placeholder:text-base placeholder:leading-none"
+              className="w-full h-10 px-4 py-2.5 rounded-md border border-[#A2A2A2] bg-transparent text-white placeholder:text-[#A2A2A2] placeholder:font-poppins placeholder:text-base placeholder:leading-none"
             />
             <CustomButton
               onClick={handleSubmit}
               disabled={isPending}
               customStyles={{
-                width: 111,
-                height: 40,
+                width: window.innerWidth < 480 ? "100%" : "111px",
+                height: "40px",
                 gap: 8,
                 borderRadius: 6,
                 background: "#AF8C32",
@@ -145,24 +82,14 @@ export default function NewsletterSection() {
               {isPending ? "Submitting..." : "Submit"}
             </CustomButton>
           </div>
-          <div
-            style={{
-              fontFamily: "Poppins",
-              fontWeight: 400,
-              fontSize: "12px",
-              lineHeight: "100%",
-              letterSpacing: "0%",
-              color: "#FFFFFF",
-              width: "418px",
-            }}
-          >
+          <p className="font-['Poppins'] font-normal text-xs leading-none text-white w-full sm:w-[418px] break-words">
             By subscribing, you agree to our Privacy Notice and consent to
             receive updates from our company.
-          </div>
+          </p>
         </div>
-        <div>
+        <div className="w-full max-w-[469px] mt-10 md:mt-0">
           <img
-            style={{ width: "469px", height: "309px" }}
+            className="w-full h-auto max-h-[309px] object-contain"
             src={CarNewsLetter}
             alt="car"
           />

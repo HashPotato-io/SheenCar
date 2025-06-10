@@ -22,7 +22,7 @@ export default function HeroSection({
   return (
     <div style={{minHeight: "376px"}} className="relative w-full bg-gradient-to-r from-neutral-800 to-neutral-700 py-12">
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0"
         style={{
           backgroundImage: `url(${bgImage})`,
           backgroundPosition: "center",

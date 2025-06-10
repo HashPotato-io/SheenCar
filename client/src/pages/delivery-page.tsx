@@ -3,10 +3,14 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import HeroSection from "@/components/hero-section";
 import DeliveryBanner from "../assets/delivery-banner.png";
+import StartJourney from "../assets/start-journey.jpg"
 import FeatureCard from "@/components/FeatureCard";
 import {
+  CommunictaionIcon,
   CreditCard,
   EyeTest,
+  InvestigationIcon,
+  MutualAggrement,
   QuickSelling,
   SmartChecking,
   SpeechBubble,
@@ -36,17 +40,17 @@ export default function DeliveryPage() {
         handleSearchSubmit={handleSearchSubmit}
         headingContent={
           <div
-          style={{
-            fontFamily: "Gilroy-SemiBold",
-            fontWeight: 400,
-            fontSize: "clamp(32px, 5vw, 50px)",
-            lineHeight: "120%",
-            letterSpacing: "-1%",
-            textAlign: "center",
-            color: "#FFFFFF",
-            margin: "60px auto",
-            padding: "0 20px",
-          }}
+            style={{
+              fontFamily: "Gilroy-SemiBold",
+              fontWeight: 400,
+              fontSize: "clamp(32px, 5vw, 50px)",
+              lineHeight: "120%",
+              letterSpacing: "-1%",
+              textAlign: "center",
+              color: "#FFFFFF",
+              margin: "60px auto",
+              padding: "0 20px",
+            }}
           >
             From Your Screen to Your Street —
             <span style={{ color: "#AF8C32" }}> Car Delivery Made Simple</span>
@@ -142,8 +146,7 @@ export default function DeliveryPage() {
         </div>
       </div>
 
-      {/* Why Choose SheenCar */}
-      <div className="py-16 bg-white">
+      <div className="py-16">
         <div className="container mx-auto px-4">
           <h2
             className="text-3xl font-bold text-center mb-2"
@@ -176,7 +179,7 @@ export default function DeliveryPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
             <FeatureCard
-              icon={<VerifiedDealers />}
+              icon={<MutualAggrement />}
               title={
                 <>
                   <span style={{ color: "#AF8C32" }}>Mutual</span> Agreement
@@ -186,7 +189,7 @@ export default function DeliveryPage() {
             />
 
             <FeatureCard
-              icon={<SmartChecking />}
+              icon={<CommunictaionIcon />}
               title={
                 <>
                   Clear
@@ -197,7 +200,7 @@ export default function DeliveryPage() {
             />
 
             <FeatureCard
-              icon={<QuickSelling />}
+              icon={<InvestigationIcon />}
               title={
                 <>
                   <span style={{ color: "#AF8C32" }}>Inspection </span>Before
@@ -223,7 +226,7 @@ export default function DeliveryPage() {
               letterSpacing: "-1%",
               textAlign: "center",
               color: "#000000",
-              marginBottom: "24px"
+              marginBottom: "24px",
             }}
           >
             Delivery <span style={{ color: "#AF8C32" }}>FAQs</span>
@@ -262,6 +265,53 @@ export default function DeliveryPage() {
                   "Yes, you can arrange third-party delivery services. Many buyers and sellers choose to use professional vehicle transport services for long-distance deliveries. Make sure to discuss and agree upon this option with the other party.",
               }}
             />
+          </div>
+        </div>
+      </div>
+
+      {/* Start Journey Section */}
+      <div className="relative">
+        <div
+          className="w-full h-[400px] bg-cover bg-center flex items-center justify-center relative"
+          style={{
+            backgroundImage: `url(${StartJourney})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          {/* Add gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 to-neutral-700 opacity-70"></div>
+          
+          <div className="text-center px-4 relative z-10">
+            <h2
+              style={{
+                fontFamily: "Gilroy-SemiBold",
+                fontWeight: 400,
+                fontSize: "clamp(32px, 5vw, 50px)",
+                lineHeight: "120%",
+                letterSpacing: "-1%",
+                textAlign: "center",
+                color: "#FFFFFF",
+                marginBottom: "24px",
+              }}
+            >
+              Start Your Journey with <span style={{ color: "#AF8C32" }}>SheenCar</span>
+            </h2>
+            <p
+              style={{
+                fontFamily: "Poppins",
+                fontWeight: 400,
+                fontSize: "20px",
+                lineHeight: "27px",
+                letterSpacing: "0%",
+                textAlign: "center",
+                color: "#FFFFFF",
+                maxWidth: "800px",
+                margin: "0 auto",
+              }}
+            >
+              Browse listings, connect with sellers, and arrange a smooth transaction for your next vehicle!
+            </p>
           </div>
         </div>
       </div>

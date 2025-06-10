@@ -33,7 +33,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({
     <div className="relative">
       <div className="flex items-center">
         <button
-          className="p-2 rounded-full bg-[#003A2F] hover:bg-[#005C47] mr-2"
+          className="hidden sm:block p-2 rounded-full bg-[#003A2F] hover:bg-[#005C47] mr-2"
           onClick={scrollPrev}
           aria-label="Previous"
         >
@@ -64,7 +64,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({
           </div>
         </div>
         <button
-          className="p-2 rounded-full bg-[#003A2F] hover:bg-[#005C47] ml-2"
+          className="hidden sm:block p-2 rounded-full bg-[#003A2F] hover:bg-[#005C47] ml-2"
           onClick={scrollNext}
           aria-label="Next"
         >

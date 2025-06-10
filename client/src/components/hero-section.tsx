@@ -29,7 +29,7 @@ export default function HeroSection({
           backgroundSize: "cover",
         }}
       ></div>
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="mx-auto px-4 relative z-10 mt-14">
         {headingContent}
         {!hideSearch && (
           <div className="mt-8">

@@ -46,29 +46,32 @@ export default function NewsletterSection() {
     <div
       style={{
         background: "#101010",
-        height: "524px",
+        minHeight: "524px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        padding: "40px 20px",
       }}
     >
       <div
         style={{
           width: "95%",
-          height: "404px",
+          minHeight: "404px",
           gap: "10px",
           borderRadius: "24px",
           background: "#003A2F",
           margin: "auto",
           display: "flex",
+          flexDirection: window.innerWidth <= 768 ? "column" : "row",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "30px",
+          padding: "30px 20px",
         }}
       >
         <div
           style={{
-            width: "723px",
+            width: "100%",
+            maxWidth: "723px",
             display: "flex",
             flexDirection: "column",
             gap: "16px",
@@ -78,8 +81,8 @@ export default function NewsletterSection() {
             style={{
               fontFamily: "Gilroy-SemiBold",
               fontWeight: 400,
-              fontSize: "46px",
-              lineHeight: "100%",
+              fontSize: "clamp(24px, 5vw, 46px)",
+              lineHeight: "120%",
               letterSpacing: "-1%",
               color: "#FFFFFF",
             }}
@@ -90,11 +93,12 @@ export default function NewsletterSection() {
             style={{
               fontFamily: "Poppins",
               fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: "100%",
+              fontSize: "clamp(14px, 3vw, 16px)",
+              lineHeight: "140%",
               letterSpacing: "0%",
               color: "#FFFFFF",
-              width: "723px",
+              width: "100%",
+              maxWidth: "723px",
             }}
           >
             Get exclusive access to the latest car listings, expert tips, market
@@ -104,6 +108,7 @@ export default function NewsletterSection() {
           <div
             style={{
               display: "flex",
+              flexDirection: window.innerWidth <= 480 ? "column" : "row",
               gap: "6px",
               alignItems: "center",
               marginTop: "8px",
@@ -114,8 +119,8 @@ export default function NewsletterSection() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={{
-                width: 263,
-                height: 40,
+                width: window.innerWidth <= 480 ? "100%" : "263px",
+                height: "40px",
                 padding: "10px 16px",
                 borderRadius: 6,
                 border: '1px solid #A2A2A2',
@@ -128,8 +133,8 @@ export default function NewsletterSection() {
               onClick={handleSubmit}
               disabled={isPending}
               customStyles={{
-                width: 111,
-                height: 40,
+                width: window.innerWidth <= 480 ? "100%" : "111px",
+                height: "40px",
                 gap: 8,
                 borderRadius: 6,
                 background: "#AF8C32",
@@ -160,9 +165,18 @@ export default function NewsletterSection() {
             receive updates from our company.
           </div>
         </div>
-        <div>
+        <div style={{ 
+          width: "100%", 
+          maxWidth: "469px",
+          marginTop: window.innerWidth <= 768 ? "40px" : "0" 
+        }}>
           <img
-            style={{ width: "469px", height: "309px" }}
+            style={{ 
+              width: "100%", 
+              height: "auto",
+              maxHeight: "309px",
+              objectFit: "contain" 
+            }}
             src={CarNewsLetter}
             alt="car"
           />

@@ -16,10 +16,8 @@ export default function HomePage() {
         <HeroSection />
         <ExploreCars />
         <CarCategories />
-{/*         <FeaturedListings /> */}
         <ComparisonTool />
         <NewsletterSection />
-{/*         <PremiumServices /> */}
       </main>
       <Footer />
     </div>

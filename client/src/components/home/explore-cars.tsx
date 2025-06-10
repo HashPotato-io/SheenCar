@@ -137,21 +137,24 @@ export default function CarCategories() {
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        padding: "60px",
+        padding: "60px 20px",
         background: "#F8F8F8",
       }}
     >
       <div
         style={{
-          width: "758px",
-          height: "112px",
+          width: "100%",
+          maxWidth: "758px",
+          height: "auto",
+          minHeight: "112px",
           fontFamily: "Gilroy-SemiBold",
           fontWeight: 400,
-          fontSize: "46px",
-          lineHeight: "100%",
+          fontSize: "clamp(24px, 5vw, 46px)",
+          lineHeight: "120%",
           letterSpacing: "-1%",
           textAlign: "center",
           color: "#000000",
+          padding: "0 20px",
         }}
       >
         Explore the <span style={{ color: "#AF8C32" }}>Cars</span> Everyone's
@@ -159,15 +162,19 @@ export default function CarCategories() {
       </div>
       <div
         style={{
-          width: "600px",
-          height: "60px",
+          width: "100%",
+          maxWidth: "600px",
+          height: "auto",
+          minHeight: "60px",
           fontFamily: "Poppins",
           fontWeight: 400,
-          fontSize: "20px",
-          lineHeight: "100%",
+          fontSize: "clamp(14px, 3vw, 20px)",
+          lineHeight: "140%",
           letterSpacing: "0%",
           textAlign: "center",
           color: "#585353",
+          padding: "0 20px",
+          marginTop: "20px",
         }}
       >
         Top-featured listings, trending vehicles, and the latest arrivals—all in

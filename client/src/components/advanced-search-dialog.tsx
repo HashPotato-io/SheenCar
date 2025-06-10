@@ -40,57 +40,22 @@ export function AdvancedSearchDialog({
 
       {/* Dialog */}
       <div
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "609px",
-          height: "522.35px",
-          background: "#FFFFFF",
-          borderRadius: "24px",
-          padding: "40px 26px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          zIndex: 1000,
-        }}
+        className="fixed top-[182.5px] left-[22px] w-[331px] h-[581.57px] bg-white rounded-[24px] p-[40px_26px] flex flex-col gap-[10px] z-[1000]
+          md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[calc(100%-32px)] md:max-w-[609px] md:h-auto md:max-h-[90vh] md:overflow-y-auto"
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "20px",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "Gilroy-SemiBold",
-              fontWeight: 400,
-              fontSize: "24px",
-              lineHeight: "100%",
-              letterSpacing: "-1%",
-              verticalAlign: "middle",
-              color: "#000000",
-            }}
-          >
+        <div className="flex justify-between items-center mb-5">
+          <h2 className="font-['Gilroy-SemiBold'] font-normal text-[24px] leading-[100%] tracking-[-1%] text-black">
             Advanced Search
           </h2>
           <button
             onClick={onClose}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "20px",
-            }}
+            className="bg-none border-none cursor-pointer text-[20px]"
           >
             <CloseIcon />
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Row 1 */}
           <div className="flex flex-col gap-2">
             <CustomSelect

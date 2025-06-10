@@ -63,20 +63,17 @@ export default function Footer() {
   return (
     <footer className="bg-[#101010] text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row gap-14 mb-12 p-12">
+        <div className="flex flex-col md:flex-row gap-14 mb-12 p-4 md:p-12">
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+            style={{ 
+              display: "flex", 
+              flexDirection: "column", 
+              gap: "16px",
+              width: "100%",
+              maxWidth: "345px"
+            }}
           >
-            {/* <Link href="/" className="flex items-center mb-4">
-              <span className="text-white font-montserrat font-bold text-xl">
-                Sheen<span className="text-secondary">Car</span>
-              </span>
-            </Link>
-            <p className="text-neutral-400 mb-4">
-              Your trusted platform for buying, selling, and comparing cars with ease. 
-              Drive your dreams, today with confidence.
-            </p> */}
-            <div className="w-[345px] h-[51px] font-['Gilroy-Regular'] font-normal text-[14px] leading-[100%] tracking-[0%] text-white">
+            <div className="w-full font-['Gilroy-Regular'] font-normal text-[14px] leading-[140%] tracking-[0%] text-white">
               SheenCar – Your trusted platform for buying, selling, and
               exploring cars with ease. Drive your dream, trade with confidence.
             </div>
@@ -93,34 +90,36 @@ export default function Footer() {
             </div>
           </div>
 
-          {menuSections.map((section, index) => (
-            <div key={index}>
-              <h4 className="font-['Gilroy-SemiBold'] font-normal text-[18px] leading-[26px] tracking-[0%] text-white mb-4">
-                {section.title}
-              </h4>
-              <ul className="space-y-2">
-                {section.items.map((item, itemIndex) => (
-                  <li key={itemIndex} style={{ minWidth: "100px" }}>
-                    {item.isLink ? (
-                      <Link
-                        href={item.href}
-                        className="font-['Gilroy-Regular'] font-normal text-[16px] leading-[100%] tracking-[0%] text-white hover:text-white transition-colors"
-                      >
-                        {item.title}
-                      </Link>
-                    ) : (
-                      <a
-                        href={item.href}
-                        className="font-['Gilroy-Regular'] font-normal text-[16px] leading-[100%] tracking-[0%] text-white hover:text-white transition-colors"
-                      >
-                        {item.title}
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full">
+            {menuSections.map((section, index) => (
+              <div key={index}>
+                <h4 className="font-['Gilroy-SemiBold'] font-normal text-[18px] leading-[26px] tracking-[0%] text-white mb-4">
+                  {section.title}
+                </h4>
+                <ul className="space-y-2">
+                  {section.items.map((item, itemIndex) => (
+                    <li key={itemIndex}>
+                      {item.isLink ? (
+                        <Link
+                          href={item.href}
+                          className="font-['Gilroy-Regular'] font-normal text-[16px] leading-[140%] tracking-[0%] text-white hover:text-white transition-colors"
+                        >
+                          {item.title}
+                        </Link>
+                      ) : (
+                        <a
+                          href={item.href}
+                          className="font-['Gilroy-Regular'] font-normal text-[16px] leading-[140%] tracking-[0%] text-white hover:text-white transition-colors"
+                        >
+                          {item.title}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div

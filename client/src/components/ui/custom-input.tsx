@@ -18,6 +18,8 @@ export interface CustomInputProps
   required?: boolean;
   iconColor?: string;
   type?: string;
+  placeholderColor?: string;
+  borderColor?: string;
 }
 
 const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
@@ -32,6 +34,8 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
       label,
       required,
       iconColor = "#003A2F",
+      placeholderColor = "#696969",
+      borderColor = "#CFCFCF",
       ...props
     },
     ref
@@ -68,9 +72,9 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
             type={type}
             className={cn(
               variant === "default" &&
-                "flex h-10 w-full border-b border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-['Poppins'] placeholder:font-normal placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] placeholder:align-middle placeholder:text-[#696969] focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-[#696969]",
+                `flex h-10 w-full border-b border-[${borderColor}] bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-['Poppins'] placeholder:font-normal placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] placeholder:align-middle placeholder:text-[${placeholderColor}] focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-[#696969]`,
               variant === "outline" &&
-                "flex h-[40px] w-[242px] border border-[#CFCFCF] rounded-[6px] bg-transparent px-4 py-[10px] text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-['Poppins'] placeholder:font-normal placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] placeholder:align-middle placeholder:text-[#696969] focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-[#696969]",
+                `flex h-[40px] w-[242px] border border-[${borderColor}] rounded-[6px] bg-transparent px-4 py-[10px] text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-['Poppins'] placeholder:font-normal placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] placeholder:align-middle placeholder:text-[${placeholderColor}] focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-[#696969]`,
               showZipCodeIcon && "pl-10",
               showInchIcon && "pr-10",
               showGalIcon && "pr-10",

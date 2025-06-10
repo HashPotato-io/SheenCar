@@ -8,7 +8,7 @@ import { CustomInput } from "@/components/ui/custom-input";
 import Search from "../assets/Icon/search.svg";
 import { SearchToggle } from "./ui/search-toggle";
 import { CustomButton } from "./ui/custom-button";
-import { useState } from 'react';
+import { useState } from "react";
 import { AdvancedSearchDialog } from "./advanced-search-dialog";
 
 export function AdvanceSearch() {
@@ -28,9 +28,9 @@ export function AdvanceSearch() {
   });
 
   const handleValueChange = (field: string, value: string) => {
-    setSearchParams(prev => ({
+    setSearchParams((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -38,29 +38,35 @@ export function AdvanceSearch() {
     <>
       <div
         style={{
-          width: "90vw",
-          height: "auto",
           background: "#F8F8F8",
           borderRadius: "34px",
           position: "relative",
         }}
-        className="flex flex-col md:flex-row gap-2 items-center p-8"
+        className="w-full md:w-[1048px] flex flex-col md:flex-row gap-2 items-center p-8 h-auto md:h-[145px]"
       >
-        <div className="flex flex-col md:flex-row w-full gap-4">
+        <div className="flex flex-col md:flex-row w-full gap-2">
           <SearchToggle />
-          <div>
+          <div className="flex items-center">
             <img src={Search} alt="search" width="19px" height="19px" />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4 w-full">
-            <div className="flex flex-col gap-2 w-full">
-              <CustomInput placeholder="Zip Code" className="w-full h-[45px]" />
+          <div className="flex flex-col md:flex-row gap-12 w-full">
+            <div className="flex flex-col md:w-[147px]">
+              <CustomInput
+                placeholder="Zip Code"
+                className="w-full md:w-[147px] h-[45px]"
+              />
             </div>
 
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col md:w-[147px]">
               <CustomSelect onValueChange={(value) => setSelectedModel(value)}>
-                <CustomSelectTrigger className="w-full h-[48px]">
-                  <span>{selectedModel ? selectedModel.charAt(0).toUpperCase() + selectedModel.slice(1) : "Make"}</span>
+                <CustomSelectTrigger className="w-full md:w-[147px] h-[48px]">
+                  <span>
+                    {selectedModel
+                      ? selectedModel.charAt(0).toUpperCase() +
+                        selectedModel.slice(1)
+                      : "Make"}
+                  </span>
                 </CustomSelectTrigger>
                 <CustomSelectContent>
                   <CustomSelectItem value="toyota">Toyota</CustomSelectItem>
@@ -70,10 +76,17 @@ export function AdvanceSearch() {
               </CustomSelect>
             </div>
 
-            <div className="flex flex-col gap-2 w-full">
-              <CustomSelect onValueChange={(value) => setSelectedCarModel(value)}>
-                <CustomSelectTrigger className="w-full h-[48px]">
-                  <span>{selectedCarModel ? selectedCarModel.charAt(0).toUpperCase() + selectedCarModel.slice(1) : "Model"}</span>
+            <div className="flex flex-col md:w-[147px]">
+              <CustomSelect
+                onValueChange={(value) => setSelectedCarModel(value)}
+              >
+                <CustomSelectTrigger className="w-full md:w-[147px] h-[48px]">
+                  <span>
+                    {selectedCarModel
+                      ? selectedCarModel.charAt(0).toUpperCase() +
+                        selectedCarModel.slice(1)
+                      : "Model"}
+                  </span>
                 </CustomSelectTrigger>
                 <CustomSelectContent>
                   <CustomSelectItem value="camry">Camry</CustomSelectItem>
@@ -82,34 +95,36 @@ export function AdvanceSearch() {
                 </CustomSelectContent>
               </CustomSelect>
             </div>
-          </div>
-        </div>
-        
-        <div className="flex items-center gap-2 w-full md:w-auto">
-          <CustomButton 
-            customStyles={{ 
-              width: "100%", 
-              height: "40px",
-              borderRadius: "6px"
-            }}
-            disabled={!selectedModel}
-          >
-            Search
-          </CustomButton>
-          <div
-            style={{
-              fontFamily: "Gilroy-Regular",
-              fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: "100%",
-              letterSpacing: "0%",
-              textAlign: "center",
-              color: "#000000",
-              cursor: "pointer",
-            }}
-            onClick={() => setIsOpen(true)}
-          >
-            Advanced Search
+
+            <div className="flex items-center gap-2 md:ml-[20px]">
+              <CustomButton
+                customStyles={{
+                  width: "100%",
+                  height: "40px",
+                  borderRadius: "6px",
+                }}
+                disabled={!selectedModel}
+              >
+                Search
+              </CustomButton>
+              <div
+                style={{
+                  fontFamily: "Gilroy-Regular",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "100%",
+                  letterSpacing: "0%",
+                  textAlign: "center",
+                  color: "#000000",
+                  cursor: "pointer",
+                  width: "250px",
+                  marginLeft: "10px",
+                }}
+                onClick={() => setIsOpen(true)}
+              >
+                Advanced Search
+              </div>
+            </div>
           </div>
         </div>
       </div>

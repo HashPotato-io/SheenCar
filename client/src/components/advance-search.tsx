@@ -44,23 +44,33 @@ export function AdvanceSearch() {
         }}
         className="w-full md:w-[1048px] flex flex-col md:flex-row gap-2 items-center p-8 h-auto md:h-[145px]"
       >
-        <div className="flex flex-col md:flex-row w-full gap-2">
+        <div className="flex flex-col md:flex-row w-full gap-4">
           <SearchToggle />
-          <div className="flex items-center">
-            <img src={Search} alt="search" width="19px" height="19px" />
-          </div>
+
+          <img
+            src={Search}
+            alt="search"
+            width="30px"
+            height="30px"
+          />
 
           <div className="flex flex-col md:flex-row gap-12 w-full">
             <div className="flex flex-col md:w-[147px]">
               <CustomInput
                 placeholder="Zip Code"
                 className="w-full md:w-[147px] h-[45px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
               />
             </div>
 
             <div className="flex flex-col md:w-[147px]">
               <CustomSelect onValueChange={(value) => setSelectedModel(value)}>
-                <CustomSelectTrigger className="w-full md:w-[147px] h-[48px]">
+                <CustomSelectTrigger
+                  className="w-full md:w-[147px] h-[48px]"
+                  placeholderColor="#000000"
+                  borderColor="#000000"
+                >
                   <span>
                     {selectedModel
                       ? selectedModel.charAt(0).toUpperCase() +
@@ -80,7 +90,11 @@ export function AdvanceSearch() {
               <CustomSelect
                 onValueChange={(value) => setSelectedCarModel(value)}
               >
-                <CustomSelectTrigger className="w-full md:w-[147px] h-[48px]">
+                <CustomSelectTrigger
+                  className="w-full md:w-[147px] h-[48px]"
+                  placeholderColor="#000000"
+                  borderColor="#000000"
+                >
                   <span>
                     {selectedCarModel
                       ? selectedCarModel.charAt(0).toUpperCase() +
@@ -96,10 +110,10 @@ export function AdvanceSearch() {
               </CustomSelect>
             </div>
 
-            <div className="flex items-center gap-2 md:ml-[20px]">
+            <div className="flex items-center gap-[20px] md:ml-[20px]">
               <CustomButton
                 customStyles={{
-                  width: "100%",
+                  width: "120px",
                   height: "40px",
                   borderRadius: "6px",
                 }}
@@ -117,8 +131,6 @@ export function AdvanceSearch() {
                   textAlign: "center",
                   color: "#000000",
                   cursor: "pointer",
-                  width: "250px",
-                  marginLeft: "10px",
                 }}
                 onClick={() => setIsOpen(true)}
               >

@@ -68,13 +68,24 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
           <span className="absolute left-[-12px] text-[#DC1A1A]">*</span>
         )}
         <div className="relative">
+          <style>
+            {`
+              input[data-placeholder-color]::placeholder {
+                color: ${placeholderColor} !important;
+              }
+            `}
+          </style>
           <input
             type={type}
+            data-placeholder-color
+            style={{
+              borderColor: borderColor
+            }}
             className={cn(
               variant === "default" &&
-                `flex h-10 w-full border-b border-[${borderColor}] bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-['Poppins'] placeholder:font-normal placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] placeholder:align-middle placeholder:text-[${placeholderColor}] focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-[#696969]`,
+                `flex h-10 w-full border-b bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-['Poppins'] placeholder:font-normal placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] placeholder:align-middle focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle`,
               variant === "outline" &&
-                `flex h-[40px] w-[242px] border border-[${borderColor}] rounded-[6px] bg-transparent px-4 py-[10px] text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-['Poppins'] placeholder:font-normal placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] placeholder:align-middle placeholder:text-[${placeholderColor}] focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle text-[#696969]`,
+                `flex h-[40px] w-[242px] border rounded-[6px] bg-transparent px-4 py-[10px] text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-['Poppins'] placeholder:font-normal placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] placeholder:align-middle focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle`,
               showZipCodeIcon && "pl-10",
               showInchIcon && "pr-10",
               showGalIcon && "pr-10",

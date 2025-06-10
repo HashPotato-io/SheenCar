@@ -17,6 +17,8 @@ import { Label } from "@/components/ui/label";
 import CarDealer from "../assets/car-dealer.png";
 import DealerBanner from "../assets/DealerHS.png";
 import HeroSection from "@/components/hero-section";
+import DealerFilter from "@/components/dealer/dealer-filter";
+import DealerCard from "@/components/dealer/dealer-card";
 
 interface Dealer {
   id: number;
@@ -149,331 +151,33 @@ export default function FindDealersPage() {
       {/* Main Content Area */}
       <div className="bg-gray-50 py-8">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col md:flex-row gap-[20px]">
             {/* Filters Sidebar */}
-            <div className="w-full md:w-64 pr-0 md:pr-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
-                <h3 className="font-bold text-xl mb-4">Filters</h3>
-
-                <div className="space-y-6">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-gray-500"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <Label htmlFor="zipcode" className="text-sm font-medium">
-                        ZIP Code
-                      </Label>
-                    </div>
-                    <div className="relative">
-                      <Input
-                        id="zipcode"
-                        type="text"
-                        placeholder="Enter ZIP code"
-                        className="w-full"
-                        value={zipCode}
-                        onChange={(e) => setZipCode(e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium">Make</Label>
-                    <Select value={make} onValueChange={setMake}>
-                      <SelectTrigger className="w-full mt-1">
-                        <SelectValue placeholder="Select make" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="toyota">Toyota</SelectItem>
-                          <SelectItem value="honda">Honda</SelectItem>
-                          <SelectItem value="ford">Ford</SelectItem>
-                          <SelectItem value="bmw">BMW</SelectItem>
-                          <SelectItem value="mercedes">
-                            Mercedes-Benz
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium">Model</Label>
-                    <Select value={model} onValueChange={setModel}>
-                      <SelectTrigger className="w-full mt-1">
-                        <SelectValue placeholder="Select model" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="camry">Camry</SelectItem>
-                          <SelectItem value="accord">Accord</SelectItem>
-                          <SelectItem value="f150">F-150</SelectItem>
-                          <SelectItem value="3series">3 Series</SelectItem>
-                          <SelectItem value="cclass">C-Class</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium">Body Type</Label>
-                    <Select value={bodyType} onValueChange={setBodyType}>
-                      <SelectTrigger className="w-full mt-1">
-                        <SelectValue placeholder="Select body type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="sedan">Sedan</SelectItem>
-                          <SelectItem value="suv">SUV</SelectItem>
-                          <SelectItem value="truck">Truck</SelectItem>
-                          <SelectItem value="coupe">Coupe</SelectItem>
-                          <SelectItem value="convertible">
-                            Convertible
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium">Condition</Label>
-                    <div className="mt-2 space-y-1">
-                      <div className="flex items-center space-x-2">
-                        <div className="flex items-center">
-                          <input
-                            type="radio"
-                            id="used"
-                            name="condition"
-                            className="w-4 h-4 accent-green-800"
-                            checked={condition === "used"}
-                            onChange={() => setCondition("used")}
-                          />
-                          <Label htmlFor="used" className="cursor-pointer ml-2">
-                            Used
-                          </Label>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <div className="flex items-center">
-                          <input
-                            type="radio"
-                            id="new"
-                            name="condition"
-                            className="w-4 h-4 accent-green-800"
-                            checked={condition === "new"}
-                            onChange={() => setCondition("new")}
-                          />
-                          <Label htmlFor="new" className="cursor-pointer ml-2">
-                            New
-                          </Label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="text-sm font-medium mb-2">
-                      Customer Ratings
-                    </h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          id="rating5"
-                          name="rating"
-                          className="mr-2"
-                          onClick={() => setRating("5")}
-                        />
-                        <label htmlFor="rating5" className="flex">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-4 h-4 fill-amber-500 text-amber-500"
-                            />
-                          ))}
-                        </label>
-                      </div>
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          id="rating4"
-                          name="rating"
-                          className="mr-2"
-                          onClick={() => setRating("4")}
-                        />
-                        <label htmlFor="rating4" className="flex">
-                          {[...Array(4)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-4 h-4 fill-amber-500 text-amber-500"
-                            />
-                          ))}
-                          <Star className="w-4 h-4 text-amber-500" />
-                        </label>
-                      </div>
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          id="rating3"
-                          name="rating"
-                          className="mr-2"
-                          onClick={() => setRating("3")}
-                        />
-                        <label htmlFor="rating3" className="flex">
-                          {[...Array(3)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-4 h-4 fill-amber-500 text-amber-500"
-                            />
-                          ))}
-                          {[...Array(2)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 text-amber-500" />
-                          ))}
-                        </label>
-                      </div>
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          id="rating2"
-                          name="rating"
-                          className="mr-2"
-                          onClick={() => setRating("2")}
-                        />
-                        <label htmlFor="rating2" className="flex">
-                          {[...Array(2)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-4 h-4 fill-amber-500 text-amber-500"
-                            />
-                          ))}
-                          {[...Array(3)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 text-amber-500" />
-                          ))}
-                        </label>
-                      </div>
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          id="rating1"
-                          name="rating"
-                          className="mr-2"
-                          onClick={() => setRating("1")}
-                        />
-                        <label htmlFor="rating1" className="flex">
-                          <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-                          {[...Array(4)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 text-amber-500" />
-                          ))}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <DealerFilter 
+                onFilterChange={(filters) => {
+                  // Handle filter changes here
+                  setZipCode(filters.zipCode);
+                  setMake(filters.make);
+                  setModel(filters.model);
+                  setBodyType(filters.bodyType);
+                  setCondition(filters.condition);
+                  setRating(filters.rating);
+                }} 
+              />
             </div>
 
             {/* Dealers List */}
-            <div className="flex-1">
-              <h2 className="text-xl font-semibold mb-4">
-                <span className="text-amber-500">{totalDealers}</span> Car
+            <div>
+              <h2 className="font-['Gilroy-SemiBold'] font-normal text-[28px] leading-[100%] text-black">
+                <span className="text-[#AF8C32]">{totalDealers}</span> Car
                 Dealers Found
               </h2>
 
-              <div className="bg-gray-100 rounded-lg p-4">
+              <div className="p-4">
                 <div className="space-y-4">
                   {dealers.map((dealer) => (
-                    <div
-                      key={dealer.id}
-                      className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                    >
-                      <Link href={`/services/dealer/${dealer.id}`}>
-                        <div className="flex p-4">
-                          <div className="w-[203px] h-[161px] bg-neutral-800 rounded overflow-hidden relative mr-4">
-                            <img src={CarDealer} alt="car-dealer" />
-                          </div>
-
-                          <div className="flex-1">
-                            <div className="flex flex-col">
-                              <h3 className="font-bold text-lg text-gray-800">
-                                {dealer.name}
-                              </h3>
-                              <div className="flex items-center mb-2">
-                                <div className="flex">
-                                  {[...Array(5)].map((_, i) => (
-                                    <Star
-                                      key={i}
-                                      className={`w-4 h-4 ${
-                                        i < Math.floor(dealer.rating)
-                                          ? "fill-amber-500 text-amber-500"
-                                          : "text-amber-500"
-                                      }`}
-                                    />
-                                  ))}
-                                </div>
-                                <span className="ml-1 text-gray-500 text-xs">
-                                  ({dealer.reviewCount} Ratings)
-                                </span>
-                              </div>
-
-                              <div className="flex items-center text-xs text-gray-500 mb-1">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-3 w-3 mr-1"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                  />
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                  />
-                                </svg>
-                                ZIP Code: {dealer.zipCode}
-                              </div>
-
-                              <div className="flex items-center text-xs text-gray-500 mb-2">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-3 w-3 mr-1"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                                  />
-                                </svg>
-                                Phone: {dealer.phoneNumber}
-                              </div>
-
-                              <p className="text-xs text-gray-600 line-clamp-3">
-                                {dealer.description}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
+                    <DealerCard key={dealer.id} dealer={dealer} />
                   ))}
                 </div>
               </div>

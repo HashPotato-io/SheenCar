@@ -1,187 +1,739 @@
+import { Link } from "wouter";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import { Shield, AlertTriangle, Eye, Lock, CreditCard, Users } from "lucide-react";
+import {
+  AlertTriangle,
+  Shield,
+  FileCheck,
+  AlertCircle,
+  UserCheck,
+  CreditCard,
+  MessageSquare,
+} from "lucide-react";
+import HeroSection from "@/components/hero-section";
+import TeamBanner from "../assets/team-banner.png";
+import { useState } from "react";
+import FraudBanner from "../assets/fraud-banner.png";
+
+type FraudSection = {
+  icon: React.ElementType;
+  title: string;
+  highlightedWord: string;
+  description: string;
+  listItems?: string[];
+};
+
+const fraudSections: FraudSection[] = [
+  {
+    icon: AlertTriangle,
+    title: "Common Fraud Types",
+    highlightedWord: "Common Fraud",
+    description:
+      "Be aware of these common fraud schemes in the automotive industry:",
+    listItems: [
+      "Fake vehicle listings with attractive prices",
+      "Requests for advance payments or deposits",
+      "Pressure to complete transactions quickly",
+      "Sellers avoiding in-person meetings",
+      "Requests to communicate outside the platform",
+    ],
+  },
+  {
+    icon: Shield,
+    title: "Safe Trading Practices",
+    highlightedWord: "Safe Trading",
+    description: "Follow these essential practices to protect yourself:",
+    listItems: [
+      "Always meet in person to inspect the vehicle",
+      "Verify the seller's identity and vehicle documentation",
+      "Use SheenCar's secure payment system",
+      "Never share personal financial information",
+      "Trust your instincts - if it seems too good to be true, it probably is",
+    ],
+  },
+  {
+    icon: UserCheck,
+    title: "Seller Verification",
+    highlightedWord: "Seller Verification",
+    description:
+      "Before proceeding with any transaction, verify the seller's credentials:",
+    listItems: [
+      "Check seller's profile and history on SheenCar",
+      "Verify contact information and business details",
+      "Look for verified dealer badges",
+      "Review seller's ratings and reviews",
+      "Confirm vehicle documentation matches seller information",
+    ],
+  },
+  {
+    icon: CreditCard,
+    title: "Secure Payment Guidelines",
+    highlightedWord: "Secure Payment",
+    description:
+      "Protect your financial information with these payment guidelines:",
+    listItems: [
+      "Use only SheenCar's approved payment methods",
+      "Never send money through wire transfers or gift cards",
+      "Keep all payment records and receipts",
+      "Be cautious of requests for partial payments",
+      "Verify payment confirmation through official channels",
+    ],
+  },
+  {
+    icon: MessageSquare,
+    title: "Communication Safety",
+    highlightedWord: "Communication",
+    description:
+      "Stay safe while communicating with potential buyers or sellers:",
+    listItems: [
+      "Use SheenCar's messaging system for all communications",
+      "Be wary of requests to communicate through external platforms",
+      "Never share personal financial information",
+      "Keep all communication records",
+      "Report suspicious behavior immediately",
+    ],
+  },
+  {
+    icon: FileCheck,
+    title: "Document Verification",
+    highlightedWord: "Document Verification",
+    description: "Always verify these important documents:",
+    listItems: [
+      "Vehicle registration and title",
+      "Service history and maintenance records",
+      "Insurance documentation",
+      "Seller's identification",
+      "Any relevant warranties or guarantees",
+    ],
+  },
+];
 
 export default function FraudPage() {
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle search logic here
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
+      <HeroSection
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearchSubmit={handleSearchSubmit}
+        headingContent={
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "16px",
+              padding: "20px 0",
+            }}
+            className="w-full px-4 md:px-0"
+          >
+            <div
+              style={{
+                fontFamily: "Gilroy-SemiBold",
+                fontWeight: 400,
+                fontSize: "clamp(32px, 5vw, 50px)",
+                lineHeight: "120%",
+                letterSpacing: "-1%",
+                textAlign: "center",
+                color: "#FFFFFF",
+              }}
+              className="w-full md:w-auto"
+            >
+              Stay Alert: Protect Yourself from{" "}
+              <span style={{ color: "#AF8C32" }}>Fraud</span>
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins",
+                fontWeight: 400,
+                fontSize: "20px",
+                lineHeight: "100%",
+                letterSpacing: "0%",
+                textAlign: "center",
+                color: "#FFFFFF",
+              }}
+              className="w-full md:w-[878px] text-base md:text-xl"
+            >
+              Learn how to spot scams, avoid fraudulent transactions, and trade
+              safely on SheenCar.
+            </div>
+          </div>
+        }
+        bgImage={FraudBanner}
+        hideSearch={true}
+      />
+
       {/* Main Content */}
-      <div className="flex-1 bg-white">
-        <div className="container mx-auto px-4 py-8">
-          <div className="max-w-4xl mx-auto">
-            
-            {/* Header Section */}
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">Fraud Prevention & Safety</h1>
-              <p className="text-gray-700 leading-relaxed">
-                At SheenCar, we're committed to preventing you from the knowledge and tools to recognize every type of scam and backing of 
-                vehicle sales transactions. We're vigilant about ensuring online marketplaces remain secure and scam-free for all of our loyal participants.
+      <div className="flex-grow bg-white p-4 md:p-[24px]">
+        <div className="container mx-auto px-4 py-4 md:py-8">
+          <div>
+            <p
+              style={{
+                fontFamily: "Poppins",
+                fontWeight: 400,
+                fontSize: "20px",
+                lineHeight: "27px",
+                letterSpacing: "0%",
+                color: "#171616",
+                marginBottom: "24px",
+              }}
+              className="text-base md:text-xl"
+            >
+              At SheenCar, we're committed to ensuring you have the knowledge
+              and tools to navigate every step of your car-buying or selling
+              journey safely. Whether you're negotiating, financing, trading, or
+              reselling—whether with a dealer or a private seller—your security
+              is our priority.
+            </p>
+            <p
+              style={{
+                fontFamily: "Poppins",
+                fontWeight: 400,
+                fontSize: "20px",
+                lineHeight: "27px",
+                letterSpacing: "0%",
+                color: "#171616",
+              }}
+            >
+              While most listings and inquiries on SheenCar are genuine, it's
+              important to stay vigilant against fraudulent activity. Some
+              individuals may post fake listings to scam buyers, while others
+              may approach legitimate sellers with deceptive offers. We
+              encourage all users to exercise caution and follow best practices
+              to protect themselves from fraud. If a deal seems too good to be
+              true, it probably is. Stay informed, trade confidently, and follow
+              our fraud prevention tips to ensure a secure and hassle-free
+              experience.
+            </p>
+          </div>
+
+          {/* Fraud Sections */}
+
+          {/* Additional Content Sections */}
+          <div className="space-y-8 mt-12">
+            {/* Advice for Buyers */}
+            <div className="border-b pb-6">
+              <h2
+                style={{
+                  fontFamily: "Gilroy-Bold",
+                  fontWeight: 400,
+                  fontSize: "20px",
+                  lineHeight: "27px",
+                  letterSpacing: "0%",
+                  color: "#000000",
+                  marginBottom: "16px",
+                }}
+                className="text-lg md:text-xl"
+              >
+                Advice for <span style={{ color: "#AF8C32" }}>Buyers</span>
+              </h2>
+
+              <h3
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                  fontSize: "18px",
+                  lineHeight: "24px",
+                  color: "#171616",
+                  marginBottom: "8px",
+                }}
+                className="text-base md:text-lg"
+              >
+                Inspect the Car, Preferably in Person
+              </h3>
+              <ul
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  paddingLeft: "20px",
+                  marginBottom: "16px",
+                  listStyleType: "disc",
+                  listStylePosition: "inside",
+                }}
+                className="text-sm md:text-lg"
+              >
+                <li>
+                  Be wary of sellers who refuse to meet in person, face to face.
+                </li>
+                <li>
+                  Use caution if the seller only wants to communicate via email
+                  or text message.
+                </li>
+                <li>
+                  Be extremely wary if the seller refuses to or claims they
+                  cannot talk on the phone.
+                </li>
+                <li>
+                  If possible, have a car mechanic join you and inspect the
+                  vehicle before you pay to complete a sale.
+                </li>
+                <li>
+                  Exercise caution if the seller states the vehicle must be
+                  shipped or is currently not in their physical possession.
+                </li>
+              </ul>
+
+              <h3
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                  fontSize: "18px",
+                  lineHeight: "24px",
+                  color: "#171616",
+                  marginBottom: "8px",
+                }}
+                className="text-base md:text-lg"
+              >
+                Avoid Listings That Are Too Good to Be True
+              </h3>
+              <ul
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  paddingLeft: "20px",
+                  marginBottom: "16px",
+                  listStyleType: "disc",
+                  listStylePosition: "inside",
+                }}
+                className="text-sm md:text-lg"
+              >
+                <li>
+                  Ask for popular sports cars and SUVs priced at half of what
+                  they're worth are almost always lures used by scam artists.
+                  Use a price check tool to get an approximate idea of an
+                  automobile's worth before responding to a suspicious listing.
+                </li>
+                <li>
+                  If you have suspicions about a listing or Cars.com, please do
+                  not hesitate to contact our Fraud Prevention Department. We
+                  can be reached at fraud@cars.com or 888-780-1288.
+                </li>
+                <li>
+                  Exercise extreme caution before wiring any deposits using
+                  Western Union, MoneyGram, PayPal, Bitcoin and other
+                  cryptocurrencies, escrow services or gift cards.
+                </li>
+                <li>
+                  The safest way to purchase a car is in person using cash in a
+                  public place. However, if you must wire funds, please make
+                  sure you verify the receiving account by contacting the bank
+                  directly prior to doing so.
+                </li>
+                <li>
+                  We never recommend doing business with an overseas car dealer
+                  or seller. Sending money in any form overseas will likely
+                  result in losing all of it. Western Union and MoneyGram are
+                  popular for internet scams because the funds are generally
+                  untraceable and unavailable by law enforcement or individual
+                  card/bank.
+                </li>
+                <li>
+                  Please be aware that fraudsters may set up fake escrow
+                  services in an attempt to deceive consumers. Before you commit
+                  to using any escrow service, we recommend researching the
+                  service thoroughly online and through the state licensing
+                  authority that has licensed the company.
+                </li>
+              </ul>
+
+              <p
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  marginBottom: "16px",
+                }}
+                className="text-sm md:text-lg"
+              >
+                Note that current online fraud trend involves a fraudulent
+                seller requesting payment via gift cards from popular stores or
+                websites. If you encounter a seller who proposes payment through
+                this method, please cut off all communication with the seller
+                and reach out to us.
+              </p>
+
+              <h3
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                  fontSize: "18px",
+                  lineHeight: "24px",
+                  color: "#171616",
+                  marginBottom: "8px",
+                }}
+                className="text-base md:text-lg"
+              >
+                Learn About a Vehicle's History
+              </h3>
+              <ul
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  paddingLeft: "20px",
+                  marginBottom: "16px",
+                  listStyleType: "disc",
+                  listStylePosition: "inside",
+                }}
+                className="text-sm md:text-lg"
+              >
+                <li>
+                  Consider purchasing a vehicle history report such as those
+                  offered by Carfax. While vehicle history reports do not
+                  necessarily include every piece of information about a used
+                  car, they can be a helpful tool to identify major issues or
+                  defects, general location and more.
+                </li>
+                <li>
+                  It can be indicative of auto fraud if the seller is unable or
+                  unwilling to provide the vehicle identification number or a
+                  copy of the title.
+                </li>
+              </ul>
+            </div>
+
+            {/* Advice for Sellers */}
+            <div className="border-b pb-6">
+              <h2
+                style={{
+                  fontFamily: "Gilroy-Bold",
+                  fontWeight: 400,
+                  fontSize: "20px",
+                  lineHeight: "27px",
+                  letterSpacing: "0%",
+                  color: "#000000",
+                  marginBottom: "16px",
+                }}
+                className="text-lg md:text-xl"
+              >
+                Advice for <span style={{ color: "#AF8C32" }}>Sellers</span>
+              </h2>
+
+              <h3
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                  fontSize: "18px",
+                  lineHeight: "24px",
+                  color: "#171616",
+                  marginBottom: "8px",
+                }}
+                className="text-base md:text-lg"
+              >
+                Dealing Locally Is Best
+              </h3>
+              <ul
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  paddingLeft: "20px",
+                  marginBottom: "16px",
+                  listStyleType: "disc",
+                  listStylePosition: "inside",
+                }}
+                className="text-sm md:text-lg"
+              >
+                <li>
+                  The safest and recommended way to deal is in person, face to
+                  face.
+                </li>
+                <li>
+                  Use caution if the buyer only wants to communicate via email
+                  or text message.
+                </li>
+                <li>
+                  Avoid buyers who are currently out of the country or claim to
+                  reside overseas.
+                </li>
+                <li>
+                  Be extremely wary if the buyer refuses to or claims he or she
+                  cannot talk on the phone.
+                </li>
+              </ul>
+
+              <h3
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                  fontSize: "18px",
+                  lineHeight: "24px",
+                  color: "#171616",
+                  marginBottom: "8px",
+                }}
+                className="text-base md:text-lg"
+              >
+                Avoid Complicated Payment Schemes
+              </h3>
+              <ul
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  paddingLeft: "20px",
+                  marginBottom: "16px",
+                  listStyleType: "disc",
+                  listStylePosition: "inside",
+                }}
+                className="text-sm md:text-lg"
+              >
+                <li>
+                  As the one selling, you are in control. Always state your
+                  preferred method of payment and be suspicious of a payment
+                  process that involves third parties in any way.
+                </li>
+                <li>
+                  Exercise caution with payment processes that involve prepaid
+                  debit or gift cards.
+                </li>
+                <li>
+                  Note that an online fraud trend involves the fraudster sending
+                  you a cashier's check for more than the purchase amount of
+                  your car and asking you to send the difference back to them
+                  via wire, gift card or some other means. These cashier's
+                  checks are almost always counterfeit and your bank will hold
+                  you liable for all losses incurred.
+                </li>
+              </ul>
+
+              <h3
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                  fontSize: "18px",
+                  lineHeight: "24px",
+                  color: "#171616",
+                  marginBottom: "8px",
+                }}
+                className="text-base md:text-lg"
+              >
+                Verify Payment
+              </h3>
+              <ul
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  paddingLeft: "20px",
+                  marginBottom: "16px",
+                  listStyleType: "disc",
+                  listStylePosition: "inside",
+                }}
+                className="text-sm md:text-lg"
+              >
+                <li>
+                  Do not transfer the title of your car to the buyer until their
+                  check has cleared or you have otherwise received full payment
+                  for your vehicle.
+                </li>
+                <li>Never accept a check for more than your asking price.</li>
+                <li>
+                  You should always verify the authenticity of any cashier's or
+                  certified check with the issuing bank.
+                </li>
+                <li>
+                  Do not rely on the phone number printed on the check; look up
+                  the issuing bank's phone number yourself if you plan to call.
+                </li>
+                <li>
+                  The bank can verify the routing number, account number and
+                  name on the account. The issuing bank will tell you if there
+                  are funds available to cover the designated amount.
+                </li>
+              </ul>
+            </div>
+
+            {/* Phishing Scams */}
+            <div className="border-b pb-6">
+              <h2
+                style={{
+                  fontFamily: "Gilroy-Bold",
+                  fontWeight: 400,
+                  fontSize: "20px",
+                  lineHeight: "27px",
+                  letterSpacing: "0%",
+                  color: "#000000",
+                  marginBottom: "16px",
+                }}
+                className="text-lg md:text-xl"
+              >
+                Phishing <span style={{ color: "#AF8C32" }}>Scams</span>
+              </h2>
+
+              <p
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  marginBottom: "16px",
+                }}
+                className="text-sm md:text-lg"
+              >
+                Always be wary of text messages or emails that include links.
+                Fraudsters will often use these links to attempt to bring you to
+                a fake version of the site. The purpose of this is to obtain
+                your login credentials in order to use your account to post
+                fraudulent listings. If you receive an email that includes
+                links, we recommend taking the following precautions to avoid
+                falling victim to them:
+              </p>
+
+              <ul
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  paddingLeft: "20px",
+                  marginBottom: "16px",
+                  listStyleType: "disc",
+                  listStylePosition: "inside",
+                }}
+                className="text-sm md:text-lg"
+              >
+                <li>
+                  Check the "from" address to ensure that it is legitimate.
+                </li>
+                <li>
+                  Hover over the links, but don't click on them. When hovering
+                  over a link you will generally receive a small pop-up message
+                  that displays the URL the link will take you to. If this looks
+                  suspicious, do not click the link.
+                </li>
+                <li>
+                  Analyze the greeting and grammar. If the email is vague (e.g.,
+                  "Hello, Valued Customer") or the grammar is poor, odds are
+                  higher that the email is illegitimate.
+                </li>
+              </ul>
+
+              <p
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  marginBottom: "16px",
+                }}
+                className="text-sm md:text-lg"
+              >
+                While the above data fraud awareness steps should help bring
+                some protection against phishing scams, there is no way to 100%
+                guarantee an email's legitimacy. Generally, the safest option is
+                to not click on any links and to go directly to Cars.com within
+                your web browser. If you ever have any hesitation or think
+                something looks suspicious, please feel free to forward it us.
               </p>
             </div>
 
-            {/* Content Sections */}
-            <div className="space-y-8">
-              
-              {/* Online Safety Tips */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <Shield className="w-5 h-5 mr-2 text-blue-600" />
-                  Online Safety Tips When Using SheenCar
-                </h2>
-                <p className="text-gray-700 mb-4">
-                  While most listings on our Digital Car and Dealers are legitimate, caution is always required. Purchasing or buying a car online should be a positive experience for you. If deals seem too good to be true, they often are.
-                </p>
-                <p className="text-gray-700">
-                  SheenCar encourages all users to perform due diligence and best business practices to protect themselves from fraud. If a deal seems too good to be true, there's usually a reason. Keep common sense business practices in mind when transacting and make the buyer experience both enjoyable and pleasant.
-                </p>
-              </section>
+            {/* Other Helpful Information */}
+            <div>
+              <h2
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: 400,
+                  fontSize: "20px",
+                  lineHeight: "27px",
+                  letterSpacing: "0%",
+                  color: "#000000",
+                  marginBottom: "16px",
+                }}
+              >
+                Other Helpful{" "}
+                <span style={{ color: "#AF8C32" }}>Information</span>
+              </h2>
 
-              {/* Advice for Buyers */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <CreditCard className="w-5 h-5 mr-2 text-green-600" />
-                  Advice for Buyers
-                </h2>
-                <div className="space-y-3">
-                  <h3 className="font-medium text-gray-800">Most scam offers tend to be Phishing in Person</h3>
-                  <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-                    <li>Verify all information and do not take anything you see as a person how to know.</li>
-                    <li>Be extremely wary if the seller wants to contact third parties with out the phone.</li>
-                    <li>Be extremely wary if the seller wants to receive the payment and tell a refund/resolution and if possible a sale.</li>
-                    <li>You should not hand over money or personal documents without first having physical viewing and transaction of the vehicle.</li>
-                  </ul>
-                </div>
-              </section>
+              <p
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  marginBottom: "16px",
+                }}
+                className="text-sm md:text-lg"
+              >
+                We do not get involved in transactions between buyers and
+                sellers. Any correspondence you have regarding a particular
+                vehicle occurs directly between you and the seller.
+              </p>
 
-              {/* Avoid Listings */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <AlertTriangle className="w-5 h-5 mr-2 text-red-600" />
-                  Avoid Listings That Are Too Good to be True
-                </h2>
-                <p className="text-gray-700 mb-4">
-                  If the offer of cars that are listed as or around the same more and much lower than market demand, then dealers recommend. Use a little perspective, reason and this is the most key points you need to keep in mind if you're looking for a legitimate vehicle purchase at a good price.
-                </p>
-                <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-                  <li>Be thorough by inspection and only go with, "YES" folks.</li>
-                  <li>Suspect may have extensive damage not immediately not visible or non-existing of third-party documents.</li>
-                </ul>
-              </section>
+              <p
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  marginBottom: "16px",
+                }}
+              >
+                We will never ask you to provide personal or financial
+                information via email. If you receive an unsolicited email that
+                claims to be from sheencar.com, reach out to us to verify it
+                prior to taking any other action. This includes requests for
+                information such as:
+              </p>
 
-              {/* Common Scams */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <Eye className="w-5 h-5 mr-2 text-purple-600" />
-                  Common Scam Warning Signs
-                </h2>
-                <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-                  <li>Verify the receiving account for confirming that email directly show breaking it</li>
-                  <li>Fraudulent dealers or other business who ask for payment upfront and claiming that a future car with the dealer on auto reply</li>
-                  <li>Poor quality photos or unwillingness to provide additional photos of the vehicle</li>
-                  <li>Please be aware that fraudsters may set up fake Dealer websites or e-chketing to devious consumers, before you commit to money or personal purchase.</li>
-                  <li>Dealers can still be for not a fraud that there may be and personal and actual customer details and working</li>
-                </ul>
-              </section>
-
-              {/* Payment Advice */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <Lock className="w-5 h-5 mr-2 text-indigo-600" />
-                  Secure Payment Practices
-                </h2>
-                <p className="text-gray-700 mb-4">
-                  When that a current makes fraud listed purchase is fraudulent trailer requesting payments at light and in front cars can demand, or scammers to do several wrong things that could be delivered when you aren't prepared for a said vehicle.
-                </p>
-                <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-                  <li>Never wire money or send payment via untraceable methods</li>
-                  <li>Use secure payment methods that offer buyer protection</li>
-                  <li>Always verify the seller's identity before making any payment</li>
-                  <li>Meet in person for vehicle inspection when possible</li>
-                </ul>
-              </section>
-
-              {/* Vehicle History */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Learn About a Vehicles History</h2>
-                <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-                  <li>Consider requesting a vehicle history report such as those offered by Carfax. While vehicle history reports do not necessarily mean a vehicle is problem-free, they can tell you the history of how a vehicle has been used</li>
-                  <li>If the seller or dealer cannot provide, this could be grounds for concern.</li>
-                  <li>A car history verification of auto fraud if the seller is unwilling or unwilling to provide the vehicle identification number or a copy of the title.</li>
-                </ul>
-              </section>
-
-              {/* Additional Advice */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Advice for Sellers</h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-medium text-gray-800">Dealing Locally is Best</h3>
-                    <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4 mt-2">
-                      <li>Find its in established safe way to deal at a person local to them.</li>
-                      <li>Be careful about buyers who might they can't business to meet of call messages</li>
-                      <li>We be extremely wary if the buyer asking their behalf for any reason call you for the phone</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="font-medium text-gray-800">Avoid Common Payment Scams</h3>
-                    <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4 mt-2">
-                      <li>Avoid any fake check or money order payment, demand it's all in many days is sent that become a risk of payment.</li>
-                      <li>Be protected from them as much work</li>
-                      <li>Verifiable payment methods and payments they rarely intended actual part out of cash.</li>
-                      <li>A common scam is when the buyer offers excessive amount and asking you to send the remainder.</li>
-                      <li>It is several situations that occur where you can be sure the dealer does and more be check/payment fraud at your bank.</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              {/* Identity Verification */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Verify Personal & Financial Information</h2>
-                <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-                  <li>Before doing any business always verify the full name of the buyer and ask who confirmed on your friend request or phone in verification or approach.</li>
-                  <li>Your address.</li>
-                  <li>Never bank and check for more than your selling price.</li>
-                  <li>If a buyer insists on sending more money any reason for not real account/detail the down payment, this could be a sign of a scam</li>
-                  <li>The bank card with the mailing medium, account number and name on the account, then billing bank card was sent. If there are none shown to agree to the items.</li>
-                </ul>
-              </section>
-
-              {/* Reporting Section */}
-              <section className="bg-red-50 p-6 rounded-lg border border-red-200">
-                <h2 className="text-xl font-semibold text-red-900 mb-4 flex items-center">
-                  <Users className="w-5 h-5 mr-2" />
-                  Report Suspicious Activity
-                </h2>
-                <p className="text-red-800 mb-4">
-                  Reports the party of cell messages or criminals that includes sites, fraudsters will often use these links to attempt to bring you fact. 
-                  Your safety is our first responsibility when you're browsing or making a car business. I wanted to let them how that we will promptly report fraudulent 
-                  other SheenCar users and to the appropriate authorities when suspected illegal activity occurs.
-                </p>
-                <ul className="list-disc list-inside text-red-800 space-y-2 ml-4">
-                  <li>Check the "user" websites to see what it is legitimate.</li>
-                  <li>Report where party checks back up to them, most especially if business sense it be the car not get yourself a good buy or campaign</li>
-                  <li>Report where your car or another link which has been received when you're in the course it's car sell get yourself needed to avoid buy or campaign</li>
-                  <li>Report that the email is suspicious.</li>
-                </ul>
-              </section>
-
-              {/* Contact Information */}
-              <section className="bg-blue-50 p-6 rounded-lg border border-blue-200 mt-8">
-                <h2 className="text-xl font-semibold text-blue-900 mb-4">Need Help or Have Questions?</h2>
-                <p className="text-blue-800 mb-4">
-                  Our customer service team is available to help with any questions about safe trading practices or to report suspicious activity.
-                </p>
-                <div className="space-y-2 text-blue-800">
-                  <p><strong>Email:</strong> security@sheencar.com</p>
-                  <p><strong>Phone:</strong> 1-800-SHEENCAR</p>
-                  <p><strong>Hours:</strong> Monday - Friday, 9 AM - 6 PM EST</p>
-                </div>
-              </section>
-
+              <ul
+                style={{
+                  fontFamily: "Open Sans",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: "26px",
+                  letterSpacing: "0%",
+                  color: "#171616",
+                  paddingLeft: "20px",
+                  listStyleType: "disc",
+                  listStylePosition: "inside",
+                }}
+              >
+                <li>Username or password</li>
+                <li>Bank account information</li>
+                <li>Credit card information</li>
+              </ul>
             </div>
           </div>
         </div>

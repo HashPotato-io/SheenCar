@@ -30,7 +30,7 @@ const menuSections: MenuSection[] = [
     items: [
       { title: "Security", href: "/security", isLink: true },
       { title: "Visitor Agreement", href: "#" },
-      { title: "Fraud Awareness", href: "#" },
+      { title: "Fraud Awareness", href: "/fraud" },
       { title: "Delivery", href: "/delivery" },
       { title: "Privacy Notice", href: "#" },
     ],

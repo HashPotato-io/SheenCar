@@ -36,7 +36,7 @@ export default function AdvertisePage() {
               padding: "0 20px",
             }}
           >
-            Advertise with <span style={{ color: "#AF8C32" }}>SheenCar</span> &
+            <span style={{ color: "#AF8C32" }}>Advertise</span> with SheenCar &
             Accelerate Your Reach
             <br className="hidden sm:block" />
             <span className="text-xl sm:text-2xl mt-4 block">

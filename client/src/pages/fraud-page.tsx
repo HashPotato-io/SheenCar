@@ -160,6 +160,8 @@ export default function FraudPage() {
                 letterSpacing: "0%",
                 textAlign: "center",
                 color: "#FFFFFF",
+                maxWidth: "700px",
+                margin: "0 auto",
               }}
               className="w-full md:w-[878px] text-base md:text-xl"
             >
@@ -174,7 +176,7 @@ export default function FraudPage() {
 
       {/* Main Content */}
       <div className="flex-grow bg-white p-4 md:p-[24px]">
-        <div className="container mx-auto px-4 py-4 md:py-8">
+        <div className="container mx-auto px-6 py-6 md:py-8">
           <div>
             <p
               style={{

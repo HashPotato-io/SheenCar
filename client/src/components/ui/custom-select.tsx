@@ -15,8 +15,23 @@ const CustomSelectTrigger = React.forwardRef<
     variant?: 'default' | 'outline';
     placeholderColor?: string;
     borderColor?: string;
+    showIcon?: boolean;
+    icon?: React.ReactNode;
+    iconColor?: string;
   }
->(({ className, children, label, required, variant = 'default', placeholderColor = "#696969", borderColor = "#CFCFCF", ...props }, ref) => (
+>(({ 
+  className, 
+  children, 
+  label, 
+  required, 
+  variant = 'default', 
+  placeholderColor = "#696969", 
+  borderColor = "#CFCFCF",
+  showIcon,
+  icon,
+  iconColor = "#696969",
+  ...props 
+}, ref) => (
   <div className="flex flex-col gap-1 relative">
     {label && (
       <div className="flex items-center gap-1">
@@ -27,26 +42,34 @@ const CustomSelectTrigger = React.forwardRef<
     {!label && required && (
       <span className="absolute left-[-12px] text-[#DC1A1A]">*</span>
     )}
-    <SelectPrimitive.Trigger
-      ref={ref}
-      style={{
-        borderColor: borderColor,
-        color: placeholderColor
-      }}
-      className={cn(
-        // Default variant styles
-        variant === 'default' && "flex h-10 w-full items-center justify-between border-b bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
-        // Outline variant styles
-        variant === 'outline' && "flex h-10 w-[364px] items-center justify-between rounded-[6px] border bg-transparent px-4 py-2.5 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
-        className
+    <div className="relative">
+      <SelectPrimitive.Trigger
+        ref={ref}
+        style={{
+          borderColor: borderColor,
+          color: placeholderColor
+        }}
+        className={cn(
+          // Default variant styles
+          variant === 'default' && "flex h-10 w-full items-center justify-between border-b bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
+          // Outline variant styles
+          variant === 'outline' && "flex h-10 w-[364px] items-center justify-between rounded-[6px] border bg-transparent px-4 py-2.5 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
+          showIcon && "pr-10",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <SelectPrimitive.Icon asChild>
+          <ChevronDown className="h-4 w-4 opacity-50" />
+        </SelectPrimitive.Icon>
+      </SelectPrimitive.Trigger>
+      {showIcon && icon && (
+        <div className="absolute right-[16px] top-1/2 -translate-y-1/2">
+          {React.cloneElement(icon as React.ReactElement, { fill: iconColor })}
+        </div>
       )}
-      {...props}
-    >
-      {children}
-      <SelectPrimitive.Icon asChild>
-        <ChevronDown className="h-4 w-4 opacity-50" />
-      </SelectPrimitive.Icon>
-    </SelectPrimitive.Trigger>
+    </div>
   </div>
 ))
 CustomSelectTrigger.displayName = SelectPrimitive.Trigger.displayName

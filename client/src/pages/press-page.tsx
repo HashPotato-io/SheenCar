@@ -1,90 +1,87 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import HeroSection from "@/components/hero-section";
+import { useState } from "react";
+import PressBanner from "../assets/press-banner.png";
+import StatCard from "@/components/StatCard";
 
 export default function PressPage() {
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle search logic here
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section */}
-      <div 
-        className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-24 bg-cover bg-center relative"
-        style={{ 
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")' 
-        }}
-      >
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Driving the <span className="text-yellow-400">Future</span> of Car Buying & Selling
-          </h1>
-          <p className="text-lg md:text-xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
-            Discover how SheenCar is reshaping the auto marketplace through smart tech, trusted listings,
-            <br />
-            and a people-first platform.
-          </p>
-        </div>
-      </div>
-
-      {/* Introduction Section */}
-      <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-lg text-gray-700 leading-relaxed">
-              From individual car owners to professional dealers, SheenCar empowers users 
-              with a seamless digital platform for posting, trading, and discovering cars across 
-              America.
-            </p>
+      <HeroSection
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearchSubmit={handleSearchSubmit}
+        headingContent={
+          <div
+            style={{
+              fontFamily: "Gilroy-SemiBold",
+              fontWeight: 400,
+              fontSize: "clamp(32px, 5vw, 50px)",
+              lineHeight: "120%",
+              letterSpacing: "-1%",
+              textAlign: "center",
+              color: "#FFFFFF",
+              margin: "60px auto",
+              padding: "0 20px",
+            }}
+          >
+            Driving the <span style={{ color: "#AF8C32" }}>Future</span> of Car
+            Buying & Selling
+            <br className="hidden sm:block" />
+            <span className="text-xl sm:text-2xl mt-4 block">
+              Discover how SheenCar is reshaping the auto marketplace through
+              smart tech, trusted listings, and a people-first platform.
+            </span>
           </div>
+        }
+        bgImage={PressBanner}
+        hideSearch={true}
+      />
+
+      <div style={{ background: "#FFFFFF" }}>
+        {/* Introduction Section */}
+
+        <div
+          style={{
+            fontFamily: "Gilroy-SemiBold",
+            fontWeight: 400,
+            fontSize: "34px",
+            lineHeight: "100%",
+            letterSpacing: "-1%",
+            textAlign: "center",
+            color: "#000000",
+            padding: "60px",
+            background: "#FFFFFF",
+          }}
+        >
+          From individual car owners to professional dealers, SheenCar empowers
+          users with a seamless digital platform for posting, trading, and
+          discovering cars across America.
         </div>
-      </div>
 
-      {/* Statistics Grid */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {/* Statistics Grid */}
+        <div className="flex flex-col gap-4 md:gap-[20px] max-w-6xl mx-auto mb-[40px] px-4 md:px-0">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-[20px]">
             {/* Row 1 */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-yellow-600 mb-4">
-                9,500+
-              </div>
-              <p className="text-gray-700 font-medium">Total Cars Listed</p>
-            </div>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-yellow-600 mb-4">
-                5,200+
-              </div>
-              <p className="text-gray-700 font-medium">Active Listings</p>
-            </div>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-yellow-600 mb-4">
-                850+
-              </div>
-              <p className="text-gray-700 font-medium">Dealers Onboarded</p>
-            </div>
-
+            <StatCard value="9,500+" label="Total Cars Listed" />
+            <StatCard value="5,200+" label="Active Listings" />
+            <StatCard value="850+" label="Dealers Onboarded" />
+          </div>
+          <div className="flex flex-col md:flex-row gap-4 md:gap-[20px]">
             {/* Row 2 */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-yellow-600 mb-4">
-                17,000+
-              </div>
-              <p className="text-gray-700 font-medium">Offers Made</p>
-            </div>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-yellow-600 mb-4">
-                20+
-              </div>
-              <p className="text-gray-700 font-medium">Team Members</p>
-            </div>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-yellow-600 mb-4">
-                2025
-              </div>
-              <p className="text-gray-700 font-medium">Year Founded</p>
-            </div>
+            <StatCard value="17,000+" label="Offers Made" />
+            <StatCard value="20+" label="Team Members" />
+            <StatCard value="2025" label="Year Founded" />
           </div>
         </div>
       </div>

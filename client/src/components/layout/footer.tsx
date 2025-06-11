@@ -38,7 +38,7 @@ const menuSections: MenuSection[] = [
   {
     title: "Resources",
     items: [
-      { title: "Press", href: "#" },
+      { title: "Press", href: "/press" },
       { title: "Faq", href: "/faq" },
     ],
   },

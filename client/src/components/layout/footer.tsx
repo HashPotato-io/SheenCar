@@ -29,7 +29,7 @@ const menuSections: MenuSection[] = [
     title: "Important",
     items: [
       { title: "Security", href: "/security", isLink: true },
-      { title: "Visitor Agreement", href: "#" },
+      { title: "Visitor Agreement", href: "/visitor" },
       { title: "Fraud Awareness", href: "/fraud" },
       { title: "Delivery", href: "/delivery" },
       { title: "Privacy Notice", href: "#" },
@@ -47,7 +47,7 @@ const menuSections: MenuSection[] = [
     items: [
       { title: "Customer Support", href: "/contact" },
       { title: "Dealer Support", href: "#" },
-      { title: "Chat with Us", href: "#" },
+      { title: "Chat with Us", href: "/chat" },
     ],
   },
 ];

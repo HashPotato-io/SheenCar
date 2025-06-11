@@ -20,6 +20,7 @@ export interface CustomInputProps
   type?: string;
   placeholderColor?: string;
   borderColor?: string;
+  rightIcon?: React.ReactNode;
 }
 
 const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
@@ -36,6 +37,7 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
       iconColor = "#003A2F",
       placeholderColor = "#696969",
       borderColor = "#CFCFCF",
+      rightIcon,
       ...props
     },
     ref
@@ -136,6 +138,11 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
           {showGalIcon && (
             <div className="absolute right-[16px] top-1/2 -translate-y-1/2">
               <GalIcon width={18} height={15} fill="#696969" />
+            </div>
+          )}
+          {rightIcon && (
+            <div className="absolute right-[16px] top-1/2 -translate-y-1/2">
+              {rightIcon}
             </div>
           )}
         </div>

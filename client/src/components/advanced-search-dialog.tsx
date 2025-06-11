@@ -5,7 +5,8 @@ import {
   CustomSelectTrigger,
 } from "@/components/ui/custom-select";
 import { CustomButton } from "./ui/custom-button";
-import { CloseIcon } from "./icons";
+import { CloseIcon, MileageIcon } from "./icons";
+import { CustomInput } from "./ui/custom-input";
 
 interface AdvancedSearchDialogProps {
   isOpen: boolean;
@@ -61,7 +62,11 @@ export function AdvancedSearchDialog({
             <CustomSelect
               onValueChange={(value) => onValueChange("fuelType", value)}
             >
-              <CustomSelectTrigger className="w-full h-[48px]">
+              <CustomSelectTrigger
+                className="w-full h-[48px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
+              >
                 <span>{searchParams.fuelType || "Fuel Type"}</span>
               </CustomSelectTrigger>
               <CustomSelectContent>
@@ -72,20 +77,13 @@ export function AdvancedSearchDialog({
             </CustomSelect>
           </div>
           <div className="flex flex-col gap-2">
-            <CustomSelect
-              onValueChange={(value) => onValueChange("mileage", value)}
-            >
-              <CustomSelectTrigger className="w-full h-[48px]">
-                <span>{searchParams.mileage || "Mileage"}</span>
-              </CustomSelectTrigger>
-              <CustomSelectContent>
-                <CustomSelectItem value="0-10000">0-10,000</CustomSelectItem>
-                <CustomSelectItem value="10000-50000">
-                  10,000-50,000
-                </CustomSelectItem>
-                <CustomSelectItem value="50000+">50,000+</CustomSelectItem>
-              </CustomSelectContent>
-            </CustomSelect>
+            <CustomInput
+              placeholder="Mileage"
+              className="w-full h-[48px]"
+              placeholderColor="#000000"
+              borderColor="#000000"
+              rightIcon={<MileageIcon />}
+            />
           </div>
 
           {/* Row 2 */}
@@ -93,7 +91,11 @@ export function AdvancedSearchDialog({
             <CustomSelect
               onValueChange={(value) => onValueChange("transmission", value)}
             >
-              <CustomSelectTrigger className="w-full h-[48px]">
+              <CustomSelectTrigger
+                className="w-full h-[48px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
+              >
                 <span>{searchParams.transmission || "Transmission"}</span>
               </CustomSelectTrigger>
               <CustomSelectContent>
@@ -106,7 +108,11 @@ export function AdvancedSearchDialog({
             <CustomSelect
               onValueChange={(value) => onValueChange("bodyType", value)}
             >
-              <CustomSelectTrigger className="w-full h-[48px]">
+              <CustomSelectTrigger
+                className="w-full h-[48px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
+              >
                 <span>{searchParams.bodyType || "Body Type"}</span>
               </CustomSelectTrigger>
               <CustomSelectContent>
@@ -122,7 +128,11 @@ export function AdvancedSearchDialog({
             <CustomSelect
               onValueChange={(value) => onValueChange("condition", value)}
             >
-              <CustomSelectTrigger className="w-full h-[48px]">
+              <CustomSelectTrigger
+                className="w-full h-[48px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
+              >
                 <span>{searchParams.condition || "Condition"}</span>
               </CustomSelectTrigger>
               <CustomSelectContent>
@@ -135,7 +145,11 @@ export function AdvancedSearchDialog({
             <CustomSelect
               onValueChange={(value) => onValueChange("sellerType", value)}
             >
-              <CustomSelectTrigger className="w-full h-[48px]">
+              <CustomSelectTrigger
+                className="w-full h-[48px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
+              >
                 <span>{searchParams.sellerType || "Seller Type"}</span>
               </CustomSelectTrigger>
               <CustomSelectContent>
@@ -150,7 +164,11 @@ export function AdvancedSearchDialog({
             <CustomSelect
               onValueChange={(value) => onValueChange("interiorColor", value)}
             >
-              <CustomSelectTrigger className="w-full h-[48px]">
+              <CustomSelectTrigger
+                className="w-full h-[48px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
+              >
                 <span>{searchParams.interiorColor || "Interior Color"}</span>
               </CustomSelectTrigger>
               <CustomSelectContent>
@@ -164,7 +182,11 @@ export function AdvancedSearchDialog({
             <CustomSelect
               onValueChange={(value) => onValueChange("exteriorColor", value)}
             >
-              <CustomSelectTrigger className="w-full h-[48px]">
+              <CustomSelectTrigger
+                className="w-full h-[48px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
+              >
                 <span>{searchParams.exteriorColor || "Exterior Color"}</span>
               </CustomSelectTrigger>
               <CustomSelectContent>
@@ -180,7 +202,11 @@ export function AdvancedSearchDialog({
             <CustomSelect
               onValueChange={(value) => onValueChange("cylinder", value)}
             >
-              <CustomSelectTrigger className="w-full h-[48px]">
+              <CustomSelectTrigger
+                className="w-full h-[48px]"
+                placeholderColor="#000000"
+                borderColor="#000000"
+              >
                 <span>{searchParams.cylinder || "Cylinder"}</span>
               </CustomSelectTrigger>
               <CustomSelectContent>

@@ -1,7 +1,6 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import HeroSection from "@/components/hero-section";
-import { Car, Handshake, Award, Search, Star, TrendingUp } from "lucide-react";
 import { useState } from "react";
 import AdvertiseBanner from "../assets/advertise-banner.png";
 import { BoostingIcon, BrandIcon, SellBuy2 } from "@/components/icons";

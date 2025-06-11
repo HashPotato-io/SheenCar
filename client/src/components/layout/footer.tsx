@@ -29,25 +29,25 @@ const menuSections: MenuSection[] = [
     title: "Important",
     items: [
       { title: "Security", href: "/security", isLink: true },
-      { title: "Visitor Agreement", href: "/visitor" },
-      { title: "Fraud Awareness", href: "/fraud" },
-      { title: "Delivery", href: "/delivery" },
-      { title: "Privacy Notice", href: "#" },
+      { title: "Visitor Agreement", href: "/visitor", isLink: true },
+      { title: "Fraud Awareness", href: "/fraud", isLink: true },
+      { title: "Delivery", href: "/delivery", isLink: true },
+      { title: "Privacy Notice", href: "#", isLink: true },
     ],
   },
   {
     title: "Resources",
     items: [
-      { title: "Press", href: "/press" },
-      { title: "Faq", href: "/faq" },
+      { title: "Press", href: "/press", isLink: true },
+      { title: "Faq", href: "/faq", isLink: true },
     ],
   },
   {
     title: "Contact",
     items: [
-      { title: "Customer Support", href: "/contact" },
+      { title: "Customer Support", href: "/contact", isLink: true },
       { title: "Dealer Support", href: "#" },
-      { title: "Chat with Us", href: "/chat" },
+      { title: "Chat with Us", href: "/chat", isLink: true },
     ],
   },
 ];
@@ -97,18 +97,18 @@ export default function Footer() {
                   {section.title}
                 </h4>
                 <ul className="space-y-2">
-                  {section.items.map((item, itemIndex) => (
+                  {section?.items?.map((item, itemIndex) => (
                     <li key={itemIndex}>
-                      {item.isLink ? (
+                      {item?.isLink ? (
                         <Link
-                          href={item.href}
+                          href={item?.href}
                           className="font-['Gilroy-Regular'] font-normal text-[16px] leading-[140%] tracking-[0%] text-white hover:text-white transition-colors"
                         >
                           {item.title}
                         </Link>
                       ) : (
                         <a
-                          href={item.href}
+                          href={item?.href}
                           className="font-['Gilroy-Regular'] font-normal text-[16px] leading-[140%] tracking-[0%] text-white hover:text-white transition-colors"
                         >
                           {item.title}

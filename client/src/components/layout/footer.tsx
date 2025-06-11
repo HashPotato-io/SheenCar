@@ -32,7 +32,7 @@ const menuSections: MenuSection[] = [
       { title: "Visitor Agreement", href: "/visitor", isLink: true },
       { title: "Fraud Awareness", href: "/fraud", isLink: true },
       { title: "Delivery", href: "/delivery", isLink: true },
-      { title: "Privacy Notice", href: "#", isLink: true },
+      { title: "Privacy Notice", href: "/privacy", isLink: true },
     ],
   },
   {
@@ -65,12 +65,12 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-14 mb-12 p-4 md:p-12">
           <div
-            style={{ 
-              display: "flex", 
-              flexDirection: "column", 
+            style={{
+              display: "flex",
+              flexDirection: "column",
               gap: "16px",
               width: "100%",
-              maxWidth: "345px"
+              maxWidth: "345px",
             }}
           >
             <div className="w-full font-['Gilroy-Regular'] font-normal text-[14px] leading-[140%] tracking-[0%] text-white">

@@ -29,23 +29,15 @@ const CarfaxModal: React.FC<CarfaxModalProps> = ({
       title="View CARFAX Report?"
       icon={CarfaxSvg}
     >
-      <div className="flex flex-col items-center gap-6 w-[339px]">
-        <p
-          style={{
-            fontFamily: "Poppins",
-            fontWeight: 300,
-            fontSize: "16px",
-            lineHeight: "22px",
-            textAlign: "center",
-            color: "#585353",
-          }}
-        >
+      <div className="flex flex-col items-center gap-4 sm:gap-6 w-full max-w-[339px] px-4 sm:px-0">
+        <p className="font-poppins font-light text-sm sm:text-base leading-[22px] text-center text-[#585353]">
           Get instant access to this vehicle's full CARFAX report, including accident history, title status, and more. This is a paid feature, and after a one-time payment of $5.00, you'll unlock the report for immediate viewing. Secure your investment with verified vehicle history!
         </p>
 
         <CustomButton
           customStyles={{
-            width: "357px",
+            width: "100%",
+            maxWidth: "357px",
             height: "44px",
             borderRadius: "7.27px",
           }}

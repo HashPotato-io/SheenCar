@@ -70,7 +70,7 @@ export default function Footer() {
               flexDirection: "column",
               gap: "16px",
               width: "100%",
-              maxWidth: "345px",
+              maxWidth: "335px",
             }}
           >
             <div className="w-full font-['Gilroy-Regular'] font-normal text-[14px] leading-[140%] tracking-[0%] text-white">
@@ -90,15 +90,18 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full">
-            {menuSections.map((section, index) => (
-              <div key={index}>
+          <div className="flex flex-wrap md:flex-nowrap justify-between gap-8 w-full">
+            {menuSections?.map((section, index) => (
+              <div key={index} className="w-full md:w-auto md:min-w-[180px]">
                 <h4 className="font-['Gilroy-SemiBold'] font-normal text-[18px] leading-[26px] tracking-[0%] text-white mb-4">
                   {section.title}
                 </h4>
                 <ul className="space-y-2">
                   {section?.items?.map((item, itemIndex) => (
-                    <li key={itemIndex}>
+                    <li
+                      key={itemIndex}
+                      className="whitespace-nowrap"
+                    >
                       {item?.isLink ? (
                         <Link
                           href={item?.href}

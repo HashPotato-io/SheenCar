@@ -42,7 +42,7 @@ export function AdvanceSearch() {
           borderRadius: "34px",
           position: "relative",
         }}
-        className="w-full md:w-[1048px] flex flex-col md:flex-row gap-2 items-center p-8 h-auto md:h-[145px]"
+        className="w-[330px] md:w-[1048px] flex flex-col md:flex-row gap-2 items-center p-8 h-auto md:h-[145px]"
       >
         <div className="flex flex-col md:flex-row w-full gap-4">
           <SearchToggle />

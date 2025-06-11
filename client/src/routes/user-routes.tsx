@@ -28,6 +28,8 @@ import ChatPage from "@/pages/chat-page";
 import NotificationPage from "@/pages/notification-page";
 import DeliveryPage from "@/pages/delivery-page";
 import VisitorAgreement from "@/pages/visitor-page";
+import TermsConditions from "@/pages/terms-condition";
+import Privacy from "@/pages/privacy";
 
 export function UserRoutes() {
   return (
@@ -63,6 +65,8 @@ export function UserRoutes() {
       <Route path="/notifications" component={NotificationPage} />
       <Route path="/delivery" component={DeliveryPage} />
       <Route path="/visitor" component={VisitorAgreement} />
+      <Route path="/terms-condition" component={TermsConditions} />
+      <Route path="/privacy" component={Privacy} />
     </Switch>
   );
 } 

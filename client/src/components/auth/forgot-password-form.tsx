@@ -44,14 +44,10 @@ export function ForgotPasswordForm({ onStepChange }: ForgotPasswordFormProps) {
               placeholder="Email"
               value={formData.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
-              style={{
-                width: "330px",
-                height: "40px",
-                background: "transparent",
-              }}
+              className="w-full h-10 bg-transparent"
             />
             <CustomButton
-              customStyles={{ width: "330px", height: "40px" }}
+              customStyles={{ width: "100%", height: "40px" }}
               onClick={handleNext}
             >
               Next
@@ -66,14 +62,10 @@ export function ForgotPasswordForm({ onStepChange }: ForgotPasswordFormProps) {
               placeholder="Reset Code"
               value={formData.resetCode}
               onChange={(e) => handleInputChange("resetCode", e.target.value)}
-              style={{
-                width: "330px",
-                height: "40px",
-                background: "transparent",
-              }}
+              className="w-full h-10 bg-transparent"
             />
             <CustomButton
-              customStyles={{ width: "330px", height: "40px" }}
+              customStyles={{ width: "100%", height: "40px" }}
               onClick={handleNext}
             >
               Next
@@ -83,34 +75,22 @@ export function ForgotPasswordForm({ onStepChange }: ForgotPasswordFormProps) {
       case 3:
         return (
           <>
-            <div style={{ position: "relative", width: "330px" }}>
+            <div className="relative w-full">
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="New Password"
                 value={formData.password}
                 onChange={(e) => handleInputChange("password", e.target.value)}
-                style={{
-                  width: "100%",
-                  height: "40px",
-                  background: "transparent",
-                }}
+                className="w-full h-10 bg-transparent"
               />
               <button
                 onClick={() => setShowPassword(!showPassword)}
-                style={{
-                  position: "absolute",
-                  right: "10px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                }}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer"
               >
                 {showPassword ? <EyeOpen /> : <EyeClose />}
               </button>
             </div>
-            <div style={{ position: "relative", width: "330px" }}>
+            <div className="relative w-full">
               <Input
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm Password"
@@ -118,29 +98,17 @@ export function ForgotPasswordForm({ onStepChange }: ForgotPasswordFormProps) {
                 onChange={(e) =>
                   handleInputChange("confirmPassword", e.target.value)
                 }
-                style={{
-                  width: "100%",
-                  height: "40px",
-                  background: "transparent",
-                }}
+                className="w-full h-10 bg-transparent"
               />
               <button
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                style={{
-                  position: "absolute",
-                  right: "10px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                }}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer"
               >
                 {showConfirmPassword ? <EyeOpen /> : <EyeClose />}
               </button>
             </div>
             <CustomButton
-              customStyles={{ width: "330px", height: "40px" }}
+              customStyles={{ width: "100%", height: "40px" }}
               onClick={handleNext}
             >
               Confirm
@@ -150,7 +118,7 @@ export function ForgotPasswordForm({ onStepChange }: ForgotPasswordFormProps) {
       case 4:
         return (
           <CustomButton
-            customStyles={{ width: "314px", height: "40px" }}
+            customStyles={{ width: "100%", height: "40px" }}
             onClick={() => navigate("/login")}
           >
             Login
@@ -167,46 +135,14 @@ export function ForgotPasswordForm({ onStepChange }: ForgotPasswordFormProps) {
   ];
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          fontFamily: "Poppins",
-          fontWeight: 400,
-          fontSize: "16px",
-          lineHeight: "100%",
-          letterSpacing: "0%",
-          textAlign: "center",
-          color: "#FFFFFF",
-          width: "376px",
-          height: "48px",
-          marginBottom: "30px",
-        }}
-      >
+    <div className="flex flex-col items-center justify-center">
+      <div className="font-['Poppins'] text-base text-center text-white w-full max-w-[376px] mb-8">
         {stepContent[currentStep - 1]}
       </div>
       {currentStep === 4 ? (
         renderStep()
       ) : (
-        <div
-          style={{
-            width: "392px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "26px",
-            padding: "24px 26px",
-            borderRadius: "17.22px",
-            background: "#F8F8F8",
-            marginBottom: "20px",
-          }}
-        >
+        <div className="w-full max-w-[392px] flex flex-col items-center gap-6 p-6 rounded-[17.22px] bg-[#F8F8F8] mb-5">
           {renderStep()}
         </div>
       )}

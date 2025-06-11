@@ -19,80 +19,34 @@ export function LoginForm() {
   };
 
   return (
-    <div
-      style={{
-        width: "370px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 20,
-        padding: "24px 26px",
-        borderRadius: 17.22,
-        background: "#F8F8F8",
-        marginBottom: "20px",
-      }}
-    >
-      <h2
-        style={{
-          fontFamily: "Gilroy-SemiBold",
-          fontWeight: 400,
-          fontSize: 32,
-          lineHeight: "100%",
-          letterSpacing: "-1%",
-          textAlign: "center",
-          color: "#171616",
-        }}
-      >
+    <div className="w-full max-w-[370px] flex flex-col items-center gap-5 p-6 rounded-[17.22px] bg-[#F8F8F8] mb-5">
+      <h2 className="font-['Gilroy-SemiBold'] text-2xl md:text-3xl text-center text-[#171616] tracking-tight">
         Login
       </h2>
-      <form onSubmit={handleLogin}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-          }}
-        >
+      <form onSubmit={handleLogin} className="w-full">
+        <div className="flex flex-col gap-4">
           <Input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: "330px",
-              height: "40px",
-              background: "transparent",
-            }}
+            className="w-full h-10 bg-transparent"
           />
           <Input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: "330px",
-              height: "40px",
-              background: "transparent",
-            }}
+            className="w-full h-10 bg-transparent"
           />
-          <div
-            style={{ width: "330px", textAlign: "left", marginBottom: "10px" }}
-          >
+          <div className="w-full text-left mb-2.5">
             <a
               href="#"
               onClick={(e) => {
                 e.preventDefault();
                 navigate("/forgot-password");
               }}
-              style={{
-                fontFamily: "Poppins",
-                fontWeight: 400,
-                fontSize: 14,
-                lineHeight: "100%",
-                letterSpacing: "0%",
-                color: "#003A2F",
-                textDecoration: "none",
-              }}
+              className="font-['Poppins'] text-sm text-[#003A2F] no-underline hover:underline"
             >
               Forgot Password?
             </a>
@@ -101,44 +55,19 @@ export function LoginForm() {
 
         <CustomButton
           type="submit"
-          customStyles={{ width: "330px", height: "40px" }}
+          customStyles={{ width: "100%", height: "40px" }}
         >
           Login
         </CustomButton>
       </form>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            width: "100%",
-            marginTop: 16,
-            marginBottom: 16,
-          }}
-        >
-          <div style={{ flex: 1, height: 1, background: "#AAAAAA66" }} />
-          <span
-            style={{
-              fontFamily: "Poppins",
-              fontWeight: 400,
-              fontSize: 12,
-              lineHeight: "100%",
-              letterSpacing: "0%",
-              color: "#858585",
-            }}
-          >
+      <div className="flex flex-col gap-4 items-center w-full">
+        <div className="flex items-center gap-2 w-full my-4">
+          <div className="flex-1 h-px bg-[#AAAAAA66]" />
+          <span className="font-['Poppins'] text-xs text-[#858585]">
             or
           </span>
-          <div style={{ flex: 1, height: 1, background: "#AAAAAA66" }} />
+          <div className="flex-1 h-px bg-[#AAAAAA66]" />
         </div>
 
         <SocialLoginButton icon={<GoogleIcon />} text="Continue with Google" />
@@ -148,18 +77,7 @@ export function LoginForm() {
           text="Continue with Facebook"
         />
 
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: 16,
-            fontFamily: "Poppins",
-            fontWeight: 400,
-            fontSize: 12,
-            lineHeight: "100%",
-            letterSpacing: "0%",
-            color: "#000000",
-          }}
-        >
+        <div className="text-center mt-4 font-['Poppins'] text-xs text-black">
           New here?{" "}
           <a
             href="#"
@@ -167,16 +85,7 @@ export function LoginForm() {
               e.preventDefault();
               navigate("/signup");
             }}
-            style={{
-              fontFamily: "Poppins",
-              fontWeight: 400,
-              fontSize: 12,
-              lineHeight: "100%",
-              letterSpacing: "0%",
-              textAlign: "center",
-              color: "#898989",
-              textDecoration: "none",
-            }}
+            className="text-[#898989] no-underline hover:underline"
           >
             Sign Up!
           </a>

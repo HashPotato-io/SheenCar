@@ -133,20 +133,18 @@ const featureSections: FeatureSection[] = [
 
 export default function CarTabs({ carData }: CarTabsProps) {
   return (
-    <div className="m-6">
+    <div className="m-2 sm:m-4 md:m-6">
       <Tabs defaultValue="basic-information">
         <TabsList
           style={{
-            height: "60px",
-            gap: "80px",
             borderRadius: "18px",
             background: "#003A2F",
           }}
-          className="w-full flex justify-between overflow-hidden mb-6"
+          className="w-full flex flex-row md:h-[60px] justify-between overflow-x-auto mb-6 scrollbar-hide"
         >
           <TabsTrigger
             value="basic-information"
-            className="flex-1 py-4 rounded-none 
+            className="w-[331px] sm:flex-1 sm:min-w-[200px] py-2 sm:py-4 rounded-none 
                     data-[state=active]:bg-white 
                     data-[state=active]:text-[#026442] 
                     data-[state=inactive]:bg-[#003A2F] 
@@ -154,19 +152,18 @@ export default function CarTabs({ carData }: CarTabsProps) {
                     transition-colors
                     font-['Gilroy-SemiBold']
                     font-normal
-                    text-[20px]
+                    text-[14px] sm:text-[20px]
                     leading-[100%]
                     tracking-[0%]
-                    data-[state=active]:w-[335px]
-                    data-[state=active]:h-[54px]
+                    data-[state=active]:rounded-[16px]
                     data-[state=active]:gap-[10px]
-                    data-[state=active]:rounded-[16px]"
+                    whitespace-nowrap"
           >
             Basic Information
           </TabsTrigger>
           <TabsTrigger
             value="specifications"
-            className="flex-1 py-4 rounded-none 
+            className="w-[331px] sm:flex-1 sm:min-w-[200px] py-2 sm:py-4 rounded-none 
                     data-[state=active]:bg-white 
                     data-[state=active]:text-[#026442] 
                     data-[state=inactive]:bg-[#003A2F] 
@@ -174,19 +171,18 @@ export default function CarTabs({ carData }: CarTabsProps) {
                     transition-colors
                     font-['Gilroy-SemiBold']
                     font-normal
-                    text-[20px]
+                    text-[14px] sm:text-[20px]
                     leading-[100%]
                     tracking-[0%]
-                    data-[state=active]:w-[335px]
-                    data-[state=active]:h-[54px]
+                    data-[state=active]:rounded-[16px]
                     data-[state=active]:gap-[10px]
-                    data-[state=active]:rounded-[16px]"
+                    whitespace-nowrap"
           >
             Specifications
           </TabsTrigger>
           <TabsTrigger
             value="features"
-            className="flex-1 py-4 rounded-none 
+            className="w-[331px] sm:flex-1 sm:min-w-[200px] py-2 sm:py-4 rounded-none 
                     data-[state=active]:bg-white 
                     data-[state=active]:text-[#026442] 
                     data-[state=inactive]:bg-[#003A2F] 
@@ -194,113 +190,88 @@ export default function CarTabs({ carData }: CarTabsProps) {
                     transition-colors
                     font-['Gilroy-SemiBold']
                     font-normal
-                    text-[20px]
+                    text-[14px] sm:text-[20px]
                     leading-[100%]
                     tracking-[0%]
-                    data-[state=active]:w-[335px]
-                    data-[state=active]:h-[54px]
+                    data-[state=active]:rounded-[16px]
                     data-[state=active]:gap-[10px]
-                    data-[state=active]:rounded-[16px]"
+                    whitespace-nowrap"
           >
             Features
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="basic-information" className="p-6">
-          <h3 className="font-['Gilroy-SemiBold'] font-normal text-[28px] leading-[100%] tracking-[1%] text-black mb-6">
+        <TabsContent value="basic-information" className="p-2 sm:p-4 md:p-6">
+          <h3 className="font-['Gilroy-SemiBold'] font-normal text-[24px] sm:text-[28px] leading-[100%] tracking-[1%] text-black mb-6">
             Vehicle Details
           </h3>
 
-          <div className="flex gap-6">
-            <div className="flex flex-wrap gap-x-16 gap-y-1 w-[70%]">
-              <div className="w-[calc(50%-32px)]">
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex flex-wrap gap-x-4 sm:gap-x-8 md:gap-x-16 gap-y-1 w-full md:w-[70%]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="Make:" value={carData.make} />
               </div>
-              <div className="w-[calc(50%-32px)]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="Model:" value={carData.model} />
               </div>
-              <div className="w-[calc(50%-32px)]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="Year:" value={carData.year} />
               </div>
-              <div className="w-[calc(50%-32px)]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="Condition:" value="New" />
               </div>
-              <div className="w-[calc(50%-32px)]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="Exterior:" value="White" />
               </div>
-              <div className="w-[calc(50%-32px)]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="Interior:" value="Black" />
               </div>
-              <div className="w-[calc(50%-32px)]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="No. of Doors:" value="4" />
               </div>
-              <div className="w-[calc(50%-32px)]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="Body Type:" value="Sedan" />
               </div>
-              <div className="w-[calc(50%-32px)]">
+              <div className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                 <KeyValueRow label="Seating Capacity:" value="4" />
               </div>
             </div>
 
-            <div className="flex item-center justify-center bg-[#D7FFF1] w-[249px] h-[249px] rounded-[206px]">
+            <div className="flex items-center justify-center bg-[#D7FFF1] w-[200px] h-[200px] sm:w-[249px] sm:h-[249px] rounded-[206px] mx-auto md:mx-0">
               <img
                 src={CarSvg}
                 alt="car-illustration"
-                width="195"
-                height="111"
+                className="w-[150px] h-[85px] sm:w-[195px] sm:h-[111px]"
               />
             </div>
           </div>
         </TabsContent>
 
-        <TabsContent value="specifications" className="p-6">
-          <div style={{ display: "flex", gap: "10px" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "40px",
-                width: "78%",
-              }}
-            >
+        <TabsContent value="specifications" className="p-2 sm:p-4 md:p-6">
+          <div className="flex flex-col md:flex-row gap-10">
+            <div className="flex flex-col gap-6 md:gap-10 w-full md:w-[78%]">
               {specificationSections?.map((section) => (
                 <div
                   key={section.title}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "24px",
-                  }}
+                  className="flex flex-col gap-6 md:gap-8"
                 >
-                  <div className="font-['Gilroy-SemiBold'] font-normal text-[28px] leading-[100%] tracking-[1%] text-black">
+                  <div className="font-['Gilroy-SemiBold'] font-normal text-[24px] sm:text-[28px] leading-[100%] tracking-[1%] text-black">
                     {section.title}
                   </div>
-                  <div className="flex flex-wrap gap-x-16 gap-y-4">
+                  <div className="flex flex-wrap gap-x-4 sm:gap-x-8 md:gap-x-16 gap-y-4">
                     {section?.items?.map((item) =>
                       item?.isSingleField ? (
                         <div
-                          style={{
-                            display: "flex",
-                            gap: "10px",
-                            alignItems: "center",
-                          }}
+                          key={item.label}
+                          className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)] flex gap-2 sm:gap-4 items-center"
                         >
                           {item?.icon}
-                          <div
-                            style={{
-                              fontFamily: "Gilroy-Bold",
-                              fontWeight: 400,
-                              fontSize: "20px",
-                              lineHeight: "100%",
-                              letterSpacing: "0%",
-                              color: "#000000",
-                            }}
-                          >
+                          <div className="font-['Gilroy-Bold'] font-normal text-[16px] sm:text-[20px] leading-[100%] tracking-[0%] text-black">
                             {item?.label}
                           </div>
                         </div>
                       ) : (
-                        <div key={item.label} className="w-[calc(50%-100px)]">
+                        <div key={item.label} className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)]">
                           <KeyValueRow
                             label={item.label}
                             value={item?.value || "N/A"}
@@ -312,56 +283,31 @@ export default function CarTabs({ carData }: CarTabsProps) {
                 </div>
               ))}
             </div>
-            <div className="mt-[60px]  flex item-center justify-center bg-[#D7FFF1] w-[249px] h-[249px] rounded-[206px]">
-              <img src={Car3} alt="car-illustration" width="195" height="111" />
+            <div className="flex items-center justify-center bg-[#D7FFF1] w-[200px] h-[200px] sm:w-[249px] sm:h-[249px] rounded-[206px] mx-auto md:mx-0">
+              <img src={Car3} alt="car-illustration" className="w-[150px] h-[85px] sm:w-[195px] sm:h-[111px]" />
             </div>
           </div>
         </TabsContent>
 
-        <TabsContent value="features" className="p-6">
-          <div style={{ display: "flex", gap: "10px" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "40px",
-                width: "78%",
-              }}
-            >
+        <TabsContent value="features" className="p-2 sm:p-4 md:p-6">
+          <div className="flex flex-col md:flex-row gap-10">
+            <div className="flex flex-col gap-6 md:gap-10 w-full md:w-[78%]">
               {featureSections?.map((section) => (
                 <div
                   key={section.title}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "24px",
-                  }}
+                  className="flex flex-col gap-6 md:gap-8"
                 >
-                  <div className="font-['Gilroy-SemiBold'] font-normal text-[28px] leading-[100%] tracking-[1%] text-black">
+                  <div className="font-['Gilroy-SemiBold'] font-normal text-[24px] sm:text-[28px] leading-[100%] tracking-[1%] text-black">
                     {section.title}
                   </div>
-                  <div className="flex flex-wrap gap-x-16 gap-y-4">
-                    {section?.items?.map((item, index) => (
+                  <div className="flex flex-wrap gap-x-4 sm:gap-x-8 md:gap-x-16 gap-y-4">
+                    {section?.items?.map((item) => (
                       <div
                         key={item.label}
-                        className="w-[calc(50%-32px)]"
-                        style={{
-                          display: "flex",
-                          gap: "10px",
-                          alignItems: "center",
-                        }}
+                        className="w-full sm:w-[calc(50%-16px)] md:w-[calc(50%-32px)] flex gap-2 sm:gap-4 items-center"
                       >
                         {item.icon}
-                        <div
-                          style={{
-                            fontFamily: "Gilroy-Bold",
-                            fontWeight: 400,
-                            fontSize: "20px",
-                            lineHeight: "100%",
-                            letterSpacing: "0%",
-                            color: "#000000",
-                          }}
-                        >
+                        <div className="font-['Gilroy-Bold'] font-normal text-[16px] sm:text-[20px] leading-[100%] tracking-[0%] text-black">
                           {item?.label}
                         </div>
                       </div>
@@ -370,8 +316,8 @@ export default function CarTabs({ carData }: CarTabsProps) {
                 </div>
               ))}
             </div>
-            <div className="mt-[60px] flex item-center justify-center bg-[#D7FFF1] w-[249px] h-[249px] rounded-[206px]">
-              <img src={Car4} alt="car-illustration" width="195" height="111" />
+            <div className="flex items-center justify-center bg-[#D7FFF1] w-[200px] h-[200px] sm:w-[249px] sm:h-[249px] rounded-[206px] mx-auto md:mx-0">
+              <img src={Car4} alt="car-illustration" className="w-[150px] h-[85px] sm:w-[195px] sm:h-[111px]" />
             </div>
           </div>
         </TabsContent>

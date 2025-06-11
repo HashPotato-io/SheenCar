@@ -62,26 +62,25 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md h-auto">
-        <div className="p-6 text-center">
+      <DialogContent className="sm:max-w-md w-[95%] h-auto max-h-[90vh] overflow-y-auto rounded-lg">
+        <div className="p-4 sm:p-6 text-center">
           {flow === "main" && (
             <>
               {/* Icon */}
-              <div className="mb-6 flex justify-center">
-                <img src={Trade1} alt="trade" />
+              <div className="mb-4 sm:mb-6 flex justify-center">
+                <img src={Trade1} alt="trade" className="w-16 sm:w-20" />
               </div>
               {/* Title */}
               <div
                 style={{
                   fontFamily: "Gilroy-Medium, sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#000000",
                 }}
-                className="mb-2"
+                className="text-lg sm:text-xl md:text-2xl mb-2"
               >
                 Interested in this Car? Make an Offer today!
               </div>
@@ -90,20 +89,19 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#585353",
                 }}
-                className="mb-6"
+                className="text-sm sm:text-base mb-4 sm:mb-6"
               >
                 Want to trade your car for this listing?
                 <br />
                 Choose how you'd like to proceed.
               </div>
               {/* Buttons */}
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 <CustomButton
                   customStyles={{
                     width: "100%",
@@ -128,7 +126,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 </CustomButton>
               </div>
               {/* Disclaimer */}
-              <p className="text-xs text-gray-500 mt-4 leading-relaxed">
+              <p className="text-xs text-gray-500 mt-3 sm:mt-4 leading-relaxed">
                 *If the seller allows Price Adjustment, the system will
                 automatically calculate the difference based on vehicle values.
               </p>
@@ -141,13 +139,12 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Gilroy-Medium, sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#171616",
                 }}
-                className="mb-2"
+                className="text-lg sm:text-xl md:text-2xl mb-2"
               >
                 Select a Car from Your Active Listings
               </h2>
@@ -155,23 +152,22 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#585353",
                 }}
-                className="mb-6"
+                className="text-sm sm:text-base mb-4 sm:mb-6"
               >
                 Choose one of your active listings to propose a trade.
               </p>
-              <div className="mb-4 space-y-3">
+              <div className="mb-4 space-y-2 sm:space-y-3">
                 {dummyCars?.map((item) => (
                   <label key={item.id} className="flex w-full">
                     <input
                       type="radio"
                       name="select-car"
-                      className="mr-3 accent-green-800"
+                      className="mr-2 sm:mr-3 accent-green-800"
                       checked={selectedCarId === item.id}
                       onChange={() => setSelectedCarId(item.id)}
                     />
@@ -188,13 +184,12 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#585353",
                 }}
-                className="mb-6"
+                className="text-sm sm:text-base mb-4 sm:mb-6"
               >
                 Only Cars that will keep the trade even are allowed.
               </p>
@@ -208,13 +203,6 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
               >
                 Confirm Selection
               </CustomButton>
-              {/* <Button
-                variant="ghost"
-                className="w-full mt-2"
-                onClick={() => setFlow("main")}
-              >
-                Back
-              </Button> */}
             </>
           )}
 
@@ -227,7 +215,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 (A form to add your car details would appear here.)
               </p>
               {/* Placeholder for add car form */}
-              <div className="mb-4 border rounded p-4 text-gray-500">
+              <div className="mb-4 border rounded-lg p-4 text-gray-500">
                 [Add car for trade form goes here]
               </div>
               <CustomButton
@@ -257,13 +245,12 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Gilroy-Medium, sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#171616",
                 }}
-                className="mb-2"
+                className="text-lg sm:text-xl md:text-2xl mb-2"
               >
                 Trade Proposal Summary
               </h2>
@@ -271,29 +258,27 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#585353",
                 }}
-                className="mb-6"
+                className="text-sm sm:text-base mb-4 sm:mb-6"
               >
                 You're proposing an even trade! Review the details below before
                 submitting your offer.
               </p>
 
-              <div className="mb-6">
+              <div className="mb-4 sm:mb-6">
                 <div
                   style={{
                     fontFamily: "Gilroy-SemiBold, sans-serif",
                     fontWeight: 400,
-                    fontSize: "16px",
                     lineHeight: "100%",
                     letterSpacing: "0%",
                     color: "#171616",
                   }}
-                  className="text-left mb-2"
+                  className="text-sm sm:text-base text-left mb-2"
                 >
                   Your Selected Car:
                 </div>
@@ -319,12 +304,11 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                   style={{
                     fontFamily: "Gilroy-SemiBold, sans-serif",
                     fontWeight: 400,
-                    fontSize: "16px",
                     lineHeight: "100%",
                     letterSpacing: "0%",
                     color: "#171616",
                   }}
-                  className="text-left mb-2"
+                  className="text-sm sm:text-base text-left mb-2"
                 >
                   To be Traded with:
                 </div>
@@ -338,36 +322,6 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 />
               </div>
 
-              {/* <div className="mb-8 flex flex-col gap-2">
-                <div
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 300,
-                    fontSize: "14px",
-                    lineHeight: "18px",
-                    letterSpacing: "0%",
-                    color: "#585353",
-                    textAlign: "left",
-                  }}
-                >
-                  If the seller accepts your proposal, they will be required to
-                  pay the following amount.
-                </div>
-                <div
-                  style={{
-                    fontFamily: "Gilroy-SemiBold, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "16px",
-                    lineHeight: "100%",
-                    letterSpacing: "0%",
-                    color: "#171616",
-                    textAlign: "left",
-                  }}
-                >
-                  Amount to Receive: $2,000
-                </div>
-              </div> */}
-
               <CustomButton
                 customStyles={{
                   width: "100%",
@@ -380,34 +334,26 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
               >
                 Submit Proposal
               </CustomButton>
-              {/* <Button
-                variant="ghost"
-                className="w-full mt-2"
-                onClick={() => setFlow("main")}
-              >
-                Back
-              </Button> */}
             </>
           )}
 
           {flow === "proposal" && (
             <>
               {/* Icon */}
-              <div className="mb-6 flex justify-center">
-                <img src={Trade1} alt="trade" />
+              <div className="mb-4 sm:mb-6 flex justify-center">
+                <img src={Trade1} alt="trade" className="w-16 sm:w-20" />
               </div>
               {/* Title */}
               <div
                 style={{
                   fontFamily: "Gilroy-Medium, sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#000000",
                 }}
-                className="mb-2"
+                className="text-lg sm:text-xl md:text-2xl mb-2"
               >
                 Trade Proposal Sent Successfully!
               </div>
@@ -416,12 +362,12 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
                   color: "#585353",
                 }}
+                className="text-sm sm:text-base"
               >
                 Your trade offer has been sent to the seller. Now, just sit
                 tight and wait for their response! You'll get a notification

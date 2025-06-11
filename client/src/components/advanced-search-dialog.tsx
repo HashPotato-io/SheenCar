@@ -41,8 +41,20 @@ export function AdvancedSearchDialog({
 
       {/* Dialog */}
       <div
-        className="fixed top-[182.5px] left-[22px] w-[331px] h-[581.57px] bg-white rounded-[24px] p-[40px_26px] flex flex-col gap-[10px] z-[1000]
-          md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[calc(100%-32px)] md:max-w-[609px] md:h-auto md:max-h-[90vh] md:overflow-y-auto"
+        className="fixed top-[20px] left-1/2 -translate-x-1/2 w-[331px] h-auto max-h-[90vh] bg-white rounded-[24px] p-[40px_26px] flex flex-col gap-[10px] z-[1000] overflow-y-auto
+          md:top-1/2 md:-translate-y-1/2 md:w-[calc(100%-32px)] md:max-w-[609px] md:h-auto md:max-h-[90vh] md:overflow-y-auto
+          transition-all duration-300 ease-in-out
+          data-[state=open]:animate-in
+          data-[state=closed]:animate-out
+          data-[state=closed]:fade-out-0
+          data-[state=open]:fade-in-0
+          data-[state=closed]:zoom-out-95
+          data-[state=open]:zoom-in-95
+          data-[state=closed]:slide-out-to-left-1/2
+          data-[state=closed]:slide-out-to-top-[48%]
+          data-[state=open]:slide-in-from-left-1/2
+          data-[state=open]:slide-in-from-top-[48%]
+          scrollbar-none md:scrollbar-thin md:scrollbar-thumb-gray-300 md:scrollbar-track-gray-100"
       >
         <div className="flex justify-between items-center mb-5">
           <h2 className="font-['Gilroy-SemiBold'] font-normal text-[24px] leading-[100%] tracking-[-1%] text-black">

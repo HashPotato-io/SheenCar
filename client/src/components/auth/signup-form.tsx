@@ -13,92 +13,48 @@ export function SignupForm() {
   const [, navigate] = useLocation();
 
   return (
-    <div
-      style={{
-        width: "370px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 20,
-        padding: "24px 26px",
-        borderRadius: 17.22,
-        background: "#F8F8F8",
-        marginBottom: "20px",
-      }}
-    >
-      <h2
-        style={{
-          fontFamily: "Gilroy-SemiBold",
-          fontWeight: 400,
-          fontSize: 32,
-          lineHeight: "100%",
-          letterSpacing: "-1%",
-          textAlign: "center",
-          color: "#171616",
-        }}
-      >
+    <div className="w-full max-w-[370px] flex flex-col items-center gap-5 p-6 rounded-[17.22px] bg-[#F8F8F8] mb-5">
+      <h2 className="font-['Gilroy-SemiBold'] text-2xl md:text-3xl text-center text-[#171616] tracking-tight">
         Sign Up
       </h2>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
-        }}
-      >
+      <div className="flex flex-col gap-4 w-full">
         <Input
           type="text"
           placeholder="First Name"
-          style={{ width: "330px", height: "40px", background: "transparent" }}
+          className="w-full h-10 bg-transparent"
         />
         <Input
           type="text"
           placeholder="Last Name"
-          style={{ width: "330px", height: "40px", background: "transparent" }}
+          className="w-full h-10 bg-transparent"
         />
         <Input
           type="email"
           placeholder="Email"
-          style={{ width: "330px", height: "40px", background: "transparent" }}
+          className="w-full h-10 bg-transparent"
         />
-        <div style={{ position: "relative", width: "330px" }}>
+        <div className="relative w-full">
           <Input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
-            style={{ width: "100%", height: "40px", background: "transparent" }}
+            className="w-full h-10 bg-transparent"
           />
           <button
             onClick={() => setShowPassword(!showPassword)}
-            style={{
-              position: "absolute",
-              right: "10px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer"
           >
             {showPassword ? <EyeOpen /> : <EyeClose />}
           </button>
         </div>
-        <div style={{ position: "relative", width: "330px" }}>
+        <div className="relative w-full">
           <Input
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Confirm Password"
-            style={{ width: "100%", height: "40px", background: "transparent" }}
+            className="w-full h-10 bg-transparent"
           />
           <button
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            style={{
-              position: "absolute",
-              right: "10px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer"
           >
             {showConfirmPassword ? <EyeOpen /> : <EyeClose />}
           </button>
@@ -106,42 +62,21 @@ export function SignupForm() {
         <CustomPhoneInput
           value={phoneNumber}
           onChange={setPhoneNumber}
-          className="w-[330px]"
+          className="w-full"
         />
       </div>
 
-      <CustomButton customStyles={{ width: "330px", height: "40px" }}>
+      <CustomButton customStyles={{ width: "100%", height: "40px" }}>
         Sign Up
       </CustomButton>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            width: "100%",
-            marginTop: 16,
-            marginBottom: 16,
-          }}
-        >
-          <div style={{ flex: 1, height: 1, background: "#E5E5E5" }} />
-          <span style={{ 
-            fontFamily: "Poppins",
-            fontWeight: 400,
-            fontSize: 12,
-            lineHeight: "100%",
-            letterSpacing: "0%",
-            color: "#858585"
-          }}>or</span>
-          <div style={{ flex: 1, height: 1, background: "#E5E5E5" }} />
+      <div className="flex flex-col gap-4 items-center w-full">
+        <div className="flex items-center gap-2 w-full my-4">
+          <div className="flex-1 h-px bg-[#E5E5E5]" />
+          <span className="font-['Poppins'] text-xs text-[#858585]">
+            or
+          </span>
+          <div className="flex-1 h-px bg-[#E5E5E5]" />
         </div>
 
         <SocialLoginButton icon={<GoogleIcon />} text="Continue with Google" />
@@ -150,33 +85,12 @@ export function SignupForm() {
           text="Continue with Facebook"
         />
 
-        <div
-          style={{
-            fontFamily: "Poppins",
-            fontWeight: 400,
-            fontSize: 12,
-            lineHeight: "100%",
-            letterSpacing: "0%",
-            textAlign: "center",
-            color: "#000000",
-          }}
-        >
+        <div className="font-['Poppins'] text-xs text-center text-black">
           By creating an account using email, Google or Apple, I agree to the
           Terms & Conditions and acknowledge the Privacy Notice.
         </div>
 
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: 16,
-            fontFamily: "Poppins",
-            fontWeight: 400,
-            fontSize: 12,
-            lineHeight: "100%",
-            letterSpacing: "0%",
-            color: "#000000",
-          }}
-        >
+        <div className="text-center mt-4 font-['Poppins'] text-xs text-black">
           Already have an account?{" "}
           <a
             href="#"
@@ -184,16 +98,7 @@ export function SignupForm() {
               e.preventDefault();
               navigate("/login");
             }}
-            style={{
-              fontFamily: "Poppins",
-              fontWeight: 400,
-              fontSize: 12,
-              lineHeight: "100%",
-              letterSpacing: "0%",
-              textAlign: "center",
-              color: "#898989",
-              textDecoration: "none",
-            }}
+            className="text-[#898989] no-underline hover:underline"
           >
             Log in
           </a>

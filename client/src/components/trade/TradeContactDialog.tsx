@@ -75,7 +75,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Gilroy-Medium, sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
+                  fontSize: "clamp(20px, 5vw, 26px)",
                   lineHeight: "100%",
                   letterSpacing: "0%",
                   textAlign: "center",
@@ -90,7 +90,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
+                  fontSize: "clamp(14px, 3vw, 16px)",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
@@ -141,7 +141,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Gilroy-Medium, sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
+                  fontSize: "clamp(20px, 5vw, 26px)",
                   lineHeight: "100%",
                   letterSpacing: "0%",
                   textAlign: "center",
@@ -155,7 +155,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
+                  fontSize: "clamp(14px, 3vw, 16px)",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
@@ -188,7 +188,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
+                  fontSize: "clamp(14px, 3vw, 16px)",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
@@ -257,7 +257,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Gilroy-Medium, sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
+                  fontSize: "clamp(20px, 5vw, 26px)",
                   lineHeight: "100%",
                   letterSpacing: "0%",
                   textAlign: "center",
@@ -271,7 +271,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
+                  fontSize: "clamp(14px, 3vw, 16px)",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",
@@ -401,7 +401,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Gilroy-Medium, sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
+                  fontSize: "clamp(20px, 5vw, 26px)",
                   lineHeight: "100%",
                   letterSpacing: "0%",
                   textAlign: "center",
@@ -416,7 +416,7 @@ const TradeContactDialog: React.FC<TradeContactDialogProps> = ({
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 300,
-                  fontSize: "16px",
+                  fontSize: "clamp(14px, 3vw, 16px)",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   textAlign: "center",

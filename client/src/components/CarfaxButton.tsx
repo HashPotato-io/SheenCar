@@ -18,6 +18,9 @@ const CarfaxButton: React.FC = () => {
           alignItems: 'center',
           gap: '8px',
           background: '#003A2F',
+          width: '100%',
+          maxWidth: '575px',
+          justifyContent: 'center'
         }}
         onClick={() => setIsModalOpen(true)}
       >

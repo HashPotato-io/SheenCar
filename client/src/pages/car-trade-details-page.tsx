@@ -179,7 +179,7 @@ export default function TradeCarDetailsPage() {
           </div> */}
 
           {/* Car Images Section */}
-          <div className="flex gap-[20px] p-6">
+          <div className="flex flex-col lg:flex-row gap-4 p-4 lg:p-6">
             <CarImageGallery
               mainImage={mainImage}
               setMainImage={setMainImage}

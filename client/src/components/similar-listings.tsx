@@ -1,8 +1,26 @@
 import React from "react";
 import EmblaCarousel from "@/components/ui/embla-carousel";
 
+interface CarDetails {
+  id: string;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  mileage: number;
+  fuelType: string;
+  transmission: string;
+  engine: string;
+  exteriorColor: string;
+  interiorColor: string;
+  doors: number;
+  features: string[];
+  imageUrl: string;
+  rating: number;
+}
+
 interface SimilarListingsProps {
-  similarCarsForCarousel: any[];
+  similarCarsForCarousel: CarDetails[];
   dealerId: string;
   emblaRef: React.RefObject<HTMLDivElement> | ((node?: Element | null) => void);
   scrollPrev: () => void;

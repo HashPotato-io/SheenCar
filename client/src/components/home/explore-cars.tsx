@@ -145,7 +145,7 @@ export default function CarCategories() {
         options={["Featured", "Popular", "Latest"]}
         value={selectedTab}
         onValueChange={(value) => setSelectedTab(value)}
-        className="w-[331px] sm:w-[433.45px]"
+        className="w-[331px] sm:w-[433.45px] mt-[10px]"
       />
 
       <div className="w-full mt-8 sm:mt-10">

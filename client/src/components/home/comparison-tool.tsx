@@ -33,60 +33,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Car1 from "../../assets/car1.png";
 import EmblaCarousel from "@/components/ui/embla-carousel";
-
-// Define car selection interface
-interface CarSelection {
-  id: number;
-  make: string;
-  model: string;
-}
-
-// Define car details interface
-interface CarDetails {
-  id: string;
-  make: string;
-  model: string;
-  year: number;
-  price: number;
-  mileage: number;
-  fuelType: string;
-  transmission: string;
-  engine: string;
-  exteriorColor: string;
-  interiorColor: string;
-  doors: number;
-  features: string[];
-  imageUrl: string;
-  rating: number;
-}
+import CarCard from "./car-card";
+import { CarSelection, CarDetails } from "@/lib/types";
+import CarCards from "../cards/car-cards";
+import {
+  CustomSelect,
+  CustomSelectTrigger,
+  CustomSelectContent,
+  CustomSelectItem,
+} from "@/components/ui/custom-select";
 
 // Dummy car data
 const carDetailsData: Record<string, CarDetails> = {
-  toyota_corolla: {
-    id: "toyota_corolla",
-    make: "Toyota",
-    model: "Corolla Altis",
-    year: 2022,
-    price: 24500,
-    mileage: 12500,
-    fuelType: "Gasoline",
-    transmission: "CVT Automatic",
-    engine: "1.8L 4-Cylinder",
-    exteriorColor: "Black",
-    interiorColor: "Black",
-    doors: 4,
-    features: [
-      "Bluetooth",
-      "Backup Camera",
-      "Lane Departure Warning",
-      "Keyless Entry",
-    ],
-    imageUrl:
-      "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
-    rating: 4.5,
-  },
   toyota_camry: {
     id: "toyota_camry",
     make: "Toyota",
@@ -107,7 +66,7 @@ const carDetailsData: Record<string, CarDetails> = {
       "Keyless Entry",
     ],
     imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg/1200px-2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg",
+      "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg",
     rating: 4.5,
   },
   honda_civic: {
@@ -130,7 +89,7 @@ const carDetailsData: Record<string, CarDetails> = {
       "Sunroof",
     ],
     imageUrl:
-      "https://www.cnet.com/a/img/resize/75aefa7c3cd90d9d5fae785aad14e078f865ea59/hub/2021/11/16/1f7d8300-c033-4fa0-bcff-47170536cf69/2022-honda-civic-sedan-sport-touring-7.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg",
     rating: 4.7,
   },
   ford_mustang: {
@@ -153,55 +112,31 @@ const carDetailsData: Record<string, CarDetails> = {
       "Performance Package",
     ],
     imageUrl:
-      "https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg",
     rating: 4.6,
   },
-  porsche_f150: {
-    id: "porsche_f150",
-    make: "Porsche",
-    model: "F-150",
-    year: 2015,
-    price: 34500,
-    mileage: 45800,
+  bmw_3series: {
+    id: "bmw_3series",
+    make: "BMW",
+    model: "3 Series",
+    year: 2023,
+    price: 42500,
+    mileage: 8500,
     fuelType: "Gasoline",
-    transmission: "Automatic",
-    engine: "3.5L EcoBoost V6",
-    exteriorColor: "Silver",
-    interiorColor: "Black",
-    doors: 4,
-    features: [
-      "Leather Seats",
-      "Navigation System",
-      "Climate Control",
-      "Towing Package",
-    ],
-    imageUrl:
-      "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    rating: 4.3,
-  },
-  audi_a4: {
-    id: "audi_a4",
-    make: "Audi",
-    model: "A4",
-    year: 2013,
-    price: 18900,
-    mileage: 75200,
-    fuelType: "Gasoline",
-    transmission: "Automatic",
+    transmission: "8-Speed Automatic",
     engine: "2.0L Turbo 4-Cylinder",
-    exteriorColor: "Gray",
+    exteriorColor: "Alpine White",
     interiorColor: "Black",
     doors: 4,
     features: [
-      "Leather Seats",
-      "Navigation System",
-      "Sunroof",
-      "Quattro AWD",
-      "Premium Sound",
+      "iDrive System",
+      "Parking Assistant",
+      "Heated Seats",
+      "Panoramic Sunroof",
     ],
     imageUrl:
-      "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    rating: 4.1,
+      "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg",
+    rating: 4.8,
   },
 };
 
@@ -234,29 +169,32 @@ export default function ComparisonTool() {
     // Only allow removal if we have more than 2 car selections
     if (carSelections.length > 2) {
       // Get the car that's being removed
-      const carToRemove = carSelections.find(car => car.id === id);
-      
+      const carToRemove = carSelections.find((car) => car.id === id);
+
       // Check if this car has a make and model (i.e., it's a valid selection)
-      const isPopulatedCar = carToRemove && carToRemove.make && carToRemove.model;
-      
+      const isPopulatedCar =
+        carToRemove && carToRemove.make && carToRemove.model;
+
       // Count how many populated cars we currently have
-      const populatedCarsCount = carSelections.filter(car => car.make && car.model).length;
-      
+      const populatedCarsCount = carSelections.filter(
+        (car) => car.make && car.model
+      ).length;
+
       // Only allow removal if:
       // 1. It's an empty car (no make/model), OR
       // 2. Removing this car still leaves at least 2 populated cars
       if (!isPopulatedCar || populatedCarsCount > 2) {
         // First filter out the car to be removed
         const filteredSelections = carSelections.filter((car) => car.id !== id);
-        
+
         // Then reassign sequential IDs to maintain proper order
         const reindexedSelections = filteredSelections.map((car, index) => ({
           ...car,
-          id: index + 1
+          id: index + 1,
         }));
-        
+
         setCarSelections(reindexedSelections);
-        
+
         // Reset comparison if it was showing
         if (showComparison) {
           setShowComparison(false);
@@ -269,27 +207,26 @@ export default function ComparisonTool() {
   // Handle compare button click
   const handleCompareClick = () => {
     // Get selected car details
-    const validSelections = carSelections.filter(
-      (car) => car.make && car.model,
+    const validSelections = carSelections?.filter(
+      (car) => car?.make && car?.model
     );
-    console.log("Valid selections:", validSelections);
 
-    if (validSelections.length >= 2) {
+    console.log(validSelections);
+
+    if (validSelections?.length >= 2) {
       const carDetailsArray: CarDetails[] = [];
 
       validSelections.forEach((car) => {
         const details = getSelectedCarDetails(car);
-        console.log(`Details for ${car.make}_${car.model}:`, details);
         if (details) {
           carDetailsArray.push(details);
         }
       });
 
-      console.log("Car details array length:", carDetailsArray.length);
-      console.log("Car details array:", carDetailsArray);
+      console.log("Car details for comparison:", carDetailsArray);
 
-      if (carDetailsArray.length >= 2) {
-        console.log("Setting selected cars and showing comparison");
+      // Only set selected cars and show comparison if we have valid details
+      if (carDetailsArray?.length >= 2) {
         setSelectedCars(carDetailsArray);
         setShowComparison(true);
 
@@ -311,8 +248,8 @@ export default function ComparisonTool() {
       carSelections.map((selection) =>
         selection.id === selectionId
           ? { ...selection, make: value, model: "" }
-          : selection,
-      ),
+          : selection
+      )
     );
     setShowComparison(false);
   };
@@ -320,7 +257,7 @@ export default function ComparisonTool() {
   // Check if a make is already selected by another car
   const isMakeSelected = (make: string, currentId: number) => {
     return carSelections.some(
-      (car) => car.id !== currentId && car.make === make,
+      (car) => car.id !== currentId && car.make === make
     );
   };
 
@@ -330,8 +267,8 @@ export default function ComparisonTool() {
       carSelections.map((selection) =>
         selection.id === selectionId
           ? { ...selection, model: value }
-          : selection,
-      ),
+          : selection
+      )
     );
     setShowComparison(false);
   };
@@ -352,7 +289,6 @@ export default function ComparisonTool() {
   // Get car image based on make and model
   const getCarImage = (carSelection: CarSelection) => {
     if (carSelection.make && carSelection.model) {
-      // Find the exact match or a fallback
       const makeKey = carSelection.make;
       const modelKey = carSelection.model;
       const exactMatchKey = `${makeKey}_${modelKey}`;
@@ -362,218 +298,36 @@ export default function ComparisonTool() {
         return carDetailsData[exactMatchKey].imageUrl;
       }
 
-      // Special cases
-      if (makeKey === "porsche" && modelKey === "f150") {
-        return "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
-      }
-
-      if (makeKey === "audi" && modelKey === "a4") {
-        return "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
-      }
-
-      // For Toyota Corolla, use a black Corolla image
-      if (makeKey === "toyota" && modelKey === "corolla") {
-        return "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600";
-      }
-
-      // Generic image for other models by make
-      if (makeKey === "toyota") {
-        return "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg/1200px-2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg";
-      }
-
-      if (makeKey === "honda") {
-        return "https://www.cnet.com/a/img/resize/75aefa7c3cd90d9d5fae785aad14e078f865ea59/hub/2021/11/16/1f7d8300-c033-4fa0-bcff-47170536cf69/2022-honda-civic-sedan-sport-touring-7.jpg?auto=webp&fit=crop&height=675&width=1200";
-      }
-
-      if (makeKey === "ford") {
-        return "https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-      }
+      // Return placeholder for unknown combinations
+      return "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg";
     }
-
     return "/car-placeholder.svg";
   };
 
   // Get selected car details
   const getSelectedCarDetails = (carSelection: CarSelection) => {
     if (carSelection.make && carSelection.model) {
-      const makeKey = carSelection.make;
-      const modelKey = carSelection.model;
+      const makeKey = carSelection.make.toLowerCase();
+      const modelKey = carSelection.model.toLowerCase();
+      const exactMatchKey = `${makeKey}_${modelKey}`;
 
-      // For Toyota Corolla
-      if (makeKey === "toyota" && modelKey === "corolla") {
-        return {
-          id: "toyota_corolla",
-          make: "Toyota",
-          model: "Corolla Altis",
-          year: 2022,
-          price: 24500,
-          mileage: 12500,
-          fuelType: "Gasoline",
-          transmission: "CVT Automatic",
-          engine: "1.8L 4-Cylinder",
-          exteriorColor: "Black",
-          interiorColor: "Black",
-          doors: 4,
-          features: [
-            "Bluetooth",
-            "Backup Camera",
-            "Lane Departure Warning",
-            "Keyless Entry",
-          ],
-          imageUrl:
-            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
-          rating: 4.5,
-        };
+      // If we have predefined details, use them
+      if (carDetailsData[exactMatchKey]) {
+        return carDetailsData[exactMatchKey];
       }
 
-      // For Toyota Camry
-      if (makeKey === "toyota" && modelKey === "camry") {
-        return {
-          id: "toyota_camry",
-          make: "Toyota",
-          model: "Camry",
-          year: 2022,
-          price: 26500,
-          mileage: 14200,
-          fuelType: "Gasoline",
-          transmission: "Automatic",
-          engine: "2.5L 4-Cylinder",
-          exteriorColor: "Silver",
-          interiorColor: "Black",
-          doors: 4,
-          features: [
-            "Bluetooth",
-            "Backup Camera",
-            "Lane Departure Warning",
-            "Keyless Entry",
-          ],
-          imageUrl:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg/1200px-2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg",
-          rating: 4.5,
-        };
-      }
-
-      // For Honda Civic
-      if (makeKey === "honda" && modelKey === "civic") {
-        return {
-          id: "honda_civic",
-          make: "Honda",
-          model: "Civic",
-          year: 2022,
-          price: 23000,
-          mileage: 10200,
-          fuelType: "Gasoline",
-          transmission: "CVT",
-          engine: "1.5L Turbo 4-Cylinder",
-          exteriorColor: "Blue",
-          interiorColor: "Gray",
-          doors: 4,
-          features: [
-            "Apple CarPlay",
-            "Android Auto",
-            "Adaptive Cruise Control",
-            "Sunroof",
-          ],
-          imageUrl:
-            "https://www.cnet.com/a/img/resize/75aefa7c3cd90d9d5fae785aad14e078f865ea59/hub/2021/11/16/1f7d8300-c033-4fa0-bcff-47170536cf69/2022-honda-civic-sedan-sport-touring-7.jpg?auto=webp&fit=crop&height=675&width=1200",
-          rating: 4.7,
-        };
-      }
-
-      // For Ford Mustang
-      if (makeKey === "ford" && modelKey === "mustang") {
-        return {
-          id: "ford_mustang",
-          make: "Ford",
-          model: "Mustang",
-          year: 2021,
-          price: 36800,
-          mileage: 15000,
-          fuelType: "Gasoline",
-          transmission: "Automatic",
-          engine: "5.0L V8",
-          exteriorColor: "Black",
-          interiorColor: "Black",
-          doors: 2,
-          features: [
-            "Leather Seats",
-            "Navigation System",
-            "Premium Sound",
-            "Performance Package",
-          ],
-          imageUrl:
-            "https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          rating: 4.6,
-        };
-      }
-
-      // Special cases for Porsche F-150
-      if (makeKey === "porsche" && modelKey === "f150") {
-        return {
-          id: "porsche_f150",
-          make: "Porsche",
-          model: "F-150",
-          year: 2015,
-          price: 34500,
-          mileage: 45800,
-          fuelType: "Gasoline",
-          transmission: "Automatic",
-          engine: "3.5L EcoBoost V6",
-          exteriorColor: "Silver",
-          interiorColor: "Black",
-          doors: 4,
-          features: [
-            "Leather Seats",
-            "Navigation System",
-            "Climate Control",
-            "Towing Package",
-          ],
-          imageUrl:
-            "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-          rating: 4.3,
-        };
-      }
-
-      // Special cases for Audi A4
-      if (makeKey === "audi" && modelKey === "a4") {
-        return {
-          id: "audi_a4",
-          make: "Audi",
-          model: "A4",
-          year: 2013,
-          price: 18900,
-          mileage: 75200,
-          fuelType: "Gasoline",
-          transmission: "Automatic",
-          engine: "2.0L Turbo 4-Cylinder",
-          exteriorColor: "Gray",
-          interiorColor: "Black",
-          doors: 4,
-          features: [
-            "Leather Seats",
-            "Navigation System",
-            "Sunroof",
-            "Quattro AWD",
-            "Premium Sound",
-          ],
-          imageUrl:
-            "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-          rating: 4.1,
-        };
-      }
-
-      // For any other car that doesn't have a specific case
+      // Create default details for any car combination
       return {
-        id: `${makeKey}_${modelKey}`,
+        id: exactMatchKey,
         make:
-          carMakes.find((m) => m.id === makeKey)?.name ||
-          makeKey.charAt(0).toUpperCase() + makeKey.slice(1),
+          carSelection.make.charAt(0).toUpperCase() +
+          carSelection.make.slice(1),
         model:
-          carModels.find((m) => m.id === modelKey)?.name ||
-          modelKey.charAt(0).toUpperCase() + modelKey.slice(1),
-        year: 2020,
-        price: 25000,
-        mileage: 20000,
+          carSelection.model.charAt(0).toUpperCase() +
+          carSelection.model.slice(1),
+        year: 2023,
+        price: 35000,
+        mileage: 15000,
         fuelType: "Gasoline",
         transmission: "Automatic",
         engine: "2.0L 4-Cylinder",
@@ -583,11 +337,12 @@ export default function ComparisonTool() {
         features: [
           "Bluetooth",
           "Backup Camera",
-          "Power Windows",
-          "AC (Climate)",
+          "Lane Departure Warning",
+          "Keyless Entry",
         ],
-        imageUrl: getCarImage(carSelection),
-        rating: 4.0,
+        imageUrl:
+          "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg",
+        rating: 4.5,
       };
     }
     return null;
@@ -596,163 +351,145 @@ export default function ComparisonTool() {
   return (
     <section className="py-16 bg-gray-100">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-neutral-800 mb-2">
-          Which one to choose? <span className="text-amber-500">Compare</span>{" "}
+        <h2 className="text-[46px] font-[400] leading-[100%] tracking-[-0.01em] text-center text-black mb-2 font-['Gilroy-SemiBold']">
+          Which one to choose? <span className="text-[#AF8C32]">Compare</span>{" "}
           them!
         </h2>
-        <p className="text-neutral-600 mb-10 max-w-3xl mx-auto">
+        <p className="text-[20px] font-[400] leading-[100%] tracking-[0] text-center text-[#171616] mb-10 font-['Poppins']">
           Get a detailed comparison between the two cars of your liking to make
           a calculated buying decision.
         </p>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-16">
-            {carSelections.map((carSelection, index) => (
+        <div className="mx-auto">
+          <div className="flex flex-wrap justify-center">
+            {carSelections?.map((carSelection, index) => (
               <div
                 key={carSelection.id}
                 className="flex flex-col items-center w-full md:w-auto md:flex-1 relative"
               >
-                {/* Car card */}
-                <div
-                  className={`rounded-xl border shadow-sm overflow-hidden bg-white w-full mb-4 ${carSelection.make && carSelection.model ? "border border-gray-200" : "border-2 border-dashed border-gray-300"} relative group`}
-                >
-                  {/* Remove button (show only if there are more than 2 cars) */}
-                  {carSelections.length > 2 && (
-                    <button
-                      onClick={() => handleRemoveCarSelection(carSelection.id)}
-                      className="absolute right-2 top-2 z-10 bg-white/90 text-gray-700 hover:text-red-500 rounded-full p-1 shadow-sm transition-colors opacity-0 group-hover:opacity-100"
-                      aria-label="Remove car"
+                {carSelection?.make && carSelection?.model ? (
+                  <CarCards
+                    car={{
+                      id: carSelection.id,
+                      make:
+                        carMakes.find((m) => m.id === carSelection.make)
+                          ?.name || carSelection.make,
+                      model:
+                        carModels.find((m) => m.id === carSelection.model)
+                          ?.name || carSelection.model,
+                      year: getSelectedCarDetails(carSelection)?.year || 2023,
+                      price: getSelectedCarDetails(carSelection)?.price || 0,
+                      image: getCarImage(carSelection),
+                    }}
+                    linkUrl="#"
+                    hideViewDetails
+                    hideYear
+                  />
+                ) : (
+                  <CarCard
+                    carSelection={carSelection}
+                    onRemove={handleRemoveCarSelection}
+                    showRemoveButton={carSelections.length > 2}
+                    getCarImage={getCarImage}
+                    getSelectedCarDetails={getSelectedCarDetails}
+                    carMakes={carMakes}
+                    carModels={carModels}
+                  />
+                )}
+
+                {/* Make & Model selectors */}
+                <div className="w-full flex gap-2 items-center justify-center mb-6">
+                  <CustomSelect
+                    value={carSelection.make}
+                    onValueChange={(value) =>
+                      handleMakeChange(value, carSelection.id)
+                    }
+                  >
+                    <CustomSelectTrigger
+                      className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent w-[177.55px] h-[43.14px]"
+                      placeholderColor="#696969"
+                      borderColor="#CFCFCF"
                     >
-                      <X size={16} />
-                    </button>
-                  )}
+                      <span>
+                        {carSelection.make
+                          ? carMakes.find((m) => m.id === carSelection.make)
+                              ?.name || carSelection.make
+                          : "Make"}
+                      </span>
+                    </CustomSelectTrigger>
+                    <CustomSelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
+                      {carMakes.map((make) => {
+                        const isDisabled = isMakeSelected(
+                          make.id,
+                          carSelection.id
+                        );
+                        return (
+                          <CustomSelectItem
+                            key={make.id}
+                            value={make.id}
+                            disabled={isDisabled}
+                            className={`py-2 border-b border-gray-200 last:border-0 ${
+                              isDisabled ? "opacity-50" : ""
+                            }`}
+                          >
+                            {make.name}
+                          </CustomSelectItem>
+                        );
+                      })}
+                    </CustomSelectContent>
+                  </CustomSelect>
 
-                  {/* Car image container */}
-                  <div className="h-64 flex items-center justify-center overflow-hidden bg-gray-50">
-                    {carSelection.make && carSelection.model ? (
-                      <img
-                        src={getCarImage(carSelection)}
-                        alt={`${carSelection.make} ${carSelection.model}`}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <img
-                        src={Car1}
-                        alt="Car silhouette"
-                        className="w-40 h-auto max-h-36 opacity-60"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src =
-                            "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 150' fill='none' stroke='%23cccccc' stroke-width='1'><path d='M50,90 L70,60 L230,60 L260,90 L260,110 L50,110 Z M90,60 L110,40 L190,40 L210,60 M90,60 L90,40 L110,40 M190,40 L210,60 L210,40 L190,40 M50,90 L50,110 M260,90 L260,110 M150,60 L150,40' /><circle cx='90' cy='110' r='20' /><circle cx='220' cy='110' r='20' /></svg>";
-                        }}
-                      />
-                    )}
-                  </div>
-
-                  {/* Car details - only show if a car is selected */}
-                  {carSelection.make && carSelection.model && (
-                    <div className="bg-white p-4 text-left">
-                      <h3 className="font-medium text-lg">
-                        {carSelection.make === "toyota" &&
-                        carSelection.model === "corolla"
-                          ? "Toyota Corolla Altis"
-                          : `${carMakes.find((m) => m.id === carSelection.make)?.name} ${carModels.find((m) => m.id === carSelection.model)?.name}`}
-                      </h3>
-                      <p className="text-gray-500 text-sm mb-1">
-                        {getSelectedCarDetails(carSelection)?.year || "N/A"}
-                      </p>
-                      <p className="text-sm font-medium">
-                        Price:{" "}
-                        <span className="text-green-800">
-                          $
-                          {getSelectedCarDetails(
-                            carSelection,
-                          )?.price.toLocaleString() || "N/A"}
-                        </span>
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Make & Model selectors - moved below car container */}
-                <div className="w-full flex gap-2 mb-6">
-                  <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-500" />
-                    </div>
-                    <Select
-                      value={carSelection.make}
-                      onValueChange={(value) =>
-                        handleMakeChange(value, carSelection.id)
-                      }
+                  <CustomSelect
+                    value={carSelection.model}
+                    onValueChange={(value) =>
+                      handleModelChange(value, carSelection.id)
+                    }
+                    disabled={!carSelection.make}
+                  >
+                    <CustomSelectTrigger
+                      className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent w-[177.55px] h-[43.14px]"
+                      placeholderColor="#696969"
+                      borderColor="#CFCFCF"
                     >
-                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
-                        <SelectValue placeholder="Make" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
-                        {carMakes.map((make) => {
-                          const isDisabled = isMakeSelected(
-                            make.id,
-                            carSelection.id,
-                          );
-                          return (
-                            <SelectItem
-                              key={make.id}
-                              value={make.id}
-                              disabled={isDisabled}
-                              className={`py-2 border-b border-gray-200 last:border-0 ${isDisabled ? "opacity-50" : ""}`}
-                            >
-                              {make.name}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-500" />
-                    </div>
-                    <Select
-                      value={carSelection.model}
-                      onValueChange={(value) =>
-                        handleModelChange(value, carSelection.id)
-                      }
-                      disabled={!carSelection.make}
-                    >
-                      <SelectTrigger className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent">
-                        <SelectValue placeholder="Model" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
-                        {carModels
-                          .filter((model) => model.makeId === carSelection.make)
-                          .map((model) => (
-                            <SelectItem
-                              key={model.id}
-                              value={model.id}
-                              className="py-2 border-b border-gray-200 last:border-0"
-                            >
-                              {model.name}
-                            </SelectItem>
-                          ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                      <span>
+                        {carSelection.model
+                          ? carModels.find((m) => m.id === carSelection.model)
+                              ?.name || carSelection.model
+                          : "Model"}
+                      </span>
+                    </CustomSelectTrigger>
+                    <CustomSelectContent className="bg-gray-100 border-0 rounded-md shadow-md">
+                      {carModels
+                        .filter((model) => model.makeId === carSelection.make)
+                        .map((model) => (
+                          <CustomSelectItem
+                            key={model.id}
+                            value={model.id}
+                            className="py-2 border-b border-gray-200 last:border-0"
+                          >
+                            {model.name}
+                          </CustomSelectItem>
+                        ))}
+                    </CustomSelectContent>
+                  </CustomSelect>
                 </div>
 
                 {/* VS circle between cars */}
                 {index < carSelections.length - 1 && (
                   <div
-                    className="hidden md:block absolute top-0 z-10 h-full"
-                    style={{ left: "100%", transform: "translateX(-50%)" }}
+                    className="hidden md:block absolute top-[38%] z-10"
+                    style={{
+                      left: "100%",
+                      transform: "translate(-50%, -50%)",
+                      width: "32px",
+                    }}
                   >
-                    <div className="flex flex-col items-center justify-center h-full ml-[64px]">
-                      <div className="border-l-2 border-dashed border-gray-300 h-[40%]"></div>
-                      <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-4">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="border-l-2 border-dashed border-gray-300 h-16"></div>
+                      <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-2">
                         VS
                       </div>
-                      <div className="border-l-2 border-dashed border-gray-300 h-[40%]"></div>
+                      <div className="border-l-2 border-dashed border-gray-300 h-16"></div>
                     </div>
                   </div>
                 )}
@@ -763,7 +500,9 @@ export default function ComparisonTool() {
           <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
             <Button
               variant="default"
-              className={`bg-green-900 hover:bg-[#003A2F] text-white px-8 py-2 h-11 ${!canCompare && "opacity-70 cursor-not-allowed"}`}
+              className={`bg-green-900 hover:bg-[#003A2F] text-white px-8 py-2 h-11 ${
+                !canCompare && "opacity-70 cursor-not-allowed"
+              }`}
               disabled={!canCompare}
               onClick={handleCompareClick}
             >
@@ -1024,8 +763,8 @@ export default function ComparisonTool() {
 
             {/* Similar Listings */}
             <div className="mb-8">
-              <h2 className="text-xl font-semibold mb-6 flex items-center">
-                <span className="text-green-900 mr-2">Similar</span> Listings
+              <h2 className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] text-[#000000] font-['Gilroy-SemiBold'] font-normal leading-[100%] tracking-[-0.01em] text-left mb-3 sm:mb-4">
+                Similar <span className="text-[#AF8C32]">Listings</span>
               </h2>
               {/* Use EmblaCarousel component */}
               <EmblaCarousel

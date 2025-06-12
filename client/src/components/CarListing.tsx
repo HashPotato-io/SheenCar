@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CarFilter from "@/components/car/car-filter";
 import CarCards from "@/components/cards/car-cards";
+import { useMobileDevice } from "@/hooks/useMobileDevice";
 
 type Car = {
   id: number;
@@ -30,13 +31,14 @@ export default function TradeCarMain({
   currentPage,
   totalPages,
   handlePageChange,
-  carsCount
+  carsCount,
 }: TradeCarMainProps) {
   const pageSize = 8;
   const paginatedCars = cars.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
+  const isMobile = useMobileDevice();
 
   return (
     <main className="flex-1 bg-neutral-50 py-8">
@@ -68,26 +70,41 @@ export default function TradeCarMain({
             <CarFilter />
           </div>
           <div className="mt-[10px]">
-            <h1 className="text-2xl font-bold mb-6">
-              {carsCount}
-            </h1>
+            <h1 className="text-2xl font-bold mb-6">{carsCount}</h1>
             <div className="flex gap-4 flex-wrap -mx-2">
-              {paginatedCars?.map((car) => (
-                <CarCards
-                  key={car?.id}
-                  car={{
-                    id: car.id,
-                    make: car.make,
-                    model: car.model,
-                    year: car.year,
-                    price: car.price,
-                    image: car.image,
-                    sellerId: car.sellerId,
-                  }}
-                  linkUrl={`/trade-car/sellers/${car?.sellerId}/cars/${car?.id}`}
-                  small
-                />
-              ))}
+              {paginatedCars?.map((car) =>
+                isMobile ? (
+                  <CarCards
+                    key={car?.id}
+                    car={{
+                      id: car.id,
+                      make: car.make,
+                      model: car.model,
+                      year: car.year,
+                      price: car.price,
+                      image: car.image,
+                      sellerId: car.sellerId,
+                    }}
+                    linkUrl={`/trade-car/sellers/${car?.sellerId}/cars/${car?.id}`}
+                    tiny
+                  />
+                ) : (
+                  <CarCards
+                    key={car?.id}
+                    car={{
+                      id: car.id,
+                      make: car.make,
+                      model: car.model,
+                      year: car.year,
+                      price: car.price,
+                      image: car.image,
+                      sellerId: car.sellerId,
+                    }}
+                    linkUrl={`/trade-car/sellers/${car?.sellerId}/cars/${car?.id}`}
+                    small
+                  />
+                )
+              )}
             </div>
             {/* Pagination */}
             <div className="flex justify-center items-center gap-1 py-4">
@@ -162,4 +179,4 @@ export default function TradeCarMain({
       </div>
     </main>
   );
-} 
+}

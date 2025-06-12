@@ -1,5 +1,17 @@
-import { Car as CarIcon, Truck, Rocket, TrendingUp, Droplet, Wind } from "lucide-react";
-import { FaCarSide, FaMotorcycle, FaTruckPickup, FaCarAlt } from "react-icons/fa";
+import {
+  Car as CarIcon,
+  Truck,
+  Rocket,
+  TrendingUp,
+  Droplet,
+  Wind,
+} from "lucide-react";
+import {
+  FaCarSide,
+  FaMotorcycle,
+  FaTruckPickup,
+  FaCarAlt,
+} from "react-icons/fa";
 import { RiTruckLine, RiMotorbikeLine } from "react-icons/ri";
 
 export const carTypes = [
@@ -71,7 +83,7 @@ export const carMakes = [
   { id: "volkswagen", name: "Volkswagen" },
   { id: "mazda", name: "Mazda" },
   { id: "porsche", name: "Porsche" },
-  { id: "jeep", name: "Jeep" },
+  /*{ id: "jeep", name: "Jeep" },
   { id: "tesla", name: "Tesla" },
   { id: "volvo", name: "Volvo" },
   { id: "acura", name: "Acura" },
@@ -80,7 +92,7 @@ export const carMakes = [
   { id: "dodge", name: "Dodge" },
   { id: "gmc", name: "GMC" },
   { id: "ram", name: "RAM" },
-  { id: "buick", name: "Buick" },
+  { id: "buick", name: "Buick" }, */
 ];
 
 export const carModels = [
@@ -95,7 +107,7 @@ export const carModels = [
   { id: "sienna", name: "Sienna", makeId: "toyota" },
   { id: "prius", name: "Prius", makeId: "toyota" },
   { id: "avalon", name: "Avalon", makeId: "toyota" },
-  
+
   // Honda Models
   { id: "civic", name: "Civic", makeId: "honda" },
   { id: "accord", name: "Accord", makeId: "honda" },
@@ -106,7 +118,7 @@ export const carModels = [
   { id: "ridgeline", name: "Ridgeline", makeId: "honda" },
   { id: "insight", name: "Insight", makeId: "honda" },
   { id: "passport", name: "Passport", makeId: "honda" },
-  
+
   // Ford Models
   { id: "f150", name: "F-150", makeId: "ford" },
   { id: "escape", name: "Escape", makeId: "ford" },
@@ -117,7 +129,7 @@ export const carModels = [
   { id: "ranger", name: "Ranger", makeId: "ford" },
   { id: "expedition", name: "Expedition", makeId: "ford" },
   { id: "fusion", name: "Fusion", makeId: "ford" },
-  
+
   // Chevrolet Models
   { id: "silverado", name: "Silverado", makeId: "chevrolet" },
   { id: "equinox", name: "Equinox", makeId: "chevrolet" },
@@ -129,7 +141,7 @@ export const carModels = [
   { id: "blazer", name: "Blazer", makeId: "chevrolet" },
   { id: "camaro", name: "Camaro", makeId: "chevrolet" },
   { id: "corvette", name: "Corvette", makeId: "chevrolet" },
-  
+
   // BMW Models
   { id: "3series", name: "3 Series", makeId: "bmw" },
   { id: "5series", name: "5 Series", makeId: "bmw" },
@@ -140,7 +152,7 @@ export const carModels = [
   { id: "m3", name: "M3", makeId: "bmw" },
   { id: "m5", name: "M5", makeId: "bmw" },
   { id: "i4", name: "i4", makeId: "bmw" },
-  
+
   // Mercedes-Benz Models
   { id: "cclass", name: "C-Class", makeId: "mercedes" },
   { id: "eclass", name: "E-Class", makeId: "mercedes" },
@@ -151,7 +163,7 @@ export const carModels = [
   { id: "cla", name: "CLA", makeId: "mercedes" },
   { id: "amggt", name: "AMG GT", makeId: "mercedes" },
   { id: "gla", name: "GLA", makeId: "mercedes" },
-  
+
   // Audi Models
   { id: "a4", name: "A4", makeId: "audi" },
   { id: "a6", name: "A6", makeId: "audi" },
@@ -162,7 +174,7 @@ export const carModels = [
   { id: "a8", name: "A8", makeId: "audi" },
   { id: "q8", name: "Q8", makeId: "audi" },
   { id: "rs7", name: "RS7", makeId: "audi" },
-  
+
   // Porsche Models
   { id: "911", name: "911", makeId: "porsche" },
   { id: "cayenne", name: "Cayenne", makeId: "porsche" },

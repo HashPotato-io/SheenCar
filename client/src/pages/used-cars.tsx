@@ -271,7 +271,6 @@ export default function UsedCars() {
                 lineHeight: "100%",
                 letterSpacing: "-1%",
                 color: "#FFFFFF",
-                width: "788px",
               }}
             >
               Quality & Value: Find the Best{" "}

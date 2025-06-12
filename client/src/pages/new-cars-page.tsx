@@ -11,6 +11,7 @@ import { Search as SearchIcon } from "lucide-react";
 import HeroSection from "@/components/hero-section";
 import NewCarsBanner from "../assets/newcarsHS.png";
 import CarListing from "@/components/CarListing";
+import { useMobileDevice } from "@/hooks/useMobileDevice";
 
 // Add this type definition above your component if not already defined elsewhere:
 type Car = {
@@ -271,7 +272,6 @@ export default function NewCars() {
                 lineHeight: "100%",
                 letterSpacing: "-1%",
                 color: "#FFFFFF",
-                width: "788px",
               }}
             >
               Drive the Future: Explore the Latest{" "}

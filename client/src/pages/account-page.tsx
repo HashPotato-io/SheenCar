@@ -36,6 +36,7 @@ import DealCard from "@/components/deal-card";
 import { useLocation, useSearchParams } from "wouter";
 import DealDetailsView from "@/components/deal-details-view";
 import OfferDetailsView from "@/components/offer-details-view";
+import { useMobileDevice } from "@/hooks/useMobileDevice";
 
 const tabList = ["Active", "Pending", "Closed", "Request"];
 
@@ -1216,6 +1217,7 @@ const Account = () => {
   const view = searchParams.get("view");
   const dealId = searchParams.get("id");
   const [, location] = useLocation();
+  const isMobile =useMobileDevice();
 
   // Calculate total pages based on filtered cars
   const filteredCars = dummyCars.filter(
@@ -1357,7 +1359,7 @@ const Account = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
           gap: "24px",
           marginBottom: 32,
         }}
@@ -1376,6 +1378,7 @@ const Account = () => {
             }
             status={car.status as any}
             dealType={car?.dealType}
+            tiny={isMobile}
           />
         ))}
       </div>
@@ -1393,46 +1396,46 @@ const Account = () => {
   const [currentOfferPage, setCurrentOfferPage] = useState(1);
 
   // Update the renderOfferContent function
-  const renderOfferContent = (items: Offer[]) => {
+  const renderOfferContent = (items: any[]) => {
     return (
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
           gap: "24px",
           marginBottom: 32,
         }}
       >
-        {items?.map((offer) => (
-          <ProductCardVariant2
-            key={offer.id}
-            car={{
-              id: offer.id,
-              make: offer.make,
-              model: offer.model,
-              year: offer.year,
-              price: offer.price,
-              image: offer.image,
-              buttonState:
+        {items?.map((item) => {
+          const offer = item as Offer;
+          return (
+            <ProductCardVariant2
+              key={offer.id}
+              car={{
+                id: offer.id,
+                make: offer.make,
+                model: offer.model,
+                year: offer.year,
+                price: offer.price,
+                image: offer.image,
+                tabType: offer.tabType,
+              }}
+              linkUrl={`/car/${offer.id}`}
+              buttonState={
                 offersTabList[selectedOfferTab] === "My Listings"
                   ? "viewOffers"
-                  : "withdrawOffer",
-              tabType: offer.tabType,
-            }}
-            linkUrl={`/car/${offer.id}`}
-            buttonState={
-              offersTabList[selectedOfferTab] === "My Listings"
-                ? "viewOffers"
-                : "withdrawOffer"
-            }
-            status={offer.status as any}
-            disabled={offer.status !== "pending"}
-            offerDetails={{
-              amount: offer.offerAmount,
-              date: offer.offerDate,
-            }}
-          />
-        ))}
+                  : "withdrawOffer"
+              }
+              status={offer.status as any}
+              disabled={offer.status !== "pending"}
+              offerDetails={{
+                amount: offer.offerAmount,
+                date: offer.offerDate,
+              }}
+              tiny={isMobile}
+            />
+          );
+        })}
       </div>
     );
   };
@@ -1471,59 +1474,40 @@ const Account = () => {
       case "My Ads":
         return (
           <div
+            className="opacity-100 transition-opacity duration-300 ease-in-out"
             style={{
               opacity: contentFade ? 0 : 1,
-              transition: "opacity 300ms ease-in-out",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 32,
-              }}
-            >
-              <div style={{ fontWeight: 400, fontSize: 40, color: "#000000" }}>
-                My <span style={{ color: "#AF8C32" }}>Ads</span>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mb-8 md:mb-8">
+              <div className="flex gap-[10px] text-3xl md:text-[40px] font-normal text-black">
+                My <span className="text-[#AF8C32]">Ads</span>
               </div>
-              <button
-                style={{
-                  width: 216,
-                  height: 44,
-                  background: "#003A2F",
-                  color: "#fff",
-                  border: "1px solid #003A2F",
-                  borderRadius: 6,
-                  fontWeight: 300,
-                  fontSize: 16,
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  paddingRight: 20,
-                  paddingLeft: 20,
-                  opacity: postAdFade ? 0 : 1,
-                  transition: "opacity 300ms ease-in-out",
-                  justifyContent: "center",
-                  textAlign: "center",
-                }}
-                onClick={handlePostAdClick}
-              >
-                <img src={Plus} />
-                <span>{selectedTab === 3 ? "Add Request" : "Post Ad"}</span>
-              </button>
+              <div className="w-full flex justify-center md:justify-end">
+                <button
+                  className="w-[331px] md:w-[216px] h-11 bg-[#003A2F] text-white border border-[#003A2F] rounded-md font-light text-base cursor-pointer flex items-center justify-center gap-2 px-5 transition-opacity duration-300 ease-in-out"
+                  style={{
+                    opacity: postAdFade ? 0 : 1,
+                  }}
+                  onClick={handlePostAdClick}
+                >
+                  <img src={Plus} alt="Plus icon" />
+                  <span>{selectedTab === 3 ? "Add Request" : "Post Ad"}</span>
+                </button>
+              </div>
             </div>
-            <TabSection
-              tabList={tabList}
-              selectedTab={selectedTab}
-              tabFade={tabFade}
-              currentPage={currentPage}
-              totalPages={totalPages}
-              getCurrentPageItems={getCurrentPageItems}
-              onTabClick={handleTabChange}
-              onPageChange={handlePageChange}
-            />
+            <div className="w-full">
+              <TabSection
+                tabList={tabList}
+                selectedTab={selectedTab}
+                tabFade={tabFade}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                getCurrentPageItems={getCurrentPageItems}
+                onTabClick={handleTabChange}
+                onPageChange={handlePageChange}
+              />
+            </div>
           </div>
         );
       case "Trade Deals":

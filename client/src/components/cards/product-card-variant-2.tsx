@@ -66,20 +66,27 @@ interface CarCardsProps {
   car: Car;
   linkUrl: string;
   small?: boolean;
+  tiny?: boolean;
   buttonState?: ButtonState;
   status?: "active" | "completed" | "closed" | "pending";
   dealType?: "sell" | "buy";
   disabled?: boolean;
+  offerDetails?: {
+    amount: number;
+    date: string;
+  };
 }
 
 const Card: React.FC<CarCardsProps> = ({
   car,
   linkUrl,
   small,
+  tiny,
   buttonState = "boostAd",
   status,
   dealType,
   disabled = false,
+  offerDetails,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [currentStep, setCurrentStep] = useState<ModalStep>("none");
@@ -402,6 +409,223 @@ const Card: React.FC<CarCardsProps> = ({
       </button>
     </div>
   );
+
+  if (tiny) {
+    return (
+      <div
+        style={{
+          boxShadow: "1.52px 1.52px 9.14px 0px #0000001F",
+          width: "331px",
+          height: "384px",
+          borderRadius: 16,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div className="overflow-hidden group w-[325px] h-[378px]">
+          <div className="relative h-full">
+            <div
+              style={{ borderRadius: "13px" }}
+              className="h-[280px] overflow-hidden"
+            >
+              <img
+                style={{ borderRadius: "13px" }}
+                src={car?.image}
+                alt={`${car?.make} ${car?.model}`}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              {status && (
+                <div className="absolute top-2 left-2">
+                  <StatusBadge status={status} />
+                </div>
+              )}
+              <MenuButton />
+              {showMenu && status === "active" && <DropdownMenu />}
+            </div>
+            <div
+              className="bg-[#EEEEEE] p-[12px] w-[325px] flex flex-col absolute left-0 right-0"
+              style={{
+                top: dealType ? "200px" : "230px",
+                borderRadius: "13px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                height: dealType ? "176px" : "148px",
+              }}
+            >
+              <div className="flex flex-col gap-[8px] ml-[10px] w-full">
+                {dealType && (
+                  <div className="">
+                    <StatusBadge status={dealType} />
+                  </div>
+                )}
+                <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[22px] font-['Gilroy-SemiBold']">
+                  {car?.make} {car?.model}
+                </div>
+                <div className="align-middle font-normal text-[#585353] leading-[100%] tracking-[-0.01em] text-[16px] font-['Poppins']">
+                  {car?.year}
+                </div>
+                {car?.tabType === "My Trade Proposals" ? (
+                  <div style={{
+                    fontFamily: 'Gilroy-Regular',
+                    fontWeight: 400,
+                    fontSize: '14px',
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    verticalAlign: 'middle',
+                    color: '#585353'
+                  }}>
+                    {car.isTraded ? (
+                      <>
+                        Traded with: {car.tradeWith}
+                        <br />
+                        No Amount Involved: Even Trade
+                      </>
+                    ) : (
+                      <>
+                        To Trade with: {car.tradeWith}
+                        <br />
+                        Amount to Pay: ${car.tradeAmount?.toLocaleString()}
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[22px] font-['Gilroy-SemiBold']">
+                    Price: ${car?.price.toLocaleString()}
+                  </div>
+                )}
+              </div>
+
+              <div className="flex justify-center mt-2 w-full px-4">
+                <CustomButton
+                  customStyles={{
+                    ...getButtonStyles(buttonState),
+                    width: "100%",
+                    height: "40px",
+                  }}
+                  onClick={getButtonClickHandler(buttonState)}
+                  disabled={disabled}
+                >
+                  {getButtonText(buttonState)}
+                </CustomButton>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Boost Ad Modal */}
+        <BoostAdModal
+          isOpen={currentStep === "boostAd"}
+          onClose={handleBoostAdClose}
+          carDetails={{
+            make: car?.make,
+            model: car?.model,
+            year: car?.year,
+          }}
+          onProceed={handleProceedToPay}
+        />
+
+        {/* Proceed to Pay Modal */}
+        <ProceedToPayModal
+          isOpen={currentStep === "proceedToPay"}
+          onClose={handleProceedToPayClose}
+          carDetails={{
+            make: car.make,
+            model: car.model,
+            year: car.year,
+          }}
+        />
+
+        {/* RenewBoostModal */}
+        <RenewBoostModal
+          isOpen={currentStep === "renewBoost"}
+          onClose={() => setCurrentStep("none")}
+          carDetails={{
+            make: car.make,
+            model: car.model,
+            year: car.year,
+          }}
+          onProceed={handleProceedToPay}
+        />
+
+        <CloseAdModal
+          isOpen={currentStep === "closeAd"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={handleCloseAdConfirm}
+          daysActive={daysActive}
+        />
+
+        <CloseAdBoostedModal
+          isOpen={currentStep === "closeAdBoosted"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={handleCloseAdConfirm}
+          daysActive={daysActive}
+        />
+
+        <RenewAdModal
+          isOpen={currentStep === "renewAd"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={() => {
+            setCurrentStep("none");
+            // Add any additional renewal logic here
+          }}
+          carDetails={{
+            make: car.make,
+            model: car.model,
+            year: car.year,
+          }}
+        />
+
+        <ReopenAdModal
+          isOpen={currentStep === "reopenAd"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={() => {
+            setCurrentStep("none");
+            // Add any additional reopen logic here
+          }}
+        />
+
+        {/* Add WithdrawAdModal */}
+        <WithdrawAdModal
+          isOpen={currentStep === "withdrawAd"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={handleWithdrawAdConfirm}
+        />
+
+        {/* Add CloseRequestModal */}
+        <CloseRequestModal
+          isOpen={currentStep === "closeRequest"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={() => {
+            setCurrentStep("none");
+            // Add any additional close request logic here
+          }}
+        />
+
+        <DeleteAdModal
+          isOpen={currentStep === "deleteAd"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={handleDeleteAdConfirm}
+        />
+
+        <WithdrawTradeProposalModal
+          isOpen={currentStep === "withdrawProposal"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={() => {
+            setCurrentStep("none");
+            // Add any additional withdrawal logic here
+          }}
+        />
+
+        <WithdrawOfferModal
+          isOpen={currentStep === "withdrawOffer"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={() => {
+            setCurrentStep("none");
+            // Add any additional withdrawal logic here
+          }}
+        />
+      </div>
+    );
+  }
 
   if (small) {
     // Small version

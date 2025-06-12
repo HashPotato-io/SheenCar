@@ -3,6 +3,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import CarFilter from "@/components/car/car-filter";
 import CarCards from "@/components/cards/car-cards";
 import { useMobileDevice } from "@/hooks/useMobileDevice";
+import { FilterIcon } from "./icons";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useState } from "react";
 
 type Car = {
   id: number;
@@ -39,11 +42,12 @@ export default function TradeCarMain({
     currentPage * pageSize
   );
   const isMobile = useMobileDevice();
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
   return (
     <main className="flex-1 bg-neutral-50 py-8">
       <div className="container mx-auto px-4">
-        <div className="lg:hidden mb-4">
+        {/*      <div className="lg:hidden mb-4">
           <Button
             variant="outline"
             onClick={() => setFilterVisible(!filterVisible)}
@@ -59,18 +63,65 @@ export default function TradeCarMain({
               </>
             )}
           </Button>
-        </div>
+        </div> */}
 
         <div className="flex flex-col lg:flex-row gap-12">
-          <div
-            className={`lg:w-1/4 ${
-              filterVisible ? "block" : "hidden"
-            } lg:block`}
-          >
-            <CarFilter />
-          </div>
+          {!isMobile ? (
+            <div
+              className={`lg:w-1/4 ${
+                filterVisible ? "block" : "hidden"
+              } lg:block`}
+            >
+              <CarFilter />
+            </div>
+          ) : null}
           <div className="mt-[10px]">
             <h1 className="text-2xl font-bold mb-6">{carsCount}</h1>
+            {isMobile ? (
+              <div
+                style={{
+                  display: "flex",
+                  gap: "4px",
+                  alignItems: "center",
+                  marginBottom: "16px",
+                  cursor: "pointer",
+                }}
+                onClick={() => setIsFilterModalOpen(true)}
+              >
+                <FilterIcon />{" "}
+                <span
+                  style={{
+                    fontFamily: "Gilroy-Medium",
+                    fontWeight: 400,
+                    fontSize: "17.56px",
+                    lineHeight: "100%",
+                    letterSpacing: "0%",
+                    color: "#595959",
+                  }}
+                >
+                  Filters
+                </span>
+              </div>
+            ) : null}
+
+            <Dialog
+              open={isFilterModalOpen}
+              onOpenChange={setIsFilterModalOpen}
+            >
+              <DialogContent
+                style={{
+                  width: "340px",
+                  padding: "30px 20px",
+                  borderRadius: "12px",
+                  background: "#FFFFFF",
+                  boxShadow: "2px 2px 16px 1px #0000001A",
+                }}
+                className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto"
+              >
+                <CarFilter />
+              </DialogContent>
+            </Dialog>
+
             <div className="flex gap-4 flex-wrap -mx-2">
               {paginatedCars?.map((car) =>
                 isMobile ? (
@@ -127,7 +178,7 @@ export default function TradeCarMain({
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
-              {Array.from({ length: Math.min(5, totalPages) }).map((_, i) => {
+              {Array?.from({ length: Math.min(5, totalPages) }).map((_, i) => {
                 let pageNum;
                 if (totalPages <= 5) {
                   pageNum = i + 1;

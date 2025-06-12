@@ -20,6 +20,8 @@ import {
   CustomSelectItem,
   CustomSelectTrigger,
 } from "@/components/ui/custom-select";
+import { useMobileDevice } from "@/hooks/useMobileDevice";
+import { CustomButton } from "../ui/custom-button";
 
 interface FilterState {
   zipCode: string;
@@ -66,6 +68,7 @@ export default function CarFilter() {
       new: searchParams.get("new") === "true",
     },
   });
+  const isMobile = useMobileDevice();
 
   const availableModels = filter.make
     ? carModels.filter((model) => model.makeId === filter.make)
@@ -112,6 +115,248 @@ export default function CarFilter() {
       condition: { used: true, new: false },
     });
   };
+
+  if (isMobile) {
+    return (
+      <div>
+        <h2 className="text-2xl font-semibold mb-4 font-poppins">Filters</h2>
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <div className="flex flex-col gap-2">
+              <CustomInput
+                placeholder="Zip Code"
+                className="w-[251px] h-[48px]"
+                showZipCodeIcon={true}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex flex-col gap-2">
+              <CustomSelect
+                value={filter.make}
+                onValueChange={(value) => setFilter({ ...filter, make: value })}
+              >
+                <CustomSelectTrigger className="w-full h-[48px]">
+                  <span>{filter.make || "Make"}</span>
+                </CustomSelectTrigger>
+                <CustomSelectContent>
+                  <CustomSelectItem value="any">Any Make</CustomSelectItem>
+                  {carMakes.map((make) => (
+                    <CustomSelectItem key={make.id} value={make.id}>
+                      {make.name}
+                    </CustomSelectItem>
+                  ))}
+                </CustomSelectContent>
+              </CustomSelect>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex flex-col gap-2">
+              <CustomSelect
+                value={filter.model}
+                onValueChange={(value) =>
+                  setFilter({ ...filter, model: value })
+                }
+                disabled={!filter.make}
+              >
+                <CustomSelectTrigger className="w-full h-[48px]">
+                  <span>
+                    {filter.model ||
+                      (filter.make ? "Model" : "Select make first")}
+                  </span>
+                </CustomSelectTrigger>
+                <CustomSelectContent>
+                  <CustomSelectItem value="any">Any Model</CustomSelectItem>
+                  {availableModels.map((model) => (
+                    <CustomSelectItem key={model.id} value={model.id}>
+                      {model.name}
+                    </CustomSelectItem>
+                  ))}
+                </CustomSelectContent>
+              </CustomSelect>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex flex-col gap-2">
+              <CustomSelect
+                value={filter.bodyType}
+                onValueChange={(value) =>
+                  setFilter({ ...filter, bodyType: value })
+                }
+              >
+                <CustomSelectTrigger className="w-full h-[48px]">
+                  <span>{filter.bodyType || "Body Type"}</span>
+                </CustomSelectTrigger>
+                <CustomSelectContent>
+                  <CustomSelectItem value="any">Any Body Type</CustomSelectItem>
+                  <CustomSelectItem value="sedan">Sedan</CustomSelectItem>
+                  <CustomSelectItem value="suv">SUV</CustomSelectItem>
+                  <CustomSelectItem value="hatchback">
+                    Hatchback
+                  </CustomSelectItem>
+                  <CustomSelectItem value="coupe">Coupe</CustomSelectItem>
+                  <CustomSelectItem value="wagon">Wagon</CustomSelectItem>
+                  <CustomSelectItem value="convertible">
+                    Convertible
+                  </CustomSelectItem>
+                  <CustomSelectItem value="pickup">Pickup</CustomSelectItem>
+                  <CustomSelectItem value="van">Van</CustomSelectItem>
+                </CustomSelectContent>
+              </CustomSelect>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-poppins font-medium text-base leading-none text-black">
+              Price
+            </h3>
+            <div className="flex justify-between text-sm">
+              <span>${filter.priceRange[0].toLocaleString()}</span>
+              <span>${filter.priceRange[1].toLocaleString()}</span>
+            </div>
+            <Slider
+              value={filter.priceRange}
+              min={5000}
+              max={100000}
+              step={1000}
+              onValueChange={(value) =>
+                setFilter({ ...filter, priceRange: value as [number, number] })
+              }
+            />
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-poppins font-medium text-base leading-none text-black">
+              Mileage
+            </h3>
+            <div className="flex justify-between text-sm">
+              <span>{filter.mileageRange[0].toLocaleString()} miles</span>
+              <span>{filter.mileageRange[1].toLocaleString()} miles</span>
+            </div>
+            <Slider
+              value={filter.mileageRange}
+              min={0}
+              max={200000}
+              step={1000}
+              onValueChange={(value) =>
+                setFilter({
+                  ...filter,
+                  mileageRange: value as [number, number],
+                })
+              }
+            />
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-poppins font-medium text-base leading-none text-black">
+              Year Range
+            </h3>
+            <div className="flex justify-between text-sm">
+              <span>{filter.yearRange[0]}</span>
+              <span>{filter.yearRange[1]}</span>
+            </div>
+            <Slider
+              value={filter.yearRange}
+              min={1990}
+              max={new Date().getFullYear()}
+              step={1}
+              onValueChange={(value) =>
+                setFilter({ ...filter, yearRange: value as [number, number] })
+              }
+            />
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-poppins font-medium text-base leading-none text-black">
+              Seller Type
+            </h3>
+            <div className="space-y-6 p-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="dealer"
+                  checked={filter.sellerType.dealer}
+                  onCheckedChange={(checked) =>
+                    setFilter({
+                      ...filter,
+                      sellerType: {
+                        ...filter.sellerType,
+                        dealer: checked as boolean,
+                      },
+                    })
+                  }
+                />
+                <Label htmlFor="dealer">Dealer</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="private"
+                  checked={filter.sellerType.private}
+                  onCheckedChange={(checked) =>
+                    setFilter({
+                      ...filter,
+                      sellerType: {
+                        ...filter.sellerType,
+                        private: checked as boolean,
+                      },
+                    })
+                  }
+                />
+                <Label htmlFor="private">Private Seller</Label>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-poppins font-medium text-base leading-none text-black">
+              Condition
+            </h3>
+            <div className="space-y-6 p-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="used"
+                  checked={filter.condition.used}
+                  onCheckedChange={(checked) =>
+                    setFilter({
+                      ...filter,
+                      condition: {
+                        ...filter.condition,
+                        used: checked as boolean,
+                      },
+                    })
+                  }
+                />
+                <Label htmlFor="used">Used</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="new"
+                  checked={filter.condition.new}
+                  onCheckedChange={(checked) =>
+                    setFilter({
+                      ...filter,
+                      condition: {
+                        ...filter.condition,
+                        new: checked as boolean,
+                      },
+                    })
+                  }
+                />
+                <Label htmlFor="new">New</Label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <CustomButton customStyles={{ width: "262px", height: "40px" }}>
+            Apply
+          </CustomButton>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

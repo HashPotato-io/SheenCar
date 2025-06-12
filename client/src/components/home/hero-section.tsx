@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Banner from "../../assets/banner.png";
-import HomeBanner from "../../assets/Home-Banner2.png"
+import HomeBanner from "../../assets/Home-Banner2.png";
 import CarBanner from "../../assets/car-banner.png";
 import { Plus } from "lucide-react";
 import { CustomButton } from "@/components/ui/custom-button";
@@ -48,11 +48,22 @@ export default function HeroSection() {
           <Plus size={23} className="mr-2" />
           <span>Post Your Ad</span>
         </CustomButton>
-        <div style={{width: "375px", height: "200px", marginTop: "40px"}} >
-          <img style={{width: "325px", height: "175px"}} src={CarBanner} alt="car"  />
+        <div
+          style={{
+            width: "375px",
+            height: "200px",
+            marginTop: "40px",
+            marginLeft: "32px",
+          }}
+        >
+          <img
+            style={{ width: "325px", height: "175px" }}
+            src={CarBanner}
+            alt="car"
+          />
         </div>
 
-          <AdvanceSearch />
+        <AdvanceSearch />
       </div>
     );
   }

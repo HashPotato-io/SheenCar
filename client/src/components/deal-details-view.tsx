@@ -63,11 +63,15 @@ const dummyDeals: Deal[] = [
 interface DealDetailsViewProps {
   onCloseTrade: () => void;
   onViewProductDetails: () => void;
+  sellerId: string;
+  carId: string;
 }
 
 const DealDetailsView: React.FC<DealDetailsViewProps> = ({
   onCloseTrade,
-  onViewProductDetails
+  onViewProductDetails,
+  sellerId,
+  carId
 }) => {
   const [showCloseModal, setShowCloseModal] = useState(false);
   const [showAcceptModal, setShowAcceptModal] = useState(false);
@@ -167,6 +171,8 @@ const DealDetailsView: React.FC<DealDetailsViewProps> = ({
                 setSelectedDeal(deal);
                 setShowRejectModal(true);
               }}
+              sellerId={sellerId}
+              carId={carId}
             />
           ))
         ) : (

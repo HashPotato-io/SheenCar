@@ -69,12 +69,16 @@ const dummyOffers: Offer[] = [
 interface OfferDetailsViewProps {
   onCloseOffer: () => void;
   onViewProductDetails: () => void;
+  sellerId: string;
+  carId: string;
 }
 
 // Rename component and its props
 const OfferDetailsView: React.FC<OfferDetailsViewProps> = ({
   onCloseOffer,
-  onViewProductDetails
+  onViewProductDetails,
+  sellerId,
+  carId
 }) => {
   const [showCloseModal, setShowCloseModal] = useState(false);
   const [showAcceptModal, setShowAcceptModal] = useState(false);

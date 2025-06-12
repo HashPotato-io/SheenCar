@@ -24,10 +24,10 @@ export default function CarCard({
 }: CarCardProps) {
   return (
     <div
-      className={`rounded-[24px] border shadow-sm overflow-hidden bg-white w-[357px] h-[244px] mb-4 ${
+      className={`rounded-[24px] border shadow-sm overflow-hidden w-[357px] h-[244px] mb-4 ${
         carSelection.make && carSelection.model
-          ? "border border-gray-200"
-          : "border-2 border-dashed border-gray-300"
+          ? "border border-[#000000]"
+          : "border-2 border-dashed border-[#000000]"
       } relative group`}
     >
       {/* Remove button (show only if there are more than 2 cars) */}

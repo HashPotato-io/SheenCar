@@ -36,13 +36,15 @@ import {
 import EmblaCarousel from "@/components/ui/embla-carousel";
 import CarCard from "./car-card";
 import { CarSelection, CarDetails } from "@/lib/types";
-import CarCards from "../cards/car-cards";
 import {
   CustomSelect,
   CustomSelectTrigger,
   CustomSelectContent,
   CustomSelectItem,
 } from "@/components/ui/custom-select";
+import { CustomButton } from "../ui/custom-button";
+import CarSelectedCard from "./car-selected-card";
+import ComparisonResults from "./comparison-results";
 
 // Dummy car data
 const carDetailsData: Record<string, CarDetails> = {
@@ -368,7 +370,7 @@ export default function ComparisonTool() {
                 className="flex flex-col items-center w-full md:w-auto md:flex-1 relative"
               >
                 {carSelection?.make && carSelection?.model ? (
-                  <CarCards
+                  <CarSelectedCard
                     car={{
                       id: carSelection.id,
                       make:
@@ -485,11 +487,11 @@ export default function ComparisonTool() {
                     }}
                   >
                     <div className="flex flex-col items-center justify-center">
-                      <div className="border-l-2 border-dashed border-gray-300 h-16"></div>
-                      <div className="rounded-full bg-green-900 text-white font-semibold flex items-center justify-center w-12 h-12 text-sm shadow-md my-2">
+                      <div className="border-l-2 border-dashed border-[#919191] h-24"></div>
+                      <div className="rounded-full bg-[#003A2F] text-white font-semibold flex items-center justify-center w-12 h-12 text-md shadow-md my-2">
                         VS
                       </div>
-                      <div className="border-l-2 border-dashed border-gray-300 h-16"></div>
+                      <div className="border-l-2 border-dashed border-[#919191] h-24"></div>
                     </div>
                   </div>
                 )}
@@ -498,285 +500,43 @@ export default function ComparisonTool() {
           </div>
 
           <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
-            <Button
-              variant="default"
-              className={`bg-green-900 hover:bg-[#003A2F] text-white px-8 py-2 h-11 ${
-                !canCompare && "opacity-70 cursor-not-allowed"
-              }`}
+            <CustomButton
+              customStyles={{ width: "200px", height: "40px" }}
               disabled={!canCompare}
               onClick={handleCompareClick}
             >
               Compare Now
-            </Button>
+            </CustomButton>
 
             {canAddMoreCars && (
-              <Button
-                variant="outline"
+              <div
+                className="flex items-center gap-2 cursor-pointer"
+                style={{
+                  fontFamily: "Gilroy-Regular",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "100%",
+                  letterSpacing: "0%",
+                  color: "#000000",
+                }}
                 onClick={addNewCarSelection}
-                className="flex items-center gap-2 border-gray-300 hover:bg-gray-100 text-black rounded-none"
               >
                 <Plus className="w-4 h-4" />
                 Add Another Car
-              </Button>
+              </div>
             )}
           </div>
         </div>
-
-        {/* Comparison Results Section */}
-        {showComparison && selectedCars.length >= 2 && (
-          <div id="comparison-results" className="mt-16 text-left">
-            {/* Features Comparison */}
-            <div className="mb-10">
-              <h2 className="text-xl font-semibold mb-4 flex items-center">
-                <span className="text-green-900 mr-2">Compare</span> Features
-              </h2>
-
-              {/* Feature Category Select */}
-              <div className="w-40 mb-4">
-                <Select defaultValue="safety">
-                  <SelectTrigger className="border-gray-300">
-                    <SelectValue placeholder="Features" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="safety">Safety</SelectItem>
-                    <SelectItem value="comfort">
-                      Comfort & Convenience
-                    </SelectItem>
-                    <SelectItem value="infotainment">Infotainment</SelectItem>
-                    <SelectItem value="exterior">Exterior Features</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="overflow-hidden rounded-none border border-gray-200">
-                <Table className="border-collapse w-full">
-                  <TableHeader>
-                    <TableRow className="bg-green-900 text-white">
-                      <TableHead className="w-1/3 border-r border-gray-600 px-4 py-3 text-left font-medium">
-                        Feature
-                      </TableHead>
-                      {selectedCars.map((car) => (
-                        <TableHead
-                          key={car.id}
-                          className="border-r last:border-r-0 border-gray-600 px-4 py-3 text-left font-medium"
-                        >
-                          {car.make === "Toyota" &&
-                          car.model === "Corolla Altis"
-                            ? "Toyota Corolla Altis"
-                            : `${car.make} ${car.model}`}
-                        </TableHead>
-                      ))}
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        AC (Climate)
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3 text-center"
-                        >
-                          <Check className="h-5 w-5 mx-auto text-green-600" />
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        Power Windows
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3 text-center"
-                        >
-                          <Check className="h-5 w-5 mx-auto text-green-600" />
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        Sunroof
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3 text-center"
-                        >
-                          {car.model === "Civic" || car.model === "A4" ? (
-                            <Check className="h-5 w-5 mx-auto text-green-600" />
-                          ) : (
-                            <X className="h-5 w-5 mx-auto text-red-500" />
-                          )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        Backup Camera
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3 text-center"
-                        >
-                          <Check className="h-5 w-5 mx-auto text-green-600" />
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-gray-200 px-4 py-3">
-                        Lane Assist
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-gray-200 px-4 py-3 text-center"
-                        >
-                          {car.model === "Mustang" || car.model === "F-150" ? (
-                            <X className="h-5 w-5 mx-auto text-red-500" />
-                          ) : (
-                            <Check className="h-5 w-5 mx-auto text-green-600" />
-                          )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </div>
-            </div>
-
-            {/* Specifications Comparison */}
-            <div className="mb-10">
-              <h2 className="text-xl font-semibold mb-4 flex items-center">
-                <span className="text-green-900 mr-2">Compare</span>{" "}
-                Specifications
-              </h2>
-
-              {/* Specifications Category Select */}
-              <div className="w-40 mb-4">
-                <Select defaultValue="engine">
-                  <SelectTrigger className="border-gray-300">
-                    <SelectValue placeholder="Specifications" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="engine">Engine/Motor</SelectItem>
-                    <SelectItem value="transmission">Transmission</SelectItem>
-                    <SelectItem value="steering">Steering</SelectItem>
-                    <SelectItem value="wheels">Wheels and Tires</SelectItem>
-                    <SelectItem value="fuel">Fuel Economy</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="overflow-hidden rounded-none border border-gray-200">
-                <Table className="border-collapse w-full">
-                  <TableHeader>
-                    <TableRow className="bg-green-900 text-white">
-                      <TableHead className="w-1/3 border-r border-gray-600 px-4 py-3 text-left font-medium">
-                        Engine/Mech
-                      </TableHead>
-                      {selectedCars.map((car) => (
-                        <TableHead
-                          key={car.id}
-                          className="border-r last:border-r-0 border-gray-600 px-4 py-3 text-left font-medium"
-                        >
-                          {car.make === "Toyota" &&
-                          car.model === "Corolla Altis"
-                            ? "Toyota Corolla Altis"
-                            : `${car.make} ${car.model}`}
-                        </TableHead>
-                      ))}
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        Engine Type
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3"
-                        >
-                          {car.engine}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        Fuel Type
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3"
-                        >
-                          {car.fuelType}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        Year
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3"
-                        >
-                          {car.year}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        Mileage
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-b border-gray-200 px-4 py-3"
-                        >
-                          {car.mileage.toLocaleString()} miles
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow className="bg-white">
-                      <TableCell className="font-medium border-r border-b border-gray-200 px-4 py-3">
-                        Transmission
-                      </TableCell>
-                      {selectedCars.map((car) => (
-                        <TableCell
-                          key={car.id}
-                          className="border-r last:border-r-0 border-gray-200 px-4 py-3"
-                        >
-                          {car.transmission}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </div>
-            </div>
-
-            {/* Similar Listings */}
-            <div className="mb-8">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] text-[#000000] font-['Gilroy-SemiBold'] font-normal leading-[100%] tracking-[-0.01em] text-left mb-3 sm:mb-4">
-                Similar <span className="text-[#AF8C32]">Listings</span>
-              </h2>
-              {/* Use EmblaCarousel component */}
-              <EmblaCarousel
-                selectedCars={selectedCars}
-                emblaRef={emblaRef}
-                scrollPrev={scrollPrev}
-                scrollNext={scrollNext}
-              />
-            </div>
-          </div>
-        )}
       </div>
+      {/* Comparison Results Section */}
+      {showComparison && selectedCars?.length >= 2 && (
+        <ComparisonResults
+          selectedCars={selectedCars}
+          emblaRef={emblaRef}
+          scrollPrev={scrollPrev}
+          scrollNext={scrollNext}
+        />
+      )}
     </section>
   );
 }

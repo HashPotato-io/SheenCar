@@ -5,7 +5,8 @@ export const useMobileDevice = () => {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      console.log('Window width:', window.innerWidth);
+      setIsMobile(window.innerWidth <= 1024);
     };
 
     // Initial check

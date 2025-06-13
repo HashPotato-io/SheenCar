@@ -14,9 +14,7 @@ import {
   Phone,
 } from "lucide-react";
 import CarSvg from "../assets/car.svg";
-import EmblaCarousel, {
-  CarDetails as EmblaCarDetails,
-} from "@/components/ui/embla-carousel";
+import EmblaCarousel from "@/components/ui/embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import CarImageGallery from "@/components/car-image-gallery";
 import CarDetails from "@/components/car/CarDetails";
@@ -24,6 +22,25 @@ import CarDescription from "@/components/car/CarDescription";
 import SimilarListings from "@/components/similar-listings";
 import CarTabs from "@/components/car/CarTabs";
 import TradeContactDialog from "@/components/trade/TradeContactDialog";
+
+// Define the CarDetails type
+interface CarDetails {
+  id: string;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  mileage: number;
+  fuelType: string;
+  transmission: string;
+  engine: string;
+  exteriorColor: string;
+  interiorColor: string;
+  doors: number;
+  features: string[];
+  imageUrl: string;
+  rating: number;
+}
 
 // Mock car data
 const carData = {
@@ -139,8 +156,8 @@ export default function DealerCarDetailsPage() {
     if (emblaApi) emblaApi.scrollNext();
   };
 
-  // Adapt similarCars to EmblaCarousel's CarDetails type (minimal fields used by carousel)
-  const similarCarsForCarousel: EmblaCarDetails[] = similarCars?.map((car) => ({
+  // Adapt similarCars to CarDetails type
+  const similarCarsForCarousel: CarDetails[] = similarCars?.map((car) => ({
     id: String(car.id),
     make: car.make,
     model: car.model,
@@ -206,8 +223,8 @@ export default function DealerCarDetailsPage() {
           {/* Similar Listings */}
           <SimilarListings
             similarCarsForCarousel={similarCarsForCarousel}
-            dealerId={dealerId}
-            emblaRef={emblaRef}
+            dealerId={dealerId || ""}
+            emblaRef={emblaRef as React.RefObject<HTMLDivElement> | ((node?: Element | null) => void)}
             scrollPrev={scrollPrev}
             scrollNext={scrollNext}
           />

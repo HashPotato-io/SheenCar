@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "wouter";
 import { StarFilled, StarEmpty } from "../icons";
 import CarDealer from "../../assets/car-dealer.png";
+import { useMobileDevice } from "@/hooks/useMobileDevice";
 
 interface DealerCardProps {
   dealer: {
@@ -16,6 +17,93 @@ interface DealerCardProps {
 }
 
 export default function DealerCard({ dealer }: DealerCardProps) {
+  const isMobile = useMobileDevice();
+
+  if(isMobile){
+    return (
+      <div
+        style={{
+          boxShadow: "1.52px 1.52px 9.14px 0px #0000001F",
+          width: "309px",
+          height: "309px",
+          borderRadius: 16,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div className="overflow-hidden group w-[303px] h-[303px]">
+          <div className="relative h-full">
+            <div
+              style={{ borderRadius: "13px" }}
+              className="h-[238px] overflow-hidden"
+            >
+              <img
+                style={{ borderRadius: "13px" }}
+                src={CarDealer}
+                alt={dealer.name}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
+            <div
+              className="bg-[#EEEEEE] p-[12px] w-[303px] h-[110px] flex justify-between absolute left-0 right-0"
+              style={{
+                top: "192px",
+                borderRadius: "13px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+              }}
+            >
+              <div className="flex flex-col gap-[6px] ml-[10px]">
+                <div className="align-middle font-normal text-[#171616] leading-[100%] tracking-[-0.01em] text-[22px] font-['Gilroy-SemiBold']">
+                  {dealer.name}
+                </div>
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) =>
+                    i < Math.floor(dealer.rating) ? (
+                      <StarFilled
+                        key={i}
+                        className="w-4 h-4 text-amber-500"
+                        width={10}
+                        height={9}
+                      />
+                    ) : (
+                      <StarEmpty
+                        key={i}
+                        className="w-4 h-4 text-amber-500"
+                        width={10}
+                        height={9}
+                      />
+                    )
+                  )}
+                </div>
+                <span className="ml-1 text-[#171616] text-xs">
+                  ({dealer.reviewCount} Ratings)
+                </span>
+              </div>
+              <Link href={`/services/dealer/${dealer.id}`}>
+                <div className="mt-[44px] mr-[10px]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="w-[903px] h-[193px] rounded-[16.23px] bg-white shadow-[0px_4px_10px_0px_#00000026] transition-all duration-300 ease-in-out hover:shadow-lg cursor-pointer">
       <Link href={`/services/dealer/${dealer.id}`}>

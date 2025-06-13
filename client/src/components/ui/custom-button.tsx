@@ -20,8 +20,8 @@ export function CustomButton({
 
   const variantStyles = {
     default: {
-      background: disabled ? "#CCCCCC" : (isHovered ? "#004D3F" : "#003A2F"),
-      color: disabled ? "#666666" : "#fff",
+      background: disabled ? "#003A2F" : (isHovered ? "#004D3F" : "#003A2F"),
+      color: disabled ? "#FFFFFF" : "#fff",
       border: `1px solid ${disabled ? "#CCCCCC" : "#003A2F"}`,
       width: 355,
       height: 40,
@@ -29,12 +29,12 @@ export function CustomButton({
       borderRadius: "6px",
       transition: "all 300ms ease-in-out",
       cursor: disabled ? "not-allowed" : "pointer",
-      opacity: disabled ? 0.7 : 1,
+      opacity: disabled ? 0.4 : 1,
     },
     outline: {
       border: `1px solid ${disabled ? "#CCCCCC" : outlineColor}`,
-      color: disabled ? "#666666" : (isHovered ? "#FFFFFF" : outlineColor),
-      background: disabled ? "#F5F5F5" : (isHovered ? outlineColor : "transparent"),
+      color: disabled ? "#FFFFFF" : (isHovered ? "#FFFFFF" : outlineColor),
+      background: disabled ? "#003A2F" : (isHovered ? outlineColor : "transparent"),
       width: 355,
       height: 40,
       gap: "8px",
@@ -42,7 +42,7 @@ export function CustomButton({
       borderWidth: "1px",
       transition: "all 300ms ease-in-out",
       cursor: disabled ? "not-allowed" : "pointer",
-      opacity: disabled ? 0.7 : 1,
+      opacity: disabled ? 0.4 : 1,
     }
   };
 

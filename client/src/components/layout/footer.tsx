@@ -39,7 +39,7 @@ const menuSections: MenuSection[] = [
     title: "Resources",
     items: [
       { title: "Press", href: "/press", isLink: true },
-      { title: "Faq", href: "/faq", isLink: true },
+      { title: "FAQ", href: "/faq", isLink: true },
     ],
   },
   {

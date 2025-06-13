@@ -45,8 +45,8 @@ export default function DealerCarsPage() {
 
       <main className="flex-1 py-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-2xl font-bold mb-6">
-            Recent <span className="text-amber-500">Car</span> Listings
+          <h1 className="text-[46px] font-['Gilroy-SemiBold'] font-normal leading-[100%] tracking-[-0.01em] align-middle text-[#171616] mb-6">
+            Recent <span className="text-[#AF8C32]">Car</span> Listings
           </h1>
 
           {/* Car Grid */}

@@ -9,6 +9,7 @@ type Car = {
   year: number;
   price: number;
   image: string;
+  sellerId: number;
 };
 
 interface CarCardsProps {

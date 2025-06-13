@@ -62,6 +62,7 @@ export default function DealerCarsPage() {
                     year: car.year,
                     price: car.price,
                     image: car.image,
+                    sellerId: Number(dealerId)
                   }}
                   linkUrl={`/services/dealer/${dealerId}/cars/${car.id}`}
                 />

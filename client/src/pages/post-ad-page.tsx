@@ -127,6 +127,38 @@ const PostAdPage = () => {
     serviceAgreement: false,
   });
 
+  const validateStep = (step: number) => {
+    switch (step) {
+      case 0:
+        return (
+          formData?.make !== "" &&
+          formData?.model !== "" &&
+          formData?.year !== "" &&
+          formData?.bodyType !== "" &&
+          formData?.condition !== "" &&
+          formData?.vin !== "" &&
+          formData?.zipCode
+        );
+      case 1:
+        return formData?.airbags && formData?.seatbelts;
+      case 2:
+        return (
+          formData.cylinder &&
+          formData.fuelTankCapacity &&
+          formData.engineType &&
+          formData.transmission
+        );
+      case 3:
+        return formData.price;
+      default:
+        return true;
+    }
+  };
+
+  const validatButton = () => {
+    return validateStep(currentStep);
+  };
+
   const validateCurrentStep = () => {
     if (
       currentStep === 3 &&
@@ -137,33 +169,7 @@ const PostAdPage = () => {
       return false;
     }
     setServiceAgreementError(false);
-
-    console.log(formData);
-    switch (currentStep) {
-      case 0:
-        /*    return (
-          formData?.make !== "" &&
-          formData?.model !== "" &&
-          formData?.year !== "" &&
-          formData?.mileage !== "" &&
-          formData?.doors !== "" &&
-          formData?.seatingCapacity !== "" &&
-          formData?.condition !== "" &&
-          formData?.description !== ""
-        ); */
-        return true;
-      case 1:
-        /* return formData?.transmission && formData?.fuelType; */
-        return true;
-      case 2:
-        /* return formData.engineSize && formData.powerOutput; */
-        return true;
-      case 3:
-        /*   return formData.price && formData.currency; */
-        return true;
-      default:
-        return true;
-    }
+    return validateStep(currentStep);
   };
 
   const handleNext = () => {
@@ -303,7 +309,7 @@ const PostAdPage = () => {
           </CustomButton>
           <CustomButton
             onClick={handleNext}
-            /*       disabled={!validateCurrentStep()} */
+            disabled={!validatButton()}
             customStyles={{ width: "354px", height: "40px" }}
           >
             {currentStep === steps?.length - 1 ? "Proceed to Pay" : "Next"}

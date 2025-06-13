@@ -109,6 +109,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                     variant="outline"
                     required
                     style={{ width: "239px" }}
+                  
                   >
                     <SelectPrimitive.Value placeholder="Year" />
                   </CustomSelectTrigger>
@@ -247,6 +248,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                 }
                 showZipCodeIcon={true}
                 iconColor="#545454"
+                required
               />
             </div>
           </div>

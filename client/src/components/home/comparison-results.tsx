@@ -7,6 +7,7 @@ import {
   CustomSelectTrigger,
 } from "../ui/custom-select";
 import { CustomTable } from "../ui/custom-table";
+import { CarDetails } from "../../lib/types";
 
 // Mock data for demonstration
 const mockCars = [
@@ -48,8 +49,16 @@ const mockCars = [
   },
 ];
 
-export default function ComparisonResults() {
-  const selectedCars = mockCars;
+interface ComparisonResultsProps {
+  selectedCars: CarDetails[];
+  emblaRef: any;
+  scrollPrev: () => void;
+  scrollNext: () => void;
+}
+
+export default function ComparisonResults({ selectedCars, emblaRef, scrollPrev, scrollNext }: ComparisonResultsProps) {
+  // Remove the mockCars constant since we're now using props
+  // const selectedCars = mockCars;
 
   const featureColumns = [
     {
@@ -58,7 +67,7 @@ export default function ComparisonResults() {
     },
     ...selectedCars.map((car) => ({
       header: `${car.make} ${car.model}`,
-      accessor: car.id.toString(),
+      accessor: car.id,
     })),
   ];
 
@@ -122,7 +131,7 @@ export default function ComparisonResults() {
     },
     ...selectedCars.map((car) => ({
       header: `${car.make} ${car.model}`,
-      accessor: car.id.toString(),
+      accessor: car.id,
     })),
   ];
 
@@ -132,27 +141,8 @@ export default function ComparisonResults() {
       ...selectedCars.reduce((acc, car) => ({ ...acc, [car.id]: car.engine }), {}),
     },
     {
-      specification: "Drive Type",
-      ...selectedCars.reduce((acc, car) => ({ ...acc, [car.id]: car.driveType }), {}),
-    },
-    {
-      specification: "Cylinder",
-      ...selectedCars.reduce((acc, car) => ({
-        ...acc,
-        [car.id]: (
-          <div className="flex items-center">
-            <span className="mr-3">{car.cylinders}</span>
-            <div className="flex items-center space-x-1">
-              <div className="w-6 h-6 bg-orange-500 rounded-full text-white text-xs flex items-center justify-center font-bold">
-                3
-              </div>
-              <div className="w-6 h-6 bg-pink-500 rounded-full text-white text-xs flex items-center justify-center font-bold">
-                A
-              </div>
-            </div>
-          </div>
-        ),
-      }), {}),
+      specification: "Transmission",
+      ...selectedCars.reduce((acc, car) => ({ ...acc, [car.id]: car.transmission }), {}),
     },
     {
       specification: "Fuel Type",

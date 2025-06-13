@@ -10,6 +10,8 @@ interface Car {
   year: number;
   price: number;
   image: string;
+  sellerId?: number;
+  dealerId?: number;
 }
 
 interface EmblaCarouselProps {
@@ -52,6 +54,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({
                     year: car.year,
                     price: car.price,
                     image: car.imageUrl || car.image,
+                    sellerId: car.sellerId || car.dealerId
                   }}
                   linkUrl={
                     listType === "dealer"

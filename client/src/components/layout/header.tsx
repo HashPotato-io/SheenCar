@@ -70,7 +70,7 @@ export default function Header() {
                     <DropdownMenuTrigger asChild>
                       <Button
                         variant="ghost"
-                        className="px-3 py-2 text-neutral-800 font-medium flex items-center"
+                        className="px-3 py-2 text-neutral-800 font-medium flex items-center hover:bg-[#E9E9E9] data-[state=open]:bg-[#E9E9E9] transition-colors duration-200"
                         style={{
                           fontFamily: "Gilroy-Regular",
                           fontWeight: 400,
@@ -98,12 +98,15 @@ export default function Header() {
                         background: "#FFFFFF",
                         marginTop: "20px",
                         animationDuration: "0ms",
+                        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+                        border: "1px solid #E5E7EB",
                       }}
+                      sideOffset={5}
                     >
                       {item.children.map((child, index) => (
                         <DropdownMenuItem
                           key={child.name}
-                          className="p-0 focus:bg-transparent hover:bg-gray-50"
+                          className="p-0 focus:bg-[#E9E9E9] hover:bg-[#E9E9E9] data-[state=open]:bg-[#E9E9E9] w-full"
                           style={{
                             fontFamily: "Gilroy-Regular",
                             fontWeight: 400,
@@ -114,11 +117,12 @@ export default function Header() {
                             marginBottom:
                               index < item.children.length - 1 ? "10px" : "0",
                             padding: "8px 0",
+                            transition: "background-color 0.2s ease",
                           }}
                         >
                           <Link
                             href={child.href}
-                            className="w-full block hover:text-inherit"
+                            className="w-full block hover:text-inherit px-4 py-2"
                           >
                             {child.name}
                           </Link>

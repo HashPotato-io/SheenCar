@@ -66,7 +66,7 @@ interface CarCardsProps {
   car: Car;
   linkUrl: string;
   small?: boolean;
-  tiny?: boolean;
+  tiny?: boolean | null;
   buttonState?: ButtonState;
   status?: "active" | "completed" | "closed" | "pending";
   dealType?: "sell" | "buy";
@@ -296,7 +296,7 @@ const Card: React.FC<CarCardsProps> = ({
       return null;
     }
 
-    if (status === "active") {
+    if (status === "active" && buttonState !== "withdrawOffer") {
       return (
         <div
           className="absolute top-2 right-2 cursor-pointer"
@@ -327,7 +327,7 @@ const Card: React.FC<CarCardsProps> = ({
       );
     }
 
-    if (status === "closed" || status === "completed") {
+    if ((status === "closed" || status === "completed") && buttonState !== "withdrawOffer") {
       return (
         <div
           className="absolute top-2 right-2 cursor-pointer"
@@ -348,7 +348,8 @@ const Card: React.FC<CarCardsProps> = ({
       );
     }
 
-    if (status === "pending") {
+   
+    if (status === "pending" && buttonState !== "withdrawOffer") {
       return (
         <div
           className="absolute top-2 right-2 cursor-pointer"
@@ -413,17 +414,18 @@ const Card: React.FC<CarCardsProps> = ({
   if (tiny) {
     return (
       <div
+      className=" "
         style={{
           boxShadow: "1.52px 1.52px 9.14px 0px #0000001F",
-          width: "331px",
-          height: "384px",
+          width: "100%",
+          height: "364px",
           borderRadius: 16,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <div className="overflow-hidden group w-[325px] h-[378px]">
+        <div className="overflow-hidden group w-full h-[378px]">
           <div className="relative h-full">
             <div
               style={{ borderRadius: "13px" }}
@@ -444,9 +446,9 @@ const Card: React.FC<CarCardsProps> = ({
               {showMenu && status === "active" && <DropdownMenu />}
             </div>
             <div
-              className="bg-[#EEEEEE] p-[12px] w-[325px] flex flex-col absolute left-0 right-0"
+              className="bg-[#EEEEEE] p-[12px] w-full flex flex-col absolute left-0 right-0"
               style={{
-                top: dealType ? "200px" : "230px",
+                top: dealType ? "200px" : "231px",
                 borderRadius: "13px",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
                 height: dealType ? "176px" : "148px",
@@ -495,7 +497,7 @@ const Card: React.FC<CarCardsProps> = ({
                 )}
               </div>
 
-              <div className="flex justify-center mt-2 w-full px-4">
+              <div className="flex justify-center mt-2 w-full ">
                 <CustomButton
                   customStyles={{
                     ...getButtonStyles(buttonState),

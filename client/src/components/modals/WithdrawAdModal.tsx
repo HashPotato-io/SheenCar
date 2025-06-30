@@ -21,7 +21,7 @@ const WithdrawAdModal: React.FC<WithdrawAdModalProps> = ({
       title="Are You Sure You Want to Withdraw Your Ad?"
       icon={CloseAdIcon}
     >
-      <div className="flex flex-col items-center gap-6 w-[339px]">
+      <div className="flex flex-col items-center gap-6 lg:w-[339px]">
         <p
           style={{
             fontFamily: "Poppins",
@@ -38,7 +38,7 @@ const WithdrawAdModal: React.FC<WithdrawAdModalProps> = ({
 
         <CustomButton
           customStyles={{
-            width: "357px",
+            width: "100%",
             height: "44px",
             borderRadius: "7.27px",
           }}

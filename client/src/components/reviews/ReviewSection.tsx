@@ -70,12 +70,12 @@ export default function ReviewSection({
   };
 
   return (
-    <div className="p-6 bg-white">
-      <h2 className="text-2xl font-bold mb-8 text-gray-900">Reviews</h2>
+    <div className="py-20 px-10 bg-white">
+      <h2 className="text-2xl font-semibold lg:text-[40px] mb-4 text-gray-900">Reviews</h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 shadow-xl py-4 px-6 rounded-md gap-12 mb-12">
         {/* Left side - Rating breakdown */}
-        <div className="space-y-3">
+        <div className="order-2 lg:order-1 space-y-3">
           {[5, 4, 3, 2, 1].map((stars) => {
             const breakdown = reviewsBreakdown.find(b => b.stars === stars) || { stars, count: 0 };
             const percentage = reviewCount > 0 ? (breakdown.count / reviewCount) * 100 : 0;
@@ -98,7 +98,7 @@ export default function ReviewSection({
         </div>
 
         {/* Right side - Overall rating */}
-        <div className="flex flex-col items-end">
+        <div className="order-1 lg:order-2 flex flex-col items-center lg:items-end">
           <div className="text-5xl font-bold text-gray-900 mb-2">
             {rating.toFixed(1)}
           </div>

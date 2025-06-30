@@ -32,7 +32,7 @@ const RenewBoostModal: React.FC<RenewBoostModalProps> = ({
       icon={RenewIcon}
       title="Keep Your Listing in the Spotlight!"
     >
-      <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+      <div style={{display: "flex", flexDirection: "column", alignItems: "center"}} >
         <p
           className="text-left mb-8"
           style={{
@@ -41,7 +41,6 @@ const RenewBoostModal: React.FC<RenewBoostModalProps> = ({
             fontSize: "16px",
             lineHeight: "100%",
             color: "#585353",
-            width: "339px",
           }}
         >
           Your boosted listing for {carDetails.make} {carDetails.model}{" "}
@@ -51,7 +50,7 @@ const RenewBoostModal: React.FC<RenewBoostModalProps> = ({
         </p>
 
         {/* Sub heading */}
-        <div style={{ width: "339px" }}>
+        <div style={{ }}>
           <h3
             className="text-left mb-2"
             style={{
@@ -75,7 +74,6 @@ const RenewBoostModal: React.FC<RenewBoostModalProps> = ({
             fontSize: "16px",
             lineHeight: "100%",
             color: "#535353",
-            width: "339px",
           }}
         >
           Choose your preferred duration and budget to keep your car in the
@@ -84,7 +82,7 @@ const RenewBoostModal: React.FC<RenewBoostModalProps> = ({
 
         {/* Buttons */}
         <CustomButton 
-          customStyles={{ width: "339px" }}
+          customStyles={{ width: "100%" }}
           onClick={handleRenewBoost}
         >
           Renew Boost
@@ -97,7 +95,7 @@ const RenewBoostModal: React.FC<RenewBoostModalProps> = ({
             lineHeight: "100%",
             letterSpacing: "0%",
             color: "#535353",
-            width: "339px",
+            
             marginTop: "16px",
           }}
         >

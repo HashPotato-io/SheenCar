@@ -26,12 +26,12 @@ export default function HeroSection() {
   if (isMobile) {
     return (
       <div
-        className="bg-cover bg-center flex items-center flex-col p-[60px] md:p-[60px] p-4 relative"
+        className="bg-cover bg-center flex items-center flex-col  lg:p-[60px] p-4 relative"
         style={{ backgroundImage: `url(${HomeBanner})` }}
       >
         <div
           className="font-['Gilroy-SemiBold'] font-normal text-[26px] leading-[30px] tracking-[-1%] text-center text-white w-[352px]
-      md:text-[50px] md:leading-[100%] md:w-[788px] md:h-[122px]"
+      md:text-3xl lg:text-[50px] md:leading-[100%] md:w-full lg:w-[788px]  mt-8 md:mb-4"
         >
           We are the best place to{" "}
           <span className="text-[#AF8C32] underline cursor-pointer">Buy</span>{" "}
@@ -39,7 +39,7 @@ export default function HeroSection() {
         </div>
         <div
           className="font-['Poppins'] font-normal text-[14px] leading-[19px] text-center text-white w-[352px] mb-6
-      md:text-[20px] md:leading-[100%] md:w-[574px]"
+      md:text-[20px] md:leading-tight md:w-[574px]"
         >
           Verified listings, trusted sellers, and a seamless experience from
           start to finish.
@@ -50,16 +50,14 @@ export default function HeroSection() {
         </CustomButton>
         <div
           style={{
-            width: "375px",
             height: "200px",
             marginTop: "40px",
-            marginLeft: "32px",
-          }}
+          }} className="w-full flex justify-center items-center md:mb-8"
         >
           <img
-            style={{ width: "325px", height: "175px" }}
             src={CarBanner}
             alt="car"
+            className="w-[325px] md:w-[450px] h-[175px] md:h-[220px]"
           />
         </div>
 
@@ -70,12 +68,12 @@ export default function HeroSection() {
 
   return (
     <div
-      className="bg-cover bg-center flex items-center flex-col p-[60px] md:p-[60px] p-4 relative"
+      className="bg-cover bg-center flex items-center flex-col  lg:p-[60px] p-4 relative"
       style={{ backgroundImage: `url(${Banner})` }}
     >
       <div
         className="font-['Gilroy-SemiBold'] font-normal text-[26px] leading-[30px] tracking-[-1%] text-center text-white w-[352px]
-        md:text-[50px] md:leading-[100%] md:w-[788px] md:h-[122px]"
+       md:text-3xl  lg:text-[50px] md:leading-[100%] lg:w-full md:h-[122px]"
       >
         We are the best place to{" "}
         <span className="text-[#AF8C32] underline cursor-pointer">Buy</span>{" "}
@@ -83,7 +81,7 @@ export default function HeroSection() {
       </div>
       <div
         className="font-['Poppins'] font-normal text-[14px] leading-[19px] text-center text-white w-[352px] mb-6
-        md:text-[20px] md:leading-[100%] md:w-[574px]"
+        md:text-[20px] md:leading-[100%] lg:w-[574px]"
       >
         Verified listings, trusted sellers, and a seamless experience from start
         to finish.

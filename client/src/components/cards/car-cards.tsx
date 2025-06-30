@@ -79,8 +79,8 @@ const CarCards: React.FC<CarCardsProps> = ({
               </div>
               {!hideViewDetails && (
                 <Link href={linkUrl}>
-                  <div className="mt-[15px] mr-[4px]">
-                    <img src={Arrow} alt="arrow" className="w-3 h-3" />
+                  <div className="mt-[13px] mr-[4px]">
+                    <img src={Arrow} alt="arrow" className="w-4 h-4" />
                   </div>
                 </Link>
               )}

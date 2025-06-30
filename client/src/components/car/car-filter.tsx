@@ -350,7 +350,7 @@ export default function CarFilter() {
           </div>
         </div>
         <div>
-          <CustomButton customStyles={{ width: "262px", height: "40px" }}>
+          <CustomButton customStyles={{ width: "100%", height: "40px" }}>
             Apply
           </CustomButton>
         </div>

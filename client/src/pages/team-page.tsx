@@ -188,7 +188,7 @@ export default function TeamPage() {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="p-4 text-center">
@@ -245,25 +245,23 @@ export default function TeamPage() {
       {/* Join Us Section */}
       <div className="relative w-full min-h-[345px] mx-auto mt-12 md:mt-[74px] bg-gradient-to-r from-neutral-800 to-neutral-700">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 bg-cover"
           style={{
             backgroundImage: `url(${JoinUs})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
           }}
         ></div>
-        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-[20px] px-4 md:px-[86px] py-8 md:py-[70px] relative z-10">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10  mt-7  py-8 md:py-[70px] relative z-10">
           {/* Left Image */}
-          <div className="w-full md:w-[379px] h-[205px] md:ml-[200px]"> 
+          <div className="w-full px-8 order-2 lg:order-1 md:w-[379px] h-[205px] "> 
             <img
               src={Car6}
               alt="Join our team"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain lg:ml-28 "
             />
           </div>
 
           {/* Right Content */}
-          <div className="w-full md:w-1/2 md:pl-[74px] text-center md:text-left">
+          <div className="w-full md:w-1/2 order-1 lg:order-2 px-8 lg:ml-10  text-center md:text-left">
             <h2
               className="text-white"
               style={{ 

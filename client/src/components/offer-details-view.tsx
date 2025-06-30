@@ -98,44 +98,40 @@ const OfferDetailsView: React.FC<OfferDetailsViewProps> = ({
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+    <div className='flex flex-col gap-6 px-5'>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 32,
-        }}
+        
+        className='flex flex-col md:flex-row md:justify-between mb-8 md:items-center'
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div
-            style={{
+         <div className='flex flex-col gap-4'>
+          <h1
+               style={{
               fontFamily: "Gilroy-SemiBold",
               fontWeight: 400,
-              fontSize: 40,
               lineHeight: "100%",
               letterSpacing: "-1%",
               color: "#000000",
             }}
+            className='text-[26px] md:text-[40px]'
           >
             Offers <span style={{ color: "#AF8C32" }}>Received</span>
-          </div>
+          </h1>
           <div
             style={{
               fontFamily: "Gilroy-Medium",
               fontWeight: 400,
-              fontSize: 18,
               lineHeight: "100%",
               letterSpacing: "0%",
               color: "#939393",
             }}
+             className='text-sm lg:text-lg mb-4 md:mb-0'
           >
             *To chat with sender, click on sender name.
           </div>
         </div>
-        <div style={{ display: "flex", gap: "16px" }}>
+        <div  className='flex gap-4 md:flex-row flex-col md:items-center'>
           <CustomButton 
-            customStyles={{ width: "244px", height: "40px" }}
+            customStyles={{ height: "40px" }}
             onClick={onViewProductDetails}
           >
             View Product Details
@@ -143,7 +139,6 @@ const OfferDetailsView: React.FC<OfferDetailsViewProps> = ({
           <CustomButton
             variant="outline"
             customStyles={{
-              width: "244px",
               height: "40px",
             }}
             onClick={() => setShowCloseModal(true)}

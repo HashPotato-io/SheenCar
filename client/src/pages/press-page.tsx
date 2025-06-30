@@ -55,14 +55,12 @@ export default function PressPage() {
           style={{
             fontFamily: "Gilroy-SemiBold",
             fontWeight: 400,
-            fontSize: "34px",
             lineHeight: "100%",
             letterSpacing: "-1%",
-            textAlign: "center",
             color: "#000000",
-            padding: "60px",
             background: "#FFFFFF",
           }}
+          className="text-2xl lg:text-[34px] text-center px-4 py-10 lg:p-[60px]"
         >
           From individual car owners to professional dealers, SheenCar empowers
           users with a seamless digital platform for posting, trading, and
@@ -71,13 +69,13 @@ export default function PressPage() {
 
         {/* Statistics Grid */}
         <div className="flex flex-col gap-4 md:gap-[20px] max-w-6xl mx-auto mb-[40px] px-4 md:px-0">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-[20px]">
+          <div className="flex flex-col items-center lg:flex-row gap-4 lg:gap-[20px]">
             {/* Row 1 */}
             <StatCard value="9,500+" label="Total Cars Listed" />
             <StatCard value="5,200+" label="Active Listings" />
             <StatCard value="850+" label="Dealers Onboarded" />
           </div>
-          <div className="flex flex-col md:flex-row gap-4 md:gap-[20px]">
+          <div className="flex flex-col items-center lg:flex-row gap-4 lg:gap-[20px]">
             {/* Row 2 */}
             <StatCard value="17,000+" label="Offers Made" />
             <StatCard value="20+" label="Team Members" />

@@ -46,14 +46,11 @@ const Notification = () => {
   ];
 
   return (
+    <div className="flex justify-center items-center">
     <div style={{ padding: "24px" }}>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "24px",
-        }}
+       
+        className="flex flex-col md:flex-row max-w-[90vw] justify-between items-center mb-6"
       >
         <h2
           style={{
@@ -65,10 +62,13 @@ const Notification = () => {
             letterSpacing: "-1%",
             color: "#171616",
           }}
+          className="text-[26px] md:text-[34px] w-full text-left"
         >
           Notifications
         </h2>
-        <CustomButton>Mark all as read</CustomButton>
+        <div className="w-full md:w-1/2  lg:w-1/4  mt-7 md:mt-0">
+        <CustomButton customStyles={{ width: "100%", fontSize: "16px" }}>Mark all as read</CustomButton>
+        </div>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -82,6 +82,7 @@ const Notification = () => {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 };

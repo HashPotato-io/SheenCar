@@ -147,9 +147,9 @@ export default function FindDealersPage() {
         headingContent={
           <>
             <div className="flex justify-center items-center w-full">
-              <div className="w-[926px] font-['Gilroy-SemiBold'] font-normal text-[50px] leading-[100%] tracking-[-0.01em] text-center text-white">
-                Find Your <span style={{ color: "#AF8C32" }}>Perfect Ride</span>{" "}
-                – Search, Buy, and Drive Away!
+              <div className="md:w-[30ch] font-['Gilroy-SemiBold'] font-normal text-[26px] lg:text-[50px] leading-[100%] tracking-[-0.01em] text-center text-white">
+                Trusted  <span style={{ color: "#AF8C32" }}>Dealerships,</span>{" "}
+                Endless Choices: Find Your Perfect Car!
               </div>
             </div>
           </>
@@ -159,11 +159,11 @@ export default function FindDealersPage() {
 
       {/* Main Content Area */}
       <div className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-[20px]">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row items-center  md:items-start md:px-8  gap-[20px]">
             {/* Filters Sidebar */}
             {!isMobile ? (
-              <div>
+              <div className="h-full]">
                 <DealerFilter
                   onFilterChange={(filters) => {
                     // Handle filter changes here
@@ -180,7 +180,7 @@ export default function FindDealersPage() {
 
             {/* Dealers List */}
             <div>
-              <h2 className="font-['Gilroy-SemiBold'] font-normal text-[28px] leading-[100%] text-black">
+              <h2 className="font-['Gilroy-SemiBold'] px-4 font-normal text-[28px] leading-[100%] text-black">
                 <span className="text-[#AF8C32]">{totalDealers}</span> Car
                 Dealers Found
               </h2>
@@ -194,6 +194,8 @@ export default function FindDealersPage() {
                     cursor: "pointer",
                     marginTop: "10px",
                   }}
+                  className="px-4"
+
                   onClick={() => setIsFilterModalOpen(true)}
                 >
                   <FilterIcon />{" "}
@@ -215,6 +217,7 @@ export default function FindDealersPage() {
               <div className="p-4">
                 <div className="space-y-4">
                   {getCurrentPageDealers()?.map((dealer) => (
+                    
                     <DealerCard key={dealer.id} dealer={dealer} />
                   ))}
                 </div>
@@ -239,7 +242,6 @@ export default function FindDealersPage() {
           <DialogContent
             style={{
               width: "90%",
-              maxWidth: "297px",
               padding: "30px 20px",
               borderRadius: "12px",
               background: "#FFFFFF",
@@ -251,7 +253,7 @@ export default function FindDealersPage() {
               maxHeight: "90vh",
               overflowY: "auto",
             }}
-            className="sm:max-w-[425px]"
+            className="sm:max-w-[425px] scrollable"
           >
             <DealerFilter
               onFilterChange={(filters) => {

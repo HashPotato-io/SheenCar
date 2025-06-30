@@ -176,7 +176,7 @@ export default function FraudPage() {
 
       {/* Main Content */}
       <div className="flex-grow bg-white p-4 md:p-[24px]">
-        <div className="container mx-auto px-6 py-6 md:py-8">
+        <div className="container mx-auto px-2 md:px-6 py-6 md:py-8">
           <div>
             <p
               style={{
@@ -228,13 +228,12 @@ export default function FraudPage() {
                 style={{
                   fontFamily: "Gilroy-Bold",
                   fontWeight: 400,
-                  fontSize: "20px",
                   lineHeight: "27px",
                   letterSpacing: "0%",
                   color: "#000000",
                   marginBottom: "16px",
                 }}
-                className="text-lg md:text-xl"
+                className="text-2xl"
               >
                 Advice for <span style={{ color: "#AF8C32" }}>Buyers</span>
               </h2>
@@ -243,8 +242,8 @@ export default function FraudPage() {
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 600,
-                  fontSize: "18px",
-                  lineHeight: "24px",
+                  fontSize: "24px",
+                  lineHeight: "28px",
                   color: "#171616",
                   marginBottom: "8px",
                 }}
@@ -292,8 +291,8 @@ export default function FraudPage() {
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 600,
-                  fontSize: "18px",
-                  lineHeight: "24px",
+                  fontSize: "24px",
+                  lineHeight: "28px",
                   color: "#171616",
                   marginBottom: "8px",
                 }}
@@ -378,8 +377,8 @@ export default function FraudPage() {
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 600,
-                  fontSize: "18px",
-                  lineHeight: "24px",
+                  fontSize: "24px",
+                  lineHeight: "28px",
                   color: "#171616",
                   marginBottom: "8px",
                 }}
@@ -422,14 +421,13 @@ export default function FraudPage() {
               <h2
                 style={{
                   fontFamily: "Gilroy-Bold",
-                  fontWeight: 400,
-                  fontSize: "20px",
+                  fontWeight: 600,
                   lineHeight: "27px",
                   letterSpacing: "0%",
                   color: "#000000",
-                  marginBottom: "16px",
+                  marginBottom: "4px",
                 }}
-                className="text-lg md:text-xl"
+                className="text-2xl"
               >
                 Advice for <span style={{ color: "#AF8C32" }}>Sellers</span>
               </h2>
@@ -438,7 +436,7 @@ export default function FraudPage() {
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 600,
-                  fontSize: "18px",
+                  fontSize: "24px",
                   lineHeight: "24px",
                   color: "#171616",
                   marginBottom: "8px",
@@ -484,12 +482,12 @@ export default function FraudPage() {
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 600,
-                  fontSize: "18px",
+                  fontSize: "24px",
                   lineHeight: "24px",
                   color: "#171616",
                   marginBottom: "8px",
                 }}
-                className="text-base md:text-lg"
+                className=""
               >
                 Avoid Complicated Payment Schemes
               </h3>
@@ -531,7 +529,7 @@ export default function FraudPage() {
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 600,
-                  fontSize: "18px",
+                  fontSize: "24px",
                   lineHeight: "24px",
                   color: "#171616",
                   marginBottom: "8px",
@@ -583,7 +581,7 @@ export default function FraudPage() {
                 style={{
                   fontFamily: "Gilroy-Bold",
                   fontWeight: 400,
-                  fontSize: "20px",
+                  fontSize: "24px",
                   lineHeight: "27px",
                   letterSpacing: "0%",
                   color: "#000000",

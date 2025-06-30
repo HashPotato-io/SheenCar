@@ -68,7 +68,7 @@ const TabSection: React.FC<TabSectionProps> = ({
   return (
     <>
       {/* Tab Buttons */}
-      <div className="flex gap-3 mb-8 overflow-x-auto pb-2 hide-scrollbar">
+      <div className="flex gap-3 mb-8 scrollable  overflow-x-auto pb-4 hide-scrollbar">
         {tabList?.map((tab, idx) => (
           <button
             key={tab}
@@ -105,8 +105,8 @@ const TabSection: React.FC<TabSectionProps> = ({
         {renderCustomContent ? (
           renderCustomContent(getCurrentPageItems())
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 place-items-center md:place-items-start">
-            {getCurrentPageItems()?.map((car) =>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6  xl:grid-cols-3  mb-8 place-items-center md:place-items-start">
+            {getCurrentPageItems()?.map((car) => 
               isMobile ? (
                 <ProductCardVariant2
                   key={car.id}
@@ -128,6 +128,7 @@ const TabSection: React.FC<TabSectionProps> = ({
                   status={
                     car.status as "active" | "completed" | "closed" | "pending"
                   }
+                  
                   dealType={car?.dealType}
                 />
               )

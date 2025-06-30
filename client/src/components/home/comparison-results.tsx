@@ -154,7 +154,7 @@ export default function ComparisonResults({ selectedCars, emblaRef, scrollPrev, 
     <div className="min-h-screen mt-[20px]">
       {/* Features Comparison */}
       <div className="mb-12 bg-[#FFFFFF] p-6">
-        <h2 className="text-[40px] font-[400] leading-[100%] tracking-[-0.01em] text-black font-['Gilroy-SemiBold']">
+        <h2 className="text-2xl lg:text-[40px] font-[400] leading-[100%] tracking-[-0.01em] text-black font-['Gilroy-SemiBold']">
           Compare <span className="text-[#AF8C32]">Features</span>
         </h2>
 
@@ -191,7 +191,7 @@ export default function ComparisonResults({ selectedCars, emblaRef, scrollPrev, 
 
       {/* Specifications Comparison */}
       <div className="mb-12 p-6">
-        <h2 className="text-[40px] font-[400] leading-[100%] tracking-[-0.01em] text-black font-['Gilroy-SemiBold']">
+        <h2 className="text-2xl lg:text-[40px] font-[400] leading-[100%] tracking-[-0.01em] text-black font-['Gilroy-SemiBold']">
           Compare <span className="text-[#AF8C32]">Specifications</span>
         </h2>
 

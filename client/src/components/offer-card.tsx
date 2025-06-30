@@ -32,24 +32,19 @@ const OfferCard: React.FC<OfferCardProps> = ({
 
   return (
     <div
-      style={{
-        width: "1273px",
-        height: "102px",
+        style={{
         gap: "24px",
-        padding: "22px 18px",
         borderRadius: "8px",
         background: "#FFFFFF",
         boxShadow: "0px 4px 10px 0px #00000014",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
       }}
+      className="w-full lg:h-[80px] flex lg:flex-row flex-col p-5 lg:items-center "
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      <div   className="flex flex-row items-center gap-4 ">
         <div
           style={{
-            width: "48px",
-            height: "48px",
+            width: "40px",
+            height: "40px",
             borderRadius: "50%",
             background: "#F0F0F0",
             display: "flex",
@@ -69,16 +64,16 @@ const OfferCard: React.FC<OfferCardProps> = ({
           )}
         </div>
         <div>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div  className="flex items-center gap-2">
             <span
               style={{
                 fontFamily: "Gilroy-Medium",
                 fontWeight: 400,
-                fontSize: "24px",
                 lineHeight: "100%",
                 letterSpacing: "0%",
                 color: "#000000",
               }}
+              className="text-[20px] md:text-2xl"
             >
               {user?.name}
             </span>
@@ -99,12 +94,12 @@ const OfferCard: React.FC<OfferCardProps> = ({
             style={{
               fontFamily: "Gilroy-Regular",
               fontWeight: 400,
-              fontSize: "20px",
               lineHeight: "23px",
               letterSpacing: "0%",
               color: "#000000",
               marginTop: "4px",
             }}
+            className="text-base md:text-[20px]"
           >
             {user?.name} has made an offer of{" "}
             <span style={{ fontFamily: "Gilroy-Semibold" }}>

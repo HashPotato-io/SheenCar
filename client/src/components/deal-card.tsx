@@ -35,25 +35,19 @@ const DealCard: React.FC<DealCardProps> = ({
   return (
     <div
       style={{
-        width: "1272.5px",
-        height: "80px",
-        display: "flex",
-        alignItems: "center",
         gap: "24px",
         borderRadius: "8px",
-        padding: "20px",
         background: "#FFFFFF",
         boxShadow: "0px 4px 10px 0px #00000014",
       }}
+      className="w-full lg:h-[80px] flex lg:flex-row flex-col p-5 lg:items-center "
     >
+
+
       {/* User Section */}
       <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          minWidth: "200px",
-        }}
+      
+        className="flex flex-row items-center gap-4 "
       >
         <div
           style={{
@@ -96,12 +90,12 @@ const DealCard: React.FC<DealCardProps> = ({
           style={{
             fontFamily: "Gilroy-SemiBold",
             fontWeight: 400,
-            fontSize: "16px",
             lineHeight: "100%",
             letterSpacing: "0%",
             color: "#171616",
             marginBottom: "4px",
           }}
+          className="text-sm md:text-lg"
         >
           Trade with:
         </div>
@@ -109,11 +103,11 @@ const DealCard: React.FC<DealCardProps> = ({
           style={{
             fontFamily: "Gilroy-Regular",
             fontWeight: 400,
-            fontSize: "16px",
             lineHeight: "100%",
             letterSpacing: "0%",
             color: "#585353",
           }}
+          className="text-sm md:text-lg"
         >
           {tradeWith}
         </div>
@@ -124,19 +118,18 @@ const DealCard: React.FC<DealCardProps> = ({
         style={{
           minWidth: "150px",
           fontFamily: "Gilroy-Medium",
-          fontSize: "16px",
         }}
       >
         <div
           style={{
             fontFamily: "Gilroy-SemiBold",
             fontWeight: 400,
-            fontSize: "16px",
             lineHeight: "100%",
             letterSpacing: "0%",
             color: "#171616",
             marginBottom: "4px",
           }}
+           className="text-sm md:text-lg"
         >
           Price Adjustment:
         </div>
@@ -144,11 +137,11 @@ const DealCard: React.FC<DealCardProps> = ({
           style={{
             fontFamily: "Gilroy-Regular",
             fontWeight: 400,
-            fontSize: "16px",
             lineHeight: "100%",
             letterSpacing: "0%",
             color: "#585353",
           }}
+           className="text-sm md:text-lg"
         >
           {priceAdjustment > 0 ? "+" : ""}
           {priceAdjustment.toLocaleString()} AED
@@ -156,21 +149,21 @@ const DealCard: React.FC<DealCardProps> = ({
       </div>
 
       {/* Buttons Section */}
-      <div style={{ display: "flex", gap: "12px" }}>
+      <div  className="flex lg:flex-row flex-col gap-4">
         <CustomButton
           customStyles={{
-            width: "300px",
             height: "40px",
           }}
           onClick={handleViewProductDetails}
         >
           View Product Details
         </CustomButton>
+        <div className="flex gap-4">
         <CustomButton
           customStyles={{
-            width: "120px",
             height: "40px",
           }}
+          className="w-full"
           onClick={onAccept}
         >
           Accept
@@ -178,13 +171,14 @@ const DealCard: React.FC<DealCardProps> = ({
         <CustomButton
           variant="outline"
           customStyles={{
-            width: "130px",
             height: "40px",
           }}
           onClick={onReject}
+          className="w-full"
         >
           Reject
         </CustomButton>
+        </div>
       </div>
     </div>
   );

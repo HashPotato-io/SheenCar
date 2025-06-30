@@ -31,13 +31,13 @@ const ProceedToPayModal: React.FC<ProceedToPayModalProps> = ({
 
   const handleCheckout = async () => {
     // Navigate to checkout page with state
-    setLocation('/checkout', { 
-      state: {
-        duration: selectedDuration,
-        budget: selectedBudget,
-        carDetails
-      }
-    });
+    // setLocation('/checkout', { 
+    //   state: {
+    //     duration: selectedDuration,
+    //     budget: selectedBudget,
+    //     carDetails
+    //   }
+    // });
   };
 
   return (

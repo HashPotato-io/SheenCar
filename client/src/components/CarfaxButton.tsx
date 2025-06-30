@@ -6,7 +6,7 @@ import Carfax from "../assets/carfax.svg";
 import CarfaxSvg from "../assets/carfax-svg.svg"; 
 import { CustomButton } from "./ui/custom-button";
 
-const CarfaxButton: React.FC = () => {
+const CarfaxButton: React.FC<{ customStyles?: React.CSSProperties }> = ({ customStyles }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { id } = useParams();
 
@@ -17,15 +17,14 @@ const CarfaxButton: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          background: '#003A2F',
-          width: '100%',
-          maxWidth: '575px',
-          justifyContent: 'center'
+          background: 'black',
+          justifyContent: 'center',   
         }}
+        className="w-fit text-xs"
         onClick={() => setIsModalOpen(true)}
       >
         <img src={Carfax} alt="CARFAX" className="h-4" />
-        View CARFAX Report
+        Vehicle History Report
       </CustomButton>
 
       <CarfaxModal

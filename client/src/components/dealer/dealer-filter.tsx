@@ -213,6 +213,7 @@ export default function DealerFilter({ onFilterChange }: DealerFilterProps) {
         background: "#FFFFFF",
         boxShadow: "2px 2px 16px 1px #0000001A",
       }}
+      className="h-full"
     >
       <h2 className="text-2xl font-semibold mb-4 font-poppins">Filters</h2>
       <div className="space-y-6">

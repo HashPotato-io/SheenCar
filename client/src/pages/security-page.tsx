@@ -118,12 +118,13 @@ export default function SecurityPage() {
               style={{
                 fontFamily: "Gilroy-SemiBold",
                 fontWeight: 400,
-                fontSize: "clamp(32px, 5vw, 50px)",
                 lineHeight: "120%",
                 letterSpacing: "-1%",
                 textAlign: "center",
                 color: "#FFFFFF",
               }}
+
+            className="text-2xl md:text-[48px] font-bold"
             >
               <span style={{ color: "#AF8C32" }}>SheenCar</span>'s Commitment to
               Security
@@ -137,8 +138,8 @@ export default function SecurityPage() {
                 letterSpacing: "0%",
                 textAlign: "center",
                 color: "#FFFFFF",
-                width: "878px",
               }}
+              className="w-full  text-sm md:text-xl"
             >
               Protecting your data, securing your transactions, and ensuring a
               safe car trading experience for all.
@@ -156,12 +157,12 @@ export default function SecurityPage() {
             style={{
               fontFamily: "Poppins",
               fontWeight: 400,
-              fontSize: "20px",
               lineHeight: "27px",
               letterSpacing: "0%",
               color: "#171616",
               marginBottom: "24px",
             }}
+            className="text-base md:text-xl"
           >
             At SheenCar, security is at the core of everything we do. We employ
             advanced security measures at the organizational, architectural, and
@@ -179,31 +180,31 @@ export default function SecurityPage() {
                   style={{
                     fontFamily: "Gilroy-SemiBold",
                     fontWeight: 400,
-                    fontSize: "34px",
                     lineHeight: "100%",
                     letterSpacing: "-1%",
-                    display: "flex",
-                    alignItems: "center",
                     marginBottom: "12px",
-                    gap: "8px",
                   }}
+                  className="text-2xl md:text-[36px]"
                 >
-                  <section.icon className="text-[#AF8C32]" size={24} />
-                  <span className="text-[#AF8C32]">
+                  {/* <section.icon className="text-[#AF8C32]" size={24} /> */}
+                  <span className="text-[#AF8C32]" style={{ display: "inline" }}>
                     {section.highlightedWord}
                   </span>
-                  {section.title.replace(section.highlightedWord, "")}
+                  <span style={{ display: "inline" }}>
+                    {section.title.replace(section.highlightedWord, "")}
+                  </span>
                 </h2>
+
                 <p
                   style={{
                     fontFamily: "Poppins",
                     fontWeight: 400,
-                    fontSize: "20px",
                     lineHeight: "27px",
                     letterSpacing: "0%",
                     color: "#171616",
                     marginBottom: section.listItems ? "16px" : "0",
                   }}
+                  className="text-base md:text-xl"
                 >
                   {section.description}
                 </p>
@@ -212,7 +213,6 @@ export default function SecurityPage() {
                     style={{
                       fontFamily: "Poppins",
                       fontWeight: 400,
-                      fontSize: "20px",
                       lineHeight: "27px",
                       letterSpacing: "0%",
                       color: "#171616",
@@ -222,6 +222,7 @@ export default function SecurityPage() {
                       flexDirection: "column",
                       gap: "8px",
                     }}
+                    className="text-base md:text-xl"
                   >
                     {section.listItems.map((item, itemIndex) => (
                       <li key={itemIndex}>{item}</li>

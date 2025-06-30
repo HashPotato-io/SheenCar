@@ -1,21 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useParams, Link } from "wouter";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ThumbsUp,
-  Heart,
-  Share,
-  Phone,
-  MapPin,
-} from "lucide-react";
-import CarSvg from "../assets/car.svg";
-import EmblaCarousel from "@/components/ui/embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import CarImageGallery from "@/components/car-image-gallery";
 import TradeContactDialog from "@/components/trade/TradeContactDialog";
@@ -78,6 +64,7 @@ const carData = {
     mpg: "24/34",
   },
   seller: {
+    type: "dealer",
     name: "Prestige Auto Gallery",
     logo: "https://randomuser.me/api/portraits/men/32.jpg",
     rating: 4.8,
@@ -134,17 +121,7 @@ export default function TradeCarDetailsPage() {
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [similarCarIndex, setSimilarCarIndex] = useState(0);
   const [contactDialogOpen, setContactDialogOpen] = useState(false);
-
-  // Move Embla carousel setup inside the component
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
-
-  const scrollPrev = () => {
-    if (emblaApi) emblaApi.scrollPrev();
-  };
-
-  const scrollNext = () => {
-    if (emblaApi) emblaApi.scrollNext();
-  };
+  
 
   // Adapt similarCars to CarDetails type
   const similarCarsForCarousel: CarDetails[] = similarCars?.map((car) => ({
@@ -169,7 +146,15 @@ export default function TradeCarDetailsPage() {
     setMainImage(image);
     setGalleryIndex(index);
   };
+ // Embla carousel setup for similar cars
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
 
+  const scrollPrev = () => {
+    if (emblaApi) emblaApi.scrollPrev();
+  };
+  const scrollNext = () => {
+    if (emblaApi) emblaApi.scrollNext();
+  };
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
@@ -196,34 +181,45 @@ export default function TradeCarDetailsPage() {
           </div> */}
 
           {/* Car Images Section */}
-          <div className="flex flex-col lg:flex-row gap-4 p-4 lg:p-6">
-            <CarImageGallery
+          <div className="flex flex-col lg:flex-row gap-4 py-6 md:p-4 lg:p-6">
+            <div className="order-2 lg:order-1">    <CarImageGallery
               mainImage={mainImage}
               setMainImage={setMainImage}
               galleryImages={carData.galleryImages}
               galleryIndex={galleryIndex}
               setGalleryIndex={setGalleryIndex}
-            />
-
-            <CarDetails
+            /></div>
+            <div className="order-1 px-4 md:px-0lg:order-2">  <CarDetails
               car={carData}
+              onContactClick={() => setContactDialogOpen(true)}
+            /></div>
+
+
+          </div>
+          <div className="lg:hidden mt-6 mb-8 px-7 lg:px-0 lg:ml-3">
+            <SellerDetails
+              seller={carData.seller}
               onContactClick={() => setContactDialogOpen(true)}
             />
           </div>
 
-          <CarDescription description={carData.description} />
 
-          <CarTabs carData={carData} />
+          <div className="  mb-6 px-4 lg:px-0 ">
+            <CarDescription description={carData.description} />
+          </div>
+          <div className="  mb-6 px-4 lg:px-0 ">
+            <CarTabs carData={carData} />
+          </div>
 
-          {/* Similar Listings */}
+ {/* Similar Listings */}
           <SimilarListings
             similarCarsForCarousel={similarCarsForCarousel}
             dealerId={dealerId || ""}
             emblaRef={emblaRef as React.RefObject<HTMLDivElement> | ((node?: Element | null) => void)}
             scrollPrev={scrollPrev}
             scrollNext={scrollNext}
+             emblaInstance={emblaApi} // Pass this!
           />
-
           {/* Contact Dialog */}
           <TradeContactDialog
             open={contactDialogOpen}

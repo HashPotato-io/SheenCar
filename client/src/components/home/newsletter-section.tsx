@@ -43,24 +43,31 @@ export default function NewsletterSection() {
   };
 
   return (
-    <div className="bg-[#101010] min-h-[524px] flex justify-center items-center p-10">
-      <div className="w-[95%] min-h-[404px] rounded-[24px] bg-[#003A2F] mx-auto flex flex-col md:flex-row justify-between items-center p-5 md:p-8">
+    <div className="bg-[#101010] min-h-[524px] flex justify-center items-center px-3 py-6 md:p-10">
+      <div className="w-[95%] min-h-[404px] rounded-[12px] md:rounded-[24px] bg-[#003A2F] mx-auto flex flex-col md:flex-row justify-between items-center p-5 md:p-8">
         <div className="w-full max-w-[723px] flex flex-col gap-4">
-          <h2 className="font-['Gilroy-SemiBold'] font-normal text-[clamp(24px,5vw,46px)] leading-[120%] tracking-[-1%] text-white break-words">
+          <h2 className="font-['Gilroy-SemiBold'] font-semibold text-center md:text-left md:text-[46px] text-2xl leading-[30px] md:leading-[120%] tracking-[-1%] text-white break-words">
             Driven by Passion? Stay Updated with SheenCar!
           </h2>
-          <p className="font-['Poppins'] font-normal text-[clamp(14px,3vw,16px)] leading-[140%] text-white w-full max-w-[723px] break-words">
-            Get exclusive access to the latest car listings, expert tips, market
-            insights, and exciting deals – delivered straight to your inbox. No
-            spam, just pure car goodness!
+          <p className="font-['Poppins'] font-normal text-sm text-center md:text-left md:text-base leading-[140%] text-white w-full max-w-[723px] break-words">
+           Be the first to know about latest car listings, and exciting deals – delivered straight to your inbox!
           </p>
-          <div className="flex flex-col sm:flex-row gap-1.5 items-center mt-2">
+
+          <img
+            className="w-full md:hidden h-auto max-h-[309px] object-contain"
+            src={CarNewsLetter}
+            alt="car"
+          />
+          <div className="flex flex-row gap-1.5 items-center md:mt-2">
+            <div className="w-full lg:w-2/3">
             <Input
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full h-10 px-4 py-2.5 rounded-md border border-[#A2A2A2] bg-transparent text-white placeholder:text-[#A2A2A2] placeholder:font-poppins placeholder:text-base placeholder:leading-none"
             />
+            </div>
+            <div className="w-1/3">
             <CustomButton
               onClick={handleSubmit}
               disabled={isPending}
@@ -81,13 +88,15 @@ export default function NewsletterSection() {
             >
               {isPending ? "Submitting..." : "Submit"}
             </CustomButton>
+            </div>
           </div>
-          <p className="font-['Poppins'] font-normal text-xs leading-none text-white w-full sm:w-[418px] break-words">
+
+          <p className="font-['Poppins'] font-[300] text-center md:text-left text-[10px] md:text-xs leading-none text-white w-full sm:w-[418px] break-words">
             By subscribing, you agree to our Privacy Notice and consent to
             receive updates from our company.
           </p>
         </div>
-        <div className="w-full max-w-[469px] mt-10 md:mt-0">
+        <div className="hidden lg:block w-full max-w-[469px] mt-10 md:mt-0">
           <img
             className="w-full h-auto max-h-[309px] object-contain"
             src={CarNewsLetter}

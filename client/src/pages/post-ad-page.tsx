@@ -3,44 +3,40 @@ import { useLocation } from "wouter";
 import Stepper from "../components/Stepper";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import {
-  CustomSelect,
-  CustomSelectContent,
-  CustomSelectTrigger,
-} from "@/components/ui/custom-select";
-import { CustomInput } from "@/components/ui/custom-input";
-import { CustomTextarea } from "@/components/ui/custom-textarea";
 import { CustomButton } from "@/components/ui/custom-button";
-import CarSvg from "../assets/car5.svg";
 import CarDetailsForm from "../components/CarDetailsForm";
-import { CustomCheckbox } from "@/components/ui/custom-checkbox";
-import CustomFileUpload from "@/components/ui/custom-fileupload";
 import CarFeaturesForm from "@/components/CarFeaturesForm";
 import { FormData } from "@/types/form";
-import { CustomSelectItem } from "@/components/ui/custom-select";
-import * as SelectPrimitive from "@radix-ui/react-select";
 import CarSpecificationsForm from "../components/CarSpecificationsForm";
-import CustomToggle from "@/components/ui/custom-toggle";
 import PricingAndPreferencesForm from "../components/PricingAndPreferencesForm";
 import AdSubmittedModal from "../components/modals/AdSubmittedModal";
 
 const steps = [
   {
-    name: "Basic Information",
-    style: { marginLeft: "-24px" },
+    name: "Basic Info",
   },
   {
     name: "Features",
-    style: { marginLeft: "-2px" },
   },
   {
     name: "Specifications",
-    style: { marginLeft: "-4px" },
   },
   {
-    name: "Pricing & Listing",
-    style: {},
+    name: " Pricing ",
   },
+];
+
+const stepStyles = [
+  // { paddingLeft: "8px"},// Style for Step 1
+  // { paddingLeft: "12px"}, // Style for Step 2
+  // {  },
+  //  { textAlign: "center" } // Style for Step 3
+
+  { paddingLeft: "3px"},// Style for Step 1
+ { paddingLeft: "5px"},// Style for Step 2
+{ paddingRight: "37px"},
+{ paddingLeft: "8px"},
+   
 ];
 
 const PostAdPage = () => {
@@ -146,7 +142,7 @@ const PostAdPage = () => {
           formData.cylinder &&
           formData.fuelTankCapacity &&
           formData.engineType &&
-          formData.transmission
+          formData.transmission 
         );
       case 3:
         return formData.price;
@@ -178,11 +174,12 @@ const PostAdPage = () => {
 
       if (currentStep < steps.length - 1) {
         setCurrentStep(currentStep + 1);
-      } else {
-        // Navigate to checkout with return URL
-        const returnUrl = encodeURIComponent(window.location.pathname);
-        setLocation(`/checkout?returnUrl=${returnUrl}`);
-      }
+      } 
+      // else {
+      //   // Navigate to checkout with return URL
+      //   const returnUrl = encodeURIComponent(window.location.pathname);
+      //   setLocation(`/checkout?returnUrl=${returnUrl}`);
+      // }
     }
     return false;
   };
@@ -271,7 +268,7 @@ const PostAdPage = () => {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-[46px] font-[400] leading-[100%] tracking-[-0.01em] text-center text-black font-['Gilroy-SemiBold'] mb-8">
+          <h1 className="text-2xl lg:text-[46px] font-[400] leading-[100%] tracking-[-0.01em] text-center text-black font-['Gilroy-SemiBold'] mb-8">
             {requestType ? (
               requestType === "sell" ? (
                 <>
@@ -289,6 +286,7 @@ const PostAdPage = () => {
 
           <Stepper
             steps={steps}
+            styles={stepStyles}
             currentStep={currentStep}
             completedSteps={completedSteps}
           />
@@ -298,19 +296,19 @@ const PostAdPage = () => {
         <div>{renderStepContent()}</div>
 
         {/* Navigation Buttons */}
-        <div className="flex gap-10 mt-14">
+        <div className="flex md:flex-row flex-col lg:max-w-lg xl:max-w-2xl lg:ml-10   gap-4 xl:gap-10  mt-14">
           <CustomButton
             onClick={handleBack}
             variant="outline"
-            customStyles={{ width: "355px", height: "40px" }}
             outlineColor="#AF8C32"
+            className="w-full"
           >
             {currentStep === 0 ? "Cancel" : "Back"}
           </CustomButton>
           <CustomButton
             onClick={handleNext}
             disabled={!validatButton()}
-            customStyles={{ width: "354px", height: "40px" }}
+            className="w-full"
           >
             {currentStep === steps?.length - 1 ? "Proceed to Pay" : "Next"}
           </CustomButton>

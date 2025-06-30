@@ -21,6 +21,8 @@ export default function DealerCard({ dealer }: DealerCardProps) {
 
   if(isMobile){
     return (
+
+    
       <div
         style={{
           boxShadow: "1.52px 1.52px 9.14px 0px #0000001F",
@@ -32,7 +34,7 @@ export default function DealerCard({ dealer }: DealerCardProps) {
           justifyContent: "center",
         }}
       >
-        <div className="overflow-hidden group w-[303px] h-[303px]">
+        <div className=" group w-[303px] h-[303px]">
           <div className="relative h-full">
             <div
               style={{ borderRadius: "13px" }}
@@ -105,7 +107,7 @@ export default function DealerCard({ dealer }: DealerCardProps) {
     )
   }
   return (
-    <div className="w-[903px] h-[193px] rounded-[16.23px] bg-white shadow-[0px_4px_10px_0px_#00000026] transition-all duration-300 ease-in-out hover:shadow-lg cursor-pointer">
+    <div className="w-full h-[193px] rounded-[16.23px] bg-white shadow-[0px_4px_10px_0px_#00000026] transition-all duration-300 ease-in-out hover:shadow-lg cursor-pointer">
       <Link href={`/services/dealer/${dealer.id}`}>
         <div className="flex p-4">
           <div style={{borderRadius: "14px"}} className="w-[203px] h-[161px] bg-neutral-800 overflow-hidden relative mr-4">

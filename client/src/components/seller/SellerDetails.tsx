@@ -12,6 +12,7 @@ interface SellerDetailsProps {
     reviewCount: number;
     location: string;
     phoneNumber: string;
+    type: string
   };
   onContactClick: () => void;
 }
@@ -22,7 +23,7 @@ const SellerDetails: React.FC<SellerDetailsProps> = ({
 }) => {
   const [, setLocation] = useLocation();
   return (
-    <div className="flex flex-col w-full max-w-[577px] h-auto gap-[4px] rounded-[11.32px] p-4 sm:p-[18px] bg-white shadow-[0px_4px_12px_0px_#00000014]">
+    <div className="flex flex-col w-full lg:max-w-[577px] h-auto gap-[4px] rounded-[11.32px] p-4 sm:p-[18px] bg-white shadow-[0px_4px_12px_0px_#00000014]">
       <div className="flex items-center gap-3 mb-4">
         <img
           src={seller.logo}
@@ -31,15 +32,17 @@ const SellerDetails: React.FC<SellerDetailsProps> = ({
         />
         <div>
           <div className="font-['Gilroy-SemiBold'] text-[18px] sm:text-[20px] leading-[100%] tracking-[0%] text-[#003A2F]">
-            Seller Details
+           {seller.type == "dealer" ? "Dealer Details" : "Seller Details"} 
           </div>
         </div>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-10">
         {/* Contact information */}
-        <div className="flex items-center gap-4">
-          <PersonIcon />
+        <div className="flex items-center gap-2">
+           <div className="flex-shrink-0 text-gray-400">
+            <PersonIcon />
+          </div>
           <div className="flex flex-col gap-[6px]">
             <div className="font-['Gilroy-Medium'] text-[13px] sm:text-[13.42px] leading-[100%] tracking-[0%] text-[#003A2F]">
               Name

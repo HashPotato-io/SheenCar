@@ -161,3 +161,35 @@
     font-family: 'Poppins', sans-serif;
   }
 }
+
+
+.scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: #D7D7D7 transparent; /* Thumb | Transparent track (Firefox) */
+  overflow-y: auto;
+}
+
+/* WebKit browsers */
+.scrollable::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;     /* Hide the track background */
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #D7D7D7;   /* Scrollbar thumb color (green) */
+  border-radius: 10px;
+}
+
+/* Optional: On hover */
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: #D7D7D7;
+}
+
+/* Optional: Show arrow buttons (rarely visible unless explicitly styled) */
+.scrollable::-webkit-scrollbar-button {
+  display: block;
+  height: 6px;
+  background-color: #D7D7D7;
+}
+
+

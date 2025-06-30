@@ -23,7 +23,6 @@ export function CustomButton({
       background: disabled ? "#003A2F" : (isHovered ? "#004D3F" : "#003A2F"),
       color: disabled ? "#FFFFFF" : "#fff",
       border: `1px solid ${disabled ? "#CCCCCC" : "#003A2F"}`,
-      width: 355,
       height: 40,
       gap: "8px",
       borderRadius: "6px",
@@ -35,7 +34,6 @@ export function CustomButton({
       border: `1px solid ${disabled ? "#CCCCCC" : outlineColor}`,
       color: disabled ? "#FFFFFF" : (isHovered ? "#FFFFFF" : outlineColor),
       background: disabled ? "#003A2F" : (isHovered ? outlineColor : "transparent"),
-      width: 355,
       height: 40,
       gap: "8px",
       borderRadius: "6px",
@@ -50,7 +48,6 @@ export function CustomButton({
     <button
       style={{
         fontWeight: 300,
-        fontSize: 16,
         display: "flex",
         alignItems: "center",
         paddingRight: 20,
@@ -61,6 +58,7 @@ export function CustomButton({
         ...variantStyles[variant],
         ...customStyles,
       }}
+      className="text-base "
       onMouseEnter={() => !disabled && setIsHovered(true)}
       onMouseLeave={() => !disabled && setIsHovered(false)}
       disabled={disabled}

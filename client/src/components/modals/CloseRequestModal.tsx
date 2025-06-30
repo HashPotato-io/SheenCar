@@ -27,7 +27,7 @@ const CloseRequestModal: React.FC<CloseRequestModalProps> = ({
       }
       icon={ReopenIcon}
     >
-      <div className="flex flex-col items-center gap-6 w-[339px]">
+      <div className="flex flex-col items-center gap-6 lg:w-[339px]">
         <p
           style={{
             fontFamily: "Poppins",
@@ -52,7 +52,7 @@ const CloseRequestModal: React.FC<CloseRequestModalProps> = ({
 
         <CustomButton
           customStyles={{
-            width: "357px",
+            width: "100%",
             height: "44px",
             borderRadius: "7.27px",
           }}

@@ -45,8 +45,8 @@ export default function TradeCarMain({
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
   return (
-    <main className="flex-1 bg-neutral-50 py-8">
-      <div className="container mx-auto px-4">
+    <main className=" bg-neutral-50 lg:p-8">
+      <div className="  lg:px-10 mt-10 md:mt-0 xl:p-0">
         {/*      <div className="lg:hidden mb-4">
           <Button
             variant="outline"
@@ -65,18 +65,18 @@ export default function TradeCarMain({
           </Button>
         </div> */}
 
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col  lg:flex-row gap-12">
           {!isMobile ? (
             <div
-              className={`lg:w-1/4 ${
+              className={`xl:w-1/4 ${
                 filterVisible ? "block" : "hidden"
               } lg:block`}
             >
               <CarFilter />
             </div>
           ) : null}
-          <div className="mt-[10px]">
-            <h1 className="text-2xl font-bold mb-6">{carsCount}</h1>
+          <div className=" mt-4 m-5 md:m-10 lg:m-0">
+            <h1 className="text-2xl  font-bold mb-6">{carsCount}</h1>
             {isMobile ? (
               <div
                 style={{
@@ -86,6 +86,7 @@ export default function TradeCarMain({
                   marginBottom: "16px",
                   cursor: "pointer",
                 }}
+                className="px-3"
                 onClick={() => setIsFilterModalOpen(true)}
               >
                 <FilterIcon />{" "}
@@ -104,25 +105,9 @@ export default function TradeCarMain({
               </div>
             ) : null}
 
-            <Dialog
-              open={isFilterModalOpen}
-              onOpenChange={setIsFilterModalOpen}
-            >
-              <DialogContent
-                style={{
-                  width: "340px",
-                  padding: "30px 20px",
-                  borderRadius: "12px",
-                  background: "#FFFFFF",
-                  boxShadow: "2px 2px 16px 1px #0000001A",
-                }}
-                className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto"
-              >
-                <CarFilter />
-              </DialogContent>
-            </Dialog>
+           
 
-            <div className="flex gap-4 flex-wrap -mx-2">
+            <div className="grid grid-cols-2 md:grid-cols-3  gap-6">
               {paginatedCars?.map((car) =>
                 isMobile ? (
                   <CarCards
@@ -136,8 +121,9 @@ export default function TradeCarMain({
                       image: car.image,
                       sellerId: car.sellerId,
                     }}
-                    linkUrl={`/trade-car/sellers/${car?.sellerId}/cars/${car?.id}`}
                     tiny
+                    linkUrl={`/trade-car/sellers/${car?.sellerId}/cars/${car?.id}`}
+                    
                   />
                 ) : (
                   <CarCards
@@ -151,8 +137,9 @@ export default function TradeCarMain({
                       image: car.image,
                       sellerId: car.sellerId,
                     }}
-                    linkUrl={`/trade-car/sellers/${car?.sellerId}/cars/${car?.id}`}
                     small
+                    linkUrl={`/trade-car/sellers/${car?.sellerId}/cars/${car?.id}`}
+                    
                   />
                 )
               )}
@@ -227,6 +214,23 @@ export default function TradeCarMain({
             </div>
           </div>
         </div>
+         <Dialog
+              open={isFilterModalOpen}
+              onOpenChange={setIsFilterModalOpen}
+            >
+              <DialogContent
+                style={{
+                  width: "340px",
+                  padding: "30px 20px",
+                  borderRadius: "12px",
+                  background: "#FFFFFF",
+                  boxShadow: "2px 2px 16px 1px #0000001A",
+                }}
+                className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto"
+              >
+                <CarFilter />
+              </DialogContent>
+            </Dialog>
       </div>
     </main>
   );

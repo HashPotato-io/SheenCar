@@ -21,29 +21,31 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
   handleInputChange,
 }) => {
   return (
-    <div className="flex justify-between">
-      {/* Left Column - Form */}
-      <div className="flex-1 space-y-6">
-        <div className="flex flex-col gap-6">
-          <h2 className="text-[34px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black mb-2">
+    <div> <div className="flex justify-center lg:justify-start items-center w-full">
+          <h2 className="text-2xl lg:text-[34px] lg:px-9 mb-8 font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black ">
             Tell Us About Your <span className="text-[#AF8C32]">Car</span>
           </h2>
         </div>
 
+    <div className="flex lg:flex-row flex-col justify-between gap-10 lg:gap-20 xl:gap-10 lg:px-10">
+      {/* Left Column - Form */}
+
+      <div className=" space-y-6  lg:max-w-lg xl:min-w-[672px] xl:max-w-2xl 3xl:w-full order-2 lg:order-1">
+       
         <div className="flex flex-col gap-4">
-          <p className="text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
+          <p className="text-[22px] lg:text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
             Vehicle Details
           </p>
           <div className="flex flex-col gap-6">
             {/* Make and Model */}
-            <div style={{ display: "flex", gap: "26px" }}>
-              <div>
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+              <div className="w-full">
                 <CustomSelect
                   value={formData.make}
                   onValueChange={(value) => handleInputChange("make", value)}
                 >
                   <CustomSelectTrigger
-                    style={{ width: "364px" }}
+                    className="w-full"
                     variant="outline"
                     required
                   >
@@ -67,14 +69,13 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   </CustomSelectContent>
                 </CustomSelect>
               </div>
-
-              <div>
+              <div className="w-full">
                 <CustomSelect
                   value={formData.model}
                   onValueChange={(value) => handleInputChange("model", value)}
                 >
                   <CustomSelectTrigger
-                    style={{ width: "364px" }}
+                    className="w-full"
                     variant="outline"
                     required
                   >
@@ -99,8 +100,8 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             </div>
 
             {/* Year, Zip Code, and Exterior Color */}
-            <div style={{ display: "flex", gap: "15.3px" }}>
-              <div>
+            <div className="flex flex-col md:flex-row gap-6  md:gap-4">
+              <div className="w-full md:w-1/2 lg:w-1/3">
                 <CustomSelect
                   value={formData.year}
                   onValueChange={(value) => handleInputChange("year", value)}
@@ -108,8 +109,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   <CustomSelectTrigger
                     variant="outline"
                     required
-                    style={{ width: "239px" }}
-                  
+                    className="w-full"
                   >
                     <SelectPrimitive.Value placeholder="Year" />
                   </CustomSelectTrigger>
@@ -125,50 +125,50 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   </CustomSelectContent>
                 </CustomSelect>
               </div>
-              <div>
+              <div className="flex gap-4 ">
+              <div className="w-full lg:w-1/2">
                 <CustomInput
                   variant="outline"
                   placeholder="Interior Color"
-                  className="w-[242px] h-[40px]"
+                  className="w-full h-[40px]"
                   value={formData.interiorColor}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("interiorColor", e.target.value)
                   }
                 />
               </div>
-              <div>
+              <div className="w-full lg:w-1/2 ">
                 <CustomInput
                   variant="outline"
                   placeholder="Exterior Color"
-                  className="w-[242px] h-[40px]"
+                  className="w-full h-[40px]"
                   value={formData.exteriorColor}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("exteriorColor", e.target.value)
                   }
                 />
               </div>
+              </div>
             </div>
 
             {/* Doors and Seating Capacity */}
-            <div style={{ display: "flex", gap: "24px" }}>
-              <div>
+            <div className="flex flex-row gap-4 md:gap-6">
+              <div className="w-full">
                 <CustomInput
-                  style={{ width: "364px" }}
                   variant="outline"
                   placeholder="No. of doors"
-                  className="w-[234px] h-[40px]"
+                  className="w-full h-[40px]"
                   value={formData.doors}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("doors", e.target.value)
                   }
                 />
               </div>
-              <div>
+              <div className="w-full">
                 <CustomInput
-                  style={{ width: "364px" }}
                   variant="outline"
                   placeholder="Seating Capacity"
-                  className="w-[234px] h-[40px]"
+                  className="w-full h-[40px]"
                   value={formData.seatingCapacity}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("seatingCapacity", e.target.value)
@@ -180,10 +180,9 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             {/* Body Type */}
             <div>
               <CustomInput
-                style={{ width: "752px" }}
                 variant="outline"
                 placeholder="Body Type"
-                className="h-[40px]"
+                className="w-full h-[40px]"
                 value={formData.bodyType}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleInputChange("bodyType", e.target.value)
@@ -193,8 +192,8 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             </div>
 
             {/* Condition and Mileage */}
-            <div style={{ display: "flex", gap: "24px" }}>
-              <div>
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+              <div className="w-full">
                 <CustomSelect
                   value={formData.condition}
                   onValueChange={(value) =>
@@ -202,7 +201,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   }
                 >
                   <CustomSelectTrigger
-                    style={{ width: "364px" }}
+                    className="w-full"
                     variant="outline"
                     required
                   >
@@ -221,12 +220,11 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
                   </CustomSelectContent>
                 </CustomSelect>
               </div>
-              <div>
+              <div className="w-full">
                 <CustomInput
-                  style={{ width: "364px" }}
                   variant="outline"
                   placeholder="Mileage"
-                  className="h-[40px]"
+                  className="w-full h-[40px]"
                   value={formData.mileage}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("mileage", e.target.value)
@@ -238,10 +236,9 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             {/* ZIP Code */}
             <div>
               <CustomInput
-                style={{ width: "752px" }}
                 variant="outline"
                 placeholder="ZIP Code"
-                className="h-[40px]"
+                className="w-full h-[40px]"
                 value={formData.zipCode}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleInputChange("zipCode", e.target.value)
@@ -255,15 +252,15 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
         </div>
 
         {/* Verification Section */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <p className="text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
+        <div className="flex flex-col gap-2.5">
+          <p className="text-[22px] lg:text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
             Verification
           </p>
           <CustomInput
             variant="outline"
             required
             placeholder="VIN (Vehicle Identification Number)"
-            className="w-[752px] h-[40px]"
+            className="w-full h-[40px]"
             value={formData.vin}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleInputChange("vin", e.target.value)
@@ -273,7 +270,7 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
 
         {/* Description Section */}
         <div className="flex flex-col gap-[10px]">
-          <p className="text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
+          <p className="text-[22px] lg:text-[26px] font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
             Description
           </p>
           <CustomTextarea
@@ -283,22 +280,23 @@ const CarDetailsForm: React.FC<CarDetailsFormProps> = ({
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
               handleInputChange("description", e.target.value)
             }
-            className="w-[752px]"
+            className="w-full"
           />
         </div>
       </div>
 
       {/* Right Column - Car Illustration */}
-      <div className="flex flex-col gap-4 items-center mt-[100px]">
+      <div className="flex flex-col gap-4 order-1 lg:order-2 items-center lg:mt-[100px]">
         <div className="flex item-center justify-center bg-[#D7FFF1] w-[249px] h-[249px] rounded-[206px]">
           <img src={CarSvg} alt="car-illustration" width="195" height="111" />
         </div>
-        <p className="w-[353px] text-[16px] font-['Poppins'] font-[300] leading-[21px] text-center text-[#585353]">
+        <p className="lg:w-[300px] xl:w-[353px] text-[16px] font-['Poppins'] font-[300] leading-[21px] text-center text-[#585353]">
           Tell us about your car — from its make to model to mileage and
           condition. The more accurate your details, the better the match with
           interested buyers!
         </p>
       </div>
+    </div>
     </div>
   );
 };

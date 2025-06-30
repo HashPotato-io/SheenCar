@@ -42,9 +42,9 @@ export function AdvanceSearch() {
           borderRadius: "34px",
           position: "relative",
         }}
-        className="w-[330px] md:w-[1048px] flex flex-col md:flex-row gap-2 items-center p-8 h-auto md:h-[145px]"
+        className="w-[330px] md:w-[450px] lg:w-full flex flex-col md:flex-row gap-2 items-center p-8  h-auto lg:h-[145px]"
       >
-        <div className="flex flex-col md:flex-row w-full gap-4">
+        <div className="flex flex-col lg:flex-row w-full gap-4">
           <SearchToggle />
 
           <img
@@ -52,22 +52,23 @@ export function AdvanceSearch() {
             alt="search"
             width="30px"
             height="30px"
+            className="hidden lg:block"
           />
 
-          <div className="flex flex-col md:flex-row gap-12 w-full">
-            <div className="flex flex-col md:w-[147px]">
+          <div className="flex flex-col md:mt-6 lg:mt-0 lg:flex-row lg:justify-around gap-12 lg:gap-0 w-full">
+            <div className="flex flex-col lg:w-[147px]">
               <CustomInput
                 placeholder="Zip Code"
-                className="w-full md:w-[147px] h-[45px]"
+                className="w-full lg:w-[147px] h-[45px]"
                 placeholderColor="#000000"
                 borderColor="#000000"
               />
             </div>
 
-            <div className="flex flex-col md:w-[147px]">
+            <div className="flex flex-col lg:w-[147px]">
               <CustomSelect onValueChange={(value) => setSelectedModel(value)}>
                 <CustomSelectTrigger
-                  className="w-full md:w-[147px] h-[48px]"
+                  className="w-full lg:w-[147px] h-[48px]"
                   placeholderColor="#000000"
                   borderColor="#000000"
                 >
@@ -86,12 +87,12 @@ export function AdvanceSearch() {
               </CustomSelect>
             </div>
 
-            <div className="flex flex-col md:w-[147px]">
+            <div className="flex flex-col lg:w-[147px]">
               <CustomSelect
                 onValueChange={(value) => setSelectedCarModel(value)}
               >
                 <CustomSelectTrigger
-                  className="w-full md:w-[147px] h-[48px]"
+                  className="w-full lg:w-[147px] h-[48px]"
                   placeholderColor="#000000"
                   borderColor="#000000"
                 >
@@ -110,7 +111,7 @@ export function AdvanceSearch() {
               </CustomSelect>
             </div>
 
-            <div className="flex items-center gap-[20px] md:ml-[20px]">
+            <div className="flex flex-col items-center lg:flex-row gap-[20px] xl:gap-14 ">
               <CustomButton
                 customStyles={{
                   width: "120px",

@@ -26,7 +26,7 @@ const AccountHero: React.FC<AccountHeroProps> = ({ onEditProfile, onTabChange })
       <div className="w-full max-w-[1200px] flex flex-col md:flex-row justify-between items-center px-8 pt-10 relative">
         {/* Edit Icon - Only visible on mobile */}
         {isMobile && (
-          <div className="absolute top-0 right-8">
+          <div className="absolute top-0 right-4">
             <button 
               onClick={onEditProfile}
               className="p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -34,7 +34,7 @@ const AccountHero: React.FC<AccountHeroProps> = ({ onEditProfile, onTabChange })
               <img
                 src={EditIcon}
                 alt="Edit"
-                className="w-5 h-5 block"
+                className="w-8 h-8 block"
               />
             </button>
           </div>

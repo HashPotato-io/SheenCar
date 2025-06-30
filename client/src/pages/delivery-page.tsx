@@ -110,7 +110,7 @@ export default function DeliveryPage() {
             Vehicle Delivery Coordination on SheenCar
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 justify-items-center">
             <FeatureCard
               icon={<SpeechBubble />}
               title={
@@ -177,7 +177,7 @@ export default function DeliveryPage() {
             Vehicle Delivery Coordination on SheenCar
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 justify-items-center">
             <FeatureCard
               icon={<MutualAggrement />}
               title={

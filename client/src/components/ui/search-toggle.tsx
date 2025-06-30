@@ -14,7 +14,7 @@ export function SearchToggle({ onToggle }: SearchToggleProps) {
   };
 
   return (
-    <div className="flex items-center justify-center w-[289px] md:w-[344px] h-[57px] md:h-[68px] gap-[7.43px] p-[5.95px_5.2px] rounded-[40.89px] bg-[#F8F8F8] shadow-[0px_4px_4px_0px_#0000001F] absolute left-1/2 -translate-x-1/2 -top-[34px]">
+    <div className="flex items-center justify-center w-[289px] md:w-[390px] lg:w-[344px] h-[57px] md:h-[68px] gap-[7.43px] p-[5.95px_5.2px] rounded-[40.89px] bg-[#F8F8F8] shadow-[0px_4px_4px_0px_#0000001F] absolute left-1/2 -translate-x-1/2 -top-[34px]">
       <button
         onClick={() => handleToggle("new")}
         className={`flex-1 h-full rounded-[34.44px] transition-all flex items-center justify-center gap-2 ${

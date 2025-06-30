@@ -37,7 +37,7 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
         icon={Rocket}
         title="Boost Your Listing – Get More Visibility & Sell Faster!"
       >
-        <div className="text-center p-4">
+        <div className="text-center md:p-4">
           <h3
             className="mb-3"
             style={{
@@ -55,7 +55,7 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
 
           <div
             style={{ color: "#585353" }}
-            className="text-left space-y-2 mb-4"
+            className="text-left leading-tight md:space-y-2 mb-4"
           >
             <div className="flex items-start">
               <span className="mr-2">•</span>
@@ -63,11 +63,11 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 300,
-                  fontSize: "16px",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   color: "#585353",
                 }}
+                className="text-sm md:text-base"
               >
                 Increased visibility on the homepage
               </p>
@@ -78,11 +78,11 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 300,
-                  fontSize: "16px",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   color: "#585353",
                 }}
+                 className="text-sm md:text-base"
               >
                 Higher ranking in search results
               </p>
@@ -93,11 +93,11 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
                 style={{
                   fontFamily: "Poppins",
                   fontWeight: 300,
-                  fontSize: "16px",
                   lineHeight: "22px",
                   letterSpacing: "0%",
                   color: "#585353",
                 }}
+                 className="text-sm md:text-base"
               >
                 Featured placement in car listings
               </p>
@@ -119,7 +119,7 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
             Set Your Boosting Preferences
           </h3>
 
-          <div className="text-left space-y-4 mb-4">
+          <div className="text-left space-y-1 md:space-y-4 mb-4">
             <div className="flex items-start">
               <span className="mr-2">•</span>
               <div>
@@ -127,14 +127,14 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
                   style={{
                     fontWeight: 400,
                     fontSize: "16px",
-                    lineHeight: "22px",
                     color: "#171616",
                   }}
+                  className="leading-[18px] md:leading-[22px]"
                 >
                   Boost Duration:{" "}
                   <span
                     style={{
-                      fontWeight: 300,
+                      fontWeight: 400,
                       color: "#585353",
                     }}
                   >
@@ -151,14 +151,14 @@ const BoostAdModal: React.FC<BoostAdModalProps> = ({
                   style={{
                     fontWeight: 400,
                     fontSize: "16px",
-                    lineHeight: "22px",
                     color: "#171616",
                   }}
+                    className="leading-[18px] md:leading-[22px]"
                 >
                   Boost Budget:{" "}
                   <span
                     style={{
-                      fontWeight: 300,
+                      fontWeight: 400,
                       color: "#585353",
                     }}
                   >

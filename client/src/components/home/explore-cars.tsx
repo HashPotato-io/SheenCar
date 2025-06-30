@@ -10,22 +10,24 @@ export default function CarCategories() {
   const [emblaInstance, setEmblaInstance] = useState<any>(null);
   const [selectedTab, setSelectedTab] = useState("Featured");
 
-  useEffect(() => {
-    const element = emblaDivRef?.current;
-    if (element) {
-      import("embla-carousel").then(({ default: EmblaCarouselCore }) => {
-        const instance = EmblaCarouselCore(element, {
-          loop: true,
-          align: "start",
-        });
-        setEmblaInstance(instance);
+useEffect(() => {
+  const element = emblaDivRef?.current;
+  if (element) {
+    import("embla-carousel").then(({ default: EmblaCarouselCore }) => {
+      const instance = EmblaCarouselCore(element, {
+        loop: true,
+        align: "start",
       });
-    }
-    return () => {
-      if (emblaInstance) emblaInstance?.destroy();
-    };
-    // eslint-disable-next-line
-  }, []);
+      setEmblaInstance(instance);
+      // Attach emblaApi to the DOM node so the child can access it
+      element.emblaApi = instance;
+    });
+  }
+  return () => {
+    if (emblaInstance) emblaInstance?.destroy();
+  };
+  // eslint-disable-next-line
+}, []);
 
   const scrollPrev = () => {
     if (emblaInstance) emblaInstance.scrollPrev();
@@ -132,7 +134,7 @@ export default function CarCategories() {
   };
 
   return (
-    <div className="flex flex-col items-center px-4 sm:px-5 py-12 sm:py-[60px] bg-[#F8F8F8]">
+    <div className="flex flex-col items-center px-8 sm:px-5 py-12 sm:py-[60px] bg-[#F8F8F8]">
       <div className="w-full max-w-[331px] sm:max-w-[758px] min-h-[80px] sm:min-h-[112px] font-['Gilroy-SemiBold'] text-center text-black px-2 sm:px-5 text-[24px] sm:text-[clamp(24px,5vw,46px)] leading-[120%] tracking-[-0.01em]">
         Explore the <span className="text-[#AF8C32]">Cars</span> Everyone's
         Obsessed With!
@@ -153,6 +155,7 @@ export default function CarCategories() {
           <EmblaCarousel
             selectedCars={getFilteredCars()}
             emblaRef={emblaDivRef}
+             emblaInstance={emblaInstance} 
             scrollPrev={scrollPrev}
             scrollNext={scrollNext}
           />

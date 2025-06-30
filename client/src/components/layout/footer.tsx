@@ -63,7 +63,9 @@ export default function Footer() {
   return (
     <footer className="bg-[#101010] text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row gap-14 mb-12 p-4 md:p-12">
+
+
+        <div className="flex flex-col lg:flex-row gap-14 mb-12 p-4 md:p-12">
           <div
             style={{
               display: "flex",
@@ -73,11 +75,11 @@ export default function Footer() {
               maxWidth: "335px",
             }}
           >
-            <div className="w-full font-['Gilroy-Regular'] font-normal text-[14px] leading-[140%] tracking-[0%] text-white">
+            <div className="w-full lg:hidden xl:block font-['Gilroy-Regular'] font-normal text-[14px] leading-[140%] tracking-[0%] text-white">
               SheenCar – Your trusted platform for buying, selling, and
               exploring cars with ease. Drive your dream, trade with confidence.
             </div>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 lg:hidden xl:block">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
@@ -90,9 +92,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-wrap md:flex-nowrap justify-between gap-8 w-full">
+          <div className="flex flex-wrap lg:flex-nowrap justify-between gap-8 w-full">
             {menuSections?.map((section, index) => (
-              <div key={index} className="w-full md:w-auto md:min-w-[180px]">
+              <div key={index} className="w-full md:w-auto lg:min-w-[180px]">
                 <h4 className="font-['Gilroy-SemiBold'] font-normal text-[18px] leading-[26px] tracking-[0%] text-white mb-4">
                   {section.title}
                 </h4>
@@ -121,6 +123,21 @@ export default function Footer() {
                   ))}
                 </ul>
               </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-full text-center mb-10 hidden lg:block xl:hidden font-['Gilroy-Regular'] font-normal text-base leading-[140%] tracking-[0%] text-white">
+          SheenCar – Your trusted platform for buying, selling, and
+          exploring cars with ease. Drive your dream, trade with confidence.
+          <div className=" space-x-4 lg:flex justify-center mt-2 xl:hidden hidden">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                className="text-neutral-400 hover:text-white transition-colors"
+              >
+                <img src={social.icon} alt={social.alt} />
+              </a>
             ))}
           </div>
         </div>

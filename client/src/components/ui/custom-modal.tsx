@@ -23,8 +23,9 @@ const CustomModal: React.FC<CustomModalProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose} modal={true}>
       <DialogContent
         className={`
-          ${width} 
-          p-8 
+          max-w-[350px] md:max-w-[419px]
+          rounded-2xl
+          md:p-8 
           relative 
           fixed 
           top-1/2 
@@ -47,6 +48,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
           data-[state=closed]:slide-out-to-top-[48%]
           data-[state=open]:slide-in-from-left-1/2
           data-[state=open]:slide-in-from-top-[48%]
+          scrollable
         `}
       >
         {/*         <button
@@ -64,11 +66,10 @@ const CustomModal: React.FC<CustomModalProps> = ({
 
         {title && (
           <h2
-            className="text-center mb-4"
+            className="text-center text-[22px] md:text-[26px] mb-4"
             style={{
               fontFamily: "Gilroy-Medium",
               fontWeight: 400,
-              fontSize: "26px",
               lineHeight: "100%",
               color: "#000000",
             }}

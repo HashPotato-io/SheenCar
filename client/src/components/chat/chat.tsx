@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, ArrowLeft } from "lucide-react";
 import UserProfile from "./UserProfile";
 import { ChatSendIcon } from "../icons";
+
 
 interface Chat {
   name: string;
@@ -131,7 +132,7 @@ const ChatComponent = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-[439px] bg-[#003A2F] text-white flex flex-col">
+      <div className="w-[300px] xl:w-fit scrollable  bg-[#003A2F] hidden md:flex text-white  flex-col">
         <UserProfile
           imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face"
           name="John Doe"
@@ -150,7 +151,7 @@ const ChatComponent = () => {
             <div
               key={chat.name}
               onClick={() => setSelectedChat(chat.name)}
-              className={`flex items-center w-[439px] h-[74px] gap-[10px] rounded-lg px-[54px] py-[10px] cursor-pointer transition-colors ${
+              className={`flex items-center w-[300px] xl:w-[439px] h-[74px] gap-[10px] rounded-lg px-4 xl:px-[54px] py-[10px] cursor-pointer transition-colors ${
                 selectedChat === chat.name
                   ? "bg-white border border-black"
                   : "bg-transparent text-white"
@@ -169,7 +170,7 @@ const ChatComponent = () => {
               <div className="ml-3 flex-1 min-w-0">
                 <div className="flex justify-between items-center">
                   <h3
-                    className={`font-['Poppins'] font-semibold text-[18px] leading-[100%] ${
+                    className={`font-['Poppins'] font-medoum lg:font-semibold text-base lg:text-[18px] leading-[100%] ${
                       selectedChat === chat.name ? "text-black" : "text-white"
                     }`}
                   >
@@ -199,12 +200,12 @@ const ChatComponent = () => {
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col bg-transparent">
         {/* Chat Header */}
-        <div className="flex flex-col items-center justify-center py-8">
+        <div className="flex flex-col items-center justify-center py-4">
           <UserProfile
             imageUrl={chats.find(chat => chat.name === selectedChat)?.avatar || ""}
             name={selectedChat}
-            imageClassName="w-[112.69px] h-[112.69px] rounded-full border-[12px] border-[#003A2F]"
-            nameClassName="font-['Gilroy-SemiBold'] font-normal text-[30px] leading-[100%] tracking-[-0.01em] text-black"
+            imageClassName="w-[75px] h-[75px] lg:w-[112.69px] lg:h-[112.69px] rounded-full border-[12px] border-[#003A2F]"
+            nameClassName="md:font-['Gilroy-SemiBold'] font-normal text-base md:text-[30px] leading-[100%] tracking-[-0.01em] text-black"
           />
         </div>
 
@@ -220,7 +221,7 @@ const ChatComponent = () => {
                 msg.sender === "me" ? "justify-end" : "justify-start"
               }`}
             >
-              <div className="max-w-[414px]">
+              <div className="max-w-xs sm:max-w-[414px]">
                 <div
                   className={`px-[18px] py-[14px] rounded-[30px] font-['Poppins'] font-normal text-[14px] leading-[100%] ${
                     msg.sender === "me"

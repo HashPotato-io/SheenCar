@@ -1,17 +1,10 @@
 import { useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import CarFilter from "@/components/car/car-filter";
-import SearchResults from "@/components/search/search-results";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import CarCards from "@/components/cards/car-cards";
-import { Input } from "@/components/ui/input";
-import { Search as SearchIcon } from "lucide-react";
+
 import HeroSection from "@/components/hero-section";
 import NewCarsBanner from "../assets/newcarsHS.png";
 import CarListing from "@/components/CarListing";
-import { useMobileDevice } from "@/hooks/useMobileDevice";
 
 // Add this type definition above your component if not already defined elsewhere:
 type Car = {
@@ -264,11 +257,10 @@ export default function NewCars() {
         headingContent={
           <>
             <div
-              className="text-center mb-2 mx-auto"
+              className="text-center  text-[26px] md:text-4xl lg:text-[50px] mb-2 mx-auto"
               style={{
                 fontFamily: "Gilroy-SemiBold",
                 fontWeight: 400,
-                fontSize: "40px",
                 lineHeight: "100%",
                 letterSpacing: "-1%",
                 color: "#FFFFFF",

@@ -353,21 +353,21 @@ export default function ComparisonTool() {
   return (
     <section className="py-16 bg-gray-100">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-[46px] font-[400] leading-[100%] tracking-[-0.01em] text-center text-black mb-2 font-['Gilroy-SemiBold']">
+        <h2 className="text-2xl lg:text-[46px] font-[400] leading-[30px] lg:leading-[100%] tracking-[-0.01em] text-center text-black mb-2 font-['Gilroy-SemiBold']">
           Which one to choose? <span className="text-[#AF8C32]">Compare</span>{" "}
           them!
         </h2>
-        <p className="text-[20px] font-[400] leading-[100%] tracking-[0] text-center text-[#171616] mb-10 font-['Poppins']">
-          Get a detailed comparison between the two cars of your liking to make
-          a calculated buying decision.
+        <p className="text-sm lg:text-[20px] font-[400] leading-[19px] lg:leading-[100%] tracking-[0] text-center text-[#171616] mb-10 font-['Poppins']">
+          Get a detailed comparison between the cars of your liking to make
+          a calculated decision.
         </p>
 
-        <div className="mx-auto">
-          <div className="flex flex-wrap justify-center">
+        <div className="mx-auto ">
+          <div className="flex flex-col lg:flex-row lg:justify-center">
             {carSelections?.map((carSelection, index) => (
               <div
                 key={carSelection.id}
-                className="flex flex-col items-center w-full md:w-auto md:flex-1 relative"
+                className="flex flex-col gap-2 my-8 items-center w-full md:w-auto md:flex-1 relative"
               >
                 {carSelection?.make && carSelection?.model ? (
                   <CarSelectedCard
@@ -400,7 +400,7 @@ export default function ComparisonTool() {
                 )}
 
                 {/* Make & Model selectors */}
-                <div className="w-full flex gap-2 items-center justify-center mb-6">
+                <div className="w-full flex justify-center  gap-6 items-center  mb-6">
                   <CustomSelect
                     value={carSelection.make}
                     onValueChange={(value) =>
@@ -408,14 +408,14 @@ export default function ComparisonTool() {
                     }
                   >
                     <CustomSelectTrigger
-                      className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent w-[177.55px] h-[43.14px]"
-                      placeholderColor="#696969"
-                      borderColor="#CFCFCF"
+                      className="md:pl-4 w-[140px] border-b-black border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent   h-[43.14px]"
+                      placeholderColor="black"
+                      borderColor="black"
                     >
                       <span>
                         {carSelection.make
                           ? carMakes.find((m) => m.id === carSelection.make)
-                              ?.name || carSelection.make
+                            ?.name || carSelection.make
                           : "Make"}
                       </span>
                     </CustomSelectTrigger>
@@ -430,9 +430,8 @@ export default function ComparisonTool() {
                             key={make.id}
                             value={make.id}
                             disabled={isDisabled}
-                            className={`py-2 border-b border-gray-200 last:border-0 ${
-                              isDisabled ? "opacity-50" : ""
-                            }`}
+                            className={`py-2 border-b-black  last:border-0 ${isDisabled ? "opacity-50" : ""
+                              }`}
                           >
                             {make.name}
                           </CustomSelectItem>
@@ -449,14 +448,14 @@ export default function ComparisonTool() {
                     disabled={!carSelection.make}
                   >
                     <CustomSelectTrigger
-                      className="pl-9 border-b border-t-0 border-l-0 border-r-0 rounded-none focus:ring-0 bg-transparent w-[177.55px] h-[43.14px]"
-                      placeholderColor="#696969"
-                      borderColor="#CFCFCF"
+                      className="md:pl-4 border-b-black text-black  rounded-none focus:ring-0 bg-transparent w-[140px] h-[43.14px]"
+                      placeholderColor="black"
+                      borderColor="black"
                     >
                       <span>
                         {carSelection.model
                           ? carModels.find((m) => m.id === carSelection.model)
-                              ?.name || carSelection.model
+                            ?.name || carSelection.model
                           : "Model"}
                       </span>
                     </CustomSelectTrigger>
@@ -474,34 +473,74 @@ export default function ComparisonTool() {
                         ))}
                     </CustomSelectContent>
                   </CustomSelect>
+
                 </div>
 
                 {/* VS circle between cars */}
-                {index < carSelections.length - 1 && (
+                {/* {index < carSelections.length - 1 && (
                   <div
-                    className="hidden md:block absolute top-[38%] z-10"
+                    className="hidden xl:w-[32px] lg:block absolute top-[38%] z-10"
                     style={{
                       left: "100%",
                       transform: "translate(-50%, -50%)",
-                      width: "32px",
+                      
                     }}
                   >
                     <div className="flex flex-col items-center justify-center">
                       <div className="border-l-2 border-dashed border-[#919191] h-24"></div>
-                      <div className="rounded-full bg-[#003A2F] text-white font-semibold flex items-center justify-center w-12 h-12 text-md shadow-md my-2">
+                      <div className="rounded-full bg-[#003A2F] text-white font-semibold flex items-center justify-center text-sm w-6 h-6 xl:w-12 xl:h-12 xl:text-lg shadow-md my-2">
                         VS
                       </div>
                       <div className="border-l-2 border-dashed border-[#919191] h-24"></div>
                     </div>
                   </div>
+                )} */}
+                {index < carSelections.length - 1 && (
+                  <>
+                    {/* Vertical layout for larger screens */}
+                    <div
+                      className="hidden lg:block absolute top-[38%] z-10"
+                      style={{
+                        left: "100%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      <div className="flex flex-col items-center justify-center">
+                        <div className="border-l-2 border-dashed border-[#919191] h-24"></div>
+                        <div className="rounded-full bg-[#003A2F] text-white font-semibold flex items-center justify-center text-sm w-6 h-6 xl:w-12 xl:h-12 xl:text-lg shadow-md my-2">
+                          VS
+                        </div>
+                        <div className="border-l-2 border-dashed border-[#919191] h-24"></div>
+                      </div>
+                    </div>
+
+                    {/* Horizontal layout for smaller screens */}
+                   <div
+                      className=" lg:hidden absolute top-[105%] z-10 w-[100%]"
+                      style={{
+                      left: "50%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      <div className="flex  items-center justify-center w-full px-5">
+                        <div className="border-b-2 border-dashed border-[#919191] w-[130px]"></div>
+                        <div className="rounded-full bg-[#003A2F] text-white font-semibold flex px-4 items-center justify-center w-12 h-12 text-lg shadow-md my-2">
+                          VS
+                        </div>
+                        <div className="border-b-2 border-dashed border-[#919191] w-[130px]"></div>
+                      </div>
+                    </div>
+                  </>
                 )}
+
               </div>
             ))}
           </div>
 
-          <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-4">
+          <div className="mt-6 flex flex-col  md:flex-row items-center justify-center gap-4">
             <CustomButton
-              customStyles={{ width: "200px", height: "40px" }}
+              customStyles={{ height: "40px" }}
+              className="w-full md:w-1/4 lg:w-1/5 order-2 md:order-1 "
               disabled={!canCompare}
               onClick={handleCompareClick}
             >
@@ -510,7 +549,7 @@ export default function ComparisonTool() {
 
             {canAddMoreCars && (
               <div
-                className="flex items-center gap-2 cursor-pointer"
+                className="flex items-center mb-4 md:mb-0 order-1 md:order-2 gap-2 cursor-pointer"
                 style={{
                   fontFamily: "Gilroy-Regular",
                   fontWeight: 400,

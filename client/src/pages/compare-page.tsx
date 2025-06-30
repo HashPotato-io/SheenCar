@@ -26,7 +26,6 @@ export default function ComparePage() {
               style={{
                 fontFamily: "Gilroy-SemiBold",
                 fontWeight: 400,
-                fontSize: "clamp(32px, 5vw, 50px)",
                 lineHeight: "120%",
                 letterSpacing: "-1%",
                 textAlign: "center",
@@ -34,11 +33,11 @@ export default function ComparePage() {
                 margin: "60px auto",
                 padding: "0 20px",
               }}
+              className="text-[26px] lg:text-[50px]"
             >
               Find Your Perfect Match:{" "}
               <span style={{ color: "#AF8C32" }}>Compare</span>{" "}Cars
-              <br className="hidden sm:block" />
-              Side-by-Side for Smarter Choices
+             <span className="block">Side-by-Side for Smarter Choices</span> 
             </div>
           }
           bgImage={CarComparisonBanner}

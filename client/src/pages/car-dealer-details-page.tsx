@@ -2,19 +2,7 @@ import React, { useState } from "react";
 import { useParams, Link } from "wouter";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ThumbsUp,
-  Heart,
-  Share,
-  Phone,
-} from "lucide-react";
-import CarSvg from "../assets/car.svg";
-import EmblaCarousel from "@/components/ui/embla-carousel";
+import SellerDetails from "@/components/seller/SellerDetails";
 import useEmblaCarousel from "embla-carousel-react";
 import CarImageGallery from "@/components/car-image-gallery";
 import CarDetails from "@/components/car/CarDetails";
@@ -73,6 +61,7 @@ const carData = {
     mpg: "24/34",
   },
   seller: {
+    type: "dealer",
     name: "Prestige Auto Gallery",
     logo: "https://randomuser.me/api/portraits/men/32.jpg",
     rating: 4.8,
@@ -201,36 +190,50 @@ export default function DealerCarDetailsPage() {
           </div> */}
 
           {/* Car Images Section */}
-          <div className="flex flex-col md:flex-row gap-[20px] p-6">
-            <CarImageGallery
-              mainImage={mainImage}
-              setMainImage={setMainImage}
-              galleryImages={carData.galleryImages}
-              galleryIndex={galleryIndex}
-              setGalleryIndex={setGalleryIndex}
-            />
-
-            <CarDetails
-              car={carData}
+          <div className="flex flex-col md:flex-row gap-[20px] md:px-4">
+            <div className="order-2 lg:order-1">
+              <CarImageGallery
+                mainImage={mainImage}
+                setMainImage={setMainImage}
+                galleryImages={carData.galleryImages}
+                galleryIndex={galleryIndex}
+                setGalleryIndex={setGalleryIndex}
+              />
+            </div>
+            <div className="order-1 lg:order-2 p-6 md:p-0">
+              <CarDetails
+                car={carData}
+                onContactClick={() => setContactDialogOpen(true)}
+              />
+            </div>
+          </div>
+          <div className=" lg:hidden my-6 px-7 lg:px-0 lg:ml-3">
+            <SellerDetails
+              seller={carData.seller}
               onContactClick={() => setContactDialogOpen(true)}
             />
           </div>
-
-          <CarDescription description={carData.description} />
-
-          <CarTabs carData={carData} />
+          <div className="  mb-6 px-4 lg:px-0 ">
+            <CarDescription description={carData.description} />
+          </div>
+          <div className="  mb-6 px-4 lg:px-0 ">
+            <CarTabs carData={carData} />
+          </div>
 
           {/* Similar Listings */}
           <SimilarListings
             similarCarsForCarousel={similarCarsForCarousel}
             dealerId={dealerId || ""}
+            // emblaRef={emblaRef as React.RefObject<HTMLDivElement> | ((node?: Element | null) => void)}
             emblaRef={emblaRef as React.RefObject<HTMLDivElement> | ((node?: Element | null) => void)}
+
             scrollPrev={scrollPrev}
             scrollNext={scrollNext}
+            emblaInstance={emblaApi} // Pass this!
           />
 
-         {/* Contact Dialog */}
-         <TradeContactDialog
+          {/* Contact Dialog */}
+          <TradeContactDialog
             open={contactDialogOpen}
             onOpenChange={setContactDialogOpen}
             seller={carData.seller}

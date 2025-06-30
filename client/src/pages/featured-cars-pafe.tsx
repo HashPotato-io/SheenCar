@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+
 import HeroSection from "@/components/hero-section";
-import TradeBanner from "../assets/tradeHS.png";
+import UsedCarsBanner from "../assets/usedcarsHS.png";
 import CarListing from "@/components/CarListing";
 
 // Add this type definition above your component if not already defined elsewhere:
@@ -16,7 +17,7 @@ type Car = {
   sellerId: number;
 };
 
-export default function TradeCar() {
+export default function FeaturedCars() {
   const [filterVisible, setFilterVisible] = useState(true);
   const [searchInput, setSearchInput] = useState("");
 
@@ -256,22 +257,21 @@ export default function TradeCar() {
         headingContent={
           <>
             <div
-              className="text-center mb-2 leading-tight text-[26px] lg:text-[40px]"
+              className="text-center text-[26px] md:text-4xl lg:text-[50px] mb-2 mx-auto"
               style={{
                 fontFamily: "Gilroy-SemiBold",
                 fontWeight: 400,
+                lineHeight: "100%",
                 letterSpacing: "-1%",
                 color: "#FFFFFF",
               }}
-              
             >
-              Best Cars Available for{" "}
-              <span style={{ color: "#AF8C32" }}>Trade</span>, Find 
-              what suites you!
+              Discover Top Picks:{" "}
+              <span style={{ color: "#AF8C32" }}>Featured Cars</span> Hand Picked For You!
             </div>
           </>
         }
-        bgImage={TradeBanner}
+        bgImage={UsedCarsBanner}
       />
       <CarListing
         filterVisible={filterVisible}
@@ -282,7 +282,8 @@ export default function TradeCar() {
         handlePageChange={handlePageChange}
         carsCount={
           <>
-            <span className="text-amber-500">24</span> Cars Listed Under Trade
+            <span className="text-amber-500">134</span> Cars Listed Under Used
+            Cars
           </>
         }
       />

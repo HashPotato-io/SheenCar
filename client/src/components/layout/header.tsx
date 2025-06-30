@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/auth-context";
 import SheenCarLogo from "../../assets/SheenCar-Logo.png";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Menu, Search, User, LogOut } from "lucide-react";
+import { ChevronDown, ChevronUp, Menu, Search, User, LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +25,8 @@ export default function Header() {
     logout();
     navigate("/");
   };
+
+
 
   const menuItems = [
     {
@@ -49,32 +51,40 @@ export default function Header() {
       name: "Buyer's Tools",
       children: [
         { name: "Buy It for Me", href: "/post-ad?requestType=buy" },
+        { name: "Featured Listings", href: "/featured-cars" },
         { name: "Car Comparison", href: "/compare" },
       ],
     },
   ];
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+
+  const toggleItem = (itemName: string) => {
+    setExpandedItems((prevState) => ({
+      ...prevState,
+      [itemName]: !prevState[itemName], // Toggle the expanded state
+    }));
+  };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-40">
-      <div className="container mx-auto px-4 py-3">
+    <header className="shadow-sm sticky top-0 z-40 bg-white">
+      <div className="  py-3 px-4">
         <div className="flex items-center justify-between">
           {/* Logo and Desktop Navigation */}
-          <div className="flex items-center space-x-4 md:space-x-8">
+          <div className="flex items-center space-x-4 md:space-x-8 ">
             <Link href="/" className="flex-shrink-0">
               <img src={SheenCarLogo} alt="SheenCar Logo" className="h-8 md:h-10" />
             </Link>
-            <nav className="hidden md:flex space-x-4">
+            <nav className="hidden lg:flex space-x-4">
               {menuItems.map((item) => (
                 <div key={item.name} className="relative group">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
                         variant="ghost"
-                        className="px-3 py-2 text-neutral-800 font-medium flex items-center hover:bg-[#E9E9E9] data-[state=open]:bg-[#E9E9E9] transition-colors duration-200"
+                        className="px-3 py-2 text-neutral-800 lg:text-lg font-medium flex items-center hover:bg-[#E9E9E9] data-[state=open]:bg-[#E9E9E9] transition-colors duration-200"
                         style={{
                           fontFamily: "Gilroy-Regular",
                           fontWeight: 400,
-                          fontSize: "18px",
                           lineHeight: "100%",
                           letterSpacing: "0%",
                           textAlign: "center",
@@ -122,7 +132,7 @@ export default function Header() {
                         >
                           <Link
                             href={child.href}
-                            className="w-full block hover:text-inherit px-4 py-2"
+                            className="w-full block  hover:text-inherit px-4 py-2"
                           >
                             {child.name}
                           </Link>
@@ -138,7 +148,7 @@ export default function Header() {
           {/* Right side buttons and icons */}
           <div className="flex items-center space-x-2 md:space-x-4">
             {user && (
-              <div className="hidden md:flex items-center space-x-4">
+              <div className="flex items-center space-x-4">
                 <Link href="/notifications" className="hover:opacity-80">
                   <NotificationIcon />
                 </Link>
@@ -150,8 +160,8 @@ export default function Header() {
                 </Link>
               </div>
             )}
-            
-            <Link href="/post-ad" className="hidden md:block">
+
+            <Link href="/post-ad" className="hidden lg:block">
               <Button
                 variant="outline"
                 className="border-[#AF8C32] text-[#AF8C32] hover:bg-[#AF8C32] hover:text-white"
@@ -159,27 +169,28 @@ export default function Header() {
                 Post Ad
               </Button>
             </Link>
-
-            {user ? (
-              <Button
-                onClick={handleLogout}
-                className="w-[100px] md:w-[120px]"
-                style={{ background: "#761B1C" }}
-              >
-                Logout
-              </Button>
-            ) : (
-              <Link href="/auth">
-                <Button>Login</Button>
-              </Link>
-            )}
+            <div className="hidden lg:block" >
+              {user ? (
+                <Button
+                  onClick={handleLogout}
+                  className="w-[100px] md:w-[120px]"
+                  style={{ background: "#761B1C" }}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <Link href="/auth">
+                  <Button>Login</Button>
+                </Link>
+              )}
+            </div>
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="md:hidden"
+                  className="lg:hidden"
                   onClick={() => setMobileMenuOpen(true)}
                 >
                   <Menu className="h-6 w-6" />
@@ -187,21 +198,8 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent>
                 <div className="flex flex-col space-y-4 mt-6">
-                  {user && (
-                    <div className="flex items-center space-x-4 mb-4">
-                      <Link href="/notifications" onClick={() => setMobileMenuOpen(false)}>
-                        <NotificationIcon />
-                      </Link>
-                      <Link href="/chat" onClick={() => setMobileMenuOpen(false)}>
-                        <Chat2Icon />
-                      </Link>
-                      <Link href="/account" onClick={() => setMobileMenuOpen(false)}>
-                        <AccountIcon />
-                      </Link>
-                    </div>
-                  )}
                   
-                  {menuItems?.map((item) => (
+                  {/* {menuItems?.map((item) => (
                     <div key={item.name} className="flex flex-col space-y-2">
                       <h3 className="font-bold">{item.name}</h3>
                       <div className="flex flex-col space-y-2 ml-2">
@@ -217,16 +215,67 @@ export default function Header() {
                         ))}
                       </div>
                     </div>
-                  ))}
+                  ))} */}
 
-                  <Link href="/post-ad" onClick={() => setMobileMenuOpen(false)}>
+                  {menuItems?.map((item) => (
+                    <div key={item.name} className="flex flex-col space-y-2">
+                      {/* Dropdown Header with Arrow */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer"
+                        onClick={() => toggleItem(item.name)}
+                      >
+                        <h3 className="text-lg">{item.name}</h3>
+                        <div>
+                          {expandedItems[item.name] ? (
+                            <ChevronUp className="text-gray-600" />
+                          ) : (
+                            <ChevronDown className="text-gray-600" />
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Children (Toggled visibility based on expanded state) */}
+                      {expandedItems[item.name] && (
+                        <div className="flex flex-col space-y-2">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.name}
+                              href={child.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className=" hover:text-primary"
+                            >
+                              {child.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                     <Link href="/post-ad" onClick={() => setMobileMenuOpen(false)}>
                     <Button
                       variant="outline"
-                      className="w-full mt-4 border-[#AF8C32] text-[#AF8C32] hover:bg-[#AF8C32] hover:text-white"
+                      className="w-full mt-10  border-[#AF8C32] text-[#AF8C32] hover:bg-[#AF8C32] hover:text-white"
                     >
                       Post Ad
                     </Button>
                   </Link>
+                  <div className="w-full ">
+                    {user ? (
+                      <Button
+                        onClick={handleLogout}
+                        className="w-full  lg:w-[100px] md:w-[120px]"
+                        style={{ background: "#761B1C" }}
+                      >
+                        Logout
+                      </Button>
+                    ) : (
+                      <Link href="/auth" className="w-full">
+                        <Button className="w-full ">Login</Button>
+                      </Link>
+                    )}
+                  </div>
+
+               
                 </div>
               </SheetContent>
             </Sheet>

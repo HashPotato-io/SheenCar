@@ -148,7 +148,7 @@ export default function ContactPage() {
 
             {/* Right Side - Car Image */}
             <img
-              className="w-full lg:w-[435px] h-auto lg:h-[435px] object-contain"
+              className="w-full hidden lg:block lg:w-[435px] h-auto lg:h-[435px] object-contain"
               src={ContactImage}
               alt="contact-us"
             />

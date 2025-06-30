@@ -19,7 +19,7 @@ const CarfaxModal: React.FC<CarfaxModalProps> = ({
 
   const handleProceed = () => {
     // Navigate to checkout with car details
-    setLocation(`/checkout?carDetails=${JSON.stringify({ carId, type: 'carfax' })}&budget=5&duration=1`);
+    // setLocation(`/checkout?carDetails=${JSON.stringify({ carId, type: 'carfax' })}&budget=5&duration=1`);
   };
 
   return (

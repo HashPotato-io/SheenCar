@@ -51,9 +51,9 @@ const CustomSelectTrigger = React.forwardRef<
         }}
         className={cn(
           // Default variant styles
-          variant === 'default' && "flex h-10 w-full items-center justify-between border-b bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
+          variant === 'default' && "flex h-10 w-full items-center justify-between border-b bg-transparent px-3 py-2 text-sm md:text-base ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
           // Outline variant styles
-          variant === 'outline' && "flex h-10 w-[364px] items-center justify-between rounded-[6px] border bg-transparent px-4 py-2.5 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
+          variant === 'outline' && "flex h-10 w-full items-center justify-between md:text-base rounded-[6px] border bg-transparent px-4 py-2.5 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 font-['Poppins'] font-normal text-[14px] leading-[100%] tracking-[0%] align-middle",
           showIcon && "pr-10",
           className
         )}

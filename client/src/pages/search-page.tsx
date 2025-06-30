@@ -36,10 +36,7 @@ export default function SearchPage() {
           
           <div className="flex flex-col lg:flex-row gap-8">
             <div className={`lg:w-1/4 ${filterVisible ? 'block' : 'hidden'} lg:block`}>
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-xl font-semibold mb-4 font-montserrat">Filters</h2>
                 <CarFilter />
-              </div>
             </div>
             
             <div className="lg:w-3/4">

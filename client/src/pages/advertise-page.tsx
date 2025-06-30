@@ -27,7 +27,6 @@ export default function AdvertisePage() {
             style={{
               fontFamily: "Gilroy-SemiBold",
               fontWeight: 400,
-              fontSize: "clamp(32px, 5vw, 50px)",
               lineHeight: "120%",
               letterSpacing: "-1%",
               textAlign: "center",
@@ -35,11 +34,12 @@ export default function AdvertisePage() {
               margin: "60px auto",
               padding: "0 20px",
             }}
+            className="text-[26px] md:text-3xl lg:text-[50px]"
           >
             <span style={{ color: "#AF8C32" }}>Advertise</span> with SheenCar &
             Accelerate Your Reach
             <br className="hidden sm:block" />
-            <span className="text-xl sm:text-2xl mt-4 block">
+            <span className="text-xs md:text-xl mt-4 block">
               Promote your business to active car buyers and sellers through
               targeted exposure.
             </span>
@@ -55,11 +55,10 @@ export default function AdvertisePage() {
           {/* Introduction Section */}
           <div className="mx-auto text-center mb-16">
             <p
-              className="text-lg text-gray-700 leading-relaxed"
+              className="lg:text-xl text-gray-700 leading-relaxed"
               style={{
                 fontFamily: "Poppins",
                 fontWeight: 400,
-                fontSize: "20px",
                 lineHeight: "27px",
                 letterSpacing: "0%",
                 textAlign: "center",
@@ -83,12 +82,12 @@ export default function AdvertisePage() {
                   style={{
                     fontFamily: "Gilroy-SemiBold",
                     fontWeight: 400,
-                    fontSize: "34px",
                     lineHeight: "100%",
                     letterSpacing: "-1%",
                     color: "#000000",
                     marginBottom: "20px",
                   }}
+                  className="text-[22px] lg:text-[34px] text-center md:text-left"
                 >
                   Helping Dealers Expand Their Reach
                 </h2>
@@ -96,11 +95,11 @@ export default function AdvertisePage() {
                   style={{
                     fontFamily: "Poppins",
                     fontWeight: 400,
-                    fontSize: "20px",
                     lineHeight: "27px",
                     letterSpacing: "0%",
                     color: "#000000",
                   }}
+                  className="text-base lg:text-xl text-center md:text-left"
                 >
                   Dealerships can showcase their inventory with Featured
                   Listings, ensuring their vehicles appear at the top of search
@@ -112,17 +111,17 @@ export default function AdvertisePage() {
             </div>
             {/* second row */}
             <div className="flex flex-col md:flex-row  gap-[10px] mb-16">
-              <div className="w-full">
+              <div className="w-full order-2 lg:order-1">
                 <h2
                   style={{
                     fontFamily: "Gilroy-SemiBold",
                     fontWeight: 400,
-                    fontSize: "34px",
                     lineHeight: "100%",
                     letterSpacing: "-1%",
                     color: "#000000",
                     marginBottom: "20px",
                   }}
+                   className="text-[22px] lg:text-[34px] text-center md:text-left"
                 >
                   Empowering Brands with High-Impact Advertising
                 </h2>
@@ -135,6 +134,7 @@ export default function AdvertisePage() {
                     letterSpacing: "0%",
                     color: "#000000",
                   }}
+                  className="text-base lg:text-xl text-center md:text-left"
                 >
                   Automotive service providers, insurance companies, and car
                   accessory brands can leverage banner ads, sponsored content,
@@ -142,7 +142,7 @@ export default function AdvertisePage() {
                   enthusiasts and buyers.
                 </p>
               </div>
-              <div className="w-full md:w-1/2 flex justify-center">
+              <div className="w-full order-1 lg:order-2 md:w-1/2 flex justify-center">
                 <BrandIcon />
               </div>
             </div>
@@ -157,12 +157,12 @@ export default function AdvertisePage() {
                   style={{
                     fontFamily: "Gilroy-SemiBold",
                     fontWeight: 400,
-                    fontSize: "34px",
                     lineHeight: "100%",
                     letterSpacing: "-1%",
                     color: "#000000",
                     marginBottom: "20px",
                   }}
+                   className="text-[22px] lg:text-[34px] text-center md:text-left"
                 >
                   Boosting Individual Sellers’ Visibility
                 </h2>
@@ -175,6 +175,7 @@ export default function AdvertisePage() {
                     letterSpacing: "0%",
                     color: "#000000",
                   }}
+                  className="text-base lg:text-xl text-center md:text-left"
                 >
                   Private sellers can enhance their listings with Boosted Ads,
                   giving them priority placement and increased exposure to

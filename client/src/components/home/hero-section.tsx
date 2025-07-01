@@ -44,7 +44,7 @@ export default function HeroSection() {
           Verified listings, trusted sellers, and a seamless experience from
           start to finish.
         </div>
-        <CustomButton customStyles={{ width: "216px", height: "49px" }}>
+        <CustomButton customStyles={{ width: "216px", height: "49px" }} onClick={() => navigate("/post-ad")}>
           <Plus size={23} className="mr-2" />
           <span>Post Your Ad</span>
         </CustomButton>
@@ -86,7 +86,7 @@ export default function HeroSection() {
         Verified listings, trusted sellers, and a seamless experience from start
         to finish.
       </div>
-      <CustomButton customStyles={{ width: "216px", height: "49px" }}>
+      <CustomButton customStyles={{ width: "216px", height: "49px" }} onClick={() => navigate("/post-ad")}>
         <Plus size={23} className="mr-2" />
         <span>Post Your Ad</span>
       </CustomButton>

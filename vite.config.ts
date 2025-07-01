@@ -29,4 +29,10 @@ export default defineConfig({
     emptyOutDir: true,
   },
   base: '/',
+   server: {
+    allowedHosts: [
+      'e5c1-39-51-56-137.ngrok-free.app', // Replace with your ngrok URL
+      '.ngrok.io', // Allow any ngrok URL
+    ],
+  },
 });

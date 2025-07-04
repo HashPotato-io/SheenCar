@@ -16,6 +16,9 @@ import WithdrawOfferModal from "../modals/WithdrawOfferModal";
 import { CustomButton } from "../ui/custom-button";
 import StatusBadge from "../ui/status-badge";
 import { DeleteIcon, EditIcon } from "../icons";
+import CompletedTradeModal from "../modals/CompletedTradeModal";
+import OfferCard from "../offer-card";
+import OfferCompletedModal from "../modals/OfferCompletedModal";
 
 type Car = {
   id: number;
@@ -28,6 +31,14 @@ type Car = {
   isTraded?: boolean;
   tradeWith?: string;
   tradeAmount?: number;
+  name?: string; // Assuming ownerName is part of the car object
+  traded?: string;
+  adjustment?: string; // Assuming this is the price adjustment for trade
+  tradedWithName?: string;
+  adjustedAmount?: number;
+  buyerName?: string;
+  receivedAmount?: number
+
 };
 
 type ModalStep =
@@ -45,7 +56,9 @@ type ModalStep =
   | "viewDeals"
   | "withdrawProposal"
   | "viewOffers"
-  | "withdrawOffer";
+  | "withdrawOffer"
+  | "viewDetails"
+  | "viewTradeDetails"
 
 export type ButtonState =
   | "boostAd"
@@ -60,7 +73,9 @@ export type ButtonState =
   | "viewDeals"
   | "withdrawProposal"
   | "viewOffers"
-  | "withdrawOffer";
+  | "withdrawOffer"
+  | "viewDetails"
+  | "viewTradeDetails"
 
 interface CarCardsProps {
   car: Car;
@@ -134,7 +149,14 @@ const Card: React.FC<CarCardsProps> = ({
   const handleWithDrawProposal = () => {
     setCurrentStep("withdrawProposal");
   };
-
+  const handleViewDetails = () => {
+    setCurrentStep("viewDetails");
+    console.log("Current Step Set to:", currentStep);
+    console.log("Clickkkkkkk", currentStep);
+  }
+  const handleViewTradeDetails = () => {
+    setCurrentStep("viewTradeDetails")
+  }
   const handleProceedToPayClose = () => {
     setCurrentStep("none");
   };
@@ -175,6 +197,8 @@ const Card: React.FC<CarCardsProps> = ({
     // Add any additional deletion logic here
   };
 
+  console.log("details", car.buyerName, car.receivedAmount)
+
   const getButtonText = (state: ButtonState): string => {
     switch (state) {
       case "boostAd":
@@ -183,6 +207,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "Boosted";
       case "renewAd":
         return "Renew Ad";
+      case "viewTradeDetails":
+        return "View Trade Details";
       case "reopenAd":
         return "Reopen Ad";
       case "withdrawAd":
@@ -201,6 +227,8 @@ const Card: React.FC<CarCardsProps> = ({
         return "View Offers";
       case "withdrawOffer":
         return "Withdraw Offer";
+      case "viewDetails":
+        return "View Details";
       default:
         return "Boost Ad";
     }
@@ -278,8 +306,17 @@ const Card: React.FC<CarCardsProps> = ({
       };
     }
 
-    if(state === "withdrawProposal"){
+
+    if (state === "withdrawProposal") {
       return handleWithDrawProposal;
+    }
+
+    if (state === "viewTradeDetails") {
+      return handleViewTradeDetails
+    }
+
+    if (state === "viewDetails") {
+      return handleViewDetails;
     }
 
     if (state === "withdrawOffer") {
@@ -348,7 +385,7 @@ const Card: React.FC<CarCardsProps> = ({
       );
     }
 
-   
+
     if (status === "pending" && buttonState !== "withdrawOffer") {
       return (
         <div
@@ -414,7 +451,7 @@ const Card: React.FC<CarCardsProps> = ({
   if (tiny) {
     return (
       <div
-      className=" "
+        className=" "
         style={{
           boxShadow: "1.52px 1.52px 9.14px 0px #0000001F",
           width: "100%",
@@ -616,7 +653,42 @@ const Card: React.FC<CarCardsProps> = ({
             // Add any additional withdrawal logic here
           }}
         />
+        <OfferCompletedModal
+          isOpen={currentStep === "viewDetails"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={() => {
+            setCurrentStep("none");
+            // Add any additional view offers logic here
+          }}
+          tradeDetails={{
+            buyerName: car.buyerName,
 
+            receivedAmount: car.receivedAmount
+
+
+          }}
+        />
+
+        <CompletedTradeModal
+          isOpen={currentStep === "viewTradeDetails"}
+          onClose={() => setCurrentStep("none")}
+          onConfirm={() => {
+            setCurrentStep("none");
+          }}
+          tradeDetails={{
+            tradedWithName: car.tradedWithName,
+            tradedWith: car.tradeWith,
+            traded: car.traded,
+            adjustment: car.adjustment,
+            adjustedAmount: car.adjustedAmount
+
+
+          }}
+
+
+
+
+        />
         <WithdrawOfferModal
           isOpen={currentStep === "withdrawOffer"}
           onClose={() => setCurrentStep("none")}
@@ -860,6 +932,42 @@ const Card: React.FC<CarCardsProps> = ({
         }}
       />
 
+      <CompletedTradeModal
+        isOpen={currentStep === "viewTradeDetails"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={() => {
+          setCurrentStep("none");
+        }}
+        tradeDetails={{
+          tradedWithName: car.tradedWithName,
+          tradedWith: car.tradeWith,
+          traded: car.traded,
+          adjustment: car.adjustment,
+          adjustedAmount: car.adjustedAmount
+
+
+        }}
+
+
+
+
+      />
+
+      <OfferCompletedModal
+        isOpen={currentStep === "viewDetails"}
+        onClose={() => setCurrentStep("none")}
+        onConfirm={() => {
+          setCurrentStep("none");
+          // Add any additional view offers logic here
+        }}
+        tradeDetails={{
+          buyerName: car.buyerName,
+
+          receivedAmount: car.receivedAmount
+
+
+        }}
+      />
       {/* Add WithdrawAdModal */}
       <WithdrawAdModal
         isOpen={currentStep === "withdrawAd"}

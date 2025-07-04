@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
 import Banner from "../../assets/banner.png";
 import HomeBanner from "../../assets/Home-Banner2.png";
 import CarBanner from "../../assets/car-banner.png";

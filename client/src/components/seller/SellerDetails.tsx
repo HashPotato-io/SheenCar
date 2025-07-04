@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChatIcon, MessageIcon, PersonIcon, PhoneIcon } from "../icons";
 import { CustomButton } from "../ui/custom-button";
@@ -21,6 +22,25 @@ const SellerDetails: React.FC<SellerDetailsProps> = ({
   seller,
   onContactClick,
 }) => {
+
+  const [isMobile, setIsMobile] = useState(false);
+  
+    // Check if it's mobile on initial load and on resize
+    useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth <= 768); // 1023px is the breakpoint for mobile
+      };
+  
+      // Initial check
+      checkMobile();
+  
+      // Event listener for resize
+      window.addEventListener('resize', checkMobile);
+  
+      // Cleanup the event listener
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+  
   const [, setLocation] = useLocation();
   return (
     <div className="flex flex-col w-full lg:max-w-[577px] h-auto gap-[4px] rounded-[11.32px] p-4 sm:p-[18px] bg-white shadow-[0px_4px_12px_0px_#00000014]">
@@ -93,7 +113,8 @@ const SellerDetails: React.FC<SellerDetailsProps> = ({
             gap: '8px'
           }}
           onClick={()=>{
-            setLocation("/chat");
+            isMobile ? setLocation("/chat/6") : setLocation("/chat");
+           
           }}
         >
           <ChatIcon />

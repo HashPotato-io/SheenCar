@@ -19,10 +19,10 @@ interface Message {
 }
 
 const ChatComponent = () => {
-  const [selectedChat, setSelectedChat] = useState<string>("Karen Faye");
+  const [selectedChat, setSelectedChat] = useState<string>("Prestige Auto Gallery");
   const [message, setMessage] = useState<string>("");
   const [chatMessages, setChatMessages] = useState<Record<string, Message[]>>({
-    "Karen Faye": [
+    "Prestige Auto Gallery": [
       {
         text: "Lorem ipsum dolor sit amet consectetur. Pellentesque...",
         time: "12:01 pm",
@@ -73,9 +73,9 @@ const ChatComponent = () => {
       unread: true,
     },
     {
-      name: "Karen Faye",
+      name: "Prestige Auto Gallery",
       avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
+        "https://randomuser.me/api/portraits/men/32.jpg",
       lastMessage: "Hello! Nice to meet you...",
       time: "9:30 pm",
       unread: false,

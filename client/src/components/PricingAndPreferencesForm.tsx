@@ -218,7 +218,7 @@ const PricingAndPreferencesForm: React.FC<Props> = ({
                 Pricing & Acknowledgment
               </p>
 
-                <p className="text-[22px] md:text-[26px] mt-2 font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
+              <p className="text-[22px] md:text-[26px] mt-2 font-['Gilroy-SemiBold'] font-[400] leading-[100%] tracking-[-0.01em] text-black">
                 Budget & Financing
               </p>
 
@@ -242,32 +242,32 @@ const PricingAndPreferencesForm: React.FC<Props> = ({
                 </div>
                 <div className="flex gap-3 flex-col md:flex-row">
                   <div className="w-full">
-                  <CustomInput
-                    variant="outline"
-                    type="number"
-                    placeholder="$ Minimum Amount"
-                    className="w-full h-[40px]"
-                    value={formData.minPrice}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleInputChange("minPrice", e.target.value)
-                    }
-                    min="0"
-                    step="100"
-                  />
+                    <CustomInput
+                      variant="outline"
+                      type="number"
+                      placeholder="$ Minimum Amount"
+                      className="w-full h-[40px]"
+                      value={formData.minPrice}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleInputChange("minPrice", e.target.value)
+                      }
+                      min="0"
+                      step="100"
+                    />
                   </div>
                   <div className="w-full">
-                  <CustomInput
-                    variant="outline"
-                    type="number"
-                    placeholder="$ Maximum Amount"
-                    className="w-full h-[40px]"
-                    value={formData.maxPrice}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleInputChange("maxPrice", e.target.value)
-                    }
-                    min="0"
-                    step="100"
-                  />
+                    <CustomInput
+                      variant="outline"
+                      type="number"
+                      placeholder="$ Maximum Amount"
+                      className="w-full h-[40px]"
+                      value={formData.maxPrice}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleInputChange("maxPrice", e.target.value)
+                      }
+                      min="0"
+                      step="100"
+                    />
                   </div>
                 </div>
               </div>
@@ -405,11 +405,11 @@ const PricingAndPreferencesForm: React.FC<Props> = ({
         </div>
 
         {/* Right Column - Car Illustration */}
-       <div className="flex flex-col gap-4 items-center order-1 lg:order-2 lg:mt-[100px]">
+        <div className="flex flex-col gap-4 items-center order-1 lg:order-2 lg:mt-[100px]">
           <div className="flex item-center justify-center bg-[#D7FFF1] w-[249px] h-[249px] rounded-[206px]">
             <img src={CarSvg} alt="car-illustration" width="195" height="111" />
           </div>
-        <p className="lg:w-[300px] xl:w-[353px] text-[16px] font-['Poppins'] font-[300] leading-[21px] text-center text-[#585353]">
+          <p className="lg:w-[300px] xl:w-[353px] text-[16px] font-['Poppins'] font-[300] leading-[21px] text-center text-[#585353]">
             Decide how you want to sell your car—set a price, enable
             negotiation, or explore car trading options. Your preferences help
             match you with the right buyers.
@@ -459,7 +459,7 @@ const PricingAndPreferencesForm: React.FC<Props> = ({
             </div>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between",  alignContent: "center" }}>
             <div
               style={{
                 fontFamily: "Gilroy-Regular",
@@ -473,15 +473,24 @@ const PricingAndPreferencesForm: React.FC<Props> = ({
             >
               Price Negotiable
             </div>
-            <CustomToggle
-              checked={formData?.priceNegotiable}
-              onChange={(checked) =>
-                handleInputChange("priceNegotiable", checked)
-              }
+            <input
+              type="radio"
+              name="negotiable"
+              checked={formData?.priceNegotiable === true}
+              onChange={() => handleInputChange("priceNegotiable", true)}
+              style={{
+                width: "14px",
+                height: "14px",
+                borderRadius: "50%",
+                border: "2px solid #1D1B20",  // Black outline
+                accentColor: "#1D1B20",  // Black checkmark color for modern browsers
+                transform: "scale(1.5)",  
+                cursor: "pointer"// Make the radio button bigger
+              }}
             />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignContent: "center"  }}>
             <div
               style={{
                 fontFamily: "Gilroy-Regular",
@@ -495,11 +504,24 @@ const PricingAndPreferencesForm: React.FC<Props> = ({
             >
               Trade Car
             </div>
-            <CustomToggle
-              checked={formData?.tradeCar}
-              onChange={(checked) => handleInputChange("tradeCar", checked)}
+            <input
+              type="radio"
+              name="negotiable"
+              checked={formData?.tradeCar === true}
+              onChange={() => handleInputChange("tradeCar", true)}
+              style={{
+                width: "14px",
+                height: "14px",
+                borderRadius: "50%",
+                border: "2px solid #1D1B20",  // Black outline
+                accentColor: "#1D1B20",  // Black checkmark color for modern browsers
+                transform: "scale(1.5)", 
+                cursor: "pointer" // Make the radio button bigger
+              }}
             />
           </div>
+
+
 
           {formData?.tradeCar && (
             <div className="mt-4 flex flex-col gap-6">

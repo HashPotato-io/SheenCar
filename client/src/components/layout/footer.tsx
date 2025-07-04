@@ -46,7 +46,7 @@ const menuSections: MenuSection[] = [
     title: "Contact",
     items: [
       { title: "Customer Support", href: "/contact", isLink: true },
-      { title: "Dealer Support", href: "#" },
+      { title: "Dealer Support", href: "/dealer-support" },
       { title: "Chat with Us", href: "/chat", isLink: true },
     ],
   },

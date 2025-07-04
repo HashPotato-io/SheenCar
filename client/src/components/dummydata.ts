@@ -1,3 +1,5 @@
+import { EmpoweringBuyers } from "./icons";
+
 export const dummyCars = [
   // Active Tab Cars (18 cars = 2 pages)
   {
@@ -12,7 +14,7 @@ export const dummyCars = [
     buttonState: "boostAd",
     tabType: "Active",
   },
- 
+
   {
     id: 3,
     make: "Tesla",
@@ -77,7 +79,7 @@ export const dummyCars = [
     buttonState: "boostAd",
     tabType: "Active",
   },
- 
+
   {
     id: 13,
     make: "Kia",
@@ -90,7 +92,7 @@ export const dummyCars = [
     buttonState: "boostAd",
     tabType: "Active",
   },
- 
+
   {
     id: 15,
     make: "Nissan",
@@ -103,7 +105,7 @@ export const dummyCars = [
     buttonState: "boostAd",
     tabType: "Active",
   },
-  
+
   {
     id: 17,
     make: "Buick",
@@ -885,11 +887,10 @@ export const dummyTradeDeals = [
     image:
       "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
     status: "active",
-    buttonState: "pending",
     tradeWith: "Honda Civic 2022",
-    tabType: "My Trade Proposals",
+    tabType: "My Trade Proposals", traded: "Toyota Corolla 2023", tradedWithName: "John Doe", adjustment: "even",
     isTraded: false,
-    tradeAmount: 5000,
+    adjustedAmount: 5000,
   },
   {
     id: 2,
@@ -899,12 +900,11 @@ export const dummyTradeDeals = [
     price: 55000,
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
-    status: "pending",
-    buttonState: "accepted",
+    status: "closed",
     tradeWith: "Mercedes GLE 2023",
-    tabType: "My Trade Proposals",
+    tabType: "My Trade Proposals", traded: "Toyota Corolla 2023", tradedWithName: "John Doe", adjustment: "even",
     isTraded: true,
-    tradeAmount: 0,
+    adjustedAmount: 0,
   },
 
   // Deals Received (second tab)
@@ -913,7 +913,7 @@ export const dummyTradeDeals = [
     make: "Honda",
     model: "Civic",
     year: 2022,
-    price: 22000,
+    price: 22000, traded: "", tradedWithName: "", adjustment: "",
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "active", // Status badge
@@ -922,15 +922,55 @@ export const dummyTradeDeals = [
     tabType: "Deals Received",
   },
   {
+    id: 21,
+    make: "Honda",
+    model: "Civic",
+    year: 2022,
+    price: 22000, traded: "Toyota Corolla 2023", tradedWithName: "John Doe", adjustment: "even",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "completed", // Status badge
+    buttonState: "viewTradeDetails",
+    tradeWith: "Toyota Corolla 2023",
+    tabType: "Deals Received",
+  },
+  {
+    id: 22,
+    make: "Honda",
+    model: "Civic",
+    year: 2022,
+    price: 22000, traded: "Toyota Corolla 2023", tradedWithName: "John Doe", adjustment: "seller",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "completed", // Status badge
+    buttonState: "viewTradeDetails",
+    tradeWith: "Toyota Corolla 2023",
+    tabType: "Deals Received",
+    adjustedAmount: 1220
+  },
+  {
+    id: 23,
+    make: "Honda",
+    model: "Civic",
+    year: 2022,
+    price: 22000, traded: "Toyota Corolla 2023", tradedWithName: "John Doe", adjustment: "buyer",
+    image:
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
+    status: "completed", // Status badge
+    buttonState: "viewTradeDetails",
+    tradeWith: "Toyota Corolla 2023",
+    tabType: "Deals Received",
+    adjustedAmount: 1420
+  },
+  {
     id: 11,
     make: "Mercedes",
     model: "GLE",
-    year: 2023,
+    year: 2023, traded: "Toyota Corolla 2023", tradedWithName: "John Doe", adjustment: "even",
     price: 65000,
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "closed", // Status badge
-    buttonState: "accepted",
     tradeWith: "BMW X5 2022",
     tabType: "Deals Received",
   },
@@ -938,31 +978,29 @@ export const dummyTradeDeals = [
     id: 13,
     make: "Toyota",
     model: "Camry",
-    year: 2023,
+    year: 2023, traded: "Toyota Corolla 2023", tradedWithName: "John Doe", adjustment: "even",
     price: 25000,
     image:
       "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
-    status: "active",
-    buttonState: "pending",
+    status: "completed",
     tradeWith: "Honda Civic 2022",
     tabType: "My Trade Proposals",
     isTraded: false,
-    tradeAmount: 5000,
+    adjustedAmount: 5000,
   },
   {
     id: 19,
     make: "Toyota",
     model: "Camry",
-    year: 2023,
+    year: 2023, traded: "Toyota Corolla 2023", tradedWithName: "John Doe", adjustment: "even",
     price: 25000,
     image:
       "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
-    status: "active",
-    buttonState: "pending",
+    status: "rejected",
     tradeWith: "Honda Civic 2022",
     tabType: "My Trade Proposals",
     isTraded: false,
-    tradeAmount: 5000,
+    adjustedAmount: 5000,
   },
   // ... more Deals Received items ...
 ];
@@ -976,11 +1014,12 @@ export const dummyOffers = [
     model: "Camry",
     year: 2023,
     price: 25000,
+    buttonState: "active",
     image:
       "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&w=400",
-    status: "pending",
-    buttonState: "viewOffers",
+    status: "active",
     offerAmount: 23000,
+    ownerName: "John Doe",
     offerDate: "2024-03-15",
     tabType: "My Listings",
   },
@@ -989,24 +1028,28 @@ export const dummyOffers = [
     make: "Honda",
     model: "Civic",
     year: 2022,
+    ownerName: "John Doe",
     price: 22000,
+    buttonState: "completed",
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
     status: "completed",
-    buttonState: "viewOffers",
     offerAmount: 21500,
     offerDate: "2024-03-14",
     tabType: "My Listings",
+    buyerName: "Jane Smith",
+    receivedAmount: 23323
   },
   {
     id: 3,
     make: "Tesla",
     model: "Model 3",
     year: 2023,
+    ownerName: "John Doe",
     price: 45000,
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
-    status: "rejected",
+    status: "closed",
     buttonState: "viewOffers",
     offerAmount: 42000,
     offerDate: "2024-03-13",
@@ -1018,18 +1061,20 @@ export const dummyOffers = [
     id: 4,
     make: "BMW",
     model: "X5",
+    ownerName: "John Doe",
     year: 2022,
     price: 55000,
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
-    status: "pending",
-    buttonState: "pending",
+    status: "active",
+    buttonState: "active",
     offerAmount: 52000,
     offerDate: "2024-03-15",
     tabType: "My Offers",
   },
   {
     id: 5,
+    ownerName: "John Doe",
     make: "Mercedes",
     model: "C-Class",
     year: 2023,
@@ -1041,17 +1086,19 @@ export const dummyOffers = [
     offerAmount: 46000,
     offerDate: "2024-03-14",
     tabType: "My Offers",
+
   },
   {
     id: 6,
+    ownerName: "John Doe",
     make: "Audi",
     model: "A4",
     year: 2022,
     price: 42000,
     image:
       "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=400",
-    status: "rejected",
-    buttonState: "rejected",
+    status: "closed",
+    buttonState: "closed",
     offerAmount: 40000,
     offerDate: "2024-03-13",
     tabType: "My Offers",

@@ -41,7 +41,7 @@ const RenewAdModal: React.FC<RenewAdModalProps> = ({
       title="Your Listing is Expiring Soon! Renew Now!"
       icon={CloseAdIcon}
     >
-      <div className="flex flex-col items-center gap-6 lg:w-[339px]">
+      <div className="flex flex-col items-center gap-6 md:w-[339px]">
         <p
           style={{
             fontFamily: "Poppins",

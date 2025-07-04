@@ -29,7 +29,7 @@ const CloseAdModal: React.FC<CloseAdModalProps> = ({
       title={title}
       icon={CloseAdIcon}
     >
-      <div className="flex flex-col items-center gap-6 lg:w-[339px]">
+      <div className="flex flex-col items-center gap-6 md:w-[339px]">
         <p
           style={{
             fontFamily: "Poppins",

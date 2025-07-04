@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {dummyCars, dummyOffers, dummyTradeDeals} from "@/components/dummydata"
+import { dummyCars, dummyOffers, dummyTradeDeals } from "@/components/dummydata"
 import CustomPhoneInput from "@/components/ui/phone-input";
 import TabSection from "@/components/ui/tab-section";
 import RequestTypeModal from "@/components/modals/request-type-modal";
@@ -42,7 +42,7 @@ interface Car {
   price: number;
   image: string;
   status: string; // For status badge
-  buttonState: string;
+  buttonState: string; // Added this required property
   dealType?: "sell" | "buy";
   tradeWith?: string;
   tabType: string; // For tab filtering
@@ -59,10 +59,13 @@ interface Offer {
   price: number;
   image: string;
   status: string; // Changed to string to match Car interface
-  buttonState: string; // Added to match Car interface
+  buttonState: string; // Added this required property
   offerAmount: number;
   offerDate: string;
   tabType: "My Listings" | "My Offers";
+  ownerName: string;
+  buyerName: string;
+  receivedAmount: number// Assuming ownerName is available in the offer
 }
 
 // Add the offers tab list
@@ -233,11 +236,15 @@ const Account = () => {
             linkUrl={`/car/${car.id}`}
             buttonState={
               tradeDealsTabList[selectedTradeTab] === "Deals Received"
-                ? "viewDeals"
-                : tradeDealsTabList[selectedTradeTab] === "My Trade Proposals"
-                  ? "withdrawProposal"
-                  : (car.buttonState as ButtonState)
+                ? car.status === "active"
+                  ? "viewDeals"  // If status is "active", show "View Deals"
+                  : car.status === "completed"
+                    ? "viewTradeDetails"  // If status is "completed", show "View Trade Details"
+                    : "reopenAd"
+                : "withdrawProposal"
+
             }
+            disabled={tradeDealsTabList[selectedTradeTab] == "My Trade Proposals" && (car.status === "rejected" || car.status === "completed")}
             status={car.status as any}
             dealType={car?.dealType}
             tiny={isMobile}
@@ -257,19 +264,30 @@ const Account = () => {
   const [offerTabFade, setOfferTabFade] = useState(false);
   const [currentOfferPage, setCurrentOfferPage] = useState(1);
 
-  // Update the renderOfferContent function
   const renderOfferContent = (items: any[]) => {
     return (
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-          gap: "24px",
-          marginBottom: 32,
-        }}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6   xl:grid-cols-3  mb-8 ">
+
         {items?.map((item) => {
           const offer = item as Offer;
+          // Determine the button state based on the offer's status and tab
+          let buttonState: ButtonState = "viewOffers"; // default state for offers
+
+          if (offersTabList[selectedOfferTab] === "My Listings") {
+            if (offer.status === "completed") {
+              buttonState = "viewDetails"; // Set to "viewDetails" if status is "completed"
+            }
+            else if (offer.status === "closed") {
+              buttonState = "reopenAd"; // Set to "viewDetails" if status is "completed"
+            } else {
+              buttonState = "viewOffers"; // Default to "viewOffers" for other statuses
+            }
+          } else {
+
+            buttonState = "withdrawOffer"; // Othe
+
+          }
+
           return (
             <ProductCardVariant2
               key={offer.id}
@@ -281,15 +299,15 @@ const Account = () => {
                 price: offer.price,
                 image: offer.image,
                 tabType: offer.tabType,
+                name: offer.ownerName,
+                buyerName: offer.buyerName,
+                receivedAmount: offer.receivedAmount // Assuming ownerName is available in the offer
               }}
               linkUrl={`/car/${offer.id}`}
-              buttonState={
-                offersTabList[selectedOfferTab] === "My Listings"
-                  ? "viewOffers"
-                  : "withdrawOffer"
-              }
+
+              buttonState={buttonState} //
               status={offer.status as any}
-              disabled={offer.status !== "pending"}
+              disabled={offersTabList[selectedOfferTab] == "My Offers" && (offer.status === "rejected" || offer.status === "completed" || offer.status === "closed")}
               offerDetails={{
                 amount: offer.offerAmount,
                 date: offer.offerDate,

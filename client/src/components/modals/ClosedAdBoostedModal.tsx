@@ -42,7 +42,7 @@ const CloseAdModal: React.FC<CloseAdModalProps> = ({
 
         <CustomButton
           customStyles={{
-            width: "357px",
+            width: "100%",
             height: "44px",
             borderRadius: "7.27px",
           }}

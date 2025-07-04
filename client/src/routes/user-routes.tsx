@@ -34,6 +34,7 @@ import TermsConditions from "@/pages/terms-condition";
 import Privacy from "@/pages/privacy";
 import {useMobileDevice} from "@/hooks/useMobileDevice";
 import MobileChat from "@/components/chat/mobileChat";
+import DealerSupportPage from "@/pages/dealer-support";
 export function UserRoutes() {
  const [isMobile, setIsMobile] = useState(false);
 
@@ -88,6 +89,7 @@ export function UserRoutes() {
       <Route path="/fraud" component={FraudPage} />
       <Route path="/advertise" component={AdvertisePage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/dealer-support" component={DealerSupportPage} />
       {isMobile
         ? <Route path="/chat" component={MobileChat} />
         : <Route path="/chat" component={ChatPage} />

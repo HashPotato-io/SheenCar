@@ -35,7 +35,7 @@ const AcceptOfferModal: React.FC<AcceptOfferModalProps> = ({
       title={step === 1 ? "Accept This Offer?" : "Offer Accepted Successfully!"}
       icon={AcceptTradeIcon}
     >
-      <div className="flex flex-col items-center gap-6 lg:w-[339px]">
+      <div className="flex flex-col items-center gap-6 md:w-[339px]">
         {step === 1 ? (
           <>
             <p
